@@ -71,7 +71,7 @@
 				4C80A4502385FC51000590C4 /* README.md */,
 				4C80A4512385FC6D000590C4 /* Package.swift */,
 				4C80A4522385FC6D000590C4 /* LICENSE */,
-				4CEE0A642385A8A400782D39 /* MRGpsDataGetter */,
+				4CF8B77723860A1A00DEAC15 /* Source */,
 				4CEE0A632385A8A400782D39 /* Products */,
 				4CEE0A762385A9E300782D39 /* Frameworks */,
 			);
@@ -188,6 +188,14 @@
 				4CEE0A662385A8A400782D39 /* Info.plist */,
 			);
 			path = Config;
+			sourceTree = "<group>";
+		};
+		4CF8B77723860A1A00DEAC15 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				4CEE0A642385A8A400782D39 /* MRGpsDataGetter */,
+			);
+			path = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
