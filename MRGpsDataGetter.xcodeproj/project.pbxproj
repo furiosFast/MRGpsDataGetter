@@ -90,14 +90,6 @@
 		4CEE0A642385A8A400782D39 /* MRGpsDataGetter */ = {
 			isa = PBXGroup;
 			children = (
-				4CEE0A6D2385A8B400782D39 /* Source */,
-			);
-			path = MRGpsDataGetter;
-			sourceTree = "<group>";
-		};
-		4CEE0A6D2385A8B400782D39 /* Source */ = {
-			isa = PBXGroup;
-			children = (
 				4CEE0A6E2385A93600782D39 /* Model */,
 				4CEE0A6F2385A93E00782D39 /* Code */,
 				4CEE0AAC2385D10700782D39 /* Other */,
@@ -105,7 +97,7 @@
 				4CEE0A922385AED400782D39 /* Resources */,
 				4CEE0A8D2385AB2000782D39 /* External */,
 			);
-			path = Source;
+			path = MRGpsDataGetter;
 			sourceTree = "<group>";
 		};
 		4CEE0A6E2385A93600782D39 /* Model */ = {
