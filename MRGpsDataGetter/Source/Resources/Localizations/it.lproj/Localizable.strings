@@ -1,0 +1,187 @@
+/*
+ Localizable.strings
+ MRGpsDataGetter
+ 
+ Created by Marco on 20/11/19.
+ Copyright © 2019 Fast-Devs Project. All rights reserved.
+ */
+
+
+
+//file lang
+"LANG" = "it";
+
+//rose page
+"position_NNE" = "NNE";
+"position_NE" = "NE";
+"position_ENE" = "ENE";
+"position_E" = "E";
+"position_ESE" = "ESE";
+"position_SE" = "SE";
+"position_SSE" = "SSE";
+"position_S" = "S";
+"position_SSW" = "SSO";
+"position_SW" = "SO";
+"position_WSW" = "OSO";
+"position_W" = "O";
+"position_WNW" = "ONO";
+"position_NW" = "NO";
+"position_NNW" = "NNO";
+"position_N" = "N";
+
+"positionWind_N" = "N - Tramontana";
+"positionWind_NE" = "NE - Grecale";
+"positionWind_E" = "E - Levante";
+"positionWind_SE" = "SE - Scirocco";
+"positionWind_S" = "S - Ostro";
+"positionWind_SW" = "SO - Libeccio";
+"positionWind_W" = "O - Ponente";
+"positionWind_NW" = "NO - Maestrale";
+"positionWind_NaN" = "Brezza leggera";
+"positionWindForce_NaN" = "Vento forza 0: 0.0 ";
+"positionWind_SCALABEAUFORT" = "Vento forza";
+"positionWind_SCALABEAUFORTSHORT" = "V. forza";
+
+//position info iphone (only)
+"positionPhone_POSITIONINFOTITLE" = "Info posizione";
+"positionPhone_LATITUDETITLE" = "Latitud.";
+"positionPhone_LONGITUDETITLE" = "Longit.";
+"positionPhone_ALTITUDETITLE" = "Altitud.";
+"positionPhone_SPEEDTITLE" = "Velocit.";
+
+"positionPhone_PRECIPITTITLE" = "Precipitazioni";
+"positionPhone_TEMPERATUREMINTITLE" = "Temp. (min)";
+"positionPhone_TEMPERATUREMAXTITLE" = "Temp. (max)";
+"positionPhone_SNOW1HTITLE" = "Neve (1h)";
+"positionPhone_SNOW3HTITLE" = "Neve (3h)";
+"positionPhone_RAIN1HTITLE" = "Pioggia (1h)";
+"positionPhone_RAIN3HTITLE" = "Pioggia (3h)";
+"positionPhone_VISIBILITYTITLE" = "Visibilità";
+"positionPhone_PRESSURETITLE" = "Pressione";
+"positionPhone_PRESSURESEATITLE" = "Pres. (liv. mare)";
+"positionPhone_PRESSUREGROUNDTITLE" = "Pres. (liv. suolo)";
+"positionPhone_HIGHTIDETITLE" = "Alta marea";
+"positionPhone_LOWTIDETITLE" = "Bassa marea";
+"positionPhone_CLOUDSITLE" = "Nuvoloso";
+
+"positionPhone_CREPTITLE" = "Alba/tramonto e crepuscoli";
+"positionPhone_BLUEGOLDHOURSSUNTITLE" = "Ora blu e Ora d'oro";
+"positionPhone_OTHERSUNTITLE" = "Altro";
+
+"positionPhone_AZIMUTHMOONTITLE" = "Azimuth";
+"positionPhone_SUNRISEMOONTITLE" = "Alba Luna";
+"positionPhone_SUNSETMOONTITLE" = "Tramonto Luna";
+"positionPhone_DISTMOONTITLE" = "Terra-Luna";
+"positionPhone_POSITIONMOONNEGATIVETITLE" = "Luna sotto l'orizzonte";
+"positionPhone_POSITIONMOONPOSITIVETITLE" = "Luna sopra l'orizzonte";
+
+"positionPhone_NOONSUNTITLE" = "Mezzogiorno";
+"positionPhone_NADIRSUNTITLE" = "Mezzanotte";
+
+//position info watch
+"position_lOCNAMENAN" = "Nome località non disponibile";
+"position_RELOAD" = "Aggiorna tutti i dati";
+"position_ROSEDIRECTIONTITLE" = "Direzione";
+"position_LATITUDETITLE" = "Latitudine";
+"position_LONGITUDETITLE" = "Longitudine";
+"position_ALTITUDETITLE" = "Altitudine";
+"position_SPEEDTITLE" = "Velocità";
+"position_WINDNAMETITLE" = "Nome \n vento";
+"position_WINDSPEEDTITLE" = "Velocità \n vento";
+"position_CLOUDSITLE" = "Percentuale \n di nuvole";
+"position_PRESSURETITLE" = "Pressione \natmosferica";
+"position_PRESSURESEATITLE" = "Pressione \n(liv. mare)";
+"position_PRESSUREGROUNDTITLE" = "Pressione \n(liv. suolo)";
+"position_VISIBILITYTITLE" = "Visibilità \n  all'aperto";
+"position_METEODESCRIPTION" = "Condizioni meteo";
+"position_HUMIDITYTITLE" = "Umidità";
+"position_TEMPERATURETITLE" = "Temperatura";
+"position_TEMPERATUREMINTITLE" = "Temperatura \n (min)";
+"position_TEMPERATUREMAXTITLE" = "Temperatura \n (max)";
+"position_NIGHTTITLE" = "Notte fonda";
+"position_CREPASTROSUNRISETITLE" = "Crepuscolo astronomico";
+"position_CREPNAUTICSUNRISETITLE" = "Crepuscolo nautico";
+"position_CREPCIVSUNRISETITLE" = "Crepuscolo civile";
+"position_DAYTITLE" = "Sole alto nel cielo";
+"position_SUNRISETITLE" = "Alba";
+"position_SUNSETTITLE" = "Tramonto";
+"position_CREPCIVSUNSETTITLE" = "Crepuscolo civile";
+"position_CREPNAUTICSUNSETTITLE" = "Crepuscolo nautico";
+"position_CREPASTROSUNSETTITLE" = "Crepuscolo astronomico";
+"position_AZIMUTHSUNTITLE" = "Azimuth";
+"position_ALTITUDESUNTITLE" = "Altitudine";
+"position_NOONSUNTITLE" = "Mezzogiorno \n solare";
+"position_NADIRSUNTITLE" = "Mezzanotte \n solare";
+"position_PHASESUNTITLE" = "Fase \n solare";
+"position_GOLDENSUNRISETITLE" = "Ora d'oro \n mattino";
+"position_GOLDENSUNSETTITLE" = "Ora d'oro \n sera";
+"position_BLUESUNRISETTITLE" = "Ora blu \n mattino";
+"position_BLUESUNSETTITLE" = "Ora blu \n sera";
+"position_DECLINATIONSUNTITLE" = "Declinazione \n Sole";
+"position_ZODIACSIGNSUNTITLE" = "Segno \n zodiacale";
+
+"position_SUNRISEMOONTITLE" = "Alba";
+"position_SUNSETMOONTITLE" = "Tramonto";
+//"position_AZIMUTHMOONTITLE" = "Azimuth";
+//"position_ALTITUDEMOONTITLE" = "Altitudine";
+"position_PHASEMOONTITLE" = "Fase \n lunare";
+"position_NEWMOONTITLE" = "Luna nuova";
+"position_UPMOONTITLE" = "Luna crescente";
+"position_FIRSTMOONTITLE" = "Primo quarto";
+"position_GIBUPMOONTITLE" = "Gibbosa crescente";
+"position_FULLMOONTITLE" = "Luna piena";
+"position_GIPDOWNMOONTITLE" = "Gibbosa calante";
+"position_LASTMOONTITLE" = "Ultimo quarto";
+"position_DOWNMOONTITLE" = "Luna calante";
+"position_COORDINATEMOONTITLE" = "Distanza \n Terra-Luna";
+"position_ILLUMINATEDMOONTITLE" = "% di Luna \n illuminata";
+"position_POSITIONMOONTITLE" = "Posizione \n Luna";
+"position_POSITIONMOONNEGATIVETITLE" = "Sotto \n l'orizzonte";
+"position_POSITIONMOONPOSITIVETITLE" = "Sopra \n l'orizzonte";
+"position_DECLINATIONMOONTITLE" = "Declinazione \n Luna";
+"position_ZODIACSIGNMOONTITLE" = "Segno \n zodiacale";
+
+"position_ARIETETITLE" = "Ariete";
+"position_TOROTITLE" = "Toro";
+"position_GEMELLITITLE" = "Gemelli";
+"position_CANCROTITLE" = "Cancro";
+"position_LEONETITLE" = "Leone";
+"position_VERGINETITLE" = "Vergine";
+"position_BILANCIATITLE" = "Bilancia";
+"position_SCORPIOTITLE" = "Scorpione";
+"position_SAGITTARIOTITLE" = "Sagittario";
+"position_CAPRICTITLE" = "Capricorno";
+"position_ACQUARIOTITLE" = "Acquario";
+"position_PESCITITLE" = "Pesci";
+
+
+
+/************************************************MISURE UNIT******************************************************/
+
+"DATE" = "Data";
+"TIME" = "Tempo";
+"HOURS" = "Ore";
+"MEDIA" = "Media";
+"MAX" = "Max";
+"KILOMETERS" = "km";
+"METERS" = "m";
+"MILLIMETERS" = "mm";
+"MILES" = "miglia";
+"KNOT" = "kn";
+"KILOMETERSHOUR" = "km/h";
+"METERSSECOND" = "m/s";
+"MILESHOURS" = "mi/h";
+"DEGREE" = "°";
+"CELSUS" = "°C";
+"CELSUSTEXT" = "Celsus";
+"FAHRENHEIT" = "°F";
+"FAHRENHEITTEXT" = "Fahrenheit";
+"KELVIN" = "°K";
+"KELVINTEXT" = "Kelvin";
+"NOTAVAIABLENUMBER" = "NaN";
+"UNITSMETRIC" = "metric";
+"UNITSIMPERIAL" = "imperial";
+"PERCENT" = "%";
+"HPA" = "hPa";
+"ATM" = "aTm";
+"BAR" = "bar";
