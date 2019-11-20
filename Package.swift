@@ -25,14 +25,28 @@
 
 import PackageDescription
 
-let package = Package(name: "Alamofire",
-                      platforms: [.macOS(.v10_12),
-                                  .iOS(.v10),
-                                  .tvOS(.v10),
-                                  .watchOS(.v3)],
-                      products: [.library(name: "Alamofire",
-                                          targets: ["Alamofire"])],
-                      targets: [.target(name: "Alamofire",
-                                        path: "Source")],
-                      swiftLanguageVersions: [.v5])
-
+let package = Package(
+    name: "MRGpsDataGetter",
+    platforms: [.macOS(.v10_12),
+                .iOS(.v11),
+                .tvOS(.v11),
+                .watchOS(.v4)
+    ],
+    products: [
+        // Products define the executables and libraries produced by a package, and make them visible to other packages.
+        .library(name: "MRGpsDataGetter", targets: ["MRGpsDataGetter"]),
+    ],
+    dependencies: [
+        // Dependencies declare other packages that this package depends on.
+        .package(url: "https://github.com/Alamofire/Alamofire.git", from: "5.0.0-rc.3"),
+        .package(url: "https://github.com/SwiftyJSON/SwiftyJSON.git", from: "4.0.0"),
+    ],
+    targets: [
+        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
+        // Targets can depend on other targets in this package, and on products in packages which this package depends on.
+        .target(name: "MRGpsDataGetter", dependencies: [.product(name: "Alamofire"), .product(name: "SwiftyJSON")]),
+    ],
+    swiftLanguageVersions: [
+        .v5
+    ]
+)

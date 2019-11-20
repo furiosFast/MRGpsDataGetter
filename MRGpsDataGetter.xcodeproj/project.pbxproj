@@ -50,7 +50,6 @@
 		4CEE0AA72385C8D000782D39 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4CEE0AA92385C8E400782D39 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4CEE0AAA2385D0A400782D39 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
-		4CF8B76A238602FB00DEAC15 /* Package.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; path = Package.resolved; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +70,6 @@
 			children = (
 				4C80A4502385FC51000590C4 /* README.md */,
 				4C80A4512385FC6D000590C4 /* Package.swift */,
-				4CF8B76A238602FB00DEAC15 /* Package.resolved */,
 				4C80A4522385FC6D000590C4 /* LICENSE */,
 				4CEE0A642385A8A400782D39 /* MRGpsDataGetter */,
 				4CEE0A632385A8A400782D39 /* Products */,
