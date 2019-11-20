@@ -91,8 +91,6 @@
 			isa = PBXGroup;
 			children = (
 				4CEE0A6D2385A8B400782D39 /* Source */,
-				4CEE0A652385A8A400782D39 /* MRGpsDataGetter.h */,
-				4CEE0A662385A8A400782D39 /* Info.plist */,
 			);
 			path = MRGpsDataGetter;
 			sourceTree = "<group>";
@@ -103,6 +101,7 @@
 				4CEE0A6E2385A93600782D39 /* Model */,
 				4CEE0A6F2385A93E00782D39 /* Code */,
 				4CEE0AAC2385D10700782D39 /* Other */,
+				4CF8B7762386089600DEAC15 /* Config */,
 				4CEE0A922385AED400782D39 /* Resources */,
 				4CEE0A8D2385AB2000782D39 /* External */,
 			);
@@ -188,6 +187,15 @@
 				4CEE0A8E2385AD2000782D39 /* ConfigShared.swift */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		4CF8B7762386089600DEAC15 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				4CEE0A652385A8A400782D39 /* MRGpsDataGetter.h */,
+				4CEE0A662385A8A400782D39 /* Info.plist */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -469,7 +477,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = MRGpsDataGetter/Info.plist;
+				INFOPLIST_FILE = MRGpsDataGetter/Source/Config/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -496,7 +504,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = MRGpsDataGetter/Info.plist;
+				INFOPLIST_FILE = MRGpsDataGetter/Source/Config/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
