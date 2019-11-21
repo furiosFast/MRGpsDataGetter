@@ -152,7 +152,7 @@ class ForecastDataGetter: NSObject {
                 if let angVento = Double(json["list"][i]["wind"]["deg"].stringValue) {
                     weather.angoloVento = String(format: "%3.1f", angVento)
                     weather.nomeVento = getWindName(angVento)
-//                    weather.nomeIconaVento = setWindDirectionImage(angVento)
+                    weather.nomeIconaVento = setWindDirectionImage(angVento)
                     self.plotDataWindName.append(weather.nomeVento)
                 }
                 //9

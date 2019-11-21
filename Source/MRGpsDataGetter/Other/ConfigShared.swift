@@ -161,7 +161,8 @@ func getBeaufortForceColor(_ windSpeedKnot: Double) -> String {
     return coloreBollinoForzaBeaufort
 }
 
-//func setWindDirectionImage(_ angolo: Double) -> String {
+#warning("sistemare")
+func setWindDirectionImage(_ angolo: Double) -> String {
 //    switch angolo {
 //        case 23..<67: return "windArrowNordEst"
 //        case 67..<114: return "windArrowEst"
@@ -173,7 +174,12 @@ func getBeaufortForceColor(_ windSpeedKnot: Double) -> String {
 //        case 339..<361, 0..<23: return "windArrowNord"
 //        default: return loc("NOTAVAIABLENUMBER")
 //    }
-//}
+    var tempDegree = Int(angolo) - 180
+    if tempDegree < 0 {
+       tempDegree = Int(angolo) + 180
+    }
+    return "windArrowNord\(tempDegree)"
+}
 
 ///Funzione che converte una data in formato UTC in una String in più formati local
 func UTCToLocal(_ date: Date, _ type: Int) -> String? {
