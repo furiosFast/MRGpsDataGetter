@@ -25,9 +25,5 @@
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>LOCALIZE_STRING</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>test</string>
-	<key>NSLocationUsageDescription</key>
-	<string>test</string>
 </dict>
 </plist>

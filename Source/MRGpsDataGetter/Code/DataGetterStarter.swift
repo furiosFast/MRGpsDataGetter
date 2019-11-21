@@ -22,12 +22,12 @@ public protocol MRGpsDataGetterStarterDelegate: NSObjectProtocol {
     func gpsHeadingForCompass(newHeading: CLHeading)
 }
 
-open class DataGetterStarter: NSObject, CLLocationManagerDelegate {
+class DataGetterStarter: NSObject, CLLocationManagerDelegate {
     
     public static let shared = DataGetterStarter()
     
     open weak var delegate : MRGpsDataGetterStarterDelegate?
-    lazy var locationManager: CLLocationManager = CLLocationManager()
+    var locationManager: CLLocationManager = CLLocationManager()
     var currentLocation: CLLocation?
     var mapLocation: CLLocationCoordinate2D?
     var timerAutoRefresh = Timer()
@@ -73,7 +73,7 @@ open class DataGetterStarter: NSObject, CLLocationManagerDelegate {
 //        }
     }
     
-    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         currentLocation = nil
         currentLocation = locations.last
         if let loc = self.currentLocation, count == 0 {
@@ -107,12 +107,12 @@ open class DataGetterStarter: NSObject, CLLocationManagerDelegate {
         count = count + 1
     }
     
-    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Swift.Error) {
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Swift.Error) {
         //print(error.localizedDescription)
         //setNotAvaiablePositionInfo()
     }
     
-    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         //non serve poichè avendo il metodo deinit effettua l'aggiornamento dei dati, in caso di cambio impostazioni fa già lui il refresh dell'ui
         //setLocationPermission()
     }
@@ -131,11 +131,11 @@ open class DataGetterStarter: NSObject, CLLocationManagerDelegate {
         }
     }
     
-    public func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         self.delegate?.gpsHeadingForCompass(newHeading: newHeading)
     }
     
-    public func locationManagerShouldDisplayHeadingCalibration(_ manager: CLLocationManager) -> Bool {
+    func locationManagerShouldDisplayHeadingCalibration(_ manager: CLLocationManager) -> Bool {
         return true
     }
     
