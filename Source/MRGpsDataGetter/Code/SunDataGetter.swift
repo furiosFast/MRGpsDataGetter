@@ -15,13 +15,13 @@
 import UIKit
 import CoreLocation
 
-public protocol sunDataDelegate {
+public protocol MRGpsDataGetterSunDataDelegate {
     func sunDataReady(_ sun: GpsSunInfoModel)
 }
 
 public class SunDataGetter: NSObject {
     
-    var delegate : sunDataDelegate? = nil
+    var delegate : MRGpsDataGetterSunDataDelegate? = nil
     let sun = GpsSunInfoModel()
     
     
