@@ -35,7 +35,7 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     var openWeatherMapKey = "NaN"
     
     
-    open func refreshAllWeatherData(){
+    open func refreshAllData(){
         setCount(0)
         setLocationPermission(openWeatherMapKey: openWeatherMapKey, preferences: Preferences.shared.prefs)
     }
