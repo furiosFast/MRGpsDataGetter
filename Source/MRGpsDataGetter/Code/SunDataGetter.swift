@@ -42,43 +42,43 @@ open class SunDataGetter: NSObject {
         let Jan12000Date = BDAstroCalc.daysSinceJan12000(date: NSDate())
         
         let sunRiseSet = BDAstroCalc.sunRiseAndSet(date: NSDate(), location: myLocationCoordinates)
-        sun.mezzogiornoSolare = UTCToLocal(sunRiseSet.solarNoon as Date, minutesTimesFlag)!
-        sun.mezzanotteSolare = UTCToLocal(sunRiseSet.nadir as Date, minutesTimesFlag)!
+        sun.solarNoon = UTCToLocal(sunRiseSet.solarNoon as Date, minutesTimesFlag)!
+        sun.nadir = UTCToLocal(sunRiseSet.nadir as Date, minutesTimesFlag)!
         
         let sunLocation = BDAstroCalc.sunPosition(date: NSDate(), location: myLocationCoordinates)
         let azim = (sunLocation.azimuth + Double.pi) * radiansToDegrees
-        sun.altitudine = String(format: "%3.1f", sunLocation.altitude * radiansToDegrees) + loc("DEGREE")
+        sun.altitude = String(format: "%3.1f", sunLocation.altitude * radiansToDegrees) + loc("DEGREE")
         sun.azimuth = String(format: "%3.1f", azim) + loc("DEGREE") + " " + getAngleName(azim)
         
         let sunTimes = BDAstroCalc.sunSignificantTimes(date: NSDate(), location: myLocationCoordinates)
-        sun.crepuscoloAstronauticoAlba = UTCToLocal(sunTimes["nightEnd"]! as Date, minutesTimesFlag)!
-        sun.crepuscoloNauticoAlba = UTCToLocal(sunTimes["nauticalDawn"]! as Date, minutesTimesFlag)!
-        sun.crepuscoloCivileAlba = UTCToLocal(sunTimes["dawn"]! as Date, minutesTimesFlag)!
-        sun.albaInizio = UTCToLocal(sunTimes["sunriseStart"]! as Date, minutesTimesFlag)!
-        sun.albaFine = UTCToLocal(sunTimes["sunriseEnd"]! as Date, minutesTimesFlag)!
-        sun.tramontoInizio = UTCToLocal(sunTimes["sunsetStart"]! as Date, minutesTimesFlag)!
-        sun.tramontoFine = UTCToLocal(sunTimes["sunsetEnd"]! as Date, minutesTimesFlag)!
-        sun.crepuscoloCivileTramonto = UTCToLocal(sunTimes["dusk"]! as Date, minutesTimesFlag)!
-        sun.crepuscoloNauticoTramonto = UTCToLocal(sunTimes["nauticalDusk"]! as Date, minutesTimesFlag)!
-        sun.crepuscoloAstronauticoTramonto = UTCToLocal(sunTimes["nightStart"]! as Date, minutesTimesFlag)!
+        sun.astronomicalDuskSunrise = UTCToLocal(sunTimes["nightEnd"]! as Date, minutesTimesFlag)!
+        sun.nauticalDuskSunrise = UTCToLocal(sunTimes["nauticalDawn"]! as Date, minutesTimesFlag)!
+        sun.civilDuskSunrise = UTCToLocal(sunTimes["dawn"]! as Date, minutesTimesFlag)!
+        sun.sunriseStart = UTCToLocal(sunTimes["sunriseStart"]! as Date, minutesTimesFlag)!
+        sun.sunriseEnd = UTCToLocal(sunTimes["sunriseEnd"]! as Date, minutesTimesFlag)!
+        sun.sunsetStart = UTCToLocal(sunTimes["sunsetStart"]! as Date, minutesTimesFlag)!
+        sun.sunsetEnd = UTCToLocal(sunTimes["sunsetEnd"]! as Date, minutesTimesFlag)!
+        sun.civilDuskSunset = UTCToLocal(sunTimes["dusk"]! as Date, minutesTimesFlag)!
+        sun.nauticalDuskSunset = UTCToLocal(sunTimes["nauticalDusk"]! as Date, minutesTimesFlag)!
+        sun.astronomicalDuskSunset = UTCToLocal(sunTimes["nightStart"]! as Date, minutesTimesFlag)!
         
-        sun.oraBluAlbaInizio = UTCToLocal(sunTimes["dawn"]! as Date, minutesTimesFlag)!
-        sun.oraBluAlbaFine = UTCToLocal((sunTimes["dawn"]! as Date).plusMinutes((Date.minutesBetween(date1: (sunTimes["dawn"]! as Date), date2: (sunTimes["sunriseStart"]! as Date))/2)), minutesTimesFlag)!
-        sun.oraBluTramontoInizio = UTCToLocal((sunTimes["sunsetEnd"]! as Date).plusMinutes((Date.minutesBetween(date1: (sunTimes["sunsetEnd"]! as Date), date2: (sunTimes["dusk"]! as Date))/2)), minutesTimesFlag)!
-        sun.oraBluTramontoFine = UTCToLocal(sunTimes["dusk"]! as Date, minutesTimesFlag)!
+        sun.blueHourSunriseStart = UTCToLocal(sunTimes["dawn"]! as Date, minutesTimesFlag)!
+        sun.blueHourSunriseEnd = UTCToLocal((sunTimes["dawn"]! as Date).plusMinutes((Date.minutesBetween(date1: (sunTimes["dawn"]! as Date), date2: (sunTimes["sunriseStart"]! as Date))/2)), minutesTimesFlag)!
+        sun.blueHourSunsetStart = UTCToLocal((sunTimes["sunsetEnd"]! as Date).plusMinutes((Date.minutesBetween(date1: (sunTimes["sunsetEnd"]! as Date), date2: (sunTimes["dusk"]! as Date))/2)), minutesTimesFlag)!
+        sun.blueHourSunsetEnd = UTCToLocal(sunTimes["dusk"]! as Date, minutesTimesFlag)!
         
-        sun.oraDoroAlbaInizio = UTCToLocal((sunTimes["dawn"]! as Date).plusMinutes((Date.minutesBetween(date1: (sunTimes["dawn"]! as Date), date2: (sunTimes["sunriseStart"]! as Date))/2)), minutesTimesFlag)!
-        sun.oraDoroAlbaFine = UTCToLocal(sunTimes["goldenHourEnd"]! as Date, minutesTimesFlag)!
-        sun.oraDoroTramontoInizio = UTCToLocal(sunTimes["goldenHourStart"]! as Date, minutesTimesFlag)!
-        sun.oraDoroTramontoFine = UTCToLocal((sunTimes["sunsetEnd"]! as Date).plusMinutes((Date.minutesBetween(date1: (sunTimes["sunsetEnd"]! as Date), date2: (sunTimes["dusk"]! as Date))/2)), minutesTimesFlag)!
+        sun.goldenHourSunriseStart = UTCToLocal((sunTimes["dawn"]! as Date).plusMinutes((Date.minutesBetween(date1: (sunTimes["dawn"]! as Date), date2: (sunTimes["sunriseStart"]! as Date))/2)), minutesTimesFlag)!
+        sun.goldenHourSunriseEnd = UTCToLocal(sunTimes["goldenHourEnd"]! as Date, minutesTimesFlag)!
+        sun.goldenHourSunsetStart = UTCToLocal(sunTimes["goldenHourStart"]! as Date, minutesTimesFlag)!
+        sun.goldenHourSunsetEnd = UTCToLocal((sunTimes["sunsetEnd"]! as Date).plusMinutes((Date.minutesBetween(date1: (sunTimes["sunsetEnd"]! as Date), date2: (sunTimes["dusk"]! as Date))/2)), minutesTimesFlag)!
         
-        sun.oreLuce = setTodayDaylightHours(sunTimes, BDAstroCalc.sunSignificantTimes(date: Date().yesterday as NSDate, location: myLocationCoordinates))
-        sun.faseSolare = setSunPhase(sunLocation.altitude * radiansToDegrees)
+        sun.daylightHours = setTodayDaylightHours(sunTimes, BDAstroCalc.sunSignificantTimes(date: Date().yesterday as NSDate, location: myLocationCoordinates))
+        sun.phaseTitle = setSunPhase(sunLocation.altitude * radiansToDegrees)
         
         let sunCoordinates = BDAstroCalc.sunCoordinates(daysSinceJan12000: Jan12000Date)
-        sun.declinazione = declinationToString(sunCoordinates.declination * radiansToDegrees)
-        sun.rettaAscendente = String(format: "%3.1f", sunCoordinates.rightAscension  * radiansToDegrees)
-        sun.segnoZodiacale = getZodiacSign(sunCoordinates.rightAscension * radiansToDegrees)
+        sun.declination = declinationToString(sunCoordinates.declination * radiansToDegrees)
+        sun.rightAscension = String(format: "%3.1f", sunCoordinates.rightAscension  * radiansToDegrees)
+        sun.zodiacSign = getZodiacSign(sunCoordinates.rightAscension * radiansToDegrees)
         
         DispatchQueue.main.async {
             self.delegate?.sunDataReady(sun: self.sun)

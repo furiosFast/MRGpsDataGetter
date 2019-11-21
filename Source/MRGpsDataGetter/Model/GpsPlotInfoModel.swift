@@ -14,7 +14,7 @@
 
 import UIKit
 
-public final class GpsPlotInfoModel: NSObject, NSCoding {
+public final class GpsPlotInfoModel: NSObject, NSCoding { 
     
     public final var plotDataWindName: [String] = []
     public final var plotData: [Double] = []

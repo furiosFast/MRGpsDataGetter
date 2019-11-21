@@ -52,35 +52,37 @@ open class GpsDataGetter: NSObject {
     }
     
     private func reversePositionInfo(_ currentLocation: CLLocation){
-        gps.latitudine = "\(latitudeToString(currentLocation.coordinate.latitude))"
-        gps.longitudine = "\(longitudeToString(currentLocation.coordinate.longitude))"
-        gps.altitudine = String(format: "%3.1f " + loc("METERS"), currentLocation.altitude)
-        gps.precisione = "\(currentLocation.horizontalAccuracy)"
+        gps.latitude = "\(latitudeToString(currentLocation.coordinate.latitude))"
+        gps.longitude = "\(longitudeToString(currentLocation.coordinate.longitude))"
+        gps.altittude = String(format: "%3.1f " + loc("METERS"), currentLocation.altitude)
+        gps.verticalAccuracy = String(format: "%3.1f " + loc("METERS"), currentLocation.verticalAccuracy)
+        gps.horizontalAccuracy = String(format: "%3.1f " + loc("METERS"), currentLocation.horizontalAccuracy)
+        gps.course = "\(currentLocation.course)"
         if(currentLocation.speed < 0) {
             if Preferences.shared.getPreference("windSpeed") == "meterSecondSpeed" {
-                gps.velocita = "0.0 " + loc("METERSSECOND")
+                gps.speed = "0.0 " + loc("METERSSECOND")
             }
             if Preferences.shared.getPreference("windSpeed") == "kilometerHoursSpeed" {
-                gps.velocita = "0.0 " + loc("KILOMETERSHOUR")
+                gps.speed = "0.0 " + loc("KILOMETERSHOUR")
             }
             if Preferences.shared.getPreference("windSpeed") == "knotSpeed" {
-                gps.velocita = "0.0 " + loc("KNOT")
+                gps.speed = "0.0 " + loc("KNOT")
             }
             if Preferences.shared.getPreference("windSpeed") == "milesHoursSpeed" {
-                gps.velocita = "0.0 " + loc("MILESHOURS")
+                gps.speed = "0.0 " + loc("MILESHOURS")
             }
         } else {
             if Preferences.shared.getPreference("windSpeed") == "meterSecondSpeed" {
-                gps.velocita = String(format: "%3.1f " + loc("METERSSECOND"), currentLocation.speed)
+                gps.speed = String(format: "%3.1f " + loc("METERSSECOND"), currentLocation.speed)
             }
             if Preferences.shared.getPreference("windSpeed") == "kilometerHoursSpeed" {
-                gps.velocita = String(format: "%3.1f " + loc("KILOMETERSHOUR"), currentLocation.speed * meterSecondToKilometerHour)
+                gps.speed = String(format: "%3.1f " + loc("KILOMETERSHOUR"), currentLocation.speed * meterSecondToKilometerHour)
             }
             if Preferences.shared.getPreference("windSpeed") == "knotSpeed" {
-                gps.velocita = String(format: "%3.1f " + loc("KNOT"), currentLocation.speed * meterSecondToKnot)
+                gps.speed = String(format: "%3.1f " + loc("KNOT"), currentLocation.speed * meterSecondToKnot)
             }
             if Preferences.shared.getPreference("windSpeed") == "milesHoursSpeed" {
-                gps.velocita = String(format: "%3.1f " + loc("MILESHOURS"), currentLocation.speed * meterSecondToMilesHour)
+                gps.speed = String(format: "%3.1f " + loc("MILESHOURS"), currentLocation.speed * meterSecondToMilesHour)
             }
         }
         DispatchQueue.main.async {
@@ -110,15 +112,15 @@ open class GpsDataGetter: NSObject {
                 self.delegate?.gpsReverseGeocodeFromLocationError(error: error.localizedDescription)
             } else {
                 if let placemarks = placemarks, let placemark = placemarks.first, let locality = placemark.locality, let isoCountryCode = placemark.isoCountryCode {
-                    self.gps.localita = locality + ", " + isoCountryCode.uppercased()
+                    self.gps.locationName = locality + ", " + isoCountryCode.uppercased()
                 } else {
                     if let placemarks = placemarks, let placemark = placemarks.first, let inlandWater = placemark.inlandWater, let ocean = placemark.ocean {
-                        self.gps.localita = ocean + ", " + inlandWater.uppercased()
+                        self.gps.locationName = ocean + ", " + inlandWater.uppercased()
                     } else {
-                        self.gps.localita = loc("position_lOCNAMENAN")
+                        self.gps.locationName = loc("position_lOCNAMENAN")
                     }
                 }
-                self.delegate?.reverseGeocodeFromLocation(locationName: self.gps.localita)
+                self.delegate?.reverseGeocodeFromLocation(locationName: self.gps.locationName)
             }
         }
     }

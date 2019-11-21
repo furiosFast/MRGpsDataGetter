@@ -42,29 +42,29 @@ open class MoonDataGetter: NSObject {
         let Jan12000Date = BDAstroCalc.daysSinceJan12000(date: NSDate())
         
         let moonRiseSet = BDAstroCalc.moonRiseAndSet(date: NSDate(), location: myLocationCoordinates)
-        moon.alba = UTCToLocal(moonRiseSet.rise, minutesTimesFlag)!
-        moon.tramonto = UTCToLocal(moonRiseSet.set, minutesTimesFlag)!
+        moon.moonRise = UTCToLocal(moonRiseSet.rise, minutesTimesFlag)!
+        moon.moonSet = UTCToLocal(moonRiseSet.set, minutesTimesFlag)!
         
         let moonLocation = BDAstroCalc.moonPosition(date: NSDate(), location: myLocationCoordinates)
         let azim = ((moonLocation.azimuth + Double.pi) * radiansToDegrees).truncatingRemainder(dividingBy: 360)
-        moon.altitudine = String(format: "%3.1f", moonLocation.altitude * radiansToDegrees) + loc("DEGREE")
+        moon.altitude = String(format: "%3.1f", moonLocation.altitude * radiansToDegrees) + loc("DEGREE")
         moon.azimuth = String(format: "%3.1f", azim) + loc("DEGREE") + " " + getAngleName(azim)
-        moon.distanzaTerraLuna = "\(Int(moonLocation.distance).formattedWithSeparator) " + loc("KILOMETERS")
-        moon.posizioneOrizzonte = setMoonVisibility(moonLocation.altitude * radiansToDegrees)
+        moon.distance = "\(Int(moonLocation.distance).formattedWithSeparator) " + loc("KILOMETERS")
+        moon.horizontalPosition = setMoonVisibility(moonLocation.altitude * radiansToDegrees)
         
         let moonPhase = BDAstroCalc.moonPhase(date: NSDate())
-        moon.illuminazioneLunare = String(format: "%3.1f", moonPhase.fractionOfMoonIlluminated * 100) + " " + loc("PERCENT")
-        moon.titoloFaseLunare = setMoonPhaseTitle(Double(moonPhase.phase))
-        moon.iconaFaseLunare = setMoonPhaseIcon(Double(moonPhase.phase))
+        moon.fractionOfMoonIlluminated = String(format: "%3.1f", moonPhase.fractionOfMoonIlluminated * 100) + " " + loc("PERCENT")
+        moon.phaseTitle = setMoonPhaseTitle(Double(moonPhase.phase))
+        moon.phaseIcon = setMoonPhaseIcon(Double(moonPhase.phase))
         moon.phaseAngle = String(format: "%3.1f", moonPhase.angle  * radiansToDegrees)
         
         let moonCoordinates = BDAstroCalc.moonCoordinates(daysSinceJan12000: Jan12000Date)
-        moon.declinazione = declinationToString(moonCoordinates.declination * radiansToDegrees)
-        moon.rettaAscendente = String(format: "%3.1f", moonCoordinates.rightAscension  * radiansToDegrees)
-        moon.segnoZodiacale = getZodiacSign(moonCoordinates.rightAscension * radiansToDegrees)
+        moon.declination = declinationToString(moonCoordinates.declination * radiansToDegrees)
+        moon.rightAscension = String(format: "%3.1f", moonCoordinates.rightAscension  * radiansToDegrees)
+        moon.zodiacSign = getZodiacSign(moonCoordinates.rightAscension * radiansToDegrees)
         
         let moonTilt = BDAstroCalc.moonTilt(date: NSDate(), location: myLocationCoordinates)
-        moon.angoloOmbra = String(moonTilt.diff)
+        moon.moonTilt = String(moonTilt.diff)
         
         
         DispatchQueue.main.async {

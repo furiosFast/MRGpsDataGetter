@@ -818,7 +818,7 @@ public extension UIImage {
             let cgImage = image.cgImage
             else { return nil }
         
-        if pdfCacheOnDisk      { cacheOnDisk(data: imageData, url: imageUrl) }
+        if pdfCacheOnDisk      { cacheOnDisk(date: imageData, url: imageUrl) }
         if pdfCacheInMemory    { cacheImageInMemory(image, url: url, size: size, pageNumber: pageNumber) }
         
         return UIImage(cgImage: cgImage, scale: UIScreen.main.scale, orientation: .up)
@@ -946,9 +946,9 @@ public extension UIImage {
     
     private static let kDiskCacheFolderName = "PDFCache"
     
-    private static func cacheOnDisk(data: Data, url: URL) {
+    private static func cacheOnDisk(date: Data, url: URL) {
         
-        try? data.write(to: url, options: [])
+        try? date.write(to: url, options: [])
     }
     
     private static func pdfCacheURL(with url: URL, size: CGSize, pageNumber: Int) -> URL? {

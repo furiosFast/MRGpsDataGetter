@@ -11,40 +11,40 @@ import CoreLocation
 
 public final class GpsWeatherModel: NSObject {
     
-    public final var velocitaVento : String = loc("NOTAVAIABLENUMBER")
-    public final var forzaScalaBeaufortVento : String = loc("NOTAVAIABLENUMBER")
-    public final var angoloVento : String = loc("NOTAVAIABLENUMBER")
-    public final var nomeVento : String = loc("NOTAVAIABLENUMBER")
-    public final var nomeIconaVento : String = loc("NOTAVAIABLENUMBER")
-    public final var coloreBollinoVento : String = loc("NOTAVAIABLENUMBER")
+    public final var windSpeed : String = loc("NOTAVAIABLENUMBER")
+    public final var beaufortScale : String = loc("NOTAVAIABLENUMBER")
+    public final var windDegree : String = loc("NOTAVAIABLENUMBER")
+    public final var windName : String = loc("NOTAVAIABLENUMBER")
+    public final var windIconName : String = loc("NOTAVAIABLENUMBER")
+    public final var beaufortScaleWindColour : String = loc("NOTAVAIABLENUMBER")
 
-    public final var descrizioneTempo : String = loc("NOTAVAIABLENUMBER")
-    public final var nomeIconaMeteo : String = loc("NOTAVAIABLENUMBER")
+    public final var weatherDescription : String = loc("NOTAVAIABLENUMBER")
+    public final var weatherOpenWeatherMapIcon : String = loc("NOTAVAIABLENUMBER")
     
-    public final var precipitazioni1h : String = loc("NOTAVAIABLENUMBER")
-    public final var precipitazioni3h : String = loc("NOTAVAIABLENUMBER")
-    public final var neve1h : String = loc("NOTAVAIABLENUMBER")
-    public final var neve3h : String = loc("NOTAVAIABLENUMBER")
-    public final var visibilita : String = loc("NOTAVAIABLENUMBER")
-    public final var umidita : String = loc("NOTAVAIABLENUMBER")
-    public final var pressione : String = loc("NOTAVAIABLENUMBER")
-    public final var pressioneMare : String = loc("NOTAVAIABLENUMBER")
-    public final var pressioneSuolo : String = loc("NOTAVAIABLENUMBER")
+    public final var rain1h : String = loc("NOTAVAIABLENUMBER")
+    public final var rain3h : String = loc("NOTAVAIABLENUMBER")
+    public final var snow1h : String = loc("NOTAVAIABLENUMBER")
+    public final var snow3h : String = loc("NOTAVAIABLENUMBER")
+    public final var visibility : String = loc("NOTAVAIABLENUMBER")
+    public final var umidity : String = loc("NOTAVAIABLENUMBER")
+    public final var pressure : String = loc("NOTAVAIABLENUMBER")
+    public final var pressureSeaLevel : String = loc("NOTAVAIABLENUMBER")
+    public final var pressureGroundLevel : String = loc("NOTAVAIABLENUMBER")
     
-    public final var nuvole : String = loc("NOTAVAIABLENUMBER")
+    public final var clouds : String = loc("NOTAVAIABLENUMBER")
 
-    public final var altaMarea : String = loc("NOTAVAIABLENUMBER")
-    public final var bassaMarea : String = loc("NOTAVAIABLENUMBER")
+    public final var highTide : String = loc("NOTAVAIABLENUMBER")
+    public final var lowMarea : String = loc("NOTAVAIABLENUMBER")
 
-    public final var temperatura : String = loc("NOTAVAIABLENUMBER")
-    public final var temperaturaMin : String = loc("NOTAVAIABLENUMBER")
-    public final var temperaturaMax : String = loc("NOTAVAIABLENUMBER")
+    public final var temp : String = loc("NOTAVAIABLENUMBER")
+    public final var temMin : String = loc("NOTAVAIABLENUMBER")
+    public final var temMax : String = loc("NOTAVAIABLENUMBER")
     
-    public final var data : String = loc("NOTAVAIABLENUMBER")
-    public final var ora : String = loc("NOTAVAIABLENUMBER")
-    public final var dataOra : String = loc("NOTAVAIABLENUMBER")
+    public final var date : String = loc("NOTAVAIABLENUMBER")
+    public final var time : String = loc("NOTAVAIABLENUMBER")
+    public final var dateTime : String = loc("NOTAVAIABLENUMBER")
 
-    public final var posizioneCorrente: CLLocation? = nil
-    public final var posizioneCorrenteString: String? = loc("NOTAVAIABLENUMBER")
+    public final var currentLocation: CLLocation? = nil
+    public final var currentLocationName: String? = loc("NOTAVAIABLENUMBER")
 
 }

@@ -8,27 +8,26 @@
 
 import UIKit
 
-public final class GpsMoonInfoModel: NSObject {
+public final class GpsMoonInfoModel: NSObject { 
     
-    public final var altitudine : String = loc("NOTAVAIABLENUMBER")
-    public final var illuminazioneLunare : String = loc("NOTAVAIABLENUMBER")
+    public final var altitude : String = loc("NOTAVAIABLENUMBER")
+    public final var fractionOfMoonIlluminated : String = loc("NOTAVAIABLENUMBER")
     public final var azimuth : String = loc("NOTAVAIABLENUMBER")
-    public final var distanzaTerraLuna : String = loc("NOTAVAIABLENUMBER")
+    public final var distance : String = loc("NOTAVAIABLENUMBER")
     
-    public final var declinazione : String = loc("NOTAVAIABLENUMBER")
-    public final var rettaAscendente : String = loc("NOTAVAIABLENUMBER")
-    public final var segnoZodiacale : String = loc("NOTAVAIABLENUMBER")
+    public final var declination : String = loc("NOTAVAIABLENUMBER")
+    public final var rightAscension : String = loc("NOTAVAIABLENUMBER")
+    public final var zodiacSign : String = loc("NOTAVAIABLENUMBER")
+    
+    public final var moonRise : String = loc("NOTAVAIABLENUMBER")
+    public final var moonSet : String = loc("NOTAVAIABLENUMBER")
+    
+    public final var phaseIcon : String = loc("NOTAVAIABLENUMBER")
+    public final var phaseTitle : String = loc("NOTAVAIABLENUMBER")
     public final var phaseAngle : String = loc("NOTAVAIABLENUMBER")
+
+    public final var horizontalPosition : String = loc("NOTAVAIABLENUMBER")
     
-    
-    public final var alba : String = loc("NOTAVAIABLENUMBER")
-    public final var tramonto : String = loc("NOTAVAIABLENUMBER")
-    
-    public final var iconaFaseLunare : String = loc("NOTAVAIABLENUMBER")
-    public final var titoloFaseLunare : String = loc("NOTAVAIABLENUMBER")
-    
-    public final var posizioneOrizzonte : String = loc("NOTAVAIABLENUMBER")
-    
-    public final var angoloOmbra : String = loc("NOTAVAIABLENUMBER")
+    public final var moonTilt : String = loc("NOTAVAIABLENUMBER")
     
 }
