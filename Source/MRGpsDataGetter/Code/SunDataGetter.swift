@@ -15,16 +15,16 @@
 import UIKit
 import CoreLocation
 
-public protocol MRGpsDataGetterSunDataDelegate {
+@objc public protocol MRGpsDataGetterSunDataDelegate {
     func sunDataReady(sun: GpsSunInfoModel)
 }
 
-open class SunDataGetter: NSObject {
+public class SunDataGetter: NSObject {
     
-    static let shared = SunDataGetter()
+    public static let shared = SunDataGetter()
 
-    var delegate : MRGpsDataGetterSunDataDelegate?
-    let sun = GpsSunInfoModel()
+    weak public var delegate : MRGpsDataGetterSunDataDelegate?
+    public var sun = GpsSunInfoModel()
     
     
     public func getSunInfo(currentLocation: CLLocation) {
@@ -160,8 +160,4 @@ open class SunDataGetter: NSObject {
         return loc("NOTAVAIABLENUMBER")
     }
     
-}
-
-extension MRGpsDataGetterSunDataDelegate {
-    func sunDataReady(sun: GpsSunInfoModel){}
 }
