@@ -85,7 +85,7 @@ open class DataGetterStarter: NSObject, CLLocationManagerDelegate {
 //            WeatherDataGetter().getWeatherInfo(openWeatherMapKey: openWeatherMapKey, currentLocation: loc)
 //            self.delegate?.setGpsMap(loc)
 //            GpsDataGetter().getPositionInfo(currentLocation: loc)
-            SunDataGetter().getSunInfo(currentLocation: loc)
+            SunDataGetter.shared.getSunInfo(currentLocation: loc)
 //            MoonDataGetter().getMoonInfo(currentLocation: loc)
             
             
