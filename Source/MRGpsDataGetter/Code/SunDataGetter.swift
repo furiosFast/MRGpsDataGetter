@@ -24,7 +24,7 @@ open class SunDataGetter: NSObject {
     public static let shared = SunDataGetter()
 
     open weak var delegate : MRGpsDataGetterSunDataDelegate?
-    public let sun = GpsSunInfoModel()
+    let sun = GpsSunInfoModel()
     
     
     open func getSunInfo(currentLocation: CLLocation) {
