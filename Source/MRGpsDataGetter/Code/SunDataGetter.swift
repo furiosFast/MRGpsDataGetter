@@ -80,15 +80,15 @@ open class SunDataGetter: NSObject {
         sun.rettaAscendente = String(format: "%3.1f", sunCoordinates.rightAscension  * radiansToDegrees)
         sun.segnoZodiacale = getZodiacSign(sunCoordinates.rightAscension * radiansToDegrees)
         
-        DispatchQueue.main.async {
-            print(self.sun)
-            self.delegate?.sunDataReady(sun: self.sun)
-        }
+        //DispatchQueue.main.async {
+            print(sun)
+            delegate?.sunDataReady(sun: sun)
+        //}
     }
     
     open func getOldSunData() -> GpsSunInfoModel {
-        print(self.sun)
-        return SunDataGetter.shared.sun
+        print(sun)
+        return sun
     }
     
     //MARK: - Support functions for sun
