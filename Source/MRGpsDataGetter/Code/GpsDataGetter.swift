@@ -20,6 +20,7 @@ protocol gpsDataProtocol {
     func gpsDataReady(_ gps: GpsInfoModel)
     func gpsLocationName(_ locationName: String)
     func gpsLocation(_ location: CLLocation)
+    func gpsGeocodeAddressFromStringError(_ error: String)
 }
 
 class GpsDataGetter: NSObject {
@@ -71,11 +72,10 @@ class GpsDataGetter: NSObject {
         }
     }
     
-    public func geocodeAddressString(_ locationAddress: String){
+    public func geocodeAddressFromString(_ locationAddress: String){
         geocoder.geocodeAddressString(locationAddress) { (placemarks, error) in
             if let error = error {
-                print("Unable to Forward Geocode Address (\(error))")
-                //self.MTCC?.setNotAvaiablePositionInfo()
+                self.delegate?.gpsGeocodeAddressFromStringError((error.localizedDescription)
             } else {
                 if let placemarks = placemarks, let placemark = placemarks.first, let location = placemark.location {
                     self.delegate?.gpsLocation(location)

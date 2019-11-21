@@ -27,10 +27,9 @@ import PackageDescription
 
 let package = Package(
     name: "MRGpsDataGetter",
-    platforms: [.macOS(.v10_12),
-                .iOS(.v11),
-                .tvOS(.v11),
-                .watchOS(.v4)
+    platforms: [
+        // Some platform where run yours library
+        .macOS(.v10_12), .iOS(.v11), .tvOS(.v11), .watchOS(.v4)
     ],
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
@@ -45,7 +44,7 @@ let package = Package(
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(name: "MRGpsDataGetter"),
-//    .target(name: "MRGpsDataGetter", dependencies: [.product(name: "Alamofire"), .product(name: "SwiftyJSON")], path: ("Source")),
+//    .target(name: "MRGpsDataGetter", dependencies: [.product(name: "Alamofire"), .product(name: "SwiftyJSON")]),
     ],
     swiftLanguageVersions: [
         .v5
