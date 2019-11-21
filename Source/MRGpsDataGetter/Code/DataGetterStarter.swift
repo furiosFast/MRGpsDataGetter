@@ -81,12 +81,12 @@ open class DataGetterStarter: NSObject, CLLocationManagerDelegate {
             locationManager.stopUpdatingLocation()
             self.delegate?.gpsDataStartLoading()
 
-//            GpsDataGetter().reverseGeocodeLocation(loc)
-//            WeatherDataGetter().getWeatherInfo(openWeatherMapKey: openWeatherMapKey, currentLocation: loc)
+//            GpsDataGetter.shared.reverseGeocodeLocation(loc)
+//            WeatherDataGetter.shared.getWeatherInfo(openWeatherMapKey: openWeatherMapKey, currentLocation: loc)
 //            self.delegate?.setGpsMap(loc)
-//            GpsDataGetter().getPositionInfo(currentLocation: loc)
+//            GpsDataGetter.shared.getPositionInfo(currentLocation: loc)
             SunDataGetter.shared.getSunInfo(currentLocation: loc)
-//            MoonDataGetter().getMoonInfo(currentLocation: loc)
+            MoonDataGetter.shared.getMoonInfo(currentLocation: loc)
             
             
             if let b = Bool(Preferences.shared.getPreference("autoRefreshSunMoonInfo")), b == true {

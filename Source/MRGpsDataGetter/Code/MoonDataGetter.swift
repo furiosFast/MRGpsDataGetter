@@ -15,17 +15,19 @@
 import UIKit
 import CoreLocation
 
-protocol moonDataProtocol {
+public protocol MRGpsDataGetterMoonDataDelegate: NSObjectProtocol {
     func moonDataReady(_ moon: GpsMoonInfoModel)
 }
 
-class MoonDataGetter: NSObject {
+open class MoonDataGetter: NSObject {
     
-    var delegate : moonDataProtocol? = nil
+    public static let shared = MoonDataGetter()
+
+    open weak var delegate : MRGpsDataGetterMoonDataDelegate? = nil
     let moon = GpsMoonInfoModel()
     
     
-    public func getMoonInfo(currentLocation: CLLocation){
+    open func getMoonInfo(currentLocation: CLLocation){
         DispatchQueue.global().async {
             self.reverseMoonInfo(currentLocation)
         }
@@ -68,6 +70,10 @@ class MoonDataGetter: NSObject {
         DispatchQueue.main.async {
             self.delegate?.moonDataReady(self.moon)
         }
+    }
+    
+    open func getOldMoonData() -> GpsMoonInfoModel {
+        return moon
     }
     
     //MARK: - Support functions for moon
