@@ -19,15 +19,15 @@ public protocol MRGpsDataGetterSunDataDelegate: NSObjectProtocol {
     func sunDataReady(sun: GpsSunInfoModel)
 }
 
-public class SunDataGetter: NSObject {
+open class SunDataGetter: NSObject {
     
-    static let shared = SunDataGetter()
+    public static let shared = SunDataGetter()
 
-    weak var delegate : MRGpsDataGetterSunDataDelegate?
-    let sun = GpsSunInfoModel()
+    open weak var delegate : MRGpsDataGetterSunDataDelegate?
+    public let sun = GpsSunInfoModel()
     
     
-    func getSunInfo(currentLocation: CLLocation) {
+    open func getSunInfo(currentLocation: CLLocation) {
         DispatchQueue.global().async {
             self.reverseSolarInfo(currentLocation)
         }
@@ -85,7 +85,7 @@ public class SunDataGetter: NSObject {
         }
     }
     
-    func getOldSunData() -> GpsSunInfoModel {
+    open func getOldSunData() -> GpsSunInfoModel {
         return sun
     }
     
