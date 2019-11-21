@@ -31,8 +31,8 @@ public protocol MRGpsDataGetterGpsDataDelegate: NSObjectProtocol {
 open class GpsDataGetter: NSObject {
     
     public static let shared = GpsDataGetter()
-
-    open weak var delegate : MRGpsDataGetterGpsDataDelegate? = nil
+    open weak var delegate : MRGpsDataGetterGpsDataDelegate?
+    
     lazy var geocoder = CLGeocoder()
     let gps = GpsInfoModel()
     var oldLocation: CLLocation? = nil

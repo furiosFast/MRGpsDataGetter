@@ -14,7 +14,7 @@
 		4CEE0A822385AA2700782D39 /* GpsSunInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE0A7E2385AA2700782D39 /* GpsSunInfoModel.swift */; };
 		4CEE0A832385AA2700782D39 /* GpsWeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE0A7F2385AA2700782D39 /* GpsWeatherModel.swift */; };
 		4CEE0A842385AA2700782D39 /* GpsInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE0A802385AA2700782D39 /* GpsInfoModel.swift */; };
-		4CEE0A862385AA5A00782D39 /* DataGetterStarter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE0A852385AA5A00782D39 /* DataGetterStarter.swift */; };
+		4CEE0A862385AA5A00782D39 /* MRGpsDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE0A852385AA5A00782D39 /* MRGpsDataGetter.swift */; };
 		4CEE0A892385AB1000782D39 /* iOSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE0A882385AB1000782D39 /* iOSExtensions.swift */; };
 		4CEE0A8F2385AD2000782D39 /* ConfigShared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE0A8E2385AD2000782D39 /* ConfigShared.swift */; };
 		4CEE0A912385AD6000782D39 /* MoonDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE0A902385AD6000782D39 /* MoonDataGetter.swift */; };
@@ -39,7 +39,7 @@
 		4CEE0A7E2385AA2700782D39 /* GpsSunInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GpsSunInfoModel.swift; sourceTree = "<group>"; };
 		4CEE0A7F2385AA2700782D39 /* GpsWeatherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GpsWeatherModel.swift; sourceTree = "<group>"; };
 		4CEE0A802385AA2700782D39 /* GpsInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GpsInfoModel.swift; sourceTree = "<group>"; };
-		4CEE0A852385AA5A00782D39 /* DataGetterStarter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataGetterStarter.swift; sourceTree = "<group>"; };
+		4CEE0A852385AA5A00782D39 /* MRGpsDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MRGpsDataGetter.swift; sourceTree = "<group>"; };
 		4CEE0A882385AB1000782D39 /* iOSExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iOSExtensions.swift; sourceTree = "<group>"; };
 		4CEE0A8B2385AB1C00782D39 /* BDAstroCalc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDAstroCalc.swift; sourceTree = "<group>"; };
 		4CEE0A8E2385AD2000782D39 /* ConfigShared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigShared.swift; sourceTree = "<group>"; };
@@ -93,6 +93,7 @@
 		4CEE0A642385A8A400782D39 /* MRGpsDataGetter */ = {
 			isa = PBXGroup;
 			children = (
+				4CEE0A852385AA5A00782D39 /* MRGpsDataGetter.swift */,
 				4CEE0A6E2385A93600782D39 /* Model */,
 				4CEE0A6F2385A93E00782D39 /* Code */,
 				4CEE0AAC2385D10700782D39 /* Other */,
@@ -117,7 +118,6 @@
 		4CEE0A6F2385A93E00782D39 /* Code */ = {
 			isa = PBXGroup;
 			children = (
-				4CEE0A852385AA5A00782D39 /* DataGetterStarter.swift */,
 				4CEE0A902385AD6000782D39 /* MoonDataGetter.swift */,
 				4CEE0A962385B07900782D39 /* SunDataGetter.swift */,
 				4CEE0A982385B39E00782D39 /* WeatherDataGetter.swift */,
@@ -321,7 +321,7 @@
 				4CEE0A8F2385AD2000782D39 /* ConfigShared.swift in Sources */,
 				4CEE0A912385AD6000782D39 /* MoonDataGetter.swift in Sources */,
 				4CEE0A822385AA2700782D39 /* GpsSunInfoModel.swift in Sources */,
-				4CEE0A862385AA5A00782D39 /* DataGetterStarter.swift in Sources */,
+				4CEE0A862385AA5A00782D39 /* MRGpsDataGetter.swift in Sources */,
 				4CEE0AAD2385D1F100782D39 /* Preferences.swift in Sources */,
 				4CEE0A9B2385B77200782D39 /* ForecastDataGetter.swift in Sources */,
 				4CEE0A992385B39E00782D39 /* WeatherDataGetter.swift in Sources */,

@@ -21,9 +21,9 @@ public protocol MRGpsDataGetterStarterDelegate: NSObjectProtocol {
     func gpsHeadingForCompass(newHeading: CLHeading)
 }
 
-open class DataGetterStarter: NSObject, CLLocationManagerDelegate {
+open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     
-    public static let shared = DataGetterStarter()
+    public static let shared = MRGpsDataGetter()
     
     open weak var delegate : MRGpsDataGetterStarterDelegate?
     var locationManager: CLLocationManager = CLLocationManager()
@@ -80,7 +80,8 @@ open class DataGetterStarter: NSObject, CLLocationManagerDelegate {
             locationManager.stopUpdatingLocation()
             self.delegate?.gpsDataStartLoading()
 
-//            WeatherDataGetter.shared.getWeatherInfo(openWeatherMapKey: openWeatherMapKey, currentLocation: loc)
+            WeatherDataGetter.shared.getWeatherInfo(openWeatherMapKey: openWeatherMapKey, currentLocation: loc)
+//            ForecastDataGetter.shared.getWeatherInfo(openWeatherMapKey: openWeatherMapKey, currentLocation: loc)
             GpsDataGetter.shared.getPositionInfo(currentLocation: loc)
             SunDataGetter.shared.getSunInfo(currentLocation: loc)
             MoonDataGetter.shared.getMoonInfo(currentLocation: loc)

@@ -17,18 +17,20 @@ import CoreLocation
 import Alamofire
 import SwiftyJSON
 
-protocol weatherDataProtocol {
+public protocol MRGpsDataGetterWeatherDataDelegate: NSObjectProtocol {
     func weatherDataNotAvaiable(_ error: String)
     func weatherDataReady(_ weather: GpsWeatherModel)
 }
 
-class WeatherDataGetter: NSObject {
+open class WeatherDataGetter: NSObject {
         
-    var delegate : weatherDataProtocol? = nil
+    public static let shared = WeatherDataGetter()
+    open weak var delegate : MRGpsDataGetterWeatherDataDelegate?
+    
     let weather = GpsWeatherModel()
     
     
-    public func getWeatherInfo(openWeatherMapKey: String, currentLocation: CLLocation) {
+    open func getWeatherInfo(openWeatherMapKey: String, currentLocation: CLLocation) {
         DispatchQueue.global().async {
             self.getWeatherInfoFromWeb(openWeatherMapKey, currentLocation)
         }
@@ -249,6 +251,10 @@ class WeatherDataGetter: NSObject {
             
             self.delegate?.weatherDataReady(self.weather)
         }
+    }
+    
+    open func getOldWeatherData() -> GpsWeatherModel {
+        return weather
     }
     
 }

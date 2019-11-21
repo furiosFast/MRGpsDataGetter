@@ -25,6 +25,7 @@ protocol forecastDataProtocol {
 class ForecastDataGetter: NSObject {
     
     var delegate : forecastDataProtocol? = nil
+    
     var storage : [GpsWeatherModel] = []
     var plotDataWindName: [String] = []
     var plotData: [Double] = []
