@@ -16,7 +16,7 @@ import UIKit
 import CoreLocation
 
 public protocol MRGpsDataGetterSunDataDelegate {
-    func sunDataReady(_ sun: GpsSunInfoModel)
+    func sunDataReady(sun: GpsSunInfoModel)
 }
 
 public class SunDataGetter: NSObject {
@@ -79,7 +79,7 @@ public class SunDataGetter: NSObject {
         sun.segnoZodiacale = getZodiacSign(sunCoordinates.rightAscension * radiansToDegrees)
         
         DispatchQueue.main.async {
-            self.delegate?.sunDataReady(self.sun)
+            self.delegate?.sunDataReady(sun: self.sun)
         }
     }
     
