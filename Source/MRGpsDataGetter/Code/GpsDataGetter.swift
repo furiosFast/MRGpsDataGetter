@@ -75,7 +75,7 @@ class GpsDataGetter: NSObject {
     public func geocodeAddressFromString(_ locationAddress: String){
         geocoder.geocodeAddressString(locationAddress) { (placemarks, error) in
             if let error = error {
-                self.delegate?.gpsGeocodeAddressFromStringError((error.localizedDescription)
+                self.delegate?.gpsGeocodeAddressFromStringError(error.localizedDescription)
             } else {
                 if let placemarks = placemarks, let placemark = placemarks.first, let location = placemark.location {
                     self.delegate?.gpsLocation(location)

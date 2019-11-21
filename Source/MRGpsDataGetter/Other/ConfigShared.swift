@@ -11,7 +11,7 @@
 //  Copyright © 2019 Fast-Devs Project. All rights reserved.
 //
 
-
+import UIKit
 import Alamofire
 
 public var AFManager = Session()

@@ -175,8 +175,8 @@
 		4CEE0AAC2385D10700782D39 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				4CEE0AAA2385D0A400782D39 /* Preferences.swift */,
 				4CEE0A8E2385AD2000782D39 /* ConfigShared.swift */,
+				4CEE0AAA2385D0A400782D39 /* Preferences.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
