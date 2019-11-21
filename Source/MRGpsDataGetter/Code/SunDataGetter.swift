@@ -19,10 +19,10 @@ public protocol MRGpsDataGetterSunDataDelegate {
     func sunDataReady(sun: GpsSunInfoModel)
 }
 
-public class SunDataGetter: NSObject {
+open class SunDataGetter: NSObject {
     
     var delegate : MRGpsDataGetterSunDataDelegate? = nil
-    let sun = GpsSunInfoModel()
+    @objc open var sun = GpsSunInfoModel()
     
     
     public func getSunInfo(currentLocation: CLLocation) {
@@ -81,6 +81,10 @@ public class SunDataGetter: NSObject {
         DispatchQueue.main.async {
             self.delegate?.sunDataReady(sun: self.sun)
         }
+    }
+    
+    public func getSunData() -> GpsSunInfoModel {
+        return sun
     }
     
     //MARK: - Support functions for sun
