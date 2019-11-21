@@ -17,22 +17,23 @@ import CoreLocation
 import Alamofire
 import SwiftyJSON
 
-protocol forecastDataProtocol {
+public protocol forecastDataProtocol: NSObjectProtocol {
     func forecastDataNotAvaiable(error: String)
     func forecastDataReady(forecast: [GpsWeatherModel])
 }
 
-class ForecastDataGetter: NSObject {
+open class ForecastDataGetter: NSObject {
     
-    var delegate : forecastDataProtocol? = nil
+    public static let shared = WeatherDataGetter()
+    open weak var delegate : forecastDataProtocol?
     
-    var storage : [GpsWeatherModel] = []
+    var forecast : [GpsWeatherModel] = []
     var plotDataWindName: [String] = []
     var plotData: [Double] = []
     var plotDataTime: [String] = []
     
     
-    public func getForecastInfo(openWeatherMapKey: String, currentLocation: CLLocation) {
+    open func getForecastInfo(openWeatherMapKey: String, currentLocation: CLLocation) {
         DispatchQueue.global().async {
             self.getForecastInfoFromWeb(openWeatherMapKey, currentLocation)
         }
@@ -79,7 +80,7 @@ class ForecastDataGetter: NSObject {
                 }
             }
             
-            self.storage = []
+            self.forecast = []
             self.plotData = []
             self.plotDataTime = []
             self.plotDataWindName = []
@@ -269,11 +270,15 @@ class ForecastDataGetter: NSObject {
                     weather.nuvole = "\(clouds)" + " " + loc("PERCENT")
                 }
                 
-                self.storage.append(weather)
+                self.forecast.append(weather)
             }
             
-            self.delegate?.forecastDataReady(forecast: self.storage)
+            self.delegate?.forecastDataReady(forecast: self.forecast)
         }
     }
     
+    open func getOldForecastData() -> [GpsWeatherModel] {
+         return forecast
+     }
+     
 }
