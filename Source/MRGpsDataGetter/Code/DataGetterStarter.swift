@@ -17,18 +17,18 @@ import Foundation
 import CoreLocation
 import MapKit
 
-protocol gpsDataGetterProtocol {
+public protocol MRGpsDataGetterStarterDelegate: NSObjectProtocol {
     func gpsDataStartLoading()
     func gpsDataNotAvaiable()
-    func setGpsMap(_ currentLocation: CLLocation)
-    func gpsHeadingForCompass(_ newHeading: CLHeading)
+    func setGpsMap(currentLocation: CLLocation)
+    func gpsHeadingForCompass(newHeading: CLHeading)
 }
 
-class DataGetterStarter: NSObject, CLLocationManagerDelegate {
+open class DataGetterStarter: NSObject, CLLocationManagerDelegate {
     
-    static let shared = DataGetterStarter()
+    public static let shared = DataGetterStarter()
     
-    var delegate : gpsDataGetterProtocol? = nil
+    open weak var delegate : MRGpsDataGetterStarterDelegate?
     var locationManager: CLLocationManager = CLLocationManager()
     var currentLocation: CLLocation?
     var mapLocation: CLLocationCoordinate2D?
@@ -38,12 +38,12 @@ class DataGetterStarter: NSObject, CLLocationManagerDelegate {
     var openWeatherMapKey = "NaN"
     
     
-    public func refreshAllWeatherData(){
+    open func refreshAllWeatherData(){
         setCount(0)
         setLocationPermission(openWeatherMapKey: openWeatherMapKey, preferences: Preferences.shared.prefs)
     }
         
-    public func setLocationPermission(openWeatherMapKey: String, preferences : [String : String]){
+    open func setLocationPermission(openWeatherMapKey: String, preferences : [String : String]){
         setOptions(openWeatherMapKey, preferences)
         DispatchQueue.global().async {
             self.locationManager.delegate = self
@@ -75,7 +75,7 @@ class DataGetterStarter: NSObject, CLLocationManagerDelegate {
         }
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         currentLocation = nil
         currentLocation = locations.last
         if let loc = self.currentLocation, count == 0 {
@@ -83,12 +83,12 @@ class DataGetterStarter: NSObject, CLLocationManagerDelegate {
             locationManager.stopUpdatingLocation()
             self.delegate?.gpsDataStartLoading()
 
-            GpsDataGetter().reverseGeocodeLocation(loc)
-            WeatherDataGetter().getWeatherInfo(openWeatherMapKey: openWeatherMapKey, currentLocation: loc)
-            self.delegate?.setGpsMap(loc)
-            GpsDataGetter().getPositionInfo(currentLocation: loc)
+//            GpsDataGetter().reverseGeocodeLocation(loc)
+//            WeatherDataGetter().getWeatherInfo(openWeatherMapKey: openWeatherMapKey, currentLocation: loc)
+//            self.delegate?.setGpsMap(loc)
+//            GpsDataGetter().getPositionInfo(currentLocation: loc)
             SunDataGetter().getSunInfo(currentLocation: loc)
-            MoonDataGetter().getMoonInfo(currentLocation: loc)
+//            MoonDataGetter().getMoonInfo(currentLocation: loc)
             
             
             if let b = Bool(Preferences.shared.getPreference("autoRefreshSunMoonInfo")), b == true {
@@ -109,12 +109,12 @@ class DataGetterStarter: NSObject, CLLocationManagerDelegate {
         count = count + 1
     }
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Swift.Error) {
+    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Swift.Error) {
         //print(error.localizedDescription)
         //setNotAvaiablePositionInfo()
     }
     
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         //non serve poichè avendo il metodo deinit effettua l'aggiornamento dei dati, in caso di cambio impostazioni fa già lui il refresh dell'ui
         //setLocationPermission()
     }
@@ -133,21 +133,19 @@ class DataGetterStarter: NSObject, CLLocationManagerDelegate {
         }
     }
     
-    
-    //********COMPASS********/
-    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        self.delegate?.gpsHeadingForCompass(newHeading)
+    public func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        self.delegate?.gpsHeadingForCompass(newHeading: newHeading)
     }
     
-    func locationManagerShouldDisplayHeadingCalibration(_ manager: CLLocationManager) -> Bool {
+    public func locationManagerShouldDisplayHeadingCalibration(_ manager: CLLocationManager) -> Bool {
         return true
     }
     
-    public func startHeading(){
+    open func startHeading(){
         self.locationManager.startUpdatingHeading()
     }
     
-    public func stopHeading(){
+    open func stopHeading(){
         self.locationManager.stopUpdatingHeading()
     }
     
