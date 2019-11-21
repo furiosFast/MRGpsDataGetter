@@ -27,7 +27,7 @@ open class DataGetterStarter: NSObject, CLLocationManagerDelegate {
     public static let shared = DataGetterStarter()
     
     open weak var delegate : MRGpsDataGetterStarterDelegate?
-    var locationManager: CLLocationManager = CLLocationManager()
+    lazy var locationManager: CLLocationManager = CLLocationManager()
     var currentLocation: CLLocation?
     var mapLocation: CLLocationCoordinate2D?
     var timerAutoRefresh = Timer()
