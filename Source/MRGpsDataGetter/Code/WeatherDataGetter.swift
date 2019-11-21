@@ -38,7 +38,7 @@ open class WeatherDataGetter: NSObject {
     
     private func getWeatherInfoFromWeb(_ openWeatherMapKey: String, _ currentLocation: CLLocation) {
         if openWeatherMapKey == "NaN" {
-            self.delegate?.weatherDataNotAvaiable("openWeatherMapKey is NaN")
+            self.delegate?.weatherDataNotAvaiable(error: "openWeatherMapKey is NaN")
         }
         
         var units = ""
@@ -62,18 +62,18 @@ open class WeatherDataGetter: NSObject {
         
         AFManager.request(urlString, parameters: parameters).responseJSON { response in
             if let er = response.error {
-                self.delegate?.weatherDataNotAvaiable(er.localizedDescription)
+                self.delegate?.weatherDataNotAvaiable(error: er.localizedDescription)
                 return
             }
             guard let ilJson = response.value else {
                 print("JSON Nil")
-                self.delegate?.weatherDataNotAvaiable("JSON is nil")
+                self.delegate?.weatherDataNotAvaiable(error: "JSON is nil")
                 return
             }
             let json = JSON(ilJson)
             if let openWeatherMapError = Int(json["cod"].stringValue) {
                 if (openWeatherMapError != 200) {
-                    self.delegate?.weatherDataNotAvaiable("OpenWeatherMap.org error: " + "\(openWeatherMapError)")
+                    self.delegate?.weatherDataNotAvaiable(error: "OpenWeatherMap.org error: " + "\(openWeatherMapError)")
                     return
                 }
             }
@@ -249,7 +249,7 @@ open class WeatherDataGetter: NSObject {
                 self.weather.nuvole = "\(clouds)" + " " + loc("PERCENT")
             }
             
-            self.delegate?.weatherDataReady(self.weather)
+            self.delegate?.weatherDataReady(weather: self.weather)
         }
     }
     

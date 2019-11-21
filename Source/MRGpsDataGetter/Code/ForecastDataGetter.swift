@@ -18,8 +18,8 @@ import Alamofire
 import SwiftyJSON
 
 protocol forecastDataProtocol {
-    func forecastDataNotAvaiable(_ error: String)
-    func forecastDataReady(_ forecast: [GpsWeatherModel])
+    func forecastDataNotAvaiable(error: String)
+    func forecastDataReady(forecast: [GpsWeatherModel])
 }
 
 class ForecastDataGetter: NSObject {
@@ -40,7 +40,7 @@ class ForecastDataGetter: NSObject {
     
     private func getForecastInfoFromWeb(_ openWeatherMapKey: String, _ currentLocation: CLLocation) {
         if openWeatherMapKey == "NaN" {
-            self.delegate?.forecastDataNotAvaiable("openWeatherMapKey is NaN")
+            self.delegate?.forecastDataNotAvaiable(error: "openWeatherMapKey is NaN")
         }
         
         var units = ""
@@ -64,17 +64,17 @@ class ForecastDataGetter: NSObject {
         
         AFManager.request(urlString, parameters: parameters).responseJSON { response in
             if let er = response.error {
-                self.delegate?.forecastDataNotAvaiable(er.localizedDescription)
+                self.delegate?.forecastDataNotAvaiable(error: er.localizedDescription)
                 return
             }
             guard let ilJson = response.value else {
-                self.delegate?.forecastDataNotAvaiable("JSON Nil")
+                self.delegate?.forecastDataNotAvaiable(error: "JSON Nil")
                 return
             }
             let json = JSON(ilJson)
             if let openWeatherMapError = Int(json["cod"].stringValue) {
                 if (openWeatherMapError != 200) {
-                    self.delegate?.forecastDataNotAvaiable("openWeatherMap.org error: " + "\(openWeatherMapError)")
+                    self.delegate?.forecastDataNotAvaiable(error: "openWeatherMap.org error: " + "\(openWeatherMapError)")
                     return
                 }
             }
@@ -272,7 +272,7 @@ class ForecastDataGetter: NSObject {
                 self.storage.append(weather)
             }
             
-            self.delegate?.forecastDataReady(self.storage)
+            self.delegate?.forecastDataReady(forecast: self.storage)
         }
     }
     
