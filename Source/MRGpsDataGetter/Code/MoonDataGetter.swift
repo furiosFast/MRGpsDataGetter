@@ -16,7 +16,7 @@ import UIKit
 import CoreLocation
 
 public protocol MRGpsDataGetterMoonDataDelegate: NSObjectProtocol {
-    func moonDataReady(_ moon: GpsMoonInfoModel)
+    func moonDataReady(moon: GpsMoonInfoModel)
 }
 
 open class MoonDataGetter: NSObject {
@@ -68,7 +68,7 @@ open class MoonDataGetter: NSObject {
         
         
         DispatchQueue.main.async {
-            self.delegate?.moonDataReady(self.moon)
+            self.delegate?.moonDataReady(moon: self.moon)
         }
     }
     
