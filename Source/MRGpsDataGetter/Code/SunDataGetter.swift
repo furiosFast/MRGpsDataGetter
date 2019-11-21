@@ -22,8 +22,8 @@ public protocol MRGpsDataGetterSunDataDelegate: NSObjectProtocol {
 open class SunDataGetter: NSObject {
     
     public static let shared = SunDataGetter()
-
-    open weak var delegate : MRGpsDataGetterSunDataDelegate?
+    
+    open weak var delegate: MRGpsDataGetterSunDataDelegate?
     let sun = GpsSunInfoModel()
     
     
@@ -81,6 +81,7 @@ open class SunDataGetter: NSObject {
         sun.segnoZodiacale = getZodiacSign(sunCoordinates.rightAscension * radiansToDegrees)
         
         DispatchQueue.main.async {
+            print(self.sun)
             self.delegate?.sunDataReady(sun: self.sun)
         }
     }
