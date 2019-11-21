@@ -15,19 +15,19 @@
 import UIKit
 import CoreLocation
 
-@objc public protocol MRGpsDataGetterSunDataDelegate {
+public protocol MRGpsDataGetterSunDataDelegate: NSObjectProtocol {
     func sunDataReady(sun: GpsSunInfoModel)
 }
 
 public class SunDataGetter: NSObject {
     
-    public static let shared = SunDataGetter()
+    static let shared = SunDataGetter()
 
-    weak public var delegate : MRGpsDataGetterSunDataDelegate?
-    public var sun = GpsSunInfoModel()
+    weak var delegate : MRGpsDataGetterSunDataDelegate?
+    let sun = GpsSunInfoModel()
     
     
-    public func getSunInfo(currentLocation: CLLocation) {
+    func getSunInfo(currentLocation: CLLocation) {
         DispatchQueue.global().async {
             self.reverseSolarInfo(currentLocation)
         }
@@ -85,7 +85,7 @@ public class SunDataGetter: NSObject {
         }
     }
     
-    public func getOldSunData() -> GpsSunInfoModel {
+    func getOldSunData() -> GpsSunInfoModel {
         return sun
     }
     
