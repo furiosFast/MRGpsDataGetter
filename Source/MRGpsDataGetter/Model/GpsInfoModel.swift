@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GpsInfoModel: NSObject {
+public final class GpsInfoModel: NSObject {
     
     var localita : String = loc("NOTAVAIABLENUMBER")
 

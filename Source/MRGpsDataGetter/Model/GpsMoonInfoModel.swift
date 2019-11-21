@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GpsMoonInfoModel: NSObject {
+public final class GpsMoonInfoModel: NSObject {
     
     var altitudine : String = loc("NOTAVAIABLENUMBER")
     var illuminazioneLunare : String = loc("NOTAVAIABLENUMBER")

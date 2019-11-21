@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class GpsWeatherModel: NSObject {
+public final class GpsWeatherModel: NSObject {
     
     var velocitaVento : String = loc("NOTAVAIABLENUMBER")
     var forzaScalaBeaufortVento : String = loc("NOTAVAIABLENUMBER")

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GpsSunInfoModel: NSObject {
+public final class GpsSunInfoModel: NSObject {
     
     var mezzogiornoSolare : String = loc("NOTAVAIABLENUMBER")
     var mezzanotteSolare : String = loc("NOTAVAIABLENUMBER")
