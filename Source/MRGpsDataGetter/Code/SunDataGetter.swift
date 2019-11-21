@@ -87,7 +87,8 @@ open class SunDataGetter: NSObject {
     }
     
     open func getOldSunData() -> GpsSunInfoModel {
-        return sun
+        print(self.sun)
+        return SunDataGetter.shared.sun
     }
     
     //MARK: - Support functions for sun
