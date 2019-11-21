@@ -18,12 +18,16 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>LOCALIZE_STRING</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>LOCALIZE_STRING</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>test</string>
+	<key>NSLocationUsageDescription</key>
+	<string>test</string>
 </dict>
 </plist>
