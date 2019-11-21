@@ -17,7 +17,7 @@ import CoreLocation
 import Alamofire
 import SwiftyJSON
 
-public protocol forecastDataProtocol: NSObjectProtocol {
+public protocol MRGpsDataGetterForecastDataDelegate: NSObjectProtocol {
     func forecastDataNotAvaiable(error: String)
     func forecastDataReady(forecast: [GpsWeatherModel])
 }
@@ -25,7 +25,7 @@ public protocol forecastDataProtocol: NSObjectProtocol {
 open class ForecastDataGetter: NSObject {
     
     public static let shared = WeatherDataGetter()
-    open weak var delegate : forecastDataProtocol?
+    open weak var delegate : MRGpsDataGetterForecastDataDelegate?
     
     var forecast : [GpsWeatherModel] = []
     var plotDataWindName: [String] = []
