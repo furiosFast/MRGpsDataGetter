@@ -15,7 +15,7 @@
 import UIKit
 import CoreLocation
 
-public protocol MRGpsDataGetterStarterDelegate: NSObjectProtocol {
+public protocol MRGpsDataGetterDelegate: NSObjectProtocol {
     func gpsDataStartLoading()
     func gpsDataNotAvaiable()
     func gpsHeadingForCompass(newHeading: CLHeading)
@@ -24,8 +24,8 @@ public protocol MRGpsDataGetterStarterDelegate: NSObjectProtocol {
 open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     
     public static let shared = MRGpsDataGetter()
+    open weak var delegate : MRGpsDataGetterDelegate?
     
-    open weak var delegate : MRGpsDataGetterStarterDelegate?
     var locationManager: CLLocationManager = CLLocationManager()
     var currentLocation: CLLocation?
     var mapLocation: CLLocationCoordinate2D?
