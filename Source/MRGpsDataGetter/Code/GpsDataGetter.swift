@@ -18,8 +18,13 @@ import MapKit
 
 public protocol MRGpsDataGetterGpsDataDelegate: NSObjectProtocol {
     func gpsDataReady(gps: GpsInfoModel)
-    func gpsLocationName(locationName: String)
-    func gpsLocation(location: CLLocation)
+    
+    func setGpsMap(currentLocation: CLLocation)
+    
+    func reverseGeocodeFromString(location: CLLocation)
+    func gpsreverseGeocodeFromLocationError(error: String)
+    
+    func reverseGeocodeFromLocation(locationName: String)
     func gpsGeocodeAddressFromStringError(error: String)
 }
 
@@ -36,6 +41,10 @@ open class GpsDataGetter: NSObject {
         DispatchQueue.global().async {
             self.reversePositionInfo(currentLocation)
         }
+        DispatchQueue.global().async {
+            self.reverseGeocodeFromLocation(currentLocation)
+        }
+        self.delegate?.setGpsMap(currentLocation: currentLocation)
     }
     
     private func reversePositionInfo(_ currentLocation: CLLocation){
@@ -79,30 +88,34 @@ open class GpsDataGetter: NSObject {
         return gps
     }
     
-    open func geocodeAddressFromString(_ locationAddress: String){
+    open func reverseGeocodeFromString(_ locationAddress: String){
         geocoder.geocodeAddressString(locationAddress) { (placemarks, error) in
             if let error = error {
                 self.delegate?.gpsGeocodeAddressFromStringError(error: error.localizedDescription)
             } else {
                 if let placemarks = placemarks, let placemark = placemarks.first, let location = placemark.location {
-                    self.delegate?.gpsLocation(location: location)
+                    self.delegate?.reverseGeocodeFromString(location: location)
                 }
             }
         }
     }
     
-    open func reverseGeocodeLocation(_ currentLocation: CLLocation){
+    open func reverseGeocodeFromLocation(_ currentLocation: CLLocation){
         geocoder.reverseGeocodeLocation(currentLocation) { (placemarks, error) in
-            if let placemarks = placemarks, let placemark = placemarks.first, let locality = placemark.locality, let isoCountryCode = placemark.isoCountryCode {
-                self.gps.localita = locality + ", " + isoCountryCode.uppercased()
+            if let error = error {
+                self.delegate?.gpsreverseGeocodeFromLocationError(error: error.localizedDescription)
             } else {
-                if let placemarks = placemarks, let placemark = placemarks.first, let inlandWater = placemark.inlandWater, let ocean = placemark.ocean {
-                    self.gps.localita = ocean + ", " + inlandWater.uppercased()
+                if let placemarks = placemarks, let placemark = placemarks.first, let locality = placemark.locality, let isoCountryCode = placemark.isoCountryCode {
+                    self.gps.localita = locality + ", " + isoCountryCode.uppercased()
                 } else {
-                    self.gps.localita = loc("position_lOCNAMENAN")
+                    if let placemarks = placemarks, let placemark = placemarks.first, let inlandWater = placemark.inlandWater, let ocean = placemark.ocean {
+                        self.gps.localita = ocean + ", " + inlandWater.uppercased()
+                    } else {
+                        self.gps.localita = loc("position_lOCNAMENAN")
+                    }
                 }
+                self.delegate?.reverseGeocodeFromLocation(locationName: self.gps.localita)
             }
-            self.delegate?.gpsLocationName(locationName: self.gps.localita)
         }
     }
     

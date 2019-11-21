@@ -18,7 +18,6 @@ import CoreLocation
 public protocol MRGpsDataGetterStarterDelegate: NSObjectProtocol {
     func gpsDataStartLoading()
     func gpsDataNotAvaiable()
-    func setGpsMap(currentLocation: CLLocation)
     func gpsHeadingForCompass(newHeading: CLHeading)
 }
 
@@ -81,9 +80,7 @@ open class DataGetterStarter: NSObject, CLLocationManagerDelegate {
             locationManager.stopUpdatingLocation()
             self.delegate?.gpsDataStartLoading()
 
-            GpsDataGetter.shared.reverseGeocodeLocation(loc)
 //            WeatherDataGetter.shared.getWeatherInfo(openWeatherMapKey: openWeatherMapKey, currentLocation: loc)
-//            self.delegate?.setGpsMap(loc)
             GpsDataGetter.shared.getPositionInfo(currentLocation: loc)
             SunDataGetter.shared.getSunInfo(currentLocation: loc)
             MoonDataGetter.shared.getMoonInfo(currentLocation: loc)
@@ -120,13 +117,13 @@ open class DataGetterStarter: NSObject, CLLocationManagerDelegate {
     @objc private func autoRefreshSunMoonInfo(){
         if let loc = currentLocation, count > 0 {
             DispatchQueue.global().async {
-                GpsDataGetter().getPositionInfo(currentLocation: loc)
+                GpsDataGetter.shared.getPositionInfo(currentLocation: loc)
             }
             DispatchQueue.global().async {
-                SunDataGetter().getSunInfo(currentLocation: loc)
+                SunDataGetter.shared.getSunInfo(currentLocation: loc)
             }
             DispatchQueue.global().async {
-                MoonDataGetter().getMoonInfo(currentLocation: loc)
+                MoonDataGetter.shared.getMoonInfo(currentLocation: loc)
             }
         }
     }
