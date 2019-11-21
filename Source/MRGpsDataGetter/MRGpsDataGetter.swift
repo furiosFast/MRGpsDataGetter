@@ -18,7 +18,7 @@ import CoreLocation
 public protocol MRGpsDataGetterDelegate: NSObjectProtocol {
     func gpsDataStartLoading()
     func gpsDataNotAvaiable()
-    func gpsHeadingForCompass(newHeading: CLHeading)
+    func gpsHeadingForCompass(newHeading: CLLocationDirection)
 }
 
 open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
@@ -134,7 +134,11 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     }
     
     public func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        self.delegate?.gpsHeadingForCompass(newHeading: newHeading)
+        if Bool(Preferences.shared.getPreference("trueNorth"))! == true {
+            self.delegate?.gpsHeadingForCompass(newHeading: newHeading.trueHeading)
+        } else {
+            self.delegate?.gpsHeadingForCompass(newHeading: newHeading.magneticHeading)
+        }
     }
     
     public func locationManagerShouldDisplayHeadingCalibration(_ manager: CLLocationManager) -> Bool {

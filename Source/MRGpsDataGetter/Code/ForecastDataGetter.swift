@@ -278,7 +278,11 @@ open class ForecastDataGetter: NSObject {
     }
     
     open func getOldForecastData() -> [GpsWeatherModel] {
-         return forecast
-     }
-     
+        return forecast
+    }
+    
+    open func getOldplotDataWindName() -> GpsPlotInfoModel {
+        return GpsPlotInfoModel(plotDataWindName, plotData, plotDataTime)
+    }
+    
 }
