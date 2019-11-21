@@ -13,7 +13,6 @@
 
 
 import UIKit
-import Foundation
 import CoreLocation
 
 public protocol MRGpsDataGetterStarterDelegate: NSObjectProtocol {
@@ -74,7 +73,7 @@ open class DataGetterStarter: NSObject, CLLocationManagerDelegate {
         }
     }
     
-    open func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         currentLocation = nil
         currentLocation = locations.last
         if let loc = self.currentLocation, count == 0 {
