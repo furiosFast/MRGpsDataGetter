@@ -16,7 +16,7 @@ public final class GpsSunInfoModel: NSObject {
     var altitudine : String = loc("NOTAVAIABLENUMBER")
     var azimuth : String = loc("NOTAVAIABLENUMBER")
 
-    open var crepuscoloAstronauticoAlba : String = loc("NOTAVAIABLENUMBER")
+    public final var crepuscoloAstronauticoAlba : String = loc("NOTAVAIABLENUMBER")
     var crepuscoloNauticoAlba : String = loc("NOTAVAIABLENUMBER")
     var crepuscoloCivileAlba : String = loc("NOTAVAIABLENUMBER")
     var albaInizio : String = loc("NOTAVAIABLENUMBER")
