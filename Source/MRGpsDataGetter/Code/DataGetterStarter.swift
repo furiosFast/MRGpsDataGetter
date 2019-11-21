@@ -22,7 +22,7 @@ public protocol MRGpsDataGetterStarterDelegate: NSObjectProtocol {
     func gpsHeadingForCompass(newHeading: CLHeading)
 }
 
-class DataGetterStarter: NSObject, CLLocationManagerDelegate {
+open class DataGetterStarter: NSObject, CLLocationManagerDelegate {
     
     public static let shared = DataGetterStarter()
     
@@ -43,7 +43,7 @@ class DataGetterStarter: NSObject, CLLocationManagerDelegate {
         
     open func setLocationPermission(openWeatherMapKey: String, preferences : [String : String]){
         setOptions(openWeatherMapKey, preferences)
-//        DispatchQueue.global().async {
+        DispatchQueue.global().async {
             self.locationManager.delegate = self
             switch CLLocationManager.authorizationStatus() {
                 case .notDetermined:
@@ -70,10 +70,10 @@ class DataGetterStarter: NSObject, CLLocationManagerDelegate {
                 case .authorizedAlways: break
                 @unknown default: break
             }
-//        }
+        }
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         currentLocation = nil
         currentLocation = locations.last
         if let loc = self.currentLocation, count == 0 {
@@ -107,12 +107,12 @@ class DataGetterStarter: NSObject, CLLocationManagerDelegate {
         count = count + 1
     }
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Swift.Error) {
+    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Swift.Error) {
         //print(error.localizedDescription)
         //setNotAvaiablePositionInfo()
     }
     
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         //non serve poichè avendo il metodo deinit effettua l'aggiornamento dei dati, in caso di cambio impostazioni fa già lui il refresh dell'ui
         //setLocationPermission()
     }
@@ -131,11 +131,11 @@ class DataGetterStarter: NSObject, CLLocationManagerDelegate {
         }
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+    public func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         self.delegate?.gpsHeadingForCompass(newHeading: newHeading)
     }
     
-    func locationManagerShouldDisplayHeadingCalibration(_ manager: CLLocationManager) -> Bool {
+    public func locationManagerShouldDisplayHeadingCalibration(_ manager: CLLocationManager) -> Bool {
         return true
     }
     
@@ -162,5 +162,5 @@ class DataGetterStarter: NSObject, CLLocationManagerDelegate {
             self.openWeatherMapKey = openWeatherMapKey
         }
     }
-    
+
 }
