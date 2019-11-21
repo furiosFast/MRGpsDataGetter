@@ -22,7 +22,7 @@ public protocol MRGpsDataGetterGpsDataDelegate: NSObjectProtocol {
     func setGpsMap(currentLocation: CLLocation)
     
     func reverseGeocodeFromString(location: CLLocation)
-    func gpsreverseGeocodeFromLocationError(error: String)
+    func gpsReverseGeocodeFromLocationError(error: String)
     
     func reverseGeocodeFromLocation(locationName: String)
     func gpsGeocodeAddressFromStringError(error: String)
@@ -35,9 +35,13 @@ open class GpsDataGetter: NSObject {
     open weak var delegate : MRGpsDataGetterGpsDataDelegate? = nil
     lazy var geocoder = CLGeocoder()
     let gps = GpsInfoModel()
+    var oldLocation: CLLocation? = nil
     
     
     open func getPositionInfo(currentLocation: CLLocation) {
+        oldLocation = currentLocation
+        
+        
         DispatchQueue.global().async {
             self.reversePositionInfo(currentLocation)
         }
@@ -103,7 +107,7 @@ open class GpsDataGetter: NSObject {
     open func reverseGeocodeFromLocation(_ currentLocation: CLLocation){
         geocoder.reverseGeocodeLocation(currentLocation) { (placemarks, error) in
             if let error = error {
-                self.delegate?.gpsreverseGeocodeFromLocationError(error: error.localizedDescription)
+                self.delegate?.gpsReverseGeocodeFromLocationError(error: error.localizedDescription)
             } else {
                 if let placemarks = placemarks, let placemark = placemarks.first, let locality = placemark.locality, let isoCountryCode = placemark.isoCountryCode {
                     self.gps.localita = locality + ", " + isoCountryCode.uppercased()
@@ -117,6 +121,10 @@ open class GpsDataGetter: NSObject {
                 self.delegate?.reverseGeocodeFromLocation(locationName: self.gps.localita)
             }
         }
+    }
+    
+    open func getOldLocation() -> CLLocation? {
+        return oldLocation
     }
     
 }
