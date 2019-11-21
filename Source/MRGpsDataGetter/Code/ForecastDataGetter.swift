@@ -24,7 +24,7 @@ public protocol MRGpsDataGetterForecastDataDelegate: NSObjectProtocol {
 
 open class ForecastDataGetter: NSObject {
     
-    public static let shared = WeatherDataGetter()
+    public static let shared = ForecastDataGetter()
     open weak var delegate : MRGpsDataGetterForecastDataDelegate?
     
     var forecast : [GpsWeatherModel] = []
