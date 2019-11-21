@@ -18,14 +18,17 @@ import MapKit
 
 public protocol MRGpsDataGetterGpsDataDelegate: NSObjectProtocol {
     func gpsDataReady(gps: GpsInfoModel)
-    
     func setGpsMap(currentLocation: CLLocation)
-    
     func reverseGeocodeFromString(location: CLLocation)
-    func gpsReverseGeocodeFromLocationError(error: String)
-    
+    func reverseGeocodeFromStringError(error: String)
     func reverseGeocodeFromLocation(locationName: String)
-    func gpsGeocodeAddressFromStringError(error: String)
+    func reverseGeocodeFromLocationError(error: String)
+}
+
+extension MRGpsDataGetterForecastDataDelegate {
+    func reverseGeocodeFromString(location: CLLocation){}
+    func reverseGeocodeFromStringError(error: String){}
+    func reverseGeocodeFromLocationError(error: String){}
 }
 
 open class GpsDataGetter: NSObject {
@@ -97,7 +100,7 @@ open class GpsDataGetter: NSObject {
     open func reverseGeocodeFromString(_ locationAddress: String){
         geocoder.geocodeAddressString(locationAddress) { (placemarks, error) in
             if let error = error {
-                self.delegate?.gpsGeocodeAddressFromStringError(error: error.localizedDescription)
+                self.delegate?.reverseGeocodeFromStringError(error: error.localizedDescription)
             } else {
                 if let placemarks = placemarks, let placemark = placemarks.first, let location = placemark.location {
                     self.delegate?.reverseGeocodeFromString(location: location)
@@ -109,7 +112,7 @@ open class GpsDataGetter: NSObject {
     open func reverseGeocodeFromLocation(_ currentLocation: CLLocation){
         geocoder.reverseGeocodeLocation(currentLocation) { (placemarks, error) in
             if let error = error {
-                self.delegate?.gpsReverseGeocodeFromLocationError(error: error.localizedDescription)
+                self.delegate?.reverseGeocodeFromLocationError(error: error.localizedDescription)
             } else {
                 if let placemarks = placemarks, let placemark = placemarks.first, let locality = placemark.locality, let isoCountryCode = placemark.isoCountryCode {
                     self.gps.locationName = locality + ", " + isoCountryCode.uppercased()

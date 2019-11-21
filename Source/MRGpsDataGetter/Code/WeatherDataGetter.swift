@@ -18,8 +18,12 @@ import Alamofire
 import SwiftyJSON
 
 public protocol MRGpsDataGetterWeatherDataDelegate: NSObjectProtocol {
-    func weatherDataNotAvaiable(error: String)
     func weatherDataReady(weather: GpsWeatherModel)
+    func weatherDataNotAvaiable(error: String)
+}
+
+extension MRGpsDataGetterForecastDataDelegate {
+    func weatherDataNotAvaiable(error: String){}
 }
 
 open class WeatherDataGetter: NSObject {
