@@ -21,8 +21,8 @@ public protocol MRGpsDataGetterSunDataDelegate {
 
 open class SunDataGetter: NSObject {
     
-    var delegate : MRGpsDataGetterSunDataDelegate? = nil
-    @objc open var sun = GpsSunInfoModel()
+    weak open var delegate : MRGpsDataGetterSunDataDelegate? = nil
+    open var sun = GpsSunInfoModel()
     
     
     public func getSunInfo(currentLocation: CLLocation) {
@@ -83,7 +83,7 @@ open class SunDataGetter: NSObject {
         }
     }
     
-    public func getSunData() -> GpsSunInfoModel {
+    public func getOldSunData() -> GpsSunInfoModel {
         return sun
     }
     
