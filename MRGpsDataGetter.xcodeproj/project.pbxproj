@@ -25,6 +25,7 @@
 		4CEE0A9D2385B9C600782D39 /* GpsDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE0A9C2385B9C600782D39 /* GpsDataGetter.swift */; };
 		4CEE0AA62385C8D000782D39 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4CEE0AA82385C8D000782D39 /* Localizable.strings */; };
 		4CEE0AAD2385D1F100782D39 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE0AAA2385D0A400782D39 /* Preferences.swift */; };
+		4CF8B79A238698B400DEAC15 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF8B799238698B400DEAC15 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		4CEE0AA72385C8D000782D39 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4CEE0AA92385C8E400782D39 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4CEE0AAA2385D0A400782D39 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		4CF8B799238698B400DEAC15 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CF8B79A238698B400DEAC15 /* CoreLocation.framework in Frameworks */,
 				4CEE0A752385A9D600782D39 /* SwiftyJSON in Frameworks */,
 				4CEE0A722385A9A700782D39 /* Alamofire in Frameworks */,
 			);
@@ -127,6 +130,7 @@
 		4CEE0A762385A9E300782D39 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4CF8B799238698B400DEAC15 /* CoreLocation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
