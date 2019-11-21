@@ -40,6 +40,7 @@ class GpsDataGetter: NSObject {
         gps.latitudine = "\(latitudeToString(currentLocation.coordinate.latitude))"
         gps.longitudine = "\(longitudeToString(currentLocation.coordinate.longitude))"
         gps.altitudine = String(format: "%3.1f " + loc("METERS"), currentLocation.altitude)
+        gps.precisione = "\(currentLocation.horizontalAccuracy)"
         if(currentLocation.speed < 0) {
             if Preferences.shared.getPreference("windSpeed") == "meterSecondSpeed" {
                 gps.velocita = "0.0 " + loc("METERSSECOND")

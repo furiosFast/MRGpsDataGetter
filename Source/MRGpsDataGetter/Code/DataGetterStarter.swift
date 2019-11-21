@@ -43,7 +43,7 @@ open class DataGetterStarter: NSObject, CLLocationManagerDelegate {
         
     open func setLocationPermission(openWeatherMapKey: String, preferences : [String : String]){
         setOptions(openWeatherMapKey, preferences)
-        DispatchQueue.global().async {
+//        DispatchQueue.global().async {
             self.locationManager.delegate = self
             switch CLLocationManager.authorizationStatus() {
                 case .notDetermined:
@@ -70,7 +70,7 @@ open class DataGetterStarter: NSObject, CLLocationManagerDelegate {
                 case .authorizedAlways: break
                 @unknown default: break
             }
-        }
+//        }
     }
     
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
