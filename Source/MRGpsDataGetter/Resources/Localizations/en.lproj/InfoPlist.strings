@@ -1,0 +1,12 @@
+/* 
+  InfoPlist.strings
+  iWindRose²
+
+  Created by Marco on 23/02/18.
+  Copyright © 2018 Fast-Devs Project. All rights reserved.
+*/
+
+NSLocationWhenInUseUsageDescription = "The GPS and magnetometer are used to obtain geolocated weather information";
+
+NSLocationAlwaysUsageDescription = "Not used";
+
