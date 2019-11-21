@@ -54,7 +54,7 @@ open class GpsDataGetter: NSObject {
     private func reversePositionInfo(_ currentLocation: CLLocation){
         gps.latitude = "\(latitudeToString(currentLocation.coordinate.latitude))"
         gps.longitude = "\(longitudeToString(currentLocation.coordinate.longitude))"
-        gps.altittude = String(format: "%3.1f " + loc("METERS"), currentLocation.altitude)
+        gps.altitude = String(format: "%3.1f " + loc("METERS"), currentLocation.altitude)
         gps.verticalAccuracy = String(format: "%3.1f " + loc("METERS"), currentLocation.verticalAccuracy)
         gps.horizontalAccuracy = String(format: "%3.1f " + loc("METERS"), currentLocation.horizontalAccuracy)
         gps.course = "\(currentLocation.course)"

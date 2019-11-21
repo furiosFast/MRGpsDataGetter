@@ -14,7 +14,7 @@ public final class GpsInfoModel: NSObject {
 
     public final var latitude : String = loc("NOTAVAIABLENUMBER")
     public final var longitude : String = loc("NOTAVAIABLENUMBER")
-    public final var altittude : String = loc("NOTAVAIABLENUMBER")
+    public final var altitude : String = loc("NOTAVAIABLENUMBER")
     public final var speed : String = loc("NOTAVAIABLENUMBER")
     public final var verticalAccuracy : String = loc("NOTAVAIABLENUMBER")
     public final var horizontalAccuracy : String = loc("NOTAVAIABLENUMBER")

@@ -211,25 +211,25 @@ open class WeatherDataGetter: NSObject {
             //13
             if let tempMin = Double(json["main"]["temp_min"].stringValue) {
                 if Preferences.shared.getPreference("weatherTemp") == "celsusTemp" {
-                    self.weather.temMin = String(format: "%3.1f", tempMin) + " " + loc("CELSUS")
+                    self.weather.tempMin = String(format: "%3.1f", tempMin) + " " + loc("CELSUS")
                 }
                 if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                    self.weather.temMin = String(format: "%3.1f", tempMin) + " " + loc("FAHRENHEIT")
+                    self.weather.tempMin = String(format: "%3.1f", tempMin) + " " + loc("FAHRENHEIT")
                 }
                 if Preferences.shared.getPreference("weatherTemp") == "kelvinTemp" {
-                    self.weather.temMin = String(format: "%3.1f", tempMin) + " " + loc("KELVIN")
+                    self.weather.tempMin = String(format: "%3.1f", tempMin) + " " + loc("KELVIN")
                 }
             }
             //14
             if let tempMax = Double(json["main"]["temp_max"].stringValue) {
                 if Preferences.shared.getPreference("weatherTemp") == "celsusTemp" {
-                    self.weather.temMax = String(format: "%3.1f", tempMax) + " " + loc("CELSUS")
+                    self.weather.tempMax = String(format: "%3.1f", tempMax) + " " + loc("CELSUS")
                 }
                 if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                    self.weather.temMax = String(format: "%3.1f", tempMax) + " " + loc("FAHRENHEIT")
+                    self.weather.tempMax = String(format: "%3.1f", tempMax) + " " + loc("FAHRENHEIT")
                 }
                 if Preferences.shared.getPreference("weatherTemp") == "kelvinTemp" {
-                    self.weather.temMax = String(format: "%3.1f", tempMax) + " " + loc("KELVIN")
+                    self.weather.tempMax = String(format: "%3.1f", tempMax) + " " + loc("KELVIN")
                 }
             }
             //15

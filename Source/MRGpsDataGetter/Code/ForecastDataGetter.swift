@@ -223,25 +223,25 @@ open class ForecastDataGetter: NSObject {
                 //16
                 if let tempMin = Double(json["list"][i]["main"]["temp_min"].stringValue) {
                     if Preferences.shared.getPreference("weatherTemp") == "celsusTemp" {
-                        weather.temMin = String(format: "%3.1f", tempMin) + " " + loc("CELSUS")
+                        weather.tempMin = String(format: "%3.1f", tempMin) + " " + loc("CELSUS")
                     }
                     if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                        weather.temMin = String(format: "%3.1f", tempMin) + " " + loc("FAHRENHEIT")
+                        weather.tempMin = String(format: "%3.1f", tempMin) + " " + loc("FAHRENHEIT")
                     }
                     if Preferences.shared.getPreference("weatherTemp") == "kelvinTemp" {
-                        weather.temMin = String(format: "%3.1f", tempMin) + " " + loc("KELVIN")
+                        weather.tempMin = String(format: "%3.1f", tempMin) + " " + loc("KELVIN")
                     }
                 }
                 //17
                 if let tempMax = Double(json["list"][i]["main"]["temp_max"].stringValue) {
                     if Preferences.shared.getPreference("weatherTemp") == "celsusTemp" {
-                        weather.temMax = String(format: "%3.1f", tempMax) + " " + loc("CELSUS")
+                        weather.tempMax = String(format: "%3.1f", tempMax) + " " + loc("CELSUS")
                     }
                     if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                        weather.temMax = String(format: "%3.1f", tempMax) + " " + loc("FAHRENHEIT")
+                        weather.tempMax = String(format: "%3.1f", tempMax) + " " + loc("FAHRENHEIT")
                     }
                     if Preferences.shared.getPreference("weatherTemp") == "kelvinTemp" {
-                        weather.temMax = String(format: "%3.1f", tempMax) + " " + loc("KELVIN")
+                        weather.tempMax = String(format: "%3.1f", tempMax) + " " + loc("KELVIN")
                     }
                 }
                 //18-19-20-21

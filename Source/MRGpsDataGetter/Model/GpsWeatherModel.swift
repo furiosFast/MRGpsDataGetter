@@ -37,8 +37,8 @@ public final class GpsWeatherModel: NSObject {
     public final var lowMarea : String = loc("NOTAVAIABLENUMBER")
 
     public final var temp : String = loc("NOTAVAIABLENUMBER")
-    public final var temMin : String = loc("NOTAVAIABLENUMBER")
-    public final var temMax : String = loc("NOTAVAIABLENUMBER")
+    public final var tempMin : String = loc("NOTAVAIABLENUMBER")
+    public final var tempMax : String = loc("NOTAVAIABLENUMBER")
     
     public final var date : String = loc("NOTAVAIABLENUMBER")
     public final var time : String = loc("NOTAVAIABLENUMBER")
