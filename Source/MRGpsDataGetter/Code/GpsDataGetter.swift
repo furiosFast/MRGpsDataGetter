@@ -16,21 +16,23 @@ import UIKit
 import CoreLocation
 import MapKit
 
-protocol gpsDataProtocol {
-    func gpsDataReady(_ gps: GpsInfoModel)
-    func gpsLocationName(_ locationName: String)
-    func gpsLocation(_ location: CLLocation)
-    func gpsGeocodeAddressFromStringError(_ error: String)
+public protocol MRGpsDataGetterGpsDataDelegate: NSObjectProtocol {
+    func gpsDataReady(gps: GpsInfoModel)
+    func gpsLocationName(locationName: String)
+    func gpsLocation(location: CLLocation)
+    func gpsGeocodeAddressFromStringError(error: String)
 }
 
-class GpsDataGetter: NSObject {
+open class GpsDataGetter: NSObject {
     
-    var delegate : gpsDataProtocol? = nil
+    public static let shared = GpsDataGetter()
+
+    open weak var delegate : MRGpsDataGetterGpsDataDelegate? = nil
     lazy var geocoder = CLGeocoder()
     let gps = GpsInfoModel()
     
     
-    public func getPositionInfo(currentLocation: CLLocation) {
+    open func getPositionInfo(currentLocation: CLLocation) {
         DispatchQueue.global().async {
             self.reversePositionInfo(currentLocation)
         }
@@ -69,23 +71,27 @@ class GpsDataGetter: NSObject {
             }
         }
         DispatchQueue.main.async {
-            self.delegate?.gpsDataReady(self.gps)
+            self.delegate?.gpsDataReady(gps: self.gps)
         }
     }
     
-    public func geocodeAddressFromString(_ locationAddress: String){
+    open func getOldGpsData() -> GpsInfoModel {
+        return gps
+    }
+    
+    open func geocodeAddressFromString(_ locationAddress: String){
         geocoder.geocodeAddressString(locationAddress) { (placemarks, error) in
             if let error = error {
-                self.delegate?.gpsGeocodeAddressFromStringError(error.localizedDescription)
+                self.delegate?.gpsGeocodeAddressFromStringError(error: error.localizedDescription)
             } else {
                 if let placemarks = placemarks, let placemark = placemarks.first, let location = placemark.location {
-                    self.delegate?.gpsLocation(location)
+                    self.delegate?.gpsLocation(location: location)
                 }
             }
         }
     }
     
-    public func reverseGeocodeLocation(_ currentLocation: CLLocation){
+    open func reverseGeocodeLocation(_ currentLocation: CLLocation){
         geocoder.reverseGeocodeLocation(currentLocation) { (placemarks, error) in
             if let placemarks = placemarks, let placemark = placemarks.first, let locality = placemark.locality, let isoCountryCode = placemark.isoCountryCode {
                 self.gps.localita = locality + ", " + isoCountryCode.uppercased()
@@ -96,10 +102,8 @@ class GpsDataGetter: NSObject {
                     self.gps.localita = loc("position_lOCNAMENAN")
                 }
             }
-            self.delegate?.gpsLocationName(self.gps.localita)
+            self.delegate?.gpsLocationName(locationName: self.gps.localita)
         }
     }
-    
-    
     
 }
