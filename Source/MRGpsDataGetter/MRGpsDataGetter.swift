@@ -155,6 +155,10 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
         self.locationManager.stopUpdatingHeading()
     }
     
+    open func setAlamofireConfigurations(){
+        setAlamofire()
+    }
+    
     //MARK: - Support functions for gps
     private func setCount(_ value:Int) {
         count = value

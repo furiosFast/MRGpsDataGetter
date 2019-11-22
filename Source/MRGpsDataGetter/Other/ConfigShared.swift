@@ -14,6 +14,7 @@
 import UIKit
 import Alamofire
 
+public var AFManager = Session()
 public let meterSecondToKilometerHour = 3.6
 public let meterSecondToKnot = 1.9438444924406
 public let meterSecondToMilesHour = 2.236936
@@ -32,12 +33,12 @@ public let hexAppBuildNumber = String(Int(appBuildNumber)!, radix: 16, uppercase
 
 
 ///Function that set the Alamofire configuration
-public func AFManager() -> Session {
+func setAlamofire(){
     let configuration = URLSessionConfiguration.default
     configuration.timeoutIntervalForRequest = 15.0
     configuration.timeoutIntervalForResource = 15.0
     configuration.requestCachePolicy = .reloadIgnoringLocalAndRemoteCacheData
-    return Alamofire.Session(configuration: configuration)
+    AFManager = Alamofire.Session(configuration: configuration)
 }
 
 ///Function that format the declination coord from a double value
