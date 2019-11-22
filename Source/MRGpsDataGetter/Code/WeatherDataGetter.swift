@@ -60,7 +60,6 @@ open class WeatherDataGetter: NSObject {
         ]
         print("Weather openweathermap API ENDPOINT iOS " + urlString)
         
-        setAlamofire()
         AFManager.request(urlString, parameters: parameters).responseJSON { response in
             if let er = response.error {
                 self.delegate?.weatherDataNotAvaiable?(error: er.localizedDescription)

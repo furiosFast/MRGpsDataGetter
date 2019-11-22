@@ -32,12 +32,8 @@ public let appBuildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVe
 public let hexAppBuildNumber = String(Int(appBuildNumber)!, radix: 16, uppercase: true)
 
 
-//func sleep(_ time: Double){
-//    Thread.sleep(until: Date(timeIntervalSinceNow: time))
-//}
-
 ///Function that set the Alamofire configuration
-func setAlamofire(){
+public func setAlamofire(){
     let configuration = URLSessionConfiguration.default
     configuration.timeoutIntervalForRequest = 15.0
     configuration.timeoutIntervalForResource = 15.0
