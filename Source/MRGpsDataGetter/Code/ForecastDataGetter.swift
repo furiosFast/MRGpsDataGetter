@@ -153,7 +153,6 @@ open class ForecastDataGetter: NSObject {
                 if let angVento = Double(json["list"][i]["wind"]["deg"].stringValue) {
                     weather.windDegree = String(format: "%3.1f", angVento)
                     weather.windName = getWindName(angVento)
-                    weather.windIconName = setWindDirectionImage(angVento)
                     self.plotDataWindName.append(weather.windName)
                 }
                 //10

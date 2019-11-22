@@ -121,11 +121,11 @@
 		4CEE0A6F2385A93E00782D39 /* Code */ = {
 			isa = PBXGroup;
 			children = (
-				4CEE0A902385AD6000782D39 /* MoonDataGetter.swift */,
+				4CEE0A9C2385B9C600782D39 /* GpsDataGetter.swift */,
 				4CEE0A962385B07900782D39 /* SunDataGetter.swift */,
+				4CEE0A902385AD6000782D39 /* MoonDataGetter.swift */,
 				4CEE0A982385B39E00782D39 /* WeatherDataGetter.swift */,
 				4CEE0A9A2385B77200782D39 /* ForecastDataGetter.swift */,
-				4CEE0A9C2385B9C600782D39 /* GpsDataGetter.swift */,
 			);
 			path = Code;
 			sourceTree = "<group>";

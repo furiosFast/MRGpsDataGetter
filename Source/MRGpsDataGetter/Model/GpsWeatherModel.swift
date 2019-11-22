@@ -15,7 +15,6 @@ public final class GpsWeatherModel: NSObject {
     public final var beaufortScale : String = loc("NOTAVAIABLENUMBER")
     public final var windDegree : String = loc("NOTAVAIABLENUMBER")
     public final var windName : String = loc("NOTAVAIABLENUMBER")
-    public final var windIconName : String = loc("NOTAVAIABLENUMBER")
     public final var beaufortScaleWindColour : String = loc("NOTAVAIABLENUMBER")
 
     public final var weatherDescription : String = loc("NOTAVAIABLENUMBER")

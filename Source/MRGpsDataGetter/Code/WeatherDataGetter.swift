@@ -136,7 +136,6 @@ open class WeatherDataGetter: NSObject {
             if let angVento = Double(json["wind"]["deg"].stringValue) {
                 self.weather.windDegree = String(format: "%3.1f", angVento)
                 self.weather.windName = getWindName(angVento)
-                self.weather.windIconName = setWindDirectionImage(angVento)
             }
             //9
             if let rain = Double(json["rain"]["1h"].stringValue) {
