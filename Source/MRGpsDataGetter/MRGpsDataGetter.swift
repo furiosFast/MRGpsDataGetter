@@ -31,7 +31,9 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     var mapLocation: CLLocationCoordinate2D?
     var timerAutoRefresh = Timer()
     var count = 0
+    ////////
     var loadForecastAndWeatherInfoFromOpenWeatherMapController: Bool = false
+    ////////
     var openWeatherMapKey = "NaN"
     
     
@@ -86,10 +88,10 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
 
             WeatherDataGetter.shared.getWeatherInfo(openWeatherMapKey: openWeatherMapKey, currentLocation: loc)
             ForecastDataGetter.shared.getForecastInfo(openWeatherMapKey: openWeatherMapKey, currentLocation: loc)
+
             GpsDataGetter.shared.getPositionInfo(currentLocation: loc)
             SunDataGetter.shared.getSunInfo(currentLocation: loc)
             MoonDataGetter.shared.getMoonInfo(currentLocation: loc)
-            
             
             if let b = Bool(Preferences.shared.getPreference("autoRefreshSunMoonInfo")), b == true {
                 timerAutoRefresh.invalidate()
@@ -97,14 +99,14 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
             } else {
                 timerAutoRefresh.invalidate()
             }
-            
-            
+            /////////
             DispatchQueue.global().async {
                 if self.loadForecastAndWeatherInfoFromOpenWeatherMapController {
                     ForecastDataGetter().getForecastInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
                     self.loadForecastAndWeatherInfoFromOpenWeatherMapController = false
                 }
             }
+            /////////
         }
         count = count + 1
     }

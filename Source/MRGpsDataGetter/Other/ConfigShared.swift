@@ -36,6 +36,7 @@ public let hexAppBuildNumber = String(Int(appBuildNumber)!, radix: 16, uppercase
 //    Thread.sleep(until: Date(timeIntervalSinceNow: time))
 //}
 
+///Function that set the Alamofire configuration
 func setAlamofire(){
     let configuration = URLSessionConfiguration.default
     configuration.timeoutIntervalForRequest = 15.0
@@ -44,24 +45,7 @@ func setAlamofire(){
     AFManager = Alamofire.Session(configuration: configuration)
 }
 
-func latitudeToString(_ latitude: Double) -> String {
-    var latSeconds = Int(latitude * 3600)
-    let latDegrees = latSeconds / 3600
-    latSeconds = abs(latSeconds % 3600)
-    let latMinutes = latSeconds / 60
-    latSeconds %= 60
-    return String(format: "%d° %d' %d\" %@", abs(latDegrees), latMinutes, latSeconds, latDegrees >= 0 ? "N" : "S")
-}
-
-func longitudeToString(_ longitude: Double) -> String {
-    var longSeconds = Int(longitude * 3600)
-    let longDegrees = longSeconds / 3600
-    longSeconds = abs(longSeconds % 3600)
-    let longMinutes = longSeconds / 60
-    longSeconds %= 60
-    return String(format: "%d° %d' %d\" %@", abs(longDegrees), longMinutes, longSeconds, longDegrees >= 0 ? "E" : "W")
-}
-
+///Function that format the declination coord from a double value
 func declinationToString(_ declination: Double) -> String {
     var decSeconds = Int(declination * 3600)
     let decDegrees = decSeconds / 3600
@@ -80,11 +64,12 @@ func declinationToString(_ declination: Double) -> String {
 //    return String(format: "%dh %dm %ds", abs(decDegrees), decMinutes, decSeconds)
 //}
 
+///Function that return the wind name based on the device heading (compass)
 func getWindName(_ heading: Double) -> String {
     var gradiNomeVento : String = ""
     switch heading {
         case 23..<67: gradiNomeVento = loc("positionWind_NE")
-        case 67..<114: gradiNomeVento = loc("positionWind_getBeaufortForceColorE")
+        case 67..<114: gradiNomeVento = loc("positionWind_E")
         case 114..<157: gradiNomeVento = loc("positionWind_SE")
         case 157..<203: gradiNomeVento = loc("positionWind_S")
         case 203..<246: gradiNomeVento = loc("positionWind_SW")
@@ -96,6 +81,7 @@ func getWindName(_ heading: Double) -> String {
     return gradiNomeVento
 }
 
+///Function that return the coordinate name (es.: N, E, S, ecc.) from the heading angle
 func getAngleName(_ heading: Double) -> String {
     var angolo : String = ""
     switch heading {
@@ -120,6 +106,7 @@ func getAngleName(_ heading: Double) -> String {
     return angolo
 }
 
+///Function that return the Beaufort force degree bassed on the wind speed in knot
 func getBeaufortForce(_ windSpeedKnot: Double) -> String {
     switch windSpeedKnot {
         case 0..<1: return "0"
@@ -140,6 +127,7 @@ func getBeaufortForce(_ windSpeedKnot: Double) -> String {
     return "0"
 }
 
+///Function that return a color for every Beaufort Scale Force
 func getBeaufortForceColor(_ windSpeedKnot: Double) -> String {
     var coloreBollinoForzaBeaufort : String = "#FFFFFF"
     switch windSpeedKnot {
@@ -161,7 +149,7 @@ func getBeaufortForceColor(_ windSpeedKnot: Double) -> String {
     return coloreBollinoForzaBeaufort
 }
 
-///Funzione che converte una data in formato UTC in una String in più formati local
+/// Function that a format a string value of date
 func UTCToLocal(_ date: Date, _ type: Int) -> String? {
     let dateFormatter = DateFormatter()
     switch type {
@@ -176,6 +164,7 @@ func UTCToLocal(_ date: Date, _ type: Int) -> String? {
     return dateFormatter.string(from: date)
 }
 
+///Function that return the zodiac sign of sun/moon based on the right ascension
 func getZodiacSign(_ rightAscension: Double) -> String {
     var rightAscension = Int(rightAscension + 360) % 360
     if(rightAscension < 0) {
@@ -196,4 +185,5 @@ func getZodiacSign(_ rightAscension: Double) -> String {
         case 330...360: return loc("position_ACQUARIOTITLE")
         default: return loc("NOTAVAIABLENUMBER")
     }
+    
 }

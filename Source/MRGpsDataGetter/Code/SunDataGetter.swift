@@ -72,8 +72,8 @@ open class SunDataGetter: NSObject {
         sun.goldenHourSunsetStart = UTCToLocal(sunTimes["goldenHourStart"]! as Date, minutesTimesFlag)!
         sun.goldenHourSunsetEnd = UTCToLocal((sunTimes["sunsetEnd"]! as Date).plusMinutes((Date.minutesBetween(date1: (sunTimes["sunsetEnd"]! as Date), date2: (sunTimes["dusk"]! as Date))/2)), minutesTimesFlag)!
         
-        sun.daylightHours = setTodayDaylightHours(sunTimes, BDAstroCalc.sunSignificantTimes(date: Date().yesterday as NSDate, location: myLocationCoordinates))
-        sun.phaseTitle = setSunPhase(sunLocation.altitude * radiansToDegrees)
+        sun.daylightHours = getTodayDaylightHours(sunTimes, BDAstroCalc.sunSignificantTimes(date: Date().yesterday as NSDate, location: myLocationCoordinates))
+        sun.phaseTitle = getSunPhaseTitle(sunLocation.altitude * radiansToDegrees)
         
         let sunCoordinates = BDAstroCalc.sunCoordinates(daysSinceJan12000: Jan12000Date)
         sun.declination = declinationToString(sunCoordinates.declination * radiansToDegrees)
@@ -89,22 +89,25 @@ open class SunDataGetter: NSObject {
         return sun
     }
     
-    //MARK: - Support functions for sun
-    private func setTodayDaylightHours(_ today: [String : NSDate], _ yesterday: [String : NSDate]) -> String {
-        let todayTime = setDaylightHoursDifference(today["sunsetEnd"]! as Date, today["sunriseStart"]! as Date)
-        let yesterdayTime = setDaylightHoursDifference(yesterday["sunsetEnd"]! as Date, yesterday["sunriseStart"]! as Date)
+    //MARK: - Support functions for sun data
+    
+    ///Function that return the today number of hours of sun lyght
+    private func getTodayDaylightHours(_ today: [String : NSDate], _ yesterday: [String : NSDate]) -> String {
+        let todayTime = getDaylightHoursDifference(today["sunsetEnd"]! as Date, today["sunriseStart"]! as Date)
+        let yesterdayTime = getDaylightHoursDifference(yesterday["sunsetEnd"]! as Date, yesterday["sunriseStart"]! as Date)
         if let t = todayTime.toDate(format: "HH:mm:ss"), let y = yesterdayTime.toDate(format: "HH:mm:ss") {
             if(t.isGreaterThan(y)) {
-                return todayTime + " (+" + setDaylightHoursDifference(t, y) + ")"
+                return todayTime + " (+" + getDaylightHoursDifference(t, y) + ")"
             } else {
-                return todayTime + " (-" + setDaylightHoursDifference(t, y) + ")"
+                return todayTime + " (-" + getDaylightHoursDifference(t, y) + ")"
             }
         } else {
             return todayTime
         }
     }
     
-    private func setDaylightHoursDifference(_ sunrise: Date, _ sunset: Date) -> String {
+    ///Function that return the deffirence of minutes of sun lyght of today and yesterday
+    private func getDaylightHoursDifference(_ sunrise: Date, _ sunset: Date) -> String {
         let hours = Date.hoursBetween(date1: sunset, date2: sunrise)
         var h = ""
         if(hours < 10) {
@@ -141,7 +144,8 @@ open class SunDataGetter: NSObject {
         return "\(h)" + "\(m)" + ":" + "\(s)"
     }
     
-    private func setSunPhase(_ altitude: Double) -> String {
+    ///Function that return the sun phase name based on the sun altitude (positive or negative) in the sky
+    private func getSunPhaseTitle(_ altitude: Double) -> String {
         if (altitude > 0) {
             return loc("position_DAYTITLE")
         }

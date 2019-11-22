@@ -50,12 +50,12 @@ open class MoonDataGetter: NSObject {
         moon.altitude = String(format: "%3.1f", moonLocation.altitude * radiansToDegrees) + loc("DEGREE")
         moon.azimuth = String(format: "%3.1f", azim) + loc("DEGREE") + " " + getAngleName(azim)
         moon.distance = "\(Int(moonLocation.distance).formattedWithSeparator) " + loc("KILOMETERS")
-        moon.horizontalPosition = setMoonVisibility(moonLocation.altitude * radiansToDegrees)
+        moon.horizontalPosition = getMoonVisibility(moonLocation.altitude * radiansToDegrees)
         
         let moonPhase = BDAstroCalc.moonPhase(date: NSDate())
         moon.fractionOfMoonIlluminated = String(format: "%3.1f", moonPhase.fractionOfMoonIlluminated * 100) + " " + loc("PERCENT")
-        moon.phaseTitle = setMoonPhaseTitle(Double(moonPhase.phase))
-        moon.phaseIcon = setMoonPhaseIcon(Double(moonPhase.phase))
+        moon.phaseTitle = getMoonPhaseTitle(Double(moonPhase.phase))
+        moon.phaseIcon = getMoonPhaseIcon(Double(moonPhase.phase))
         moon.phaseAngle = String(format: "%3.1f", moonPhase.angle  * radiansToDegrees)
         
         let moonCoordinates = BDAstroCalc.moonCoordinates(daysSinceJan12000: Jan12000Date)
@@ -76,8 +76,10 @@ open class MoonDataGetter: NSObject {
         return moon
     }
     
-    //MARK: - Support functions for moon
-    private func setMoonVisibility(_ altitude: Double) -> String {
+    //MARK: - Support functions for moon data
+    
+    ///Function that return the visibility of the moon in sky (if it is under or hover the horizon)
+    private func getMoonVisibility(_ altitude: Double) -> String {
         if (altitude >= 0) {
             return loc("positionPhone_POSITIONMOONPOSITIVETITLE")
         }
@@ -87,7 +89,8 @@ open class MoonDataGetter: NSObject {
         return loc("NOTAVAIABLENUMBER")
     }
     
-    private func setMoonPhaseTitle(_ fase: Double) -> String {
+    ///Function that return the moon phase name based on the moon phase angle (is the midpoint of the illuminated limb of the moon going east)
+    private func getMoonPhaseTitle(_ fase: Double) -> String {
         if fase == 0 { return loc("position_NEWMOONTITLE") }
         if fase > 0 && fase < 0.25 { return loc("position_UPMOONTITLE") }
         if fase == 0.25 { return loc("position_FIRSTMOONTITLE") }
@@ -100,7 +103,8 @@ open class MoonDataGetter: NSObject {
         return loc("NOTAVAIABLENUMBER")
     }
     
-    private func setMoonPhaseIcon(_ fase: Double) -> String {
+    ///Function that return the moon phase icon name based on the moon phase angle (is the midpoint of the illuminated limb of the moon going east)
+    private func getMoonPhaseIcon(_ fase: Double) -> String {
         if fase == 0 { return "wi-moon-alt-new" }
         if fase > 0 && fase <= 0.04166666667 { return "wi-moon-alt-waxing-crescent-1" }
         if fase > 0.04166666667 && fase <= 0.08333333334 { return "wi-moon-alt-waxing-crescent-2" }

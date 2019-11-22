@@ -20,13 +20,15 @@ class Preferences: NSObject {
     var prefs = [String : String]()
     
     
+    ///Function that return the preferences map
     func getPreference(_ key: String) -> String {
         return prefs[key] ?? "NaN"
     }
     
+    ///Function that set the preferences map
     func setPreferences(_ preferences : [String : String]){
-        Preferences.shared.prefs = [String : String]()
-        Preferences.shared.prefs = preferences
+        prefs = [String : String]()
+        prefs = preferences
     }
     
 }
