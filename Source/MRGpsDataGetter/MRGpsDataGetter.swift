@@ -37,6 +37,10 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     var openWeatherMapKey = "NaN"
     
     
+    open func initialize(){
+        setAlamofire()
+    }
+    
     open func refreshAllData(preferences: [String : String]? = nil){
         setCount(0)
         if let pref = preferences {
@@ -153,10 +157,6 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     
     open func stopHeading(){
         self.locationManager.stopUpdatingHeading()
-    }
-    
-    open func setAlamofireConfigurations(){
-        setAlamofire()
     }
     
     //MARK: - Support functions for gps
