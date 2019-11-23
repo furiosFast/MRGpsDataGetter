@@ -27,7 +27,7 @@ class Preferences: NSObject {
     
     ///Function that set the preferences map
     func setPreferences(_ preferences : [String : String]){
-        prefs = [String : String]()
+        prefs.removeAll()
         prefs = preferences
     }
     

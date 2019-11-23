@@ -41,13 +41,9 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
         setAlamofire()
     }
     
-    open func refreshAllData(preferences: [String : String]? = nil){
+    open func refreshAllData(openWeatherMapKey: String, preferences: [String : String]){
         setCount(0)
-        if let pref = preferences {
-            setLocationPermission(openWeatherMapKey: openWeatherMapKey, preferences: pref)
-        } else {
-            setLocationPermission(openWeatherMapKey: openWeatherMapKey, preferences: Preferences.shared.prefs)
-        }
+        setLocationPermission(openWeatherMapKey: openWeatherMapKey, preferences: preferences)
     }
         
     open func setLocationPermission(openWeatherMapKey: String, preferences : [String : String]){
