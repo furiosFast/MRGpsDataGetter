@@ -18,7 +18,7 @@ import MapKit
 
 @objc public protocol MRGpsDataGetterGpsDataDelegate: NSObjectProtocol {
     func gpsDataReady(gps: GpsInfoModel)
-    func setGpsMap(currentLocation: CLLocation)
+    @objc optional func setGpsMap(currentLocation: CLLocation)
     @objc optional func reverseGeocodeFromString(location: CLLocation)
     @objc optional func reverseGeocodeFromStringError(error: String)
     func reverseGeocodeFromLocation(locationName: String)
@@ -45,7 +45,7 @@ open class GpsDataGetter: NSObject {
         DispatchQueue.global().async {
             self.reverseGeocodeFromLocation(currentLocation)
         }
-        self.delegate?.setGpsMap(currentLocation: currentLocation)
+        self.delegate?.setGpsMap?(currentLocation: currentLocation)
     }
     
     private func reversePositionInfo(_ currentLocation: CLLocation){
