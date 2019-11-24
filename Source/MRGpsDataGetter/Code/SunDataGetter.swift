@@ -110,7 +110,7 @@ open class SunDataGetter: NSObject {
     
     ///Function that return the deffirence of minutes of sun lyght of today and yesterday
     private func getDaylightHoursDifference(_ sunrise: Date, _ sunset: Date) -> String {
-        let hours = sunset.hoursSince(sunrise).int
+        let hours = sunset.hoursSince(sunrise).int.abs
         var h = ""
         if(hours < 10) {
             h = "0\(hours):"
@@ -143,7 +143,7 @@ open class SunDataGetter: NSObject {
             s = s.replacingOccurrences(of: "-", with: "")
         }
         
-        return "\(h)" + "\(m)" + ":" + "\(s)"
+        return h + m + ":" + s
     }
     
     ///Function that return the sun phase name based on the sun altitude (positive or negative) in the sky
