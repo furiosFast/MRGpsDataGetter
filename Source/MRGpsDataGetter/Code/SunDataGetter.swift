@@ -99,7 +99,7 @@ open class SunDataGetter: NSObject {
         let todayTime = getDaylightHoursDifference(today["sunsetEnd"]! as Date, today["sunriseStart"]! as Date)
         let yesterdayTime = getDaylightHoursDifference(yesterday["sunsetEnd"]! as Date, yesterday["sunriseStart"]! as Date)
         if let t = todayTime.date(withFormat: "HH:mm:ss"), let y = yesterdayTime.date(withFormat: "HH:mm:ss") {
-            if(t.second - y.second) > 0 {
+            if(t.timeIntervalSince(y)) > 0 {
                 return todayTime + " (+" + getDaylightHoursDifference(t, y) + ")"
             } else {
                 return todayTime + " (-" + getDaylightHoursDifference(t, y) + ")"
@@ -118,7 +118,7 @@ open class SunDataGetter: NSObject {
             h = "\(hours):"
         }
         if(hours < 1) {
-            h = "00"
+            h = ""
         }
         
         let minutes = sunset.minute - sunrise.minute
