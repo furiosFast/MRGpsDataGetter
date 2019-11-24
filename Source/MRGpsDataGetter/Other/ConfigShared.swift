@@ -32,6 +32,12 @@ public let appBuildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVe
 public let hexAppBuildNumber = String(Int(appBuildNumber)!, radix: 16, uppercase: true)
 
 
+///Function for localize string
+func loc(_ localizedKey:String) -> String {
+    return NSLocalizedString(localizedKey, comment: "")
+}
+
+
 ///Function that set the Alamofire configuration
 func setAlamofire(){
     let configuration = URLSessionConfiguration.default

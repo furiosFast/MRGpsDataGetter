@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4C34FE7C2387169E00A9C1CC /* GpsPlotInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C34FE7B2387169E00A9C1CC /* GpsPlotInfoModel.swift */; };
+		4C42DE252389DB1400B586B5 /* iOSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE0A882385AB1000782D39 /* iOSExtensions.swift */; };
 		4CEE0A672385A8A400782D39 /* MRGpsDataGetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CEE0A652385A8A400782D39 /* MRGpsDataGetter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4CEE0A722385A9A700782D39 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4CEE0A712385A9A700782D39 /* Alamofire */; };
 		4CEE0A752385A9D600782D39 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 4CEE0A742385A9D600782D39 /* SwiftyJSON */; };
@@ -16,7 +17,6 @@
 		4CEE0A832385AA2700782D39 /* GpsWeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE0A7F2385AA2700782D39 /* GpsWeatherModel.swift */; };
 		4CEE0A842385AA2700782D39 /* GpsInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE0A802385AA2700782D39 /* GpsInfoModel.swift */; };
 		4CEE0A862385AA5A00782D39 /* MRGpsDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE0A852385AA5A00782D39 /* MRGpsDataGetter.swift */; };
-		4CEE0A892385AB1000782D39 /* iOSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE0A882385AB1000782D39 /* iOSExtensions.swift */; };
 		4CEE0A8F2385AD2000782D39 /* ConfigShared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE0A8E2385AD2000782D39 /* ConfigShared.swift */; };
 		4CEE0A912385AD6000782D39 /* MoonDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE0A902385AD6000782D39 /* MoonDataGetter.swift */; };
 		4CEE0A952385AFCA00782D39 /* BDAstroCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE0A8B2385AB1C00782D39 /* BDAstroCalc.swift */; };
@@ -320,12 +320,12 @@
 				4CEE0A912385AD6000782D39 /* MoonDataGetter.swift in Sources */,
 				4CEE0A822385AA2700782D39 /* GpsSunInfoModel.swift in Sources */,
 				4C34FE7C2387169E00A9C1CC /* GpsPlotInfoModel.swift in Sources */,
+				4C42DE252389DB1400B586B5 /* iOSExtensions.swift in Sources */,
 				4CEE0A862385AA5A00782D39 /* MRGpsDataGetter.swift in Sources */,
 				4CEE0AAD2385D1F100782D39 /* Preferences.swift in Sources */,
 				4CEE0A9B2385B77200782D39 /* ForecastDataGetter.swift in Sources */,
 				4CEE0A992385B39E00782D39 /* WeatherDataGetter.swift in Sources */,
 				4CEE0A832385AA2700782D39 /* GpsWeatherModel.swift in Sources */,
-				4CEE0A892385AB1000782D39 /* iOSExtensions.swift in Sources */,
 				4CEE0A972385B07900782D39 /* SunDataGetter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
