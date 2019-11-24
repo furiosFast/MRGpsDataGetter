@@ -95,7 +95,7 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
             
             if let b = Bool(Preferences.shared.getPreference("autoRefreshSunMoonInfo")), b == true {
                 timerAutoRefresh.invalidate()
-                    timerAutoRefresh = Timer.scheduledTimer(timeInterval: Preferences.shared.getPreference("sunMoonRefreshSeconds").int!.double, target: self, selector: #selector(self.autoRefreshSunMoonInfo), userInfo: nil, repeats: true)
+                    timerAutoRefresh = Timer.scheduledTimer(timeInterval: Double(Preferences.shared.getPreference("sunMoonRefreshSeconds"))!, target: self, selector: #selector(self.autoRefreshSunMoonInfo), userInfo: nil, repeats: true)
             } else {
                 timerAutoRefresh.invalidate()
             }
