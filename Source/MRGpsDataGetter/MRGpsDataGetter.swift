@@ -148,11 +148,15 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     }
     
     open func startHeading(){
-        self.locationManager.startUpdatingHeading()
+        locationManager.startUpdatingHeading()
     }
     
     open func stopHeading(){
-        self.locationManager.stopUpdatingHeading()
+        locationManager.stopUpdatingHeading()
+    }
+    
+    open func getCurrentLocation() -> CLLocation? {
+        return currentLocation
     }
     
     //MARK: - Support functions for gps
