@@ -155,6 +155,10 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
         locationManager.stopUpdatingHeading()
     }
     
+    open func setCurrentLocation(_ currentLocation: CLLocation) {
+        return self.currentLocation = currentLocation
+    }
+    
     open func getCurrentLocation() -> CLLocation? {
         return currentLocation
     }
