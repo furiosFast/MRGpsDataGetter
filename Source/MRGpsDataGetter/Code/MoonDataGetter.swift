@@ -14,7 +14,6 @@
 
 import UIKit
 import CoreLocation
-import SwifterSwift
 
 public protocol MRGpsDataGetterMoonDataDelegate: NSObjectProtocol {
     func moonDataReady(moon: GpsMoonInfoModel)
