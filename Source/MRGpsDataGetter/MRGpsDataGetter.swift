@@ -164,7 +164,7 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     }
     
     open func getLoadForecastAndWeatherInfoFromOpenWeatherMapController() -> Bool {
-        return loadForecastAndWeatherInfoFromOpenWeatherMapController = value
+        return loadForecastAndWeatherInfoFromOpenWeatherMapController
     }
     
     //MARK: - Support functions for gps
