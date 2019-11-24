@@ -118,7 +118,7 @@ open class SunDataGetter: NSObject {
             h = "\(hours):"
         }
         if(hours < 1) {
-            h = ""
+            h = "00"
         }
         
         let minutes = sunset.minute - sunrise.minute
