@@ -15,6 +15,7 @@
 import UIKit
 import CoreLocation
 import MapKit
+import SwifterSwift
 
 @objc public protocol MRGpsDataGetterGpsDataDelegate: NSObjectProtocol {
     func gpsDataReady(gps: GpsInfoModel)
@@ -49,12 +50,12 @@ open class GpsDataGetter: NSObject {
     }
     
     private func reversePositionInfo(_ currentLocation: CLLocation){
-        gps.latitude = "\(latitudeToString(currentLocation.coordinate.latitude))"
-        gps.longitude = "\(longitudeToString(currentLocation.coordinate.longitude))"
+        gps.latitude = latitudeToString(currentLocation.coordinate.latitude)
+        gps.longitude = longitudeToString(currentLocation.coordinate.longitude)
         gps.altitude = String(format: "%3.1f " + loc("METERS"), currentLocation.altitude)
         gps.verticalAccuracy = String(format: "%3.1f " + loc("METERS"), currentLocation.verticalAccuracy)
         gps.horizontalAccuracy = String(format: "%3.1f " + loc("METERS"), currentLocation.horizontalAccuracy)
-        gps.course = "\(currentLocation.course)"
+        gps.course = currentLocation.course.string
         if(currentLocation.speed < 0) {
             if Preferences.shared.getPreference("windSpeed") == "meterSecondSpeed" {
                 gps.speed = "0.0 " + loc("METERSSECOND")
@@ -130,7 +131,7 @@ open class GpsDataGetter: NSObject {
     
     ///Function that format the latitute coord from a double value
     private func latitudeToString(_ latitude: Double) -> String {
-        var latSeconds = Int(latitude * 3600)
+        var latSeconds = (latitude * 3600).int
         let latDegrees = latSeconds / 3600
         latSeconds = abs(latSeconds % 3600)
         let latMinutes = latSeconds / 60
@@ -140,7 +141,7 @@ open class GpsDataGetter: NSObject {
 
     ///Function that format the longitude coord from a double value
     private func longitudeToString(_ longitude: Double) -> String {
-        var longSeconds = Int(longitude * 3600)
+        var longSeconds = (longitude * 3600).int
         let longDegrees = longSeconds / 3600
         longSeconds = abs(longSeconds % 3600)
         let longMinutes = longSeconds / 60

@@ -254,13 +254,13 @@ struct BDAstroCalc {
         
         var diff = 0.0
         if moonPhase <= 0.5 {
-            if (absAzimMoonSun * radiansToDegrees) <= 180 {
+            if (absAzimMoonSun.radiansToDegrees) <= 180 {
                 diff = atan(-tanAlfa)
             } else {
                 diff = atan(tanAlfa)
             }
         } else {
-            if (absAzimMoonSun * radiansToDegrees) <= 180 {
+            if (absAzimMoonSun.radiansToDegrees) <= 180 {
                 diff = atan(tanAlfa)
             } else {
                 diff = atan(-tanAlfa)

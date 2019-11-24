@@ -14,6 +14,7 @@
 
 import UIKit
 import CoreLocation
+import SwifterSwift
 
 public protocol MRGpsDataGetterMoonDataDelegate: NSObjectProtocol {
     func moonDataReady(moon: GpsMoonInfoModel)
@@ -34,37 +35,37 @@ open class MoonDataGetter: NSObject {
     }
     
     private func reverseMoonInfo(_ currentLocation: CLLocation){
-        var minutesTimesFlag = 1
+        var timeFormat = "HH:mm:ss"
         if Bool(Preferences.shared.getPreference("minutesTimes"))! == true {
-            minutesTimesFlag = 3
+            timeFormat = "HH:mm"
         }
         let myLocationCoordinates = CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
         let Jan12000Date = BDAstroCalc.daysSinceJan12000(date: NSDate())
         
         let moonRiseSet = BDAstroCalc.moonRiseAndSet(date: NSDate(), location: myLocationCoordinates)
-        moon.moonRise = UTCToLocal(moonRiseSet.rise, minutesTimesFlag)!
-        moon.moonSet = UTCToLocal(moonRiseSet.set, minutesTimesFlag)!
+        moon.moonRise = (moonRiseSet.rise).string(withFormat: timeFormat)
+        moon.moonSet = (moonRiseSet.set).string(withFormat: timeFormat)
         
         let moonLocation = BDAstroCalc.moonPosition(date: NSDate(), location: myLocationCoordinates)
-        let azim = ((moonLocation.azimuth + Double.pi) * radiansToDegrees).truncatingRemainder(dividingBy: 360)
-        moon.altitude = String(format: "%3.1f", moonLocation.altitude * radiansToDegrees) + loc("DEGREE")
+        let azim = ((moonLocation.azimuth + Double.pi).radiansToDegrees).truncatingRemainder(dividingBy: 360)
+        moon.altitude = String(format: "%3.1f", moonLocation.altitude.radiansToDegrees) + loc("DEGREE")
         moon.azimuth = String(format: "%3.1f", azim) + loc("DEGREE") + " " + getAngleName(azim)
         moon.distance = "\(Int(moonLocation.distance).formattedWithSeparator) " + loc("KILOMETERS")
-        moon.horizontalPosition = getMoonVisibility(moonLocation.altitude * radiansToDegrees)
+        moon.horizontalPosition = getMoonVisibility(moonLocation.altitude.radiansToDegrees)
         
         let moonPhase = BDAstroCalc.moonPhase(date: NSDate())
         moon.fractionOfMoonIlluminated = String(format: "%3.1f", moonPhase.fractionOfMoonIlluminated * 100) + " " + loc("PERCENT")
-        moon.phaseTitle = getMoonPhaseTitle(Double(moonPhase.phase))
-        moon.phaseIcon = getMoonPhaseIcon(Double(moonPhase.phase))
-        moon.phaseAngle = String(format: "%3.1f", moonPhase.angle  * radiansToDegrees)
+        moon.phaseTitle = getMoonPhaseTitle(moonPhase.phase)
+        moon.phaseIcon = getMoonPhaseIcon(moonPhase.phase)
+        moon.phaseAngle = String(format: "%3.1f", moonPhase.angle.radiansToDegrees)
         
         let moonCoordinates = BDAstroCalc.moonCoordinates(daysSinceJan12000: Jan12000Date)
-        moon.declination = declinationToString(moonCoordinates.declination * radiansToDegrees)
-        moon.rightAscension = String(format: "%3.1f", moonCoordinates.rightAscension  * radiansToDegrees)
-        moon.zodiacSign = getZodiacSign(moonCoordinates.rightAscension * radiansToDegrees)
+        moon.declination = declinationToString(moonCoordinates.declination.radiansToDegrees)
+        moon.rightAscension = String(format: "%3.1f", moonCoordinates.rightAscension.radiansToDegrees)
+        moon.zodiacSign = getZodiacSign(moonCoordinates.rightAscension.radiansToDegrees)
         
         let moonTilt = BDAstroCalc.moonTilt(date: NSDate(), location: myLocationCoordinates)
-        moon.moonTilt = String(moonTilt.diff)
+        moon.moonTilt = moonTilt.diff.string
         
         
         DispatchQueue.main.async {

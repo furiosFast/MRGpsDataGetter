@@ -14,6 +14,7 @@
 
 import UIKit
 import CoreLocation
+import SwifterSwift
 
 public protocol MRGpsDataGetterSunDataDelegate: NSObjectProtocol {
     func sunDataReady(sun: GpsSunInfoModel)
@@ -34,51 +35,51 @@ open class SunDataGetter: NSObject {
     }
     
     private func reverseSolarInfo(_ currentLocation: CLLocation){
-        var minutesTimesFlag = 1
+        var timeFormat = "HH:mm:ss"
         if Bool(Preferences.shared.getPreference("minutesTimes"))! == true {
-            minutesTimesFlag = 3
+            timeFormat = "HH:mm"
         }
+        
         let myLocationCoordinates = CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
         let Jan12000Date = BDAstroCalc.daysSinceJan12000(date: NSDate())
         
         let sunRiseSet = BDAstroCalc.sunRiseAndSet(date: NSDate(), location: myLocationCoordinates)
-        sun.solarNoon = UTCToLocal(sunRiseSet.solarNoon as Date, minutesTimesFlag)!
-        sun.nadir = UTCToLocal(sunRiseSet.nadir as Date, minutesTimesFlag)!
+        sun.solarNoon = (sunRiseSet.solarNoon as Date).string(withFormat: timeFormat)
+        sun.nadir = (sunRiseSet.nadir as Date).string(withFormat: timeFormat)
         
         let sunLocation = BDAstroCalc.sunPosition(date: NSDate(), location: myLocationCoordinates)
-        let azim = (sunLocation.azimuth + Double.pi) * radiansToDegrees
-        sun.altitude = String(format: "%3.1f", sunLocation.altitude * radiansToDegrees) + loc("DEGREE")
+        let azim = (sunLocation.azimuth + Double.pi).radiansToDegrees
+        sun.altitude = String(format: "%3.1f", sunLocation.altitude.radiansToDegrees) + loc("DEGREE")
         sun.azimuth = String(format: "%3.1f", azim) + loc("DEGREE") + " " + getAngleName(azim)
         
         let sunTimes = BDAstroCalc.sunSignificantTimes(date: NSDate(), location: myLocationCoordinates)
-        sun.astronomicalDuskSunrise = UTCToLocal(sunTimes["nightEnd"]! as Date, minutesTimesFlag)!
-        sun.nauticalDuskSunrise = UTCToLocal(sunTimes["nauticalDawn"]! as Date, minutesTimesFlag)!
-        sun.civilDuskSunrise = UTCToLocal(sunTimes["dawn"]! as Date, minutesTimesFlag)!
-        sun.sunriseStart = UTCToLocal(sunTimes["sunriseStart"]! as Date, minutesTimesFlag)!
-        sun.sunriseEnd = UTCToLocal(sunTimes["sunriseEnd"]! as Date, minutesTimesFlag)!
-        sun.sunsetStart = UTCToLocal(sunTimes["sunsetStart"]! as Date, minutesTimesFlag)!
-        sun.sunsetEnd = UTCToLocal(sunTimes["sunsetEnd"]! as Date, minutesTimesFlag)!
-        sun.civilDuskSunset = UTCToLocal(sunTimes["dusk"]! as Date, minutesTimesFlag)!
-        sun.nauticalDuskSunset = UTCToLocal(sunTimes["nauticalDusk"]! as Date, minutesTimesFlag)!
-        sun.astronomicalDuskSunset = UTCToLocal(sunTimes["nightStart"]! as Date, minutesTimesFlag)!
+        sun.astronomicalDuskSunrise = (sunTimes["nightEnd"]! as Date).string(withFormat: timeFormat)
+        sun.nauticalDuskSunrise = (sunTimes["nauticalDawn"]! as Date).string(withFormat: timeFormat)
+        sun.civilDuskSunrise = (sunTimes["dawn"]! as Date).string(withFormat: timeFormat)
+        sun.sunriseStart = (sunTimes["sunriseStart"]! as Date).string(withFormat: timeFormat)
+        sun.sunriseEnd = (sunTimes["sunriseEnd"]! as Date).string(withFormat: timeFormat)
+        sun.sunsetStart = (sunTimes["sunsetStart"]! as Date).string(withFormat: timeFormat)
+        sun.sunsetEnd = (sunTimes["sunsetEnd"]! as Date).string(withFormat: timeFormat)
+        sun.civilDuskSunset = (sunTimes["dusk"]! as Date).string(withFormat: timeFormat)
+        sun.nauticalDuskSunset = (sunTimes["nauticalDusk"]! as Date).string(withFormat: timeFormat)
+        sun.astronomicalDuskSunset = (sunTimes["nightStart"]! as Date).string(withFormat: timeFormat)
         
-        sun.blueHourSunriseStart = UTCToLocal(sunTimes["dawn"]! as Date, minutesTimesFlag)!
-        sun.blueHourSunriseEnd = UTCToLocal((sunTimes["dawn"]! as Date).plusMinutes((Date.minutesBetween(date1: (sunTimes["dawn"]! as Date), date2: (sunTimes["sunriseStart"]! as Date))/2)), minutesTimesFlag)!
-        sun.blueHourSunsetStart = UTCToLocal((sunTimes["sunsetEnd"]! as Date).plusMinutes((Date.minutesBetween(date1: (sunTimes["sunsetEnd"]! as Date), date2: (sunTimes["dusk"]! as Date))/2)), minutesTimesFlag)!
-        sun.blueHourSunsetEnd = UTCToLocal(sunTimes["dusk"]! as Date, minutesTimesFlag)!
-        
-        sun.goldenHourSunriseStart = UTCToLocal((sunTimes["dawn"]! as Date).plusMinutes((Date.minutesBetween(date1: (sunTimes["dawn"]! as Date), date2: (sunTimes["sunriseStart"]! as Date))/2)), minutesTimesFlag)!
-        sun.goldenHourSunriseEnd = UTCToLocal(sunTimes["goldenHourEnd"]! as Date, minutesTimesFlag)!
-        sun.goldenHourSunsetStart = UTCToLocal(sunTimes["goldenHourStart"]! as Date, minutesTimesFlag)!
-        sun.goldenHourSunsetEnd = UTCToLocal((sunTimes["sunsetEnd"]! as Date).plusMinutes((Date.minutesBetween(date1: (sunTimes["sunsetEnd"]! as Date), date2: (sunTimes["dusk"]! as Date))/2)), minutesTimesFlag)!
+        sun.blueHourSunriseStart = (sunTimes["dawn"]! as Date).string(withFormat: timeFormat)
+        sun.blueHourSunriseEnd = (sunTimes["dawn"]! as Date).addingTimeInterval((sunTimes["dawn"]! as Date).minutesSince((sunTimes["sunriseStart"]! as Date))/2).string(withFormat: timeFormat)
+        sun.blueHourSunsetStart = (sunTimes["sunsetEnd"]! as Date).addingTimeInterval((sunTimes["sunsetEnd"]! as Date).minutesSince((sunTimes["dusk"]! as Date))/2).string(withFormat: timeFormat)
+        sun.blueHourSunsetEnd = (sunTimes["dusk"]! as Date).string(withFormat: timeFormat)
+        sun.goldenHourSunriseStart = (sunTimes["dawn"]! as Date).addingTimeInterval((sunTimes["dawn"]! as Date).minutesSince((sunTimes["sunriseStart"]! as Date))/2).string(withFormat: timeFormat)
+        sun.goldenHourSunriseEnd = (sunTimes["goldenHourEnd"]! as Date).string(withFormat: timeFormat)
+        sun.goldenHourSunsetStart = (sunTimes["goldenHourStart"]! as Date).string(withFormat: timeFormat)
+        sun.goldenHourSunsetEnd = (sunTimes["sunsetEnd"]! as Date).addingTimeInterval((sunTimes["sunsetEnd"]! as Date).minutesSince((sunTimes["dusk"]! as Date))/2).string(withFormat: timeFormat)
         
         sun.daylightHours = getTodayDaylightHours(sunTimes, BDAstroCalc.sunSignificantTimes(date: Date().yesterday as NSDate, location: myLocationCoordinates))
-        sun.phaseTitle = getSunPhaseTitle(sunLocation.altitude * radiansToDegrees)
+        sun.phaseTitle = getSunPhaseTitle(sunLocation.altitude.radiansToDegrees)
         
         let sunCoordinates = BDAstroCalc.sunCoordinates(daysSinceJan12000: Jan12000Date)
-        sun.declination = declinationToString(sunCoordinates.declination * radiansToDegrees)
-        sun.rightAscension = String(format: "%3.1f", sunCoordinates.rightAscension  * radiansToDegrees)
-        sun.zodiacSign = getZodiacSign(sunCoordinates.rightAscension * radiansToDegrees)
+        sun.declination = declinationToString(sunCoordinates.declination.radiansToDegrees)
+        sun.rightAscension = String(format: "%3.1f", sunCoordinates.rightAscension.radiansToDegrees)
+        sun.zodiacSign = getZodiacSign(sunCoordinates.rightAscension.radiansToDegrees)
         
         DispatchQueue.main.async {
             self.delegate?.sunDataReady(sun: self.sun)
@@ -95,8 +96,8 @@ open class SunDataGetter: NSObject {
     private func getTodayDaylightHours(_ today: [String : NSDate], _ yesterday: [String : NSDate]) -> String {
         let todayTime = getDaylightHoursDifference(today["sunsetEnd"]! as Date, today["sunriseStart"]! as Date)
         let yesterdayTime = getDaylightHoursDifference(yesterday["sunsetEnd"]! as Date, yesterday["sunriseStart"]! as Date)
-        if let t = todayTime.toDate(format: "HH:mm:ss"), let y = yesterdayTime.toDate(format: "HH:mm:ss") {
-            if(t.isGreaterThan(y)) {
+        if let t = todayTime.date(withFormat: "HH:mm:ss"), let y = yesterdayTime.date(withFormat: "HH:mm:ss") {
+            if(t.secondsSince(y) > 0) {
                 return todayTime + " (+" + getDaylightHoursDifference(t, y) + ")"
             } else {
                 return todayTime + " (-" + getDaylightHoursDifference(t, y) + ")"
@@ -108,7 +109,7 @@ open class SunDataGetter: NSObject {
     
     ///Function that return the deffirence of minutes of sun lyght of today and yesterday
     private func getDaylightHoursDifference(_ sunrise: Date, _ sunset: Date) -> String {
-        let hours = Date.hoursBetween(date1: sunset, date2: sunrise)
+        let hours = sunset.hoursSince(sunrise).int
         var h = ""
         if(hours < 10) {
             h = "0\(hours):"
@@ -119,7 +120,7 @@ open class SunDataGetter: NSObject {
             h = ""
         }
         
-        let minutes = Date.minutesBetween(date1: sunset, date2: sunrise)
+        let minutes = sunset.minutesSince(sunrise).int
         var m = ""
         if(minutes > -10 && minutes < 10) {
             m = "0\(minutes)"
@@ -130,7 +131,7 @@ open class SunDataGetter: NSObject {
             m = m.replacingOccurrences(of: "-", with: "")
         }
         
-        let seconds = Date.secondsBetween(date1: sunset, date2: sunrise)
+        let seconds = sunset.secondsSince(sunrise).int
         var s = ""
         if(seconds > -10 && seconds < 10) {
             s = "0\(seconds)"
@@ -141,7 +142,7 @@ open class SunDataGetter: NSObject {
             s = s.replacingOccurrences(of: "-", with: "")
         }
         
-        return "\(h)" + "\(m)" + ":" + "\(s)"
+        return h + m + ":" + s
     }
     
     ///Function that return the sun phase name based on the sun altitude (positive or negative) in the sky

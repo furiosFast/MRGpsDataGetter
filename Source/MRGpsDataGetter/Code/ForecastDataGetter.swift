@@ -16,6 +16,7 @@ import UIKit
 import CoreLocation
 import Alamofire
 import SwiftyJSON
+import SwifterSwift
 
 @objc public protocol MRGpsDataGetterForecastDataDelegate: NSObjectProtocol {
     func forecastDataReady(forecast: [GpsWeatherModel])
@@ -54,10 +55,10 @@ open class ForecastDataGetter: NSObject {
         
         let urlString = "http://api.openweathermap.org/data/2.5/forecast"
         let parameters: Dictionary = [
-            "lat"           : "\(currentLocation.coordinate.latitude)",
-            "lon"           : "\(currentLocation.coordinate.longitude)",
+            "lat"           : currentLocation.coordinate.latitude.string,
+            "lon"           : currentLocation.coordinate.longitude.string,
             "type"          : "accurate",
-            "units"         : "\(units)",
+            "units"         : units,
             "lang"          : loc("LANG"),
             "appid"         : openWeatherMapKey
         ]
@@ -73,9 +74,9 @@ open class ForecastDataGetter: NSObject {
                 return
             }
             let json = JSON(ilJson)
-            if let openWeatherMapError = Int(json["cod"].stringValue) {
+            if let openWeatherMapError = (json["cod"].stringValue).int {
                 if (openWeatherMapError != 200) {
-                    self.delegate?.forecastDataNotAvaiable?(error: "openWeatherMap.org error: " + "\(openWeatherMapError)")
+                    self.delegate?.forecastDataNotAvaiable?(error: "openWeatherMap.org error: " + openWeatherMapError.string)
                     return
                 }
             }
@@ -98,47 +99,47 @@ open class ForecastDataGetter: NSObject {
                     weather.weatherOpenWeatherMapIcon = weatherIcon
                 }
                 //3-4-5-6
-                if let velVento = Double(json["list"][i]["wind"]["speed"].stringValue) {
+                if let velVento = json["list"][i]["wind"]["speed"].stringValue.double() {
                     if Preferences.shared.getPreference("windSpeed") == "meterSecondSpeed" {
                         if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                            weather.windSpeed = String(velVento * milesHourToMeterSecond)
+                            weather.windSpeed = (velVento * milesHourToMeterSecond).string
                             weather.beaufortScale = /*loc("positionWind_SCALABEAUFORT") + " " +*/ getBeaufortForce(velVento * milesHourToKnot) /*+ ": " + String(format: "%3.1f ", velVento * milesHourToMeterSecond)*/
                             self.plotData.append(velVento * milesHourToMeterSecond)
                         } else {
-                            weather.windSpeed = String(velVento)
+                            weather.windSpeed = velVento.string
                             weather.beaufortScale = /*loc("positionWind_SCALABEAUFORT") + " " +*/ getBeaufortForce(velVento * meterSecondToKnot) /*+ ": " + String(format: "%3.1f ", velVento)*/
                             self.plotData.append(velVento)
                         }
                     }
                     if Preferences.shared.getPreference("windSpeed") == "kilometerHoursSpeed" {
                         if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                            weather.windSpeed = String(velVento * milesHourToKilometerHour)
+                            weather.windSpeed = (velVento * milesHourToKilometerHour).string
                             weather.beaufortScale = /*loc("positionWind_SCALABEAUFORT") + " " +*/ getBeaufortForce(velVento * milesHourToKnot) /*+ ": " + String(format: "%3.1f ", velVento * milesHourToKilometerHour)*/
                             self.plotData.append(velVento * milesHourToKilometerHour)
                         } else {
-                            weather.windSpeed = String(velVento * meterSecondToKilometerHour)
+                            weather.windSpeed = (velVento * meterSecondToKilometerHour).string
                             weather.beaufortScale = /*loc("positionWind_SCALABEAUFORT") + " " +*/ getBeaufortForce(velVento * meterSecondToKnot) /*+ ": " + String(format: "%3.1f ", velVento * meterSecondToKilometerHour)*/
                             self.plotData.append(velVento * meterSecondToKilometerHour)
                         }
                     }
                     if Preferences.shared.getPreference("windSpeed") == "knotSpeed" {
                         if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                            weather.windSpeed = String(velVento * milesHourToKnot)
+                            weather.windSpeed = (velVento * milesHourToKnot).string
                             weather.beaufortScale = /*loc("positionWind_SCALABEAUFORT") + " " +*/ getBeaufortForce(velVento * milesHourToKnot) /*+ ": " + String(format: "%3.1f ", velVento * milesHourToKnot)*/
                             self.plotData.append(velVento * milesHourToKnot)
                         } else {
-                            weather.windSpeed = String(velVento * meterSecondToKnot)
+                            weather.windSpeed = (velVento * meterSecondToKnot).string
                             weather.beaufortScale = /*loc("positionWind_SCALABEAUFORT") + " " +*/ getBeaufortForce(velVento * meterSecondToKnot) /*+ ": " + String(format: "%3.1f ", velVento * meterSecondToKnot)*/
                             self.plotData.append(velVento * meterSecondToKnot)
                         }
                     }
                     if Preferences.shared.getPreference("windSpeed") == "milesHoursSpeed" {
                         if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                            weather.windSpeed = String(velVento)
+                            weather.windSpeed = velVento.string
                             weather.beaufortScale = /*loc("positionWind_SCALABEAUFORT") + " " +*/ getBeaufortForce(velVento * milesHourToKnot) /*+ ": " + String(format: "%3.1f ", velVento)
                             self.plotData.append(velVento)*/
                         } else {
-                            weather.windSpeed = String(velVento * meterSecondToMilesHour)
+                            weather.windSpeed = (velVento * meterSecondToMilesHour).string
                             weather.beaufortScale = /*loc("positionWind_SCALABEAUFORT") + " " +*/ getBeaufortForce(velVento * meterSecondToKnot) /*+ ": " + String(format: "%3.1f ", velVento * meterSecondToMilesHour)*/
                             self.plotData.append(velVento * meterSecondToMilesHour)
                         }
@@ -150,25 +151,25 @@ open class ForecastDataGetter: NSObject {
                     }
                 }
                 //7-8-9
-                if let angVento = Double(json["list"][i]["wind"]["deg"].stringValue) {
+                if let angVento = json["list"][i]["wind"]["deg"].stringValue.double() {
                     weather.windDegree = String(format: "%3.1f", angVento)
                     weather.windName = getWindName(angVento)
                     self.plotDataWindName.append(weather.windName)
                 }
                 //10
-                if let rain = Double(json["list"][i]["rain"]["1h"].stringValue) {
+                if let rain = json["list"][i]["rain"]["1h"].stringValue.double() {
                     weather.rain1h = String(format: "%3.1f", rain) + " " + loc("MILLIMETERS")
                 }
                 //11
-                if let rain = Double(json["list"][i]["rain"]["3h"].stringValue) {
+                if let rain = json["list"][i]["rain"]["3h"].stringValue.double() {
                     weather.rain3h = String(format: "%3.1f", rain) + " " + loc("MILLIMETERS")
                 }
                 //12
-                if let vis = Double(json["list"][i]["main"]["visibility"].stringValue) {
+                if let vis = json["list"][i]["main"]["visibility"].stringValue.double() {
                     weather.visibility = String(format: "%3.1f", vis/1000) + " " + loc("KILOMETERS")
                 }
                 //13
-                if let pres = Double(json["list"][i]["main"]["pressure"].stringValue) {
+                if let pres = json["list"][i]["main"]["pressure"].stringValue.double() {
                     if Preferences.shared.getPreference("pressureUnit") == "atm" {
                         weather.pressure = String(format: "%3.3f", pres * hpaToAtm) + " " + loc("ATM")
                     }
@@ -180,7 +181,7 @@ open class ForecastDataGetter: NSObject {
                     }
                 }
                 //14
-                if let pres = Double(json["list"][i]["main"]["sea_level"].stringValue) {
+                if let pres = json["list"][i]["main"]["sea_level"].stringValue.double() {
                     if Preferences.shared.getPreference("pressureUnit") == "atm" {
                         weather.pressureSeaLevel = String(format: "%3.3f", pres * hpaToAtm) + " " + loc("ATM")
                     }
@@ -192,7 +193,7 @@ open class ForecastDataGetter: NSObject {
                     }
                 }
                 //15
-                if let pres = Double(json["list"][i]["main"]["grnd_level"].stringValue) {
+                if let pres = json["list"][i]["main"]["grnd_level"].stringValue.double() {
                     if Preferences.shared.getPreference("pressureUnit") == "atm" {
                         weather.pressureGroundLevel = String(format: "%3.3f", pres * hpaToAtm) + " " + loc("ATM")
                     }
@@ -204,11 +205,11 @@ open class ForecastDataGetter: NSObject {
                     }
                 }
                 //16
-                if let hum = Double(json["list"][i]["main"]["humidity"].stringValue) {
-                    weather.umidity = "\(hum)" + " " + loc("PERCENT")
+                if let hum = json["list"][i]["main"]["humidity"].stringValue.double() {
+                    weather.umidity = hum.string + " " + loc("PERCENT")
                 }
                 //17
-                if let temp = Double(json["list"][i]["main"]["temp"].stringValue) {
+                if let temp = json["list"][i]["main"]["temp"].stringValue.double() {
                     if Preferences.shared.getPreference("weatherTemp") == "celsusTemp" {
                         weather.temp = String(format: "%3.0f", temp) + " " + loc("CELSUS")
                     }
@@ -220,7 +221,7 @@ open class ForecastDataGetter: NSObject {
                     }
                 }
                 //18
-                if let tempMin = Double(json["list"][i]["main"]["temp_min"].stringValue) {
+                if let tempMin = json["list"][i]["main"]["temp_min"].stringValue.double() {
                     if Preferences.shared.getPreference("weatherTemp") == "celsusTemp" {
                         weather.tempMin = String(format: "%3.1f", tempMin) + " " + loc("CELSUS")
                     }
@@ -232,7 +233,7 @@ open class ForecastDataGetter: NSObject {
                     }
                 }
                 //19
-                if let tempMax = Double(json["list"][i]["main"]["temp_max"].stringValue) {
+                if let tempMax = json["list"][i]["main"]["temp_max"].stringValue.double() {
                     if Preferences.shared.getPreference("weatherTemp") == "celsusTemp" {
                         weather.tempMax = String(format: "%3.1f", tempMax) + " " + loc("CELSUS")
                     }
@@ -245,28 +246,30 @@ open class ForecastDataGetter: NSObject {
                 }
                 //20-21-22-23
                 if let dateTime = json["list"][i]["dt_txt"].string {
-                    if let dt = dateTime.toDate(format: "yyyy-MM-dd HH:mm:ss"), let data = UTCToLocal(dt, 4), let ora = UTCToLocal(dt, 3), let dataOra = UTCToLocal(dt, 2) {
-                        weather.date = data.firstUppercased
-                        weather.time = ora
-                        weather.dateTime = dataOra
-                        self.plotDataTime.append(ora)
+                    if let dt = dateTime.date(withFormat: "yyyy-MM-dd HH:mm:ss") {
+                        var date = dt.string(withFormat: "EEEE, dd/MM/yyyy")
+                        date.firstCharacterUppercased()
+                        weather.date = date
+                        weather.time = dt.string(withFormat: "HH:mm")
+                        weather.dateTime = dt.string(withFormat: "dd/MM/yyyy - HH:mm:ss")
+                        self.plotDataTime.append(dt.string(withFormat: "HH:mm"))
                     }
                 }
                 //24
-                if let rain = Double(json["list"][i]["rain"]["3h"].stringValue) {
+                if let rain = json["list"][i]["rain"]["3h"].stringValue.double() {
                     weather.rain3h = String(format: "%3.1f", rain) + " " + loc("MILLIMETERS")
                 } else {
-                    weather.rain3h = String("0.0") + " " + loc("MILLIMETERS")
+                    weather.rain3h = "0.0 " + loc("MILLIMETERS")
                 }
                 //25
-                if let snow = Double(json["list"][i]["snow"]["3h"].stringValue) {
+                if let snow = json["list"][i]["snow"]["3h"].stringValue.double() {
                     weather.snow3h = String(format: "%3.1f", snow) + " " + loc("MILLIMETERS")
                 } else {
-                    weather.snow3h = String("0.0") + " " + loc("MILLIMETERS")
+                    weather.snow3h = "0.0 " + loc("MILLIMETERS")
                 }
                 //26
-                if let clouds = Double(json["list"][i]["clouds"]["all"].stringValue) {
-                    weather.clouds = "\(clouds)" + " " + loc("PERCENT")
+                if let clouds = json["list"][i]["clouds"]["all"].stringValue.double() {
+                    weather.clouds = clouds.string + " " + loc("PERCENT")
                 }
                 
                 self.forecast.append(weather)

@@ -14,6 +14,8 @@
 import UIKit
 import Alamofire
 
+//MARK: - Shared variables
+
 public var AFManager = Session()
 public let meterSecondToKilometerHour = 3.6
 public let meterSecondToKnot = 1.9438444924406
@@ -24,13 +26,15 @@ public let milesHourToMeterSecond = 0.44704
 public let milesHourToKilometerHour = 1.60934
 public let hpaToAtm = 0.00098692326672
 public let hpaToBar = 0.001
-public let radiansToDegrees = 180 / Double.pi
+//public let radiansToDegrees = 180 / Double.pi
 public let bundleId = "org.fastdevsproject.altervista.MRGpsDataGetter"
 public let appVersionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
 public let copyright = Bundle.main.object(forInfoDictionaryKey: "NSHumanReadableCopyright") as! String
 public let appBuildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
-public let hexAppBuildNumber = String(Int(appBuildNumber)!, radix: 16, uppercase: true)
+public let hexAppBuildNumber = String(appBuildNumber.int!, radix: 16, uppercase: true)
 
+
+//MARK: - Shared functions
 
 ///Function for localize string
 func loc(_ localizedKey:String) -> String {
@@ -49,7 +53,7 @@ func setAlamofire(){
 
 ///Function that format the declination coord from a double value
 func declinationToString(_ declination: Double) -> String {
-    var decSeconds = Int(declination * 3600)
+    var decSeconds = (declination * 3600).int
     let decDegrees = decSeconds / 3600
     decSeconds = abs(decSeconds % 3600)
     let decMinutes = decSeconds / 60
@@ -58,7 +62,7 @@ func declinationToString(_ declination: Double) -> String {
 }
 
 //func rightAscensionToString(_ rightAscension: Double) -> String {
-//    var decSeconds = Int(rightAscension * 3600)
+//    var decSeconds = (rightAscension * 3600).int
 //    let decDegrees = decSeconds / 3600
 //    decSeconds = abs(decSeconds % 3600)
 //    let decMinutes = decSeconds / 60
@@ -152,23 +156,23 @@ func getBeaufortForceColor(_ windSpeedKnot: Double) -> String {
 }
 
 /// Function that a format a string value of date
-func UTCToLocal(_ date: Date, _ type: Int) -> String? {
-    let dateFormatter = DateFormatter()
-    switch type {
-        case 0: dateFormatter.dateFormat = "dd/MM/yyyy"
-        case 1: dateFormatter.dateFormat = "HH:mm:ss"
-        case 2: dateFormatter.dateFormat = "dd/MM/yyyy - HH:mm:ss"
-        case 3: dateFormatter.dateFormat = "HH:mm"
-        case 4: dateFormatter.dateFormat = "EEEE, dd/MM/yyyy"
-        default: return nil
-    }
-    dateFormatter.timeZone = NSTimeZone.local
-    return dateFormatter.string(from: date)
-}
+//func UTCToLocal(_ date: Date, _ type: Int) -> String? {
+//    let dateFormatter = DateFormatter()
+//    switch type {
+//        case 0: dateFormatter.dateFormat = "dd/MM/yyyy"
+//        case 1: dateFormatter.dateFormat = "HH:mm:ss"
+//        case 2: dateFormatter.dateFormat = "dd/MM/yyyy - HH:mm:ss"
+//        case 3: dateFormatter.dateFormat = "HH:mm"
+//        case 4: dateFormatter.dateFormat = "EEEE, dd/MM/yyyy"
+//        default: return nil
+//    }
+//    dateFormatter.timeZone = NSTimeZone.local
+//    return dateFormatter.string(from: date)
+//}
 
 ///Function that return the zodiac sign of sun/moon based on the right ascension
 func getZodiacSign(_ rightAscension: Double) -> String {
-    var rightAscension = Int(rightAscension + 360) % 360
+    var rightAscension = (rightAscension + 360).int % 360
     if(rightAscension < 0) {
         rightAscension = -1 * rightAscension
     }
@@ -188,4 +192,25 @@ func getZodiacSign(_ rightAscension: Double) -> String {
         default: return loc("NOTAVAIABLENUMBER")
     }
     
+}
+
+//MARK: - Shared extension
+
+extension Formatter {
+    
+    static let withSeparator: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.groupingSeparator = "."
+        formatter.numberStyle = .decimal
+        return formatter
+    }()
+    
+}
+
+extension Int {
+    
+    var formattedWithSeparator: String {
+        return Formatter.withSeparator.string(for: self) ?? ""
+    }
+
 }
