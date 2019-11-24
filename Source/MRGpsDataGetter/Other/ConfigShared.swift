@@ -214,3 +214,11 @@ extension Int {
     }
 
 }
+
+public extension Date {
+    
+    func isGreaterThan(_ date: Date) -> Bool {
+        return (self.compare(date) == .orderedDescending)
+    }
+    
+}
