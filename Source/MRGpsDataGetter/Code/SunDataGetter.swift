@@ -104,9 +104,8 @@ open class SunDataGetter: NSObject {
             } else {
                 return todayTime + " (-" + getDaylightHoursDifference(t, y) + ")"
             }
-        } else {
-            return todayTime
         }
+        return loc("NOTAVAIABLENUMBER")
     }
     
     ///Function that return the deffirence of minutes of sun lyght of today and yesterday
@@ -144,7 +143,7 @@ open class SunDataGetter: NSObject {
             s = s.replacingOccurrences(of: "-", with: "")
         }
         
-        return h + m + ":" + s
+        return "\(h)" + "\(m)" + ":" + "\(s)"
     }
     
     ///Function that return the sun phase name based on the sun altitude (positive or negative) in the sky
