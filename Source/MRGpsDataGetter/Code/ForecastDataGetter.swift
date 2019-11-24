@@ -99,7 +99,7 @@ open class ForecastDataGetter: NSObject {
                     weather.weatherOpenWeatherMapIcon = weatherIcon
                 }
                 //3-4-5-6
-                if let velVento = json["list"][i]["wind"]["speed"].stringValue.double() {
+                if let velVento = Double(json["list"][i]["wind"]["speed"].stringValue) {
                     if Preferences.shared.getPreference("windSpeed") == "meterSecondSpeed" {
                         if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
                             weather.windSpeed = (velVento * milesHourToMeterSecond).string
@@ -151,25 +151,25 @@ open class ForecastDataGetter: NSObject {
                     }
                 }
                 //7-8-9
-                if let angVento = json["list"][i]["wind"]["deg"].stringValue.double() {
+                if let angVento = Double(json["list"][i]["wind"]["deg"].stringValue) {
                     weather.windDegree = String(format: "%3.1f", angVento)
                     weather.windName = getWindName(angVento)
                     self.plotDataWindName.append(weather.windName)
                 }
                 //10
-                if let rain = json["list"][i]["rain"]["1h"].stringValue.double() {
+                if let rain = Double(json["list"][i]["rain"]["1h"].stringValue) {
                     weather.rain1h = String(format: "%3.1f", rain) + " " + loc("MILLIMETERS")
                 }
                 //11
-                if let rain = json["list"][i]["rain"]["3h"].stringValue.double() {
+                if let rain = Double(json["list"][i]["rain"]["3h"].stringValue) {
                     weather.rain3h = String(format: "%3.1f", rain) + " " + loc("MILLIMETERS")
                 }
                 //12
-                if let vis = json["list"][i]["main"]["visibility"].stringValue.double() {
+                if let vis = Double(json["list"][i]["main"]["visibility"].stringValue) {
                     weather.visibility = String(format: "%3.1f", vis/1000) + " " + loc("KILOMETERS")
                 }
                 //13
-                if let pres = json["list"][i]["main"]["pressure"].stringValue.double() {
+                if let pres = Double(json["list"][i]["main"]["pressure"].stringValue) {
                     if Preferences.shared.getPreference("pressureUnit") == "atm" {
                         weather.pressure = String(format: "%3.3f", pres * hpaToAtm) + " " + loc("ATM")
                     }
@@ -181,7 +181,7 @@ open class ForecastDataGetter: NSObject {
                     }
                 }
                 //14
-                if let pres = json["list"][i]["main"]["sea_level"].stringValue.double() {
+                if let pres = Double(json["list"][i]["main"]["sea_level"].stringValue) {
                     if Preferences.shared.getPreference("pressureUnit") == "atm" {
                         weather.pressureSeaLevel = String(format: "%3.3f", pres * hpaToAtm) + " " + loc("ATM")
                     }
@@ -193,7 +193,7 @@ open class ForecastDataGetter: NSObject {
                     }
                 }
                 //15
-                if let pres = json["list"][i]["main"]["grnd_level"].stringValue.double() {
+                if let pres = Double(json["list"][i]["main"]["grnd_level"].stringValue) {
                     if Preferences.shared.getPreference("pressureUnit") == "atm" {
                         weather.pressureGroundLevel = String(format: "%3.3f", pres * hpaToAtm) + " " + loc("ATM")
                     }
@@ -205,11 +205,11 @@ open class ForecastDataGetter: NSObject {
                     }
                 }
                 //16
-                if let hum = json["list"][i]["main"]["humidity"].stringValue.double() {
+                if let hum = Double(json["list"][i]["main"]["humidity"].stringValue) {
                     weather.umidity = hum.string + " " + loc("PERCENT")
                 }
                 //17
-                if let temp = json["list"][i]["main"]["temp"].stringValue.double() {
+                if let temp = Double(json["list"][i]["main"]["temp"].stringValue) {
                     if Preferences.shared.getPreference("weatherTemp") == "celsusTemp" {
                         weather.temp = String(format: "%3.0f", temp) + " " + loc("CELSUS")
                     }
@@ -221,7 +221,7 @@ open class ForecastDataGetter: NSObject {
                     }
                 }
                 //18
-                if let tempMin = json["list"][i]["main"]["temp_min"].stringValue.double() {
+                if let tempMin = Double(json["list"][i]["main"]["temp_min"].stringValue) {
                     if Preferences.shared.getPreference("weatherTemp") == "celsusTemp" {
                         weather.tempMin = String(format: "%3.1f", tempMin) + " " + loc("CELSUS")
                     }
@@ -233,7 +233,7 @@ open class ForecastDataGetter: NSObject {
                     }
                 }
                 //19
-                if let tempMax = json["list"][i]["main"]["temp_max"].stringValue.double() {
+                if let tempMax = Double(json["list"][i]["main"]["temp_max"].stringValue) {
                     if Preferences.shared.getPreference("weatherTemp") == "celsusTemp" {
                         weather.tempMax = String(format: "%3.1f", tempMax) + " " + loc("CELSUS")
                     }
@@ -256,19 +256,19 @@ open class ForecastDataGetter: NSObject {
                     }
                 }
                 //24
-                if let rain = json["list"][i]["rain"]["3h"].stringValue.double() {
+                if let rain = Double(json["list"][i]["rain"]["3h"].stringValue) {
                     weather.rain3h = String(format: "%3.1f", rain) + " " + loc("MILLIMETERS")
                 } else {
                     weather.rain3h = "0.0 " + loc("MILLIMETERS")
                 }
                 //25
-                if let snow = json["list"][i]["snow"]["3h"].stringValue.double() {
+                if let snow = Double(json["list"][i]["snow"]["3h"].stringValue) {
                     weather.snow3h = String(format: "%3.1f", snow) + " " + loc("MILLIMETERS")
                 } else {
                     weather.snow3h = "0.0 " + loc("MILLIMETERS")
                 }
                 //26
-                if let clouds = json["list"][i]["clouds"]["all"].stringValue.double() {
+                if let clouds = Double(json["list"][i]["clouds"]["all"].stringValue) {
                     weather.clouds = clouds.string + " " + loc("PERCENT")
                 }
                 
