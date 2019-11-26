@@ -155,21 +155,6 @@ func getBeaufortForceColor(_ windSpeedKnot: Double) -> String {
     return coloreBollinoForzaBeaufort
 }
 
-/// Function that a format a string value of date
-//func UTCToLocal(_ date: Date, _ type: Int) -> String? {
-//    let dateFormatter = DateFormatter()
-//    switch type {
-//        case 0: dateFormatter.dateFormat = "dd/MM/yyyy"
-//        case 1: dateFormatter.dateFormat = "HH:mm:ss"
-//        case 2: dateFormatter.dateFormat = "dd/MM/yyyy - HH:mm:ss"
-//        case 3: dateFormatter.dateFormat = "HH:mm"
-//        case 4: dateFormatter.dateFormat = "EEEE, dd/MM/yyyy"
-//        default: return nil
-//    }
-//    dateFormatter.timeZone = NSTimeZone.local
-//    return dateFormatter.string(from: date)
-//}
-
 ///Function that return the zodiac sign of sun/moon based on the right ascension
 func getZodiacSign(_ rightAscension: Double) -> String {
     var rightAscension = (rightAscension + 360).int % 360
@@ -191,7 +176,41 @@ func getZodiacSign(_ rightAscension: Double) -> String {
         case 330...360: return loc("position_ACQUARIOTITLE")
         default: return loc("NOTAVAIABLENUMBER")
     }
-    
+}
+
+func secondsBetween(date1 d1:Date, date2 d2:Date) -> Int {
+    let dc = Calendar.current.dateComponents([Calendar.Component.second], from: d1, to: d2)
+    return dc.second!
+}
+
+func minutesBetween(date1 d1: Date, date2 d2: Date) -> Int {
+    let dc = Calendar.current.dateComponents([Calendar.Component.minute], from: d1, to: d2)
+    return dc.minute!
+}
+
+func hoursBetween(date1 d1: Date, date2 d2: Date) -> Int {
+    let dc = Calendar.current.dateComponents([Calendar.Component.hour], from: d1, to: d2)
+    return dc.hour!
+}
+
+func daysBetween(date1 d1: Date, date2 d2: Date) -> Int {
+    let dc = Calendar.current.dateComponents([Calendar.Component.day], from: d1, to: d2)
+    return dc.day!
+}
+
+func weeksBetween(date1 d1: Date, date2 d2: Date) -> Int {
+    let dc = Calendar.current.dateComponents([Calendar.Component.weekday], from: d1, to: d2)
+    return dc.weekOfYear!
+}
+
+func monthsBetween(date1 d1: Date, date2 d2: Date) -> Int {
+    let dc = Calendar.current.dateComponents([Calendar.Component.month], from: d1, to: d2)
+    return dc.month!
+}
+
+func yearsBetween(date1 d1: Date, date2 d2: Date) -> Int {
+    let dc = Calendar.current.dateComponents([Calendar.Component.year], from: d1, to: d2)
+    return dc.year!
 }
 
 //MARK: - Shared extension
@@ -211,6 +230,79 @@ extension Int {
     
     var formattedWithSeparator: String {
         return Formatter.withSeparator.string(for: self) ?? ""
+    }
+
+}
+
+// Date
+extension Date {
+        
+    func plusSeconds(_ s: Int) -> Date {
+        return self.addComponentsToDate(seconds: s, minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: 0)
+    }
+    
+    func minusSeconds(_ s: UInt) -> Date {
+        return self.addComponentsToDate(seconds: -Int(s), minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: 0)
+    }
+    
+    func plusMinutes(_ m: Int) -> Date {
+        return self.addComponentsToDate(seconds: 0, minutes: m, hours: 0, days: 0, weeks: 0, months: 0, years: 0)
+    }
+    
+    func minusMinutes(_ m: UInt) -> Date {
+        return self.addComponentsToDate(seconds: 0, minutes: -Int(m), hours: 0, days: 0, weeks: 0, months: 0, years: 0)
+    }
+    
+    func plusHours(_ h: UInt) -> Date {
+        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: Int(h), days: 0, weeks: 0, months: 0, years: 0)
+    }
+    
+    func minusHours(_ h: UInt) -> Date {
+        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: -Int(h), days: 0, weeks: 0, months: 0, years: 0)
+    }
+    
+    func plusDays(_ d: UInt) -> Date {
+        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: Int(d), weeks: 0, months: 0, years: 0)
+    }
+    
+    func minusDays(_ d: UInt) -> Date {
+        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: -Int(d), weeks: 0, months: 0, years: 0)
+    }
+    
+    func plusWeeks(_ w: UInt) -> Date {
+        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: Int(w), months: 0, years: 0)
+    }
+    
+    func minusWeeks(_ w: UInt) -> Date {
+        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: -Int(w), months: 0, years: 0)
+    }
+    
+    func plusMonths(_ m: UInt) -> Date {
+        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: Int(m), years: 0)
+    }
+    
+    func minusMonths(_ m: UInt) -> Date {
+        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: -Int(m), years: 0)
+    }
+    
+    func plusYears(_ y: UInt) -> Date {
+        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: Int(y))
+    }
+    
+    func minusYears(_ y: UInt) -> Date {
+        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: -Int(y))
+    }
+    
+    private func addComponentsToDate(seconds sec: Int, minutes min: Int, hours hrs: Int, days d: Int, weeks wks: Int, months mts: Int, years yrs: Int) -> Date {
+        var dc:DateComponents = DateComponents()
+        dc.second = sec
+        dc.minute = min
+        dc.hour = hrs
+        dc.day = d
+        dc.weekOfYear = wks
+        dc.month = mts
+        dc.year = yrs
+        return Calendar.current.date(byAdding: dc, to: self, wrappingComponents: false)!
     }
 
 }
