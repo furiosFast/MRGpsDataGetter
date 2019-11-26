@@ -64,17 +64,13 @@ open class SunDataGetter: NSObject {
         sun.astronomicalDuskSunset = (sunTimes["nightStart"]! as Date).string(withFormat: timeFormat)
             
         sun.blueHourSunriseStart = (sunTimes["dawn"]! as Date).string(withFormat: timeFormat)
-//        sun.blueHourSunriseEnd = (sunTimes["dawn"]! as Date).addingTimeInterval((Calendar.current.dateComponents([Calendar.Component.hour], from: (sunTimes["dawn"]! as Date), to: (sunTimes["sunriseStart"]! as Date)).hour!/2).double).string(withFormat: timeFormat)
-//        sun.blueHourSunsetStart = (sunTimes["sunsetEnd"]! as Date).addingTimeInterval((((sunTimes["sunsetEnd"]! as Date).minute - (sunTimes["dusk"]! as Date).minute)/2).double).string(withFormat: timeFormat)
         sun.blueHourSunriseEnd = (sunTimes["dawn"]! as Date).plusMinutes((minutesBetween(date1: (sunTimes["dawn"]! as Date), date2: (sunTimes["sunriseStart"]! as Date))/2)).string(withFormat: timeFormat)
         sun.blueHourSunsetStart = (sunTimes["sunsetEnd"]! as Date).plusMinutes((minutesBetween(date1: (sunTimes["sunsetEnd"]! as Date), date2: (sunTimes["dusk"]! as Date))/2)).string(withFormat: timeFormat)
         sun.blueHourSunsetEnd = (sunTimes["dusk"]! as Date).string(withFormat: timeFormat)
         
-//        sun.goldenHourSunriseStart = (sunTimes["dawn"]! as Date).addingTimeInterval((((sunTimes["dawn"]! as Date).minute - (sunTimes["sunriseStart"]! as Date).minute)/2).double).string(withFormat: timeFormat)
         sun.goldenHourSunriseStart = (sunTimes["dawn"]! as Date).plusMinutes((minutesBetween(date1: (sunTimes["dawn"]! as Date), date2: (sunTimes["sunriseStart"]! as Date))/2)).string(withFormat: timeFormat)
         sun.goldenHourSunriseEnd = (sunTimes["goldenHourEnd"]! as Date).string(withFormat: timeFormat)
         sun.goldenHourSunsetStart = (sunTimes["goldenHourStart"]! as Date).string(withFormat: timeFormat)
-//        sun.goldenHourSunsetEnd = (sunTimes["sunsetEnd"]! as Date).addingTimeInterval((((sunTimes["sunsetEnd"]! as Date).minute - (sunTimes["dusk"]! as Date).minute)/2).double).string(withFormat: timeFormat)
         sun.goldenHourSunsetEnd = (sunTimes["sunsetEnd"]! as Date).plusMinutes((minutesBetween(date1: (sunTimes["sunsetEnd"]! as Date), date2: (sunTimes["dusk"]! as Date))/2)).string(withFormat: timeFormat)
 
         sun.daylightHours = getTodayDaylightHours(sunTimes, BDAstroCalc.sunSignificantTimes(date: Date().yesterday as NSDate, location: myLocationCoordinates))
@@ -100,7 +96,7 @@ open class SunDataGetter: NSObject {
     private func getTodayDaylightHours(_ today: [String : NSDate], _ yesterday: [String : NSDate]) -> String {
         let todayTime = getDaylightHoursDifference(today["sunsetEnd"]! as Date, today["sunriseStart"]! as Date)
         let yesterdayTime = getDaylightHoursDifference(yesterday["sunsetEnd"]! as Date, yesterday["sunriseStart"]! as Date)
-        if let t = todayTime.date(withFormat: "HH:mm:ss"), let y = yesterdayTime.date(withFormat: "HH:mm:ss") {
+        if let t = todayTime.toDate(format: "HH:mm:ss"), let y = yesterdayTime.toDate(format: "HH:mm:ss") {
             if t.compare(y) == .orderedDescending /*t.timeIntervalSince(y) > 0*/ {
                 return todayTime + " (+" + getDaylightHoursDifference(t, y) + ")"
             } else {

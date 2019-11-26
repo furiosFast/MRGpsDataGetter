@@ -215,6 +215,7 @@ func yearsBetween(date1 d1: Date, date2 d2: Date) -> Int {
 
 //MARK: - Shared extension
 
+// Formatter
 extension Formatter {
     
     static let withSeparator: NumberFormatter = {
@@ -226,10 +227,31 @@ extension Formatter {
     
 }
 
+// Int
 extension Int {
     
     var formattedWithSeparator: String {
         return Formatter.withSeparator.string(for: self) ?? ""
+    }
+
+}
+
+// DateFormatter
+public extension DateFormatter {
+    
+    convenience init (format: String) {
+        self.init()
+        dateFormat = format
+        locale = Locale.current
+    }
+    
+}
+
+// String
+public extension String {
+    
+    func toDate (format: String) -> Date? {
+        return DateFormatter(format: format).date(from: self)
     }
 
 }
