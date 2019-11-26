@@ -122,7 +122,7 @@ open class SunDataGetter: NSObject {
     
     ///Function that return the deffirence of minutes of sun lyght of today and yesterday
     private func getDaylightHoursDifference(_ sunrise: Date, _ sunset: Date) -> String {
-        print(sunset.timeIntervalSince(sunrise))
+        print(Date(timeIntervalSince1970: sunset.timeIntervalSince(sunrise)))
         let hours = sunset.hour - sunrise.hour
         var h = ""
         if(hours < 10) {
