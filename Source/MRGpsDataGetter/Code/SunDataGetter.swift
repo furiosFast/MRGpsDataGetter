@@ -122,7 +122,7 @@ open class SunDataGetter: NSObject {
     
     ///Function that return the deffirence of minutes of sun lyght of today and yesterday
     private func getDaylightHoursDifference(_ sunrise: Date, _ sunset: Date) -> String {
-        let hours = hoursBetween(date1: sunset, date2: sunrise)
+        let hours = sunset.hoursSince(sunrise).int.abs
         var h = ""
         if(hours < 10) {
             h = "0\(hours):"
@@ -132,8 +132,8 @@ open class SunDataGetter: NSObject {
         if(hours < 1) {
             h = ""
         }
-
-        let minutes = minutesBetween(date1: sunset, date2: sunrise)
+        
+        let minutes = sunset.minute - sunrise.minute
         var m = ""
         if(minutes > -10 && minutes < 10) {
             m = "0\(minutes)"
@@ -143,8 +143,8 @@ open class SunDataGetter: NSObject {
         if(minutes < 0) {
             m = m.replacingOccurrences(of: "-", with: "")
         }
-
-        let seconds = secondsBetween(date1: sunset, date2: sunrise)
+        
+        let seconds = sunset.second - sunrise.second
         var s = ""
         if(seconds > -10 && seconds < 10) {
             s = "0\(seconds)"
@@ -154,9 +154,46 @@ open class SunDataGetter: NSObject {
         if(seconds < 0) {
             s = s.replacingOccurrences(of: "-", with: "")
         }
-
-        return "\(h)" + "\(m)" + ":" + "\(s)"
+        
+        return h + m + ":" + s
     }
+        
+//    private func getDaylightHoursDifference(_ sunrise: Date, _ sunset: Date) -> String {
+//        let hours = hoursBetween(date1: sunset, date2: sunrise)
+//        var h = ""
+//        if(hours < 10) {
+//            h = "0\(hours):"
+//        } else {
+//            h = "\(hours):"
+//        }
+//        if(hours < 1) {
+//            h = ""
+//        }
+//
+//        let minutes = minutesBetween(date1: sunset, date2: sunrise)
+//        var m = ""
+//        if(minutes > -10 && minutes < 10) {
+//            m = "0\(minutes)"
+//        } else {
+//            m = "\(minutes)"
+//        }
+//        if(minutes < 0) {
+//            m = m.replacingOccurrences(of: "-", with: "")
+//        }
+//
+//        let seconds = secondsBetween(date1: sunset, date2: sunrise)
+//        var s = ""
+//        if(seconds > -10 && seconds < 10) {
+//            s = "0\(seconds)"
+//        } else {
+//            s = "\(seconds)"
+//        }
+//        if(seconds < 0) {
+//            s = s.replacingOccurrences(of: "-", with: "")
+//        }
+//
+//        return "\(h)" + "\(m)" + ":" + "\(s)"
+//    }
     
     ///Function that return the sun phase name based on the sun altitude (positive or negative) in the sky
     private func getSunPhaseTitle(_ altitude: Double) -> String {
