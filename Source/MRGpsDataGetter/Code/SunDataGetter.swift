@@ -109,48 +109,21 @@ open class SunDataGetter: NSObject {
     private func getTodayDaylightHours(_ today: [String : NSDate], _ yesterday: [String : NSDate]) -> String {
         let todayTime = getDaylightHoursDifference(today["sunriseStart"]! as Date, today["sunsetEnd"]! as Date)
         let yesterdayTime = getDaylightHoursDifference(yesterday["sunriseStart"]! as Date, yesterday["sunsetEnd"]! as Date)
-        if let t = todayTime.toDate(format: "HH:mm:ss"), let y = yesterdayTime.toDate(format: "HH:mm:ss") {
-            if(t.timeIntervalSince(y) > 0) {
-                return todayTime + " (+" + getDaylightHoursDifference(t, y) + ")"
-            } else {
-                return todayTime + " (-" + getDaylightHoursDifference(t, y) + ")"
-            }
-        } else {
+//        if let t = todayTime.toDate(format: "HH:mm:ss"), let y = yesterdayTime.toDate(format: "HH:mm:ss") {
+//            if(t.timeIntervalSince(y) > 0) {
+//                return todayTime + " (+" + getDaylightHoursDifference(t, y) + ")"
+//            } else {
+//                return todayTime + " (-" + getDaylightHoursDifference(t, y) + ")"
+//            }
+//        } else {
             return todayTime
-        }
+//        }
     }
     
     ///Function that return the deffirence of minutes of sun lyght of today and yesterday
     private func getDaylightHoursDifference(_ sunrise: Date, _ sunset: Date) -> String {
-        let hours = sunset.hour - sunrise.hour
-        var h = ""
-        if(hours < 10) {
-            h = "0\(hours)"
-        } else {
-            h = "\(hours)"
-        }
-        if(hours < 1) {
-            h = "00"
-        }
-        
-        let minutes = (sunset.minute - sunrise.minute).abs
-        var m = ""
-        if(minutes < 10) {
-            m = "0\(minutes)"
-        }
-        
-        let seconds = (sunset.second - sunrise.second).abs
-        var s = ""
-        if(seconds < 10) {
-            s = "0\(seconds)"
-        }
-        
-        
-        let ho = hoursBetween(date1: sunset, date2: sunrise)
-        let mi = minutesBetween(date1: sunset, date2: sunrise)
-        let se = secondsBetween(date1: sunset, date2: sunrise)
-        
-        return h + ":" + m + ":" + s
+        let difference = sunset.timeIntervalSince(sunrise)
+        return difference.stringFromTimeInterval()
     }
         
 //    private func getDaylightHoursDifference(_ sunrise: Date, _ sunset: Date) -> String {
@@ -212,16 +185,15 @@ open class SunDataGetter: NSObject {
     
 }
 
-extension Date {
+extension TimeInterval{
 
-    static func -(recent: Date, previous: Date) -> (month: Int?, day: Int?, hour: Int?, minute: Int?, second: Int?) {
-        let day = Calendar.current.dateComponents([.day], from: previous, to: recent).day
-        let month = Calendar.current.dateComponents([.month], from: previous, to: recent).month
-        let hour = Calendar.current.dateComponents([.hour], from: previous, to: recent).hour
-        let minute = Calendar.current.dateComponents([.minute], from: previous, to: recent).minute
-        let second = Calendar.current.dateComponents([.second], from: previous, to: recent).second
+    func stringFromTimeInterval() -> String {
+        let time = NSInteger(self)
+        let seconds = time % 60
+        let minutes = (time / 60) % 60
+        let hours = (time / 3600)
 
-        return (month: month, day: day, hour: hour, minute: minute, second: second)
+        return String(format: "%0.2d:%0.2d:%0.2d", hours, minutes, seconds)
     }
-
+    
 }
