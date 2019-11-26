@@ -107,8 +107,8 @@ open class SunDataGetter: NSObject {
 //    }
     
     private func getTodayDaylightHours(_ today: [String : NSDate], _ yesterday: [String : NSDate]) -> String {
-        let todayTime = getDaylightHoursDifference(today["sunsetEnd"]! as Date, today["sunriseStart"]! as Date)
-        let yesterdayTime = getDaylightHoursDifference(yesterday["sunsetEnd"]! as Date, yesterday["sunriseStart"]! as Date)
+        let todayTime = getDaylightHoursDifference(today["sunriseStart"]! as Date, today["sunsetEnd"]! as Date)
+        let yesterdayTime = getDaylightHoursDifference(yesterday["sunriseStart"]! as Date, yesterday["sunsetEnd"]! as Date)
         if let t = todayTime.toDate(format: "HH:mm:ss"), let y = yesterdayTime.toDate(format: "HH:mm:ss") {
             if(t.timeIntervalSince(y) > 0) {
                 return todayTime + " (+" + getDaylightHoursDifference(t, y) + ")"
