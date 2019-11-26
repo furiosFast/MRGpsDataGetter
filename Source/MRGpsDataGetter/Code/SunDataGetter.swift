@@ -122,7 +122,15 @@ open class SunDataGetter: NSObject {
     
     ///Function that return the deffirence of minutes of sun lyght of today and yesterday
     private func getDaylightHoursDifference(_ sunrise: Date, _ sunset: Date) -> String {
-        print(Date(timeIntervalSince1970: sunset.timeIntervalSince(sunrise) / 1000))
+
+
+        let interval = sunset - sunrise
+        print(interval.day)
+        print(interval.hour)
+        print(interval.minute)
+        print(interval.second)
+
+
         let hours = sunset.hour - sunrise.hour
         var h = ""
         if(hours < 10) {
@@ -216,4 +224,18 @@ open class SunDataGetter: NSObject {
         return loc("NOTAVAIABLENUMBER")
     }
     
+}
+
+extension Date {
+
+    static func -(recent: Date, previous: Date) -> (month: Int?, day: Int?, hour: Int?, minute: Int?, second: Int?) {
+        let day = Calendar.current.dateComponents([.day], from: previous, to: recent).day
+        let month = Calendar.current.dateComponents([.month], from: previous, to: recent).month
+        let hour = Calendar.current.dateComponents([.hour], from: previous, to: recent).hour
+        let minute = Calendar.current.dateComponents([.minute], from: previous, to: recent).minute
+        let second = Calendar.current.dateComponents([.second], from: previous, to: recent).second
+
+        return (month: month, day: day, hour: hour, minute: minute, second: second)
+    }
+
 }
