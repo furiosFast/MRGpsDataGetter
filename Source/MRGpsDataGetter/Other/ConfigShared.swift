@@ -43,10 +43,10 @@ func loc(_ localizedKey:String) -> String {
 
 
 ///Function that set the Alamofire configuration
-func setAlamofire(){
+func setAlamofire(_ timeOut: TimeInterval = 15.0){
     let configuration = URLSessionConfiguration.default
-    configuration.timeoutIntervalForRequest = 15.0
-    configuration.timeoutIntervalForResource = 15.0
+    configuration.timeoutIntervalForRequest = timeOut
+    configuration.timeoutIntervalForResource = timeOut
     configuration.requestCachePolicy = .reloadIgnoringLocalAndRemoteCacheData
     AFManager = Alamofire.Session(configuration: configuration)
 }

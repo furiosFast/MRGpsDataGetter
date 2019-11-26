@@ -31,14 +31,11 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     var mapLocation: CLLocationCoordinate2D?
     var timerAutoRefresh = Timer()
     var count = 0
-    ////////
-    var loadForecastAndWeatherInfoFromOpenWeatherMapController: Bool = false
-    ////////
     var openWeatherMapKey = "NaN"
     
     
-    open func initialize(){
-        setAlamofire()
+    open func initialize(_ timeOut: TimeInterval = 15.0){
+        setAlamofire(timeOut)
     }
     
     open func refreshAllData(openWeatherMapKey: String, preferences: [String : String]){
@@ -99,14 +96,6 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
             } else {
                 timerAutoRefresh.invalidate()
             }
-            /////////
-            DispatchQueue.global().async {
-                if self.loadForecastAndWeatherInfoFromOpenWeatherMapController {
-                    ForecastDataGetter().getForecastInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
-                    self.loadForecastAndWeatherInfoFromOpenWeatherMapController = false
-                }
-            }
-            /////////
         }
         count = count + 1
     }
@@ -163,16 +152,8 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
         return currentLocation
     }
     
-    open func setLoadForecastAndWeatherInfoFromOpenWeatherMapController(_ value: Bool) {
-        loadForecastAndWeatherInfoFromOpenWeatherMapController = value
-    }
-    
-    open func getLoadForecastAndWeatherInfoFromOpenWeatherMapController() -> Bool {
-        return loadForecastAndWeatherInfoFromOpenWeatherMapController
-    }
-    
     //MARK: - Support functions for gps
-    private func setCount(_ value:Int) {
+    private func setCount(_ value: Int) {
         count = value
     }
     

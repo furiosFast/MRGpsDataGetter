@@ -33,13 +33,9 @@ open class GpsDataGetter: NSObject {
     
     lazy var geocoder = CLGeocoder()
     let gps = GpsInfoModel()
-//    var oldLocation: CLLocation? = nil
     
     
     open func getPositionInfo(currentLocation: CLLocation) {
-//        oldLocation = currentLocation
-        
-        
         DispatchQueue.global().async {
             self.reversePositionInfo(currentLocation)
         }
@@ -122,10 +118,6 @@ open class GpsDataGetter: NSObject {
             }
         }
     }
-    
-//    open func getOldLocation() -> CLLocation? {
-//        return oldLocation
-//    }
     
     //MARK: - Support functions for gps data
     
