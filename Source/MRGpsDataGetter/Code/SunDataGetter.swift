@@ -93,17 +93,31 @@ open class SunDataGetter: NSObject {
     //MARK: - Support functions for sun data
     
     ///Function that return the today number of hours of sun lyght
+//    private func getTodayDaylightHours(_ today: [String : NSDate], _ yesterday: [String : NSDate]) -> String {
+//        let todayTime = getDaylightHoursDifference(today["sunsetEnd"]! as Date, today["sunriseStart"]! as Date)
+//        let yesterdayTime = getDaylightHoursDifference(yesterday["sunsetEnd"]! as Date, yesterday["sunriseStart"]! as Date)
+//        if let t = todayTime.date(withFormat: "HH:mm:ss"), let y = yesterdayTime.date(withFormat: "HH:mm:ss") {
+//            if t.compare(y) == .orderedDescending /*t.timeIntervalSince(y) > 0*/ {
+//                return todayTime + " (+" + getDaylightHoursDifference(t, y) + ")"
+//            } else {
+//                return todayTime + " (-" + getDaylightHoursDifference(t, y) + ")"
+//            }
+//        }
+//        return todayTime
+//    }
+    
     private func getTodayDaylightHours(_ today: [String : NSDate], _ yesterday: [String : NSDate]) -> String {
         let todayTime = getDaylightHoursDifference(today["sunsetEnd"]! as Date, today["sunriseStart"]! as Date)
         let yesterdayTime = getDaylightHoursDifference(yesterday["sunsetEnd"]! as Date, yesterday["sunriseStart"]! as Date)
         if let t = todayTime.toDate(format: "HH:mm:ss"), let y = yesterdayTime.toDate(format: "HH:mm:ss") {
-            if t.compare(y) == .orderedDescending /*t.timeIntervalSince(y) > 0*/ {
+            if(t.timeIntervalSince(y) > 0) {
                 return todayTime + " (+" + getDaylightHoursDifference(t, y) + ")"
             } else {
                 return todayTime + " (-" + getDaylightHoursDifference(t, y) + ")"
             }
+        } else {
+            return todayTime
         }
-        return todayTime
     }
     
     ///Function that return the deffirence of minutes of sun lyght of today and yesterday
