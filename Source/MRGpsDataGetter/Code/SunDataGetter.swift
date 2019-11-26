@@ -62,34 +62,15 @@ open class SunDataGetter: NSObject {
         sun.civilDuskSunset = (sunTimes["dusk"]! as Date).string(withFormat: timeFormat)
         sun.nauticalDuskSunset = (sunTimes["nauticalDusk"]! as Date).string(withFormat: timeFormat)
         sun.astronomicalDuskSunset = (sunTimes["nightStart"]! as Date).string(withFormat: timeFormat)
-            
+        
         sun.blueHourSunriseStart = (sunTimes["dawn"]! as Date).string(withFormat: timeFormat)
-        sun.blueHourSunriseEnd = ((sunTimes["dawn"]! as Date).addingTimeInterval(((sunTimes["sunriseStart"]! as Date).minutesSince((sunTimes["dawn"]! as Date)))/2)).string(withFormat: timeFormat)
-//        sun.blueHourSunriseEnd = ((sunTimes["dawn"]! as Date).addingTimeInterval(((sunTimes["dawn"]! as Date).timeIntervalSince((sunTimes["sunriseStart"]! as Date)))/2)).string(withFormat: timeFormat)
-//        sun.blueHourSunsetStart = ((sunTimes["sunsetEnd"]! as Date).addingTimeInterval(((sunTimes["sunsetEnd"]! as Date).timeIntervalSince((sunTimes["dusk"]! as Date)))/2)).string(withFormat: timeFormat)
-        sun.blueHourSunsetStart = ((sunTimes["sunsetEnd"]! as Date).addingTimeInterval(((sunTimes["dusk"]! as Date).minutesSince((sunTimes["sunsetEnd"]! as Date)))/2)).string(withFormat: timeFormat)
+        sun.blueHourSunriseEnd = ((sunTimes["dawn"]! as Date).plusMinutes((minutesBetween(date1: (sunTimes["dawn"]! as Date), date2: (sunTimes["sunriseStart"]! as Date))/2))).string(withFormat: timeFormat)
+        sun.blueHourSunsetStart = ((sunTimes["sunsetEnd"]! as Date).plusMinutes((minutesBetween(date1: (sunTimes["sunsetEnd"]! as Date), date2: (sunTimes["dusk"]! as Date))/2))).string(withFormat: timeFormat)
         sun.blueHourSunsetEnd = (sunTimes["dusk"]! as Date).string(withFormat: timeFormat)
-        
-        sun.goldenHourSunriseStart = ((sunTimes["dawn"]! as Date).addingTimeInterval(((sunTimes["dawn"]! as Date).timeIntervalSince((sunTimes["sunriseStart"]! as Date)))/2)).string(withFormat: timeFormat)
-//        sun.goldenHourSunriseStart = (sunTimes["dawn"]! as Date).plusMinutes((minutesBetween(date1: (sunTimes["dawn"]! as Date), date2: (sunTimes["sunriseStart"]! as Date))/2)).string(withFormat: timeFormat)
-        sun.goldenHourSunriseEnd = (sunTimes["goldenHourEnd"]! as Date).string(withFormat: timeFormat)
-        sun.goldenHourSunsetStart = (sunTimes["goldenHourStart"]! as Date).string(withFormat: timeFormat)
-//        sun.goldenHourSunsetEnd = (sunTimes["sunsetEnd"]! as Date).plusMinutes((minutesBetween(date1: (sunTimes["sunsetEnd"]! as Date), date2: (sunTimes["dusk"]! as Date))/2)).string(withFormat: timeFormat)
-        sun.goldenHourSunsetEnd = ((sunTimes["sunsetEnd"]! as Date).addingTimeInterval(((sunTimes["sunsetEnd"]! as Date).timeIntervalSince((sunTimes["dusk"]! as Date)))/2)).string(withFormat: timeFormat)
 
-        
-        
-        
-        
-        
-//        sun.blueHourSunriseStart = (sunTimes["dawn"]! as Date).string(withFormat: timeFormat)
-//        sun.oraBluAlbaFine = UTCToLocal((sunTimes["dawn"]! as Date).plusMinutes((Date.minutesBetween(date1: (sunTimes["dawn"]! as Date), date2: (sunTimes["sunriseStart"]! as Date))/2)), minutesTimesFlag)!
-//        sun.oraBluTramontoInizio = UTCToLocal((sunTimes["sunsetEnd"]! as Date).plusMinutes((Date.minutesBetween(date1: (sunTimes["sunsetEnd"]! as Date), date2: (sunTimes["dusk"]! as Date))/2)), minutesTimesFlag)!
-//        sun.blueHourSunsetEnd = (sunTimes["dusk"]! as Date).string(withFormat: timeFormat)
-//
-//
-//
-//
+
+
+
 //        sun.oraDoroAlbaInizio = ((sunTimes["dawn"]! as Date).plusMinutes((Date.minutesBetween(date1: (sunTimes["dawn"]! as Date), date2: (sunTimes["sunriseStart"]! as Date))/2))).string(withFormat: timeFormat)
 //        sun.goldenHourSunriseEnd = (sunTimes["goldenHourEnd"]! as Date).string(withFormat: timeFormat)
 //        sun.goldenHourSunsetStart = (sunTimes["goldenHourStart"]! as Date).string(withFormat: timeFormat)

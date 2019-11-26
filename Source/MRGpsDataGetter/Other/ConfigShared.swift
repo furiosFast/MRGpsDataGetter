@@ -234,3 +234,60 @@ extension TimeInterval {
     }
     
 }
+
+let componentFlags : Set<Calendar.Component> = [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day, Calendar.Component.weekdayOrdinal, Calendar.Component.hour,Calendar.Component.minute, Calendar.Component.second, Calendar.Component.weekday, Calendar.Component.weekdayOrdinal]
+func secondsBetween(date1 d1:Date, date2 d2:Date) -> Int {
+    let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
+    return dc.second!
+}
+
+func minutesBetween(date1 d1: Date, date2 d2: Date) -> Int {
+    let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
+    return dc.minute!
+}
+
+func hoursBetween(date1 d1: Date, date2 d2: Date) -> Int {
+    let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
+    return dc.hour!
+}
+
+func daysBetween(date1 d1: Date, date2 d2: Date) -> Int {
+    let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
+    return dc.day!
+}
+
+func weeksBetween(date1 d1: Date, date2 d2: Date) -> Int {
+    let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
+    return dc.weekOfYear!
+}
+
+func monthsBetween(date1 d1: Date, date2 d2: Date) -> Int {
+    let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
+    return dc.month!
+}
+
+func yearsBetween(date1 d1: Date, date2 d2: Date) -> Int {
+    let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
+    return dc.year!
+}
+
+// TimeInterval
+extension Date {
+    
+    func plusMinutes(_ m: Int) -> Date {
+        return self.addComponentsToDate(seconds: 0, minutes: m, hours: 0, days: 0, weeks: 0, months: 0, years: 0)
+    }
+    
+    private func addComponentsToDate(seconds sec: Int, minutes min: Int, hours hrs: Int, days d: Int, weeks wks: Int, months mts: Int, years yrs: Int) -> Date {
+        var dc:DateComponents = DateComponents()
+        dc.second = sec
+        dc.minute = min
+        dc.hour = hrs
+        dc.day = d
+        dc.weekOfYear = wks
+        dc.month = mts
+        dc.year = yrs
+        return Calendar.current.date(byAdding: dc, to: self, wrappingComponents: false)!
+    }
+    
+}
