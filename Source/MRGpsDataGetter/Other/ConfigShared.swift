@@ -239,7 +239,7 @@ extension Int {
 // DateFormatter
 public extension DateFormatter {
     
-    convenience init (format: String) {
+    convenience init(format: String) {
         self.init()
         dateFormat = format
         locale = Locale.current
@@ -250,7 +250,7 @@ public extension DateFormatter {
 // String
 public extension String {
     
-    func toDate (format: String) -> Date? {
+    func toDate(format: String) -> Date? {
         return DateFormatter(format: format).date(from: self)
     }
 
