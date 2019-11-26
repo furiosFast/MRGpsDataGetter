@@ -64,14 +64,14 @@ open class SunDataGetter: NSObject {
         sun.astronomicalDuskSunset = (sunTimes["nightStart"]! as Date).string(withFormat: timeFormat)
             
         sun.blueHourSunriseStart = (sunTimes["dawn"]! as Date).string(withFormat: timeFormat)
-        sun.blueHourSunriseEnd = (sunTimes["dawn"]! as Date).plusMinutes((minutesBetween(date1: (sunTimes["dawn"]! as Date), date2: (sunTimes["sunriseStart"]! as Date))/2)).string(withFormat: timeFormat)
-        sun.blueHourSunsetStart = (sunTimes["sunsetEnd"]! as Date).plusMinutes((minutesBetween(date1: (sunTimes["sunsetEnd"]! as Date), date2: (sunTimes["dusk"]! as Date))/2)).string(withFormat: timeFormat)
+        sun.blueHourSunriseEnd = (sunTimes["dawn"]! as Date).addingTimeInterval(((sunTimes["dawn"]! as Date).timeIntervalSince((sunTimes["sunriseStart"]! as Date)))/2).string(withFormat: timeFormat)
+        sun.blueHourSunriseEnd = (sunTimes["sunsetEnd"]! as Date).addingTimeInterval(((sunTimes["sunsetEnd"]! as Date).timeIntervalSince((sunTimes["dusk"]! as Date)))/2).string(withFormat: timeFormat)
         sun.blueHourSunsetEnd = (sunTimes["dusk"]! as Date).string(withFormat: timeFormat)
         
-        sun.goldenHourSunriseStart = (sunTimes["dawn"]! as Date).plusMinutes((minutesBetween(date1: (sunTimes["dawn"]! as Date), date2: (sunTimes["sunriseStart"]! as Date))/2)).string(withFormat: timeFormat)
+        sun.blueHourSunriseEnd = (sunTimes["dawn"]! as Date).addingTimeInterval(((sunTimes["dawn"]! as Date).timeIntervalSince((sunTimes["sunriseStart"]! as Date)))/2).string(withFormat: timeFormat)
         sun.goldenHourSunriseEnd = (sunTimes["goldenHourEnd"]! as Date).string(withFormat: timeFormat)
         sun.goldenHourSunsetStart = (sunTimes["goldenHourStart"]! as Date).string(withFormat: timeFormat)
-        sun.goldenHourSunsetEnd = (sunTimes["sunsetEnd"]! as Date).plusMinutes((minutesBetween(date1: (sunTimes["sunsetEnd"]! as Date), date2: (sunTimes["dusk"]! as Date))/2)).string(withFormat: timeFormat)
+        sun.blueHourSunriseEnd = (sunTimes["sunsetEnd"]! as Date).addingTimeInterval(((sunTimes["sunsetEnd"]! as Date).timeIntervalSince((sunTimes["dusk"]! as Date)))/2).string(withFormat: timeFormat)
 
         sun.daylightHours = getTodayDaylightHours(sunTimes, BDAstroCalc.sunSignificantTimes(date: Date().yesterday as NSDate, location: myLocationCoordinates))
         sun.phaseTitle = getSunPhaseTitle(sunLocation.altitude.radiansToDegrees)
@@ -92,28 +92,15 @@ open class SunDataGetter: NSObject {
     
     //MARK: - Support functions for sun data
     
-    ///Function that return the today number of hours of sun lyght
-//    private func getTodayDaylightHours(_ today: [String : NSDate], _ yesterday: [String : NSDate]) -> String {
-//        let todayTime = getDaylightHoursDifference(today["sunsetEnd"]! as Date, today["sunriseStart"]! as Date)
-//        let yesterdayTime = getDaylightHoursDifference(yesterday["sunsetEnd"]! as Date, yesterday["sunriseStart"]! as Date)
-//        if let t = todayTime.date(withFormat: "HH:mm:ss"), let y = yesterdayTime.date(withFormat: "HH:mm:ss") {
-//            if t.compare(y) == .orderedDescending /*t.timeIntervalSince(y) > 0*/ {
-//                return todayTime + " (+" + getDaylightHoursDifference(t, y) + ")"
-//            } else {
-//                return todayTime + " (-" + getDaylightHoursDifference(t, y) + ")"
-//            }
-//        }
-//        return todayTime
-//    }
-    
     private func getTodayDaylightHours(_ today: [String : NSDate], _ yesterday: [String : NSDate]) -> String {
         let todayTime = getDaylightHoursDifference(today["sunriseStart"]! as Date, today["sunsetEnd"]! as Date)
         let yesterdayTime = getDaylightHoursDifference(yesterday["sunriseStart"]! as Date, yesterday["sunsetEnd"]! as Date)
         if let t = todayTime.date(withFormat: "HH:mm:ss"), let y = yesterdayTime.date(withFormat: "HH:mm:ss") {
+            let diff = getDaylightHoursDifference(t, y).split(separator: ":")
             if(t.timeIntervalSince(y) > 0) {
-                return todayTime + " (+" + getDaylightHoursDifference(t, y) + ")"
+                return todayTime + " (+" + diff[1] + ":" + diff[2] + ")"
             } else {
-                return todayTime + " (-" + getDaylightHoursDifference(t, y) + ")"
+                return todayTime + " (-" + diff[1] + ":" + diff[2] + ")"
             }
         } else {
             return todayTime
@@ -125,43 +112,6 @@ open class SunDataGetter: NSObject {
         let difference = sunset.timeIntervalSince(sunrise)
         return difference.stringFromTimeInterval()
     }
-        
-//    private func getDaylightHoursDifference(_ sunrise: Date, _ sunset: Date) -> String {
-//        let hours = hoursBetween(date1: sunset, date2: sunrise)
-//        var h = ""
-//        if(hours < 10) {
-//            h = "0\(hours):"
-//        } else {
-//            h = "\(hours):"
-//        }
-//        if(hours < 1) {
-//            h = ""
-//        }
-//
-//        let minutes = minutesBetween(date1: sunset, date2: sunrise)
-//        var m = ""
-//        if(minutes > -10 && minutes < 10) {
-//            m = "0\(minutes)"
-//        } else {
-//            m = "\(minutes)"
-//        }
-//        if(minutes < 0) {
-//            m = m.replacingOccurrences(of: "-", with: "")
-//        }
-//
-//        let seconds = secondsBetween(date1: sunset, date2: sunrise)
-//        var s = ""
-//        if(seconds > -10 && seconds < 10) {
-//            s = "0\(seconds)"
-//        } else {
-//            s = "\(seconds)"
-//        }
-//        if(seconds < 0) {
-//            s = s.replacingOccurrences(of: "-", with: "")
-//        }
-//
-//        return "\(h)" + "\(m)" + ":" + "\(s)"
-//    }
     
     ///Function that return the sun phase name based on the sun altitude (positive or negative) in the sky
     private func getSunPhaseTitle(_ altitude: Double) -> String {
@@ -181,19 +131,6 @@ open class SunDataGetter: NSObject {
             return loc("position_NIGHTTITLE")
         }
         return loc("NOTAVAIABLENUMBER")
-    }
-    
-}
-
-extension TimeInterval{
-
-    func stringFromTimeInterval() -> String {
-        let time = NSInteger(self)
-        let seconds = time % 60
-        let minutes = (time / 60) % 60
-        let hours = (time / 3600)
-
-        return String(format: "%0.2d:%0.2d:%0.2d", hours, minutes, seconds)
     }
     
 }
