@@ -14,6 +14,7 @@
 
 import UIKit
 import CoreLocation
+import SwifterSwift
 
 public protocol MRGpsDataGetterSunDataDelegate: NSObjectProtocol {
     func sunDataReady(sun: GpsSunInfoModel)
@@ -27,12 +28,16 @@ open class SunDataGetter: NSObject {
     let sun = GpsSunInfoModel()
     
     
+    /// Function that start to retrive all Sun data based on a specified location
+    /// - Parameter currentLocation: location
     open func getSunInfo(currentLocation: CLLocation) {
         DispatchQueue.global().async {
             self.reverseSolarInfo(currentLocation)
         }
     }
     
+    /// Private function that start to retrive all Sun data based on a specified location
+    /// - Parameter currentLocation: location
     private func reverseSolarInfo(_ currentLocation: CLLocation){
         var timeFormat = "HH:mm:ss"
         if Bool(Preferences.shared.getPreference("minutesTimes"))! == true {
@@ -86,12 +91,17 @@ open class SunDataGetter: NSObject {
         }
     }
     
+    /// Get the sun data object
     open func getOldSunData() -> GpsSunInfoModel {
         return sun
     }
     
     //MARK: - Support functions for sun data
     
+    /// Function that return the today sun lyght hours and the difference of minutes of sun lyght of today and yesterday
+    /// - Parameters:
+    ///   - today: today sun info
+    ///   - yesterday: yesterday date info
     private func getTodayDaylightHours(_ today: [String : NSDate], _ yesterday: [String : NSDate]) -> String {
         let todayTime = getDaylightHoursDifference(today["sunriseStart"]! as Date, today["sunsetEnd"]! as Date)
         let yesterdayTime = getDaylightHoursDifference(yesterday["sunriseStart"]! as Date, yesterday["sunsetEnd"]! as Date)
@@ -107,13 +117,17 @@ open class SunDataGetter: NSObject {
         }
     }
     
-    ///Function that return the deffirence of minutes of sun lyght of today and yesterday
+    /// Function that return the difference of minutes of sun lyght of today and yesterday
+    /// - Parameters:
+    ///   - sunrise: the sunrise date and time
+    ///   - sunset: the sunset date and time
     private func getDaylightHoursDifference(_ sunrise: Date, _ sunset: Date) -> String {
         let difference = sunset.timeIntervalSince(sunrise)
         return difference.stringFromTimeInterval()
     }
     
-    ///Function that return the sun phase name based on the sun altitude (positive or negative) in the sky
+    /// Function that return the sun phase name based on the sun altitude (positive or negative) in the sky
+    /// - Parameter altitude: altitude on the sun (in degrees)
     private func getSunPhaseTitle(_ altitude: Double) -> String {
         if (altitude > 0) {
             return loc("position_DAYTITLE")

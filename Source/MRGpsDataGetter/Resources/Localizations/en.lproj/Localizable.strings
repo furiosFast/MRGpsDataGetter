@@ -43,61 +43,12 @@
 "positionWind_SCALABEAUFORTSHORT" = "W. force";
 
 //position info iphone (only)
-"positionPhone_POSITIONINFOTITLE" = "Position info";
-"positionPhone_LATITUDETITLE" = "Latitud.";
-"positionPhone_LONGITUDETITLE" = "Longit.";
-"positionPhone_ALTITUDETITLE" = "Altitud.";
-"positionPhone_SPEEDTITLE" = "Speed";
-
-"positionPhone_PRECIPITTITLE" = "Precipitation";
-"positionPhone_TEMPERATUREMINTITLE" = "Temp. (min)";
-"positionPhone_TEMPERATUREMAXTITLE" = "Temp. (max)";
-"positionPhone_SNOW1HTITLE" = "Snow (1h)";
-"positionPhone_SNOW3HTITLE" = "Snow (3h)";
-"positionPhone_RAIN1HTITLE" = "Rain (1h)";
-"positionPhone_RAIN3HTITLE" = "Rain (3h)";
-"positionPhone_VISIBILITYTITLE" = "Visibility";
-"positionPhone_PRESSURETITLE" = "Pressure";
-"positionPhone_PRESSURESEATITLE" = "Pres. (sea)";
-"positionPhone_PRESSUREGROUNDTITLE" = "Pres. (ground)";
-"positionPhone_HIGHTIDETITLE" = "High tide";
-"positionPhone_LOWTIDETITLE" = "Low tide";
-"positionPhone_CLOUDSITLE" = "Clouds";
-
-"positionPhone_CREPTITLE" = "Sunrise/Sunset and twilight";
-"positionPhone_BLUEGOLDHOURSSUNTITLE" = "Blue and Golden hour";
-"positionPhone_OTHERSUNTITLE" = "More";
-
-"positionPhone_AZIMUTHMOONTITLE" = "Azimuth";
-"positionPhone_SUNRISEMOONTITLE" = "Moonrise";
-"positionPhone_SUNSETMOONTITLE" = "Moonset";
-"positionPhone_DISTMOONTITLE" = "Earth-Moon";
 "positionPhone_POSITIONMOONNEGATIVETITLE" = "Moon under the horizon";
 "positionPhone_POSITIONMOONPOSITIVETITLE" = "Moon over the horizon";
 
-"positionPhone_NOONSUNTITLE" = "Noon";
-"positionPhone_NADIRSUNTITLE" = "Nadir";
-
 //position info watch
 "position_lOCNAMENAN" = "Location name not avaiable";
-"position_RELOAD" = "Refresh all data";
-"position_ROSEDIRECTIONTITLE" = "Direction";
-"position_LATITUDETITLE" = "Latitude";
-"position_LONGITUDETITLE" = "Longitude";
-"position_ALTITUDETITLE" = "Altitude";
-"position_SPEEDTITLE" = "Speed";
-"position_WINDNAMETITLE" = "Wind \n name";
-"position_WINDSPEEDTITLE" = "Wind \n speed";
-"position_CLOUDSITLE" = "Cloudiness \n percentage";
-"position_PRESSURETITLE" = "Atmospheric \npressure";
-"position_PRESSURESEATITLE" = "Pressure \n(sea level)";
-"position_PRESSUREGROUNDTITLE" = "Pressure \n(ground level)";
-"position_VISIBILITYTITLE" = "Outdoors \n  visibility";
-"position_METEODESCRIPTION" = "Weather condition";
-"position_HUMIDITYTITLE" = "Humidity";
-"position_TEMPERATURETITLE" = "Temperature";
-"position_TEMPERATUREMINTITLE" = "Temperature \n min";
-"position_TEMPERATUREMAXTITLE" = "Temperature \n max";
+
 "position_NIGHTTITLE" = "Night";
 "position_CREPASTROSUNRISETITLE" = "Astronomical twilight";
 "position_CREPNAUTICSUNRISETITLE" = "Nautical twilight";
@@ -108,38 +59,6 @@
 "position_CREPCIVSUNSETTITLE" = "Civil twilight";
 "position_CREPNAUTICSUNSETTITLE" = "Nautical twilight";
 "position_CREPASTROSUNSETTITLE" = "Astronomical twilight";
-"position_AZIMUTHSUNTITLE" = "Azimuth";
-"position_ALTITUDESUNTITLE" = "Altitude";
-"position_NOONSUNTITLE" = "Solar \n noon";
-"position_NADIRSUNTITLE" = "Solar \n nadir";
-"position_PHASESUNTITLE" = "Sun \n phase";
-"position_GOLDENSUNRISETITLE" = "Golden hour \n morning";
-"position_GOLDENSUNSETTITLE" = "Golden hour \n evening";
-"position_BLUESUNRISETTITLE" = "Blue hour \n morning";
-"position_BLUESUNSETTITLE" = "Blue hour \n evening";
-"position_DECLINATIONSUNTITLE" = "Sun \n declination";
-"position_ZODIACSIGNSUNTITLE" = "Zodiac \n sign";
-
-"position_SUNRISEMOONTITLE" = "Moonrise";
-"position_SUNSETMOONTITLE" = "Moonset";
-//"position_AZIMUTHMOONTITLE" = "Azimuth";
-//"position_ALTITUDEMOONTITLE" = "Altitude";
-"position_PHASEMOONTITLE" = "Moon \n phase";
-"position_NEWMOONTITLE" = "New Moon";
-"position_UPMOONTITLE" = "Waxing crescent";
-"position_FIRSTMOONTITLE" = "First quarter";
-"position_GIBUPMOONTITLE" = "Waxing gibbous";
-"position_FULLMOONTITLE" = "Full moon";
-"position_GIPDOWNMOONTITLE" = "Waning gibbous";
-"position_LASTMOONTITLE" = "Last quarter";
-"position_DOWNMOONTITLE" = "Waning crescent";
-"position_COORDINATEMOONTITLE" = "Distance \n Earth-Moon";
-"position_ILLUMINATEDMOONTITLE" = "% of illuminated \n Moon";
-"position_POSITIONMOONTITLE" = "Moon \n position";
-"position_POSITIONMOONNEGATIVETITLE" = "Under the \n horizon";
-"position_POSITIONMOONPOSITIVETITLE" = "Over the \n horizon";
-"position_DECLINATIONMOONTITLE" = "Moon \n declination";
-"position_ZODIACSIGNMOONTITLE" = "Zodiac \n sign";
 
 "position_ARIETETITLE" = "Aries";
 "position_TOROTITLE" = "Taurus";

@@ -36,13 +36,14 @@ public let hexAppBuildNumber = String(appBuildNumber.int!, radix: 16, uppercase:
 
 //MARK: - Shared functions
 
-///Function for localize string
+///Short function for localize string
 func loc(_ localizedKey:String) -> String {
     return NSLocalizedString(localizedKey, comment: "")
 }
 
 
-///Function that set the Alamofire configuration
+/// Function that set the Alamofire configuration
+/// - Parameter timeOut: time interval that indicate the time out for every call to the web service made with alamofire
 func setAlamofire(_ timeOut: TimeInterval = 15.0){
     let configuration = URLSessionConfiguration.default
     configuration.timeoutIntervalForRequest = timeOut
@@ -51,7 +52,8 @@ func setAlamofire(_ timeOut: TimeInterval = 15.0){
     AFManager = Alamofire.Session(configuration: configuration)
 }
 
-///Function that format the declination coord from a double value
+/// Function that format the declination coord from a double value
+/// - Parameter declination: declination angle (in degrees)
 func declinationToString(_ declination: Double) -> String {
     var decSeconds = (declination * 3600).int
     let decDegrees = decSeconds / 3600
@@ -70,112 +72,120 @@ func declinationToString(_ declination: Double) -> String {
 //    return String(format: "%dh %dm %ds", abs(decDegrees), decMinutes, decSeconds)
 //}
 
-///Function that return the wind name based on the device heading (compass)
-func getWindName(_ heading: Double) -> String {
-    var gradiNomeVento : String = ""
-    switch heading {
-        case 23..<67: gradiNomeVento = loc("positionWind_NE")
-        case 67..<114: gradiNomeVento = loc("positionWind_E")
-        case 114..<157: gradiNomeVento = loc("positionWind_SE")
-        case 157..<203: gradiNomeVento = loc("positionWind_S")
-        case 203..<246: gradiNomeVento = loc("positionWind_SW")
-        case 246..<294: gradiNomeVento = loc("positionWind_W")
-        case 294..<339: gradiNomeVento = loc("positionWind_NW")
-        case 339..<361, 0..<23: gradiNomeVento = loc("positionWind_N")
+/// Function that return the wind name based on the device heading (compass)
+/// - Parameter angle: wind angle (in degrees)
+func getWindName(_ angle: Double) -> String {
+    var windNameWithCardinalSign : String = ""
+    switch angle {
+        case 23..<67: windNameWithCardinalSign = loc("positionWind_NE")
+        case 67..<114: windNameWithCardinalSign = loc("positionWind_E")
+        case 114..<157: windNameWithCardinalSign = loc("positionWind_SE")
+        case 157..<203: windNameWithCardinalSign = loc("positionWind_S")
+        case 203..<246: windNameWithCardinalSign = loc("positionWind_SW")
+        case 246..<294: windNameWithCardinalSign = loc("positionWind_W")
+        case 294..<339: windNameWithCardinalSign = loc("positionWind_NW")
+        case 339..<361, 0..<23: windNameWithCardinalSign = loc("positionWind_N")
         default: break
     }
-    return gradiNomeVento
+    return windNameWithCardinalSign
 }
 
-///Function that return the coordinate name (es.: N, E, S, ecc.) from the heading angle
-func getAngleName(_ heading: Double) -> String {
-    var angolo : String = ""
-    switch heading {
-        case 11.25..<33.75: angolo = loc("position_NNE")
-        case 33.75..<56.25: angolo = loc("position_NE")
-        case 56.25..<78.75: angolo = loc("position_ENE")
-        case 78.75..<101.25: angolo = loc("position_E")
-        case 101.25..<123.75: angolo = loc("position_ESE")
-        case 123.75..<146.25: angolo = loc("position_SE")
-        case 146.25..<168.75: angolo = loc("position_SSE")
-        case 168.75..<191.25: angolo = loc("position_S")
-        case 191.25..<213.75: angolo = loc("position_SSW")
-        case 213.75..<236.25: angolo = loc("position_SW")
-        case 236.25..<258.75: angolo = loc("position_WSW")
-        case 258.75..<281.25: angolo = loc("position_W")
-        case 281.25..<303.75: angolo = loc("position_WNW")
-        case 303.75..<326.25: angolo = loc("position_NW")
-        case 326.25..<348.75: angolo = loc("position_NNW")
-        case 348.75..<361, 0..<11.25: angolo = loc("position_N")
+/// Function that return the coordinate name (es.: N, E, S, ecc.) from the heading angle
+/// - Parameter heading: the coordinate angle (in degrees)
+func getAngleName(_ angle: Double) -> String {
+    var name : String = ""
+    switch angle {
+        case 11.25..<33.75: name = loc("position_NNE")
+        case 33.75..<56.25: name = loc("position_NE")
+        case 56.25..<78.75: name = loc("position_ENE")
+        case 78.75..<101.25: name = loc("position_E")
+        case 101.25..<123.75: name = loc("position_ESE")
+        case 123.75..<146.25: name = loc("position_SE")
+        case 146.25..<168.75: name = loc("position_SSE")
+        case 168.75..<191.25: name = loc("position_S")
+        case 191.25..<213.75: name = loc("position_SSW")
+        case 213.75..<236.25: name = loc("position_SW")
+        case 236.25..<258.75: name = loc("position_WSW")
+        case 258.75..<281.25: name = loc("position_W")
+        case 281.25..<303.75: name = loc("position_WNW")
+        case 303.75..<326.25: name = loc("position_NW")
+        case 326.25..<348.75: name = loc("position_NNW")
+        case 348.75..<361, 0..<11.25: name = loc("position_N")
         default: break
     }
-    return angolo
+    return name
 }
 
-///Function that return the Beaufort force degree bassed on the wind speed in knot
+/// Function that return the Beaufort force degree bassed on the wind speed in knot
+/// - Parameter windSpeedKnot: wind speed (in knot)
 func getBeaufortForce(_ windSpeedKnot: Double) -> String {
+    var windSpeed = "0"
     switch windSpeedKnot {
-        case 0..<1: return "0"
-        case 1..<4: return "1"
-        case 4..<7: return "2"
-        case 7..<11: return "3"
-        case 11..<17: return "4"
-        case 17..<22: return "5"
-        case 22..<28: return "6"
-        case 28..<34: return "7"
-        case 34..<41: return "8"
-        case 41..<48: return "9"
-        case 48..<56: return "10"
-        case 56..<65: return "11"
-        case 65..<71: return "12"
+        case 0..<1: windSpeed = "0"
+        case 1..<4: windSpeed = "1"
+        case 4..<7: windSpeed = "2"
+        case 7..<11: windSpeed = "3"
+        case 11..<17: windSpeed = "4"
+        case 17..<22: windSpeed = "5"
+        case 22..<28: windSpeed = "6"
+        case 28..<34: windSpeed = "7"
+        case 34..<41: windSpeed = "8"
+        case 41..<48: windSpeed = "9"
+        case 48..<56: windSpeed = "10"
+        case 56..<65: windSpeed = "11"
+        case 65..<71: windSpeed = "12"
         default: break
     }
-    return "0"
+    return windSpeed
 }
 
-///Function that return a color for every Beaufort Scale Force
+/// Function that return a color for every Beaufort Scale Force
+/// - Parameter windSpeedKnot: wind speed (in knot)
 func getBeaufortForceColor(_ windSpeedKnot: Double) -> String {
-    var coloreBollinoForzaBeaufort : String = "#FFFFFF"
+    var hexColor : String = "#FFFFFF"
     switch windSpeedKnot {
-        case 0..<1: coloreBollinoForzaBeaufort = "#FFFFFF"
-        case 1..<4: coloreBollinoForzaBeaufort = "#CCFFFF"
-        case 4..<7: coloreBollinoForzaBeaufort = "#99FFCC"
-        case 7..<11: coloreBollinoForzaBeaufort = "#99FF99"
-        case 11..<17: coloreBollinoForzaBeaufort = "#99FF66"
-        case 17..<22: coloreBollinoForzaBeaufort = "#99FF00"
-        case 22..<28: coloreBollinoForzaBeaufort = "#CCFF00"
-        case 28..<34: coloreBollinoForzaBeaufort = "#FFFF00"
-        case 34..<41: coloreBollinoForzaBeaufort = "#FFCC00"
-        case 41..<48: coloreBollinoForzaBeaufort = "#FF9900"
-        case 48..<56: coloreBollinoForzaBeaufort = "#FF6600"
-        case 56..<65: coloreBollinoForzaBeaufort = "#FF3300"
-        case 65..<71: coloreBollinoForzaBeaufort = "#FF0000"
+        case 0..<1: hexColor = "#FFFFFF"
+        case 1..<4: hexColor = "#CCFFFF"
+        case 4..<7: hexColor = "#99FFCC"
+        case 7..<11: hexColor = "#99FF99"
+        case 11..<17: hexColor = "#99FF66"
+        case 17..<22: hexColor = "#99FF00"
+        case 22..<28: hexColor = "#CCFF00"
+        case 28..<34: hexColor = "#FFFF00"
+        case 34..<41: hexColor = "#FFCC00"
+        case 41..<48: hexColor = "#FF9900"
+        case 48..<56: hexColor = "#FF6600"
+        case 56..<65: hexColor = "#FF3300"
+        case 65..<71: hexColor = "#FF0000"
         default: break
     }
-    return coloreBollinoForzaBeaufort
+    return hexColor
 }
 
-///Function that return the zodiac sign of sun/moon based on the right ascension
+/// Function that return the zodiac sign of sun/moon based on the right ascension
+/// - Parameter rightAscension: the right asnension of Sun/Moon (in radians).
 func getZodiacSign(_ rightAscension: Double) -> String {
     var rightAscension = (rightAscension + 360).int % 360
     if(rightAscension < 0) {
         rightAscension = -1 * rightAscension
     }
+    var zodiacSign = loc("NOTAVAIABLENUMBER")
     switch rightAscension {
-        case 0..<30: return loc("position_PESCITITLE")
-        case 30..<60: return loc("position_ARIETETITLE")
-        case 60..<90: return loc("position_TOROTITLE")
-        case 90..<120: return loc("position_GEMELLITITLE")
-        case 120..<150: return loc("position_CANCROTITLE")
-        case 150..<180: return loc("position_LEONETITLE")
-        case 180..<210: return loc("position_VERGINETITLE")
-        case 210...240: return loc("position_BILANCIATITLE")
-        case 240...270: return loc("position_SCORPIOTITLE")
-        case 270...300: return loc("position_SAGITTARIOTITLE")
-        case 300...330: return loc("position_CAPRICTITLE")
-        case 330...360: return loc("position_ACQUARIOTITLE")
-        default: return loc("NOTAVAIABLENUMBER")
+        case 0..<30: zodiacSign = loc("position_PESCITITLE")
+        case 30..<60: zodiacSign = loc("position_ARIETETITLE")
+        case 60..<90: zodiacSign = loc("position_TOROTITLE")
+        case 90..<120: zodiacSign = loc("position_GEMELLITITLE")
+        case 120..<150: zodiacSign = loc("position_CANCROTITLE")
+        case 150..<180: zodiacSign = loc("position_LEONETITLE")
+        case 180..<210: zodiacSign = loc("position_VERGINETITLE")
+        case 210...240: zodiacSign = loc("position_BILANCIATITLE")
+        case 240...270: zodiacSign = loc("position_SCORPIOTITLE")
+        case 270...300: zodiacSign = loc("position_SAGITTARIOTITLE")
+        case 300...330: zodiacSign = loc("position_CAPRICTITLE")
+        case 330...360: zodiacSign = loc("position_ACQUARIOTITLE")
+        default: break
     }
+    return zodiacSign
 }
 
 //MARK: - Extensions

@@ -43,43 +43,12 @@
 "positionWind_SCALABEAUFORTSHORT" = "V. forza";
 
 //position info iphone (only)
-"positionPhone_POSITIONINFOTITLE" = "Info posizione";
-"positionPhone_LATITUDETITLE" = "Latitud.";
-"positionPhone_LONGITUDETITLE" = "Longit.";
-"positionPhone_ALTITUDETITLE" = "Altitud.";
-"positionPhone_SPEEDTITLE" = "Velocit.";
-
-"positionPhone_PRECIPITTITLE" = "Precipitazioni";
-"positionPhone_TEMPERATUREMINTITLE" = "Temp. (min)";
-"positionPhone_TEMPERATUREMAXTITLE" = "Temp. (max)";
-"positionPhone_SNOW1HTITLE" = "Neve (1h)";
-"positionPhone_SNOW3HTITLE" = "Neve (3h)";
-"positionPhone_RAIN1HTITLE" = "Pioggia (1h)";
-"positionPhone_RAIN3HTITLE" = "Pioggia (3h)";
-"positionPhone_VISIBILITYTITLE" = "Visibilità";
-"positionPhone_PRESSURETITLE" = "Pressione";
-"positionPhone_PRESSURESEATITLE" = "Pres. (liv. mare)";
-"positionPhone_PRESSUREGROUNDTITLE" = "Pres. (liv. suolo)";
-"positionPhone_HIGHTIDETITLE" = "Alta marea";
-"positionPhone_LOWTIDETITLE" = "Bassa marea";
-"positionPhone_CLOUDSITLE" = "Nuvoloso";
-
-"positionPhone_CREPTITLE" = "Alba/tramonto e crepuscoli";
-"positionPhone_BLUEGOLDHOURSSUNTITLE" = "Ora blu e Ora d'oro";
-"positionPhone_OTHERSUNTITLE" = "Altro";
-
-"positionPhone_AZIMUTHMOONTITLE" = "Azimuth";
-"positionPhone_SUNRISEMOONTITLE" = "Alba Luna";
-"positionPhone_SUNSETMOONTITLE" = "Tramonto Luna";
-"positionPhone_DISTMOONTITLE" = "Terra-Luna";
 "positionPhone_POSITIONMOONNEGATIVETITLE" = "Luna sotto l'orizzonte";
 "positionPhone_POSITIONMOONPOSITIVETITLE" = "Luna sopra l'orizzonte";
 
-"positionPhone_NOONSUNTITLE" = "Mezzogiorno";
-"positionPhone_NADIRSUNTITLE" = "Mezzanotte";
-
 //position info watch
 "position_lOCNAMENAN" = "Nome località non disponibile";
+
 "position_RELOAD" = "Aggiorna tutti i dati";
 "position_ROSEDIRECTIONTITLE" = "Direzione";
 "position_LATITUDETITLE" = "Latitudine";
@@ -98,6 +67,7 @@
 "position_TEMPERATURETITLE" = "Temperatura";
 "position_TEMPERATUREMINTITLE" = "Temperatura \n (min)";
 "position_TEMPERATUREMAXTITLE" = "Temperatura \n (max)";
+
 "position_NIGHTTITLE" = "Notte fonda";
 "position_CREPASTROSUNRISETITLE" = "Crepuscolo astronomico";
 "position_CREPNAUTICSUNRISETITLE" = "Crepuscolo nautico";
@@ -108,6 +78,7 @@
 "position_CREPCIVSUNSETTITLE" = "Crepuscolo civile";
 "position_CREPNAUTICSUNSETTITLE" = "Crepuscolo nautico";
 "position_CREPASTROSUNSETTITLE" = "Crepuscolo astronomico";
+
 "position_AZIMUTHSUNTITLE" = "Azimuth";
 "position_ALTITUDESUNTITLE" = "Altitudine";
 "position_NOONSUNTITLE" = "Mezzogiorno \n solare";
@@ -119,27 +90,6 @@
 "position_BLUESUNSETTITLE" = "Ora blu \n sera";
 "position_DECLINATIONSUNTITLE" = "Declinazione \n Sole";
 "position_ZODIACSIGNSUNTITLE" = "Segno \n zodiacale";
-
-"position_SUNRISEMOONTITLE" = "Alba";
-"position_SUNSETMOONTITLE" = "Tramonto";
-//"position_AZIMUTHMOONTITLE" = "Azimuth";
-//"position_ALTITUDEMOONTITLE" = "Altitudine";
-"position_PHASEMOONTITLE" = "Fase \n lunare";
-"position_NEWMOONTITLE" = "Luna nuova";
-"position_UPMOONTITLE" = "Luna crescente";
-"position_FIRSTMOONTITLE" = "Primo quarto";
-"position_GIBUPMOONTITLE" = "Gibbosa crescente";
-"position_FULLMOONTITLE" = "Luna piena";
-"position_GIPDOWNMOONTITLE" = "Gibbosa calante";
-"position_LASTMOONTITLE" = "Ultimo quarto";
-"position_DOWNMOONTITLE" = "Luna calante";
-"position_COORDINATEMOONTITLE" = "Distanza \n Terra-Luna";
-"position_ILLUMINATEDMOONTITLE" = "% di Luna \n illuminata";
-"position_POSITIONMOONTITLE" = "Posizione \n Luna";
-"position_POSITIONMOONNEGATIVETITLE" = "Sotto \n l'orizzonte";
-"position_POSITIONMOONPOSITIVETITLE" = "Sopra \n l'orizzonte";
-"position_DECLINATIONMOONTITLE" = "Declinazione \n Luna";
-"position_ZODIACSIGNMOONTITLE" = "Segno \n zodiacale";
 
 "position_ARIETETITLE" = "Ariete";
 "position_TOROTITLE" = "Toro";

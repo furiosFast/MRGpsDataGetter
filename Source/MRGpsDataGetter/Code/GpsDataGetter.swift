@@ -35,6 +35,8 @@ open class GpsDataGetter: NSObject {
     let gps = GpsInfoModel()
     
     
+    /// Function that start to retrive all GPS data and the location on name of a specified location
+    /// - Parameter currentLocation: location
     open func getPositionInfo(currentLocation: CLLocation) {
         DispatchQueue.global().async {
             self.reversePositionInfo(currentLocation)
@@ -45,6 +47,8 @@ open class GpsDataGetter: NSObject {
         self.delegate?.setGpsMap?(currentLocation: currentLocation)
     }
     
+    /// Private function that start to retrive all GPS data of a specified location
+    /// - Parameter currentLocation: location
     private func reversePositionInfo(_ currentLocation: CLLocation){
         gps.latitude = latitudeToString(currentLocation.coordinate.latitude)
         gps.longitude = longitudeToString(currentLocation.coordinate.longitude)
@@ -84,10 +88,13 @@ open class GpsDataGetter: NSObject {
         }
     }
     
+    /// Get the gps data object
     open func getOldGpsData() -> GpsInfoModel {
         return gps
     }
     
+    /// Function that retrieve the location object based on the location name
+    /// - Parameter locationAddress: location name
     open func reverseGeocodeFromString(_ locationAddress: String){
         geocoder.geocodeAddressString(locationAddress) { (placemarks, error) in
             if let error = error {
@@ -100,6 +107,7 @@ open class GpsDataGetter: NSObject {
         }
     }
     
+    /// Function that retrieve the location name based on the location object
     open func reverseGeocodeFromLocation(_ currentLocation: CLLocation){
         geocoder.reverseGeocodeLocation(currentLocation) { (placemarks, error) in
             if let error = error {
@@ -121,7 +129,8 @@ open class GpsDataGetter: NSObject {
     
     //MARK: - Support functions for gps data
     
-    ///Function that format the latitute coord from a double value
+    /// Function that format the latitute coord from a double value
+    /// - Parameter latitude: the position latitute (in degrees)
     private func latitudeToString(_ latitude: Double) -> String {
         var latSeconds = (latitude * 3600).int
         let latDegrees = latSeconds / 3600
@@ -131,7 +140,8 @@ open class GpsDataGetter: NSObject {
         return String(format: "%d° %d' %d\" %@", abs(latDegrees), latMinutes, latSeconds, latDegrees >= 0 ? "N" : "S")
     }
 
-    ///Function that format the longitude coord from a double value
+    /// Function that format the longitude coord from a double value
+    /// - Parameter longitude: the position longitude (in degrees)
     private func longitudeToString(_ longitude: Double) -> String {
         var longSeconds = (longitude * 3600).int
         let longDegrees = longSeconds / 3600

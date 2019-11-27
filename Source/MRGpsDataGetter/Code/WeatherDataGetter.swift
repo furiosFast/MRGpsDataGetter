@@ -16,6 +16,7 @@ import UIKit
 import CoreLocation
 import Alamofire
 import SwiftyJSON
+import SwifterSwift
 
 @objc public protocol MRGpsDataGetterWeatherDataDelegate: NSObjectProtocol {
     func weatherDataReady(weather: GpsWeatherModel)
@@ -30,12 +31,20 @@ open class WeatherDataGetter: NSObject {
     let weather = GpsWeatherModel()
     
     
+    /// Function that start to retrive current Weather (provider: OpenWeatherMap.org) data based on a specified location
+    /// - Parameters:
+    ///   - openWeatherMapKey: OpenWeatherMapKey.org key
+    ///   - currentLocation: location
     open func getWeatherInfo(openWeatherMapKey: String, currentLocation: CLLocation) {
         DispatchQueue.global().async {
             self.getWeatherInfoFromWeb(openWeatherMapKey, currentLocation)
         }
     }
     
+    /// Private function that start to retrive current Weather (provider: OpenWeatherMap.org) data based on a specified location
+    /// - Parameters:
+    ///   - openWeatherMapKey: OpenWeatherMapKey.org key
+    ///   - currentLocation: location
     private func getWeatherInfoFromWeb(_ openWeatherMapKey: String, _ currentLocation: CLLocation) {
         if openWeatherMapKey == "NaN" {
             self.delegate?.weatherDataNotAvaiable?(error: "openWeatherMapKey is NaN")
@@ -89,53 +98,53 @@ open class WeatherDataGetter: NSObject {
                 self.weather.weatherOpenWeatherMapIcon = weatherIcon
             }
             //3-4-5
-            if let velVento = Double(json["wind"]["speed"].stringValue) {
+            if let windSpeed = Double(json["wind"]["speed"].stringValue) {
                 if Preferences.shared.getPreference("windSpeed") == "meterSecondSpeed" {
                     if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                        self.weather.windSpeed = (velVento * milesHourToMeterSecond).string
-                        self.weather.beaufortScale = getBeaufortForce(velVento * milesHourToKnot)
+                        self.weather.windSpeed = (windSpeed * milesHourToMeterSecond).string
+                        self.weather.beaufortScale = getBeaufortForce(windSpeed * milesHourToKnot)
                     } else {
-                        self.weather.windSpeed = velVento.string
-                        self.weather.beaufortScale = getBeaufortForce(velVento * meterSecondToKnot)
+                        self.weather.windSpeed = windSpeed.string
+                        self.weather.beaufortScale = getBeaufortForce(windSpeed * meterSecondToKnot)
                     }
                 }
                 if Preferences.shared.getPreference("windSpeed") == "kilometerHoursSpeed" {
                     if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                        self.weather.windSpeed = (velVento * milesHourToKilometerHour).string
-                        self.weather.beaufortScale = getBeaufortForce(velVento * milesHourToKnot)
+                        self.weather.windSpeed = (windSpeed * milesHourToKilometerHour).string
+                        self.weather.beaufortScale = getBeaufortForce(windSpeed * milesHourToKnot)
                     } else {
-                        self.weather.windSpeed = (velVento * meterSecondToKilometerHour).string
-                        self.weather.beaufortScale = getBeaufortForce(velVento * meterSecondToKnot)
+                        self.weather.windSpeed = (windSpeed * meterSecondToKilometerHour).string
+                        self.weather.beaufortScale = getBeaufortForce(windSpeed * meterSecondToKnot)
                     }
                 }
                 if Preferences.shared.getPreference("windSpeed") == "knotSpeed" {
                     if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                        self.weather.windSpeed = (velVento * milesHourToKnot).string
-                        self.weather.beaufortScale = getBeaufortForce(velVento * milesHourToKnot)
+                        self.weather.windSpeed = (windSpeed * milesHourToKnot).string
+                        self.weather.beaufortScale = getBeaufortForce(windSpeed * milesHourToKnot)
                     } else {
-                        self.weather.windSpeed = (velVento * meterSecondToKnot).string
-                        self.weather.beaufortScale = getBeaufortForce(velVento * meterSecondToKnot)
+                        self.weather.windSpeed = (windSpeed * meterSecondToKnot).string
+                        self.weather.beaufortScale = getBeaufortForce(windSpeed * meterSecondToKnot)
                     }
                 }
                 if Preferences.shared.getPreference("windSpeed") == "milesHoursSpeed" {
                     if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                        self.weather.windSpeed = velVento.string
-                        self.weather.beaufortScale = getBeaufortForce(velVento * milesHourToKnot)
+                        self.weather.windSpeed = windSpeed.string
+                        self.weather.beaufortScale = getBeaufortForce(windSpeed * milesHourToKnot)
                     } else {
-                        self.weather.windSpeed = (velVento * meterSecondToMilesHour).string
-                        self.weather.beaufortScale = getBeaufortForce(velVento * meterSecondToKnot)
+                        self.weather.windSpeed = (windSpeed * meterSecondToMilesHour).string
+                        self.weather.beaufortScale = getBeaufortForce(windSpeed * meterSecondToKnot)
                     }
                 }
                 if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                    self.weather.beaufortScaleWindColour = getBeaufortForceColor(velVento * milesHourToKnot)
+                    self.weather.beaufortScaleWindColour = getBeaufortForceColor(windSpeed * milesHourToKnot)
                 } else {
-                    self.weather.beaufortScaleWindColour = getBeaufortForceColor(velVento * meterSecondToKnot)
+                    self.weather.beaufortScaleWindColour = getBeaufortForceColor(windSpeed * meterSecondToKnot)
                 }
             }
             //6-7-8
-            if let angVento = Double(json["wind"]["deg"].stringValue) {
-                self.weather.windDegree = String(format: "%3.1f", angVento)
-                self.weather.windName = getWindName(angVento)
+            if let windAngle = Double(json["wind"]["deg"].stringValue) {
+                self.weather.windDegree = String(format: "%3.1f", windAngle)
+                self.weather.windName = getWindName(windAngle)
             }
             //9
             if let rain = Double(json["rain"]["1h"].stringValue) {
@@ -252,6 +261,7 @@ open class WeatherDataGetter: NSObject {
         }
     }
     
+    /// Get the weather data object
     open func getOldWeatherData() -> GpsWeatherModel {
         return weather
     }
