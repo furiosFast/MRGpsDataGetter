@@ -2,7 +2,7 @@
 
 ![Platform](https://img.shields.io/badge/platforms-iOS%2011.0%20%7C%20macOS%2010.11%20%7C%20tvOS%2011.0%20%7C%20watchOS%204.0-F28D00.svg)
 
-Easy access to information on Sun, Moon and Position. In addition Weather and Future Forecasts.
+Easy access to Sun, Moon and Location informations. In addition Weather and Future Forecasts.
 
 ## Requirements
 
@@ -66,6 +66,14 @@ If you prefer not to use any of the aforementioned dependency managers, you can 
 import MRGpsDataGetter
 ```
 
+## Requirements
+
+MRGpsDataGetter has different dependencies and therefore needs the following libraries (also available via SPM):
+- Alamofie 5.0.0-rc.3 +
+- SwiftyJSON 5.0.0+
+- SwifterSwift 5.1.0+
+Adding MRGpsDataGetter to your project (with SPM) will cause the related dependencies to be added.
+
 ## License
 
-SwifterSwift is released under the MIT license. See [LICENSE](https://github.com/SwifterSwift/SwifterSwift/blob/master/LICENSE) for more information.
+SwifterSwift is released under the MIT license. See [LICENSE](https://github.com/furiosFast/MRGpsDataGetter/blob/master/LICENSE) for more information.
