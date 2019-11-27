@@ -69,9 +69,9 @@ import MRGpsDataGetter
 ## Requirements
 
 MRGpsDataGetter has different dependencies and therefore needs the following libraries (also available via SPM):
-- Alamofie 5.0.0-rc.3 +
-- SwiftyJSON 5.0.0+
-- SwifterSwift 5.1.0+
+- [Alamofie](https://github.com/Alamofire/Alamofire) 5.0.0-rc.3 +
+- [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON) 5.0.0+
+- [SwifterSwift](https://github.com/SwifterSwift/SwifterSwift) 5.1.0+
 Adding MRGpsDataGetter to your project (with SPM) will cause the related dependencies to be added.
 
 ## License
