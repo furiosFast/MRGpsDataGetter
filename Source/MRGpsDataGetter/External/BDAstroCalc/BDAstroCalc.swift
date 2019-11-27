@@ -252,7 +252,7 @@ struct BDAstroCalc {
         let tanAlfa = ((cos(moonAltitude) * tan(sunAltitude)) - (sin(moonAltitude) * cos(absAzimMoonSun))) / sin(absAzimMoonSun)
         let tanBeta = (sin(moonAltitude) - sin(sunAltitude)) / (cos(sunAltitude) * sin(absAzimMoonSun))
         
-        var diff = 0.0
+        var diff = 0.0 //in radians
         if moonPhase <= 0.5 {
             if (absAzimMoonSun.radiansToDegrees) <= 180 {
                 diff = atan(-tanAlfa)
