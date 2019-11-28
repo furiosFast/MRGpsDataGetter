@@ -283,7 +283,9 @@ open class ForecastDataGetter: NSObject {
                 self.forecast.append(weather)
             }
             
-            self.delegate?.forecastDataReady(forecast: self.forecast)
+            DispatchQueue.main.async {
+                self.delegate?.forecastDataReady(forecast: self.forecast)
+            }
         }
     }
     
