@@ -67,12 +67,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4CCC14B7239066FA000310C9 /* Example */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Example;
+			sourceTree = "<group>";
+		};
 		4CEE0A582385A8A400782D39 = {
 			isa = PBXGroup;
 			children = (
 				4C80A4502385FC51000590C4 /* README.md */,
 				4C80A4512385FC6D000590C4 /* Package.swift */,
 				4C80A4522385FC6D000590C4 /* LICENSE */,
+				4CCC14B7239066FA000310C9 /* Example */,
 				4CF8B77723860A1A00DEAC15 /* Source */,
 				4CEE0A632385A8A400782D39 /* Products */,
 				4CEE0A762385A9E300782D39 /* Frameworks */,
