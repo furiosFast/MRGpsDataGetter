@@ -56,7 +56,7 @@ If you prefer not to use any of the aforementioned dependency managers, you can 
 
 - And that's it!
 
-  > The `MRGpsDataGetter.framework` is automagically added as a target dependency, linked framework and embedded framework in a copy files build phase which is all you need to build on the simulator and a device.
+  > The `MRGpsDataGetter.framework` is automatically added as a target dependency, linked framework and embedded framework in a copy files build phase which is all you need to build on the simulator and a device.
 
 ## Usage
 
@@ -72,6 +72,7 @@ MRGpsDataGetter has different dependencies and therefore needs the following lib
 - [Alamofie](https://github.com/Alamofire/Alamofire) 5.0.0-rc.3 +
 - [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON) 5.0.0+
 - [SwifterSwift](https://github.com/SwifterSwift/SwifterSwift) 5.1.0+
+
 Adding MRGpsDataGetter to your project (with SPM) will cause the related dependencies to be added.
 
 ## License
