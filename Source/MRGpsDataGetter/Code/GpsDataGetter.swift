@@ -44,7 +44,9 @@ open class GpsDataGetter: NSObject {
         DispatchQueue.global().async {
             self.reverseGeocodeFromLocation(currentLocation)
         }
-        self.delegate?.setGpsMap?(currentLocation: currentLocation)
+        DispatchQueue.main.async {
+            self.delegate?.setGpsMap?(currentLocation: currentLocation)
+        }
     }
     
     /// Private function that start to retrive all GPS data of a specified location
