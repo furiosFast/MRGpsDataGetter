@@ -78,7 +78,7 @@ open class SunDataGetter: NSObject {
         sun.goldenHourSunsetStart = (sunTimes["goldenHourStart"]! as Date).string(withFormat: timeFormat)
         sun.goldenHourSunsetEnd = ((sunTimes["sunsetEnd"]! as Date).plusMinutes((Date().minutesBetween(date1: (sunTimes["sunsetEnd"]! as Date), date2: (sunTimes["dusk"]! as Date))/2))).string(withFormat: timeFormat)
         
-        sun.daylightHours = getTodayDaylightHours(sunTimes, BDAstroCalc.sunSignificantTimes(date: Date().yesterday as NSDate, location: myLocationCoordinates))
+        sun.daylightHours = getTodayDaylightHours(sunTimes, BDAstroCalc.sunSignificantTimes(date: Date().yesterday as NSDate, location: myLocationCoordinates), timeFormat)
         sun.phaseTitle = getSunPhaseTitle(sunLocation.altitude.radiansToDegrees)
         
         let sunCoordinates = BDAstroCalc.sunCoordinates(daysSinceJan12000: Jan12000Date)
@@ -102,15 +102,15 @@ open class SunDataGetter: NSObject {
     /// - Parameters:
     ///   - today: today sun info
     ///   - yesterday: yesterday date info
-    private func getTodayDaylightHours(_ today: [String : NSDate], _ yesterday: [String : NSDate]) -> String {
+    private func getTodayDaylightHours(_ today: [String : NSDate], _ yesterday: [String : NSDate], _ timeFormat: String) -> String {
         let todayTime = getDaylightHoursDifference(today["sunriseStart"]! as Date, today["sunsetEnd"]! as Date)
         let yesterdayTime = getDaylightHoursDifference(yesterday["sunriseStart"]! as Date, yesterday["sunsetEnd"]! as Date)
         if let t = todayTime.date(withFormat: "HH:mm:ss"), let y = yesterdayTime.date(withFormat: "HH:mm:ss") {
             let diff = getDaylightHoursDifference(t, y).split(separator: ":")
             if(t.timeIntervalSince(y) > 0) {
-                return todayTime + " (+" + diff[1] + ":" + diff[2] + ")"
+                return todayTime + " (+" + String(diff[1]).dateTime!.string(withFormat: timeFormat) + ":" + String(diff[2]).dateTime!.string(withFormat: timeFormat) + ")"
             } else {
-                return todayTime + " (-" + diff[1] + ":" + diff[2] + ")"
+                return todayTime + " (-" + String(diff[1]).dateTime!.string(withFormat: timeFormat) + ":" + String(diff[2]).dateTime!.string(withFormat: timeFormat) + ")"
             }
         } else {
             return todayTime

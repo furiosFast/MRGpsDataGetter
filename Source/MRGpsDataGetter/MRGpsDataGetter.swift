@@ -28,10 +28,10 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     
     var locationManager: CLLocationManager = CLLocationManager()
     var currentLocation: CLLocation?
-    var mapLocation: CLLocationCoordinate2D?
     var timerAutoRefresh = Timer()
     var count = 0
     var openWeatherMapKey = "NaN"
+    var isHeadingAvaiableOnDevice = false
     
     
     open func initialize(_ timeOut: TimeInterval = 15.0){
@@ -61,6 +61,7 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
                     self.locationManager.stopUpdatingHeading()
                     self.locationManager.stopUpdatingLocation()
                     self.timerAutoRefresh.invalidate()
+                    self.isHeadingAvaiableOnDevice = false
                     print("Permessi per localizzazzione negati!")
                     break
                 case .authorizedWhenInUse:
@@ -125,6 +126,7 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     }
     
     public func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        isHeadingAvaiableOnDevice = true
         if Bool(Preferences.shared.getPreference("trueNorth"))! == true {
             self.delegate?.gpsHeadingForCompass(newHeading: newHeading.trueHeading)
         } else {
@@ -133,14 +135,18 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     }
     
     public func locationManagerShouldDisplayHeadingCalibration(_ manager: CLLocationManager) -> Bool {
-        return true
+        return false
     }
     
-    open func startHeading(){
+    open func isHeadingAvaiable() -> Bool {
+        return isHeadingAvaiableOnDevice
+    }
+    
+    open func startHeading() {
         locationManager.startUpdatingHeading()
     }
     
-    open func stopHeading(){
+    open func stopHeading() {
         locationManager.stopUpdatingHeading()
     }
     
