@@ -13,8 +13,8 @@ public final class GpsWeatherModel: NSObject {
     
     public final var windSpeed : String = loc("NOTAVAILABLENUMBER")
     public final var beaufortScale : String = loc("NOTAVAILABLENUMBER")
-    public final var windDegree : String = NSLocalizedString("NOTAVAILABLENUMBER", comment: "")
-    public final var windName : String = NSLocalizedString("NOTAVAILABLENUMBER", comment: "")
+    public final var windDegree : String = loc("NOTAVAILABLENUMBER")
+    public final var windName : String = loc("NOTAVAILABLENUMBER")
     public final var beaufortScaleWindColour : String = loc("NOTAVAILABLENUMBER")
 
     public final var weatherDescription : String = loc("NOTAVAILABLENUMBER")
