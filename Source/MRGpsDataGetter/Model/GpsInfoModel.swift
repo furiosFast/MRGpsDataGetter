@@ -10,14 +10,14 @@ import UIKit
 
 public final class GpsInfoModel: NSObject {
     
-    public final var locationName : String = loc("NOTAVAIABLENUMBER")
+    public final var locationName : String = loc("NOTAVAILABLENUMBER")
 
-    public final var latitude : String = loc("NOTAVAIABLENUMBER")
-    public final var longitude : String = loc("NOTAVAIABLENUMBER")
-    public final var altitude : String = loc("NOTAVAIABLENUMBER")
-    public final var speed : String = loc("NOTAVAIABLENUMBER")
-    public final var verticalAccuracy : String = loc("NOTAVAIABLENUMBER")
-    public final var horizontalAccuracy : String = loc("NOTAVAIABLENUMBER")
-    public final var course : String = loc("NOTAVAIABLENUMBER")
+    public final var latitude : String = loc("NOTAVAILABLENUMBER")
+    public final var longitude : String = loc("NOTAVAILABLENUMBER")
+    public final var altitude : String = loc("NOTAVAILABLENUMBER")
+    public final var speed : String = loc("NOTAVAILABLENUMBER")
+    public final var verticalAccuracy : String = loc("NOTAVAILABLENUMBER")
+    public final var horizontalAccuracy : String = loc("NOTAVAILABLENUMBER")
+    public final var course : String = loc("NOTAVAILABLENUMBER")
 
 }

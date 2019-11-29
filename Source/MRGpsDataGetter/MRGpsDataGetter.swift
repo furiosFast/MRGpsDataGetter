@@ -17,7 +17,7 @@ import CoreLocation
 
 public protocol MRGpsDataGetterDelegate: NSObjectProtocol {
     func gpsDataStartLoading()
-    func gpsDataNotAvaiable()
+    func gpsDataNotAvailable()
     func gpsHeadingForCompass(newHeading: CLLocationDirection)
 }
 
@@ -55,7 +55,7 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
                 case .restricted, .denied:
                     DispatchQueue.main.async {
                         self.delegate?.gpsDataStartLoading()
-                        self.delegate?.gpsDataNotAvaiable()
+                        self.delegate?.gpsDataNotAvailable()
                     }
                     self.locationManager.delegate = nil
                     self.locationManager.stopUpdatingHeading()
@@ -103,7 +103,7 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Swift.Error) {
         //print(error.localizedDescription)
-        //setNotAvaiablePositionInfo()
+        //setNotAvailablePositionInfo()
     }
     
     public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

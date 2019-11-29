@@ -97,7 +97,7 @@
 "FAHRENHEITTEXT" = "Fahrenheit";
 "KELVIN" = "°K";
 "KELVINTEXT" = "Kelvin";
-"NOTAVAIABLENUMBER" = "NaN";
+"NOTAVAILABLENUMBER" = "NaN";
 "UNITSMETRIC" = "metric";
 "UNITSIMPERIAL" = "imperial";
 "PERCENT" = "%";

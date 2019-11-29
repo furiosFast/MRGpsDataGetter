@@ -144,7 +144,7 @@ open class SunDataGetter: NSObject {
         if (altitude < -18) {
             return loc("position_NIGHTTITLE")
         }
-        return loc("NOTAVAIABLENUMBER")
+        return loc("NOTAVAILABLENUMBER")
     }
     
 }

@@ -169,7 +169,7 @@ func getZodiacSign(_ rightAscension: Double) -> String {
     if(rightAscension < 0) {
         rightAscension = -1 * rightAscension
     }
-    var zodiacSign = loc("NOTAVAIABLENUMBER")
+    var zodiacSign = loc("NOTAVAILABLENUMBER")
     switch rightAscension {
         case 0..<30: zodiacSign = loc("position_PESCITITLE")
         case 30..<60: zodiacSign = loc("position_ARIETETITLE")

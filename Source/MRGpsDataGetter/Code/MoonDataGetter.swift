@@ -93,7 +93,7 @@ open class MoonDataGetter: NSObject {
         if (altitude < 0) {
             return loc("positionPhone_POSITIONMOONNEGATIVETITLE")
         }
-        return loc("NOTAVAIABLENUMBER")
+        return loc("NOTAVAILABLENUMBER")
     }
     
     /// Function that return the moon phase name based on the moon phase angle (is the midpoint of the illuminated limb of the moon going east)
@@ -108,7 +108,7 @@ open class MoonDataGetter: NSObject {
         if phase == 0.75 { return loc("position_LASTMOONTITLE") }
         if phase > 0.75 && phase < 1 { return loc("position_DOWNMOONTITLE") }
         if phase == 1 { return loc("position_NEWMOONTITLE") }
-        return loc("NOTAVAIABLENUMBER")
+        return loc("NOTAVAILABLENUMBER")
     }
     
     /// Function that return the moon phase icon name based on the moon phase angle (is the midpoint of the illuminated limb of the moon going east)
@@ -143,7 +143,7 @@ open class MoonDataGetter: NSObject {
         if phase > 0.91666666674 && phase <= 0.95833333341 { return "wi-moon-alt-waning-crescent-5" }
         if phase > 0.95833333341 && phase < 1 { return "wi-moon-alt-waning-crescent-6" }
         if phase == 1 { return "wi-moon-alt-new" }
-        return loc("NOTAVAIABLENUMBER")
+        return loc("NOTAVAILABLENUMBER")
     }
     
 }

@@ -20,7 +20,7 @@ import SwifterSwift
 
 @objc public protocol MRGpsDataGetterForecastDataDelegate: NSObjectProtocol {
     func forecastDataReady(forecast: [GpsWeatherModel])
-    @objc optional func forecastDataNotAvaiable(error: String)
+    @objc optional func forecastDataNotAvailable(error: String)
 }
 
 open class ForecastDataGetter: NSObject {
@@ -50,7 +50,7 @@ open class ForecastDataGetter: NSObject {
     ///   - currentLocation: location
     private func getForecastInfoFromWeb(_ openWeatherMapKey: String, _ currentLocation: CLLocation) {
         if openWeatherMapKey == "NaN" {
-            self.delegate?.forecastDataNotAvaiable?(error: "openWeatherMapKey is NaN")
+            self.delegate?.forecastDataNotAvailable?(error: "openWeatherMapKey is NaN")
         }
         
         var units = ""
@@ -74,17 +74,17 @@ open class ForecastDataGetter: NSObject {
         
         AFManager.request(urlString, parameters: parameters).responseJSON { response in
             if let er = response.error {
-                self.delegate?.forecastDataNotAvaiable?(error: er.localizedDescription)
+                self.delegate?.forecastDataNotAvailable?(error: er.localizedDescription)
                 return
             }
             guard let ilJson = response.value else {
-                self.delegate?.forecastDataNotAvaiable?(error: "JSON Nil")
+                self.delegate?.forecastDataNotAvailable?(error: "JSON Nil")
                 return
             }
             let json = JSON(ilJson)
             if let openWeatherMapError = (json["cod"].stringValue).int {
                 if (openWeatherMapError != 200) {
-                    self.delegate?.forecastDataNotAvaiable?(error: "openWeatherMap.org error: " + openWeatherMapError.string)
+                    self.delegate?.forecastDataNotAvailable?(error: "openWeatherMap.org error: " + openWeatherMapError.string)
                     return
                 }
             }
