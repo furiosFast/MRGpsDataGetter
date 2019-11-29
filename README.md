@@ -1,6 +1,9 @@
 # MRGpsDataGetter
 
+[![SPM ready](https://img.shields.io/badge/SPM-ready-orange.svg)](https://swift.org/package-manager/)
 ![Platform](https://img.shields.io/badge/platforms-iOS%2011.0%20%7C%20macOS%2010.11%20%7C%20tvOS%2011.0%20%7C%20watchOS%204.0-F28D00.svg)
+![Swift](https://img.shields.io/badge/Swift-5.0-orange.svg)
+[![License](https://img.shields.io/cocoapods/l/Pastel.svg?style=flat)](http://cocoapods.org/pods/Pastel)
 
 Easy access to Sun, Moon and Location informations. In addition Weather and Future Forecasts.
 
