@@ -258,6 +258,7 @@ open class WeatherDataGetter: NSObject {
             }
             
             DispatchQueue.main.async {
+                print(self.weather)
                 self.delegate?.weatherDataReady(weather: self.weather)
             }
         }
