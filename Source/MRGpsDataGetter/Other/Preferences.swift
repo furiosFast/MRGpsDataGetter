@@ -1,14 +1,14 @@
 //
-//  PreferencesController.swift
-//  iWindRose²
+//  Preferences.swift
+//  MRGpsDataGetter
 //
-//  Created by Marco Ricca on 20/12/2018
+//  Created by Marco Ricca on 20/11/2019
 //
-//  Created for iWindRose² in 20/12/2018
-//  Using Swift 4.0
+//  Created for MRGpsDataGetter in 20/11/2019
+//  Using Swift 5.0
 //  Running on macOS 10.14
 //
-//  Copyright © 2018 Fast-Devs Project. All rights reserved.
+//  Copyright © 2019 Fast-Devs Project. All rights reserved.
 //
 
 
