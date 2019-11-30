@@ -102,7 +102,7 @@
 			children = (
 				4CEE0A852385AA5A00782D39 /* MRGpsDataGetter.swift */,
 				4CEE0A6E2385A93600782D39 /* Model */,
-				4CEE0A6F2385A93E00782D39 /* Code */,
+				4CEE0A6F2385A93E00782D39 /* Getters */,
 				4CEE0AAC2385D10700782D39 /* Other */,
 				4CF8B7762386089600DEAC15 /* Config */,
 				4CEE0A922385AED400782D39 /* Resources */,
@@ -123,7 +123,7 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		4CEE0A6F2385A93E00782D39 /* Code */ = {
+		4CEE0A6F2385A93E00782D39 /* Getters */ = {
 			isa = PBXGroup;
 			children = (
 				4CEE0A9C2385B9C600782D39 /* GpsDataGetter.swift */,
@@ -132,7 +132,7 @@
 				4CEE0A982385B39E00782D39 /* WeatherDataGetter.swift */,
 				4CEE0A9A2385B77200782D39 /* ForecastDataGetter.swift */,
 			);
-			path = Code;
+			path = Getters;
 			sourceTree = "<group>";
 		};
 		4CEE0A762385A9E300782D39 /* Frameworks */ = {
