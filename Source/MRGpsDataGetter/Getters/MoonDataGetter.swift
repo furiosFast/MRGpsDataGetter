@@ -113,36 +113,71 @@ open class MoonDataGetter: NSObject {
     
     /// Function that return the moon phase icon name based on the moon phase angle (is the midpoint of the illuminated limb of the moon going east)
     /// - Parameter phase: the phase is a number from 0 to 1, where 0 and 1 are a new moon, 0.5 is a full moon, 0 - 0.5 is waxing, and 0.5 - 1.0 is waning
+//    private func getMoonPhaseIcon(_ phase: Double) -> String {
+//        if phase == 0 { return "wi-moon-alt-new" }
+//        if phase > 0 && phase <= 0.04166666667 { return "wi-moon-alt-waxing-crescent-1" }
+//        if phase > 0.04166666667 && phase <= 0.08333333334 { return "wi-moon-alt-waxing-crescent-2" }
+//        if phase > 0.08333333334 && phase <= 0.12500000001 { return "wi-moon-alt-waxing-crescent-3" }
+//        if phase > 0.12500000001 && phase <= 0.16666666668 { return "wi-moon-alt-waxing-crescent-4" }
+//        if phase > 0.16666666668 && phase <= 0.20833333335 { return "wi-moon-alt-waxing-crescent-5" }
+//        if phase > 0.20833333335 && phase < 0.25 { return "wi-moon-alt-waxing-crescent-6" }
+//        if phase == 0.25 { return "wi-moon-alt-first-quarter" }
+//        if phase > 0.25 && phase <= 0.29166666669 { return "wi-moon-alt-waxing-gibbous-1" }
+//        if phase > 0.29166666669 && phase <= 0.33333333336 { return "wi-moon-alt-waxing-gibbous-2" }
+//        if phase > 0.33333333336 && phase <= 0.37500000003 { return "wi-moon-alt-waxing-gibbous-3" }
+//        if phase > 0.37500000003 && phase <= 0.4166666667 { return "wi-moon-alt-waxing-gibbous-4" }
+//        if phase > 0.4166666667 && phase <= 0.45833333337 { return "wi-moon-alt-waxing-gibbous-5" }
+//        if phase > 0.45833333337 && phase < 0.5 { return "wi-moon-alt-waxing-gibbous-6" }
+//        if phase == 0.5 { return "wi-moon-alt-full" }
+//        if phase > 0.5 && phase <= 0.54166666671 { return "wi-moon-alt-waning-gibbous-1" }
+//        if phase > 0.54166666671 && phase <= 0.58333333338 { return "wi-moon-alt-waning-gibbous-2" }
+//        if phase > 0.58333333338 && phase <= 0.62500000005 { return "wi-moon-alt-waning-gibbous-3" }
+//        if phase > 0.62500000005 && phase <= 0.66666666672 { return "wi-moon-alt-waning-gibbous-4" }
+//        if phase > 0.66666666672 && phase <= 0.70833333339 { return "wi-moon-alt-waning-gibbous-5" }
+//        if phase > 0.70833333339 && phase < 0.75 { return "wi-moon-alt-waning-gibbous-6" }
+//        if phase == 0.75 { return "wi-moon-alt-third-quarter" }
+//        if phase > 0.75 && phase <= 0.79166666673 { return "wi-moon-alt-waning-crescent-1" }
+//        if phase > 0.79166666673 && phase <= 0.8333333334 { return "wi-moon-alt-waning-crescent-2" }
+//        if phase > 0.8333333334 && phase <= 0.87500000007 { return "wi-moon-alt-waning-crescent-3" }
+//        if phase > 0.87500000007 && phase <= 0.91666666674 { return "wi-moon-alt-waning-crescent-4" }
+//        if phase > 0.91666666674 && phase <= 0.95833333341 { return "wi-moon-alt-waning-crescent-5" }
+//        if phase > 0.95833333341 && phase < 1 { return "wi-moon-alt-waning-crescent-6" }
+//        if phase == 1 { return "wi-moon-alt-new" }
+//        return loc("NOTAVAILABLENUMBER")
+//    }
+    
+    /// Function that return the moon phase icon name based on the moon phase angle (is the midpoint of the illuminated limb of the moon going east)
+    /// - Parameter phase: the phase is a number from 0 to 1, where 0 and 1 are a new moon, 0.5 is a full moon, 0 - 0.5 is waxing, and 0.5 - 1.0 is waning
     private func getMoonPhaseIcon(_ phase: Double) -> String {
-        if phase == 0 { return "wi-moon-alt-new" }
-        if phase > 0 && phase <= 0.04166666667 { return "wi-moon-alt-waxing-crescent-1" }
-        if phase > 0.04166666667 && phase <= 0.08333333334 { return "wi-moon-alt-waxing-crescent-2" }
-        if phase > 0.08333333334 && phase <= 0.12500000001 { return "wi-moon-alt-waxing-crescent-3" }
-        if phase > 0.12500000001 && phase <= 0.16666666668 { return "wi-moon-alt-waxing-crescent-4" }
-        if phase > 0.16666666668 && phase <= 0.20833333335 { return "wi-moon-alt-waxing-crescent-5" }
-        if phase > 0.20833333335 && phase < 0.25 { return "wi-moon-alt-waxing-crescent-6" }
-        if phase == 0.25 { return "wi-moon-alt-first-quarter" }
-        if phase > 0.25 && phase <= 0.29166666669 { return "wi-moon-alt-waxing-gibbous-1" }
-        if phase > 0.29166666669 && phase <= 0.33333333336 { return "wi-moon-alt-waxing-gibbous-2" }
-        if phase > 0.33333333336 && phase <= 0.37500000003 { return "wi-moon-alt-waxing-gibbous-3" }
-        if phase > 0.37500000003 && phase <= 0.4166666667 { return "wi-moon-alt-waxing-gibbous-4" }
-        if phase > 0.4166666667 && phase <= 0.45833333337 { return "wi-moon-alt-waxing-gibbous-5" }
-        if phase > 0.45833333337 && phase < 0.5 { return "wi-moon-alt-waxing-gibbous-6" }
-        if phase == 0.5 { return "wi-moon-alt-full" }
-        if phase > 0.5 && phase <= 0.54166666671 { return "wi-moon-alt-waning-gibbous-1" }
-        if phase > 0.54166666671 && phase <= 0.58333333338 { return "wi-moon-alt-waning-gibbous-2" }
-        if phase > 0.58333333338 && phase <= 0.62500000005 { return "wi-moon-alt-waning-gibbous-3" }
-        if phase > 0.62500000005 && phase <= 0.66666666672 { return "wi-moon-alt-waning-gibbous-4" }
-        if phase > 0.66666666672 && phase <= 0.70833333339 { return "wi-moon-alt-waning-gibbous-5" }
-        if phase > 0.70833333339 && phase < 0.75 { return "wi-moon-alt-waning-gibbous-6" }
-        if phase == 0.75 { return "wi-moon-alt-third-quarter" }
-        if phase > 0.75 && phase <= 0.79166666673 { return "wi-moon-alt-waning-crescent-1" }
-        if phase > 0.79166666673 && phase <= 0.8333333334 { return "wi-moon-alt-waning-crescent-2" }
-        if phase > 0.8333333334 && phase <= 0.87500000007 { return "wi-moon-alt-waning-crescent-3" }
-        if phase > 0.87500000007 && phase <= 0.91666666674 { return "wi-moon-alt-waning-crescent-4" }
-        if phase > 0.91666666674 && phase <= 0.95833333341 { return "wi-moon-alt-waning-crescent-5" }
-        if phase > 0.95833333341 && phase < 1 { return "wi-moon-alt-waning-crescent-6" }
-        if phase == 1 { return "wi-moon-alt-new" }
+        if phase > 0 && phase <= 0.03448275862 { return "wi-moon-alt-new" }
+        if phase > 0.03448275862 && phase <= 0.06896551724 { return "wi-moon-alt-waxing-crescent-1" }
+        if phase > 0.06896551724 && phase <= 0.10344827586 { return "wi-moon-alt-waxing-crescent-2" }
+        if phase > 0.10344827586 && phase <= 0.13793103448 { return "wi-moon-alt-waxing-crescent-3" }
+        if phase > 0.13793103448 && phase <= 0.1724137931 { return "wi-moon-alt-waxing-crescent-4" }
+        if phase > 0.1724137931 && phase <= 0.20689655172 { return "wi-moon-alt-waxing-crescent-5" }
+        if phase > 0.20689655172 && phase <= 0.24137931034 { return "wi-moon-alt-waxing-crescent-6" }
+        if phase > 0.24137931034 && phase <= 0.27586206896 { return "wi-moon-alt-first-quarter" }
+        if phase > 0.27586206896 && phase <= 0.31034482758 { return "wi-moon-alt-waxing-gibbous-1" }
+        if phase > 0.31034482758 && phase <= 0.3448275862 { return "wi-moon-alt-waxing-gibbous-2" }
+        if phase > 0.3448275862 && phase <= 0.37931034482 { return "wi-moon-alt-waxing-gibbous-3" }
+        if phase > 0.37931034482 && phase <= 0.41379310344 { return "wi-moon-alt-waxing-gibbous-4" }
+        if phase > 0.41379310344 && phase <= 0.44827586206 { return "wi-moon-alt-waxing-gibbous-5" }
+        if phase > 0.44827586206 && phase <= 0.48275862068 { return "wi-moon-alt-waxing-gibbous-6" }
+        if phase > 0.48275862068 && phase <= 0.5172413793 { return "wi-moon-alt-full" }
+        if phase > 0.5172413793 && phase <= 0.55172413792 { return "wi-moon-alt-waning-gibbous-1" }
+        if phase > 0.55172413792 && phase <= 0.58620689654 { return "wi-moon-alt-waning-gibbous-2" }
+        if phase > 0.58620689654 && phase <= 0.62068965516 { return "wi-moon-alt-waning-gibbous-3" }
+        if phase > 0.62068965516 && phase <= 0.65517241378 { return "wi-moon-alt-waning-gibbous-4" }
+        if phase > 0.65517241378 && phase <= 0.6896551724 { return "wi-moon-alt-waning-gibbous-5" }
+        if phase > 0.6896551724 && phase <= 0.72413793102 { return "wi-moon-alt-waning-gibbous-6" }
+        if phase > 0.72413793102 && phase <= 0.75862068964 { return "wi-moon-alt-third-quarter" }
+        if phase > 0.75862068964 && phase <= 0.79310344826 { return "wi-moon-alt-waning-crescent-1" }
+        if phase > 0.79310344826 && phase <= 0.82758620688 { return "wi-moon-alt-waning-crescent-2" }
+        if phase > 0.82758620688 && phase <= 0.8620689655 { return "wi-moon-alt-waning-crescent-3" }
+        if phase > 0.8620689655 && phase <= 0.89655172412 { return "wi-moon-alt-waning-crescent-4" }
+        if phase > 0.89655172412 && phase <= 0.93103448274 { return "wi-moon-alt-waning-crescent-5" }
+        if phase > 0.93103448274 && phase <= 0.96551724136 { return "wi-moon-alt-waning-crescent-6" }
+        if phase > 0.96551724136 && phase <= 1 { return "wi-moon-alt-new" }
         return loc("NOTAVAILABLENUMBER")
     }
     
