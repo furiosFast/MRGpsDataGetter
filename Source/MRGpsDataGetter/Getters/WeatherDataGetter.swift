@@ -258,8 +258,6 @@ open class WeatherDataGetter: NSObject {
             }
             
             DispatchQueue.main.async {
-                print(self.weather.windDegree)
-                print(self.weather.windName)
                 self.delegate?.weatherDataReady(weather: self.weather)
             }
         }

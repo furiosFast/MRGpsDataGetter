@@ -102,13 +102,13 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     }
     
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Swift.Error) {
-        //print(error.localizedDescription)
-        //setNotAvailablePositionInfo()
+        debugPrint(error.localizedDescription)
+//        self.delegate?.gpsDataNotAvailable()
     }
     
     public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         //non serve poichè avendo il metodo deinit effettua l'aggiornamento dei dati, in caso di cambio impostazioni fa già lui il refresh dell'ui
-        //setLocationPermission()
+//        refreshAllData(openWeatherMapKey: openWeatherMapKey, preferences: preferences)
     }
     
     @objc private func autoRefreshSunMoonInfo(){
