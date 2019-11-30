@@ -59,6 +59,7 @@ open class MoonDataGetter: NSObject {
         
         let moonPhase = BDAstroCalc.moonPhase(date: NSDate())
         moon.fractionOfMoonIlluminated = String(format: "%3.1f", moonPhase.fractionOfMoonIlluminated * 100) + " " + loc("PERCENT")
+        moon.phase = moonPhase.phase.string
         moon.phaseTitle = getMoonPhaseTitle(moonPhase.phase)
         moon.phaseIcon = getMoonPhaseIcon(moonPhase.phase)
         moon.phaseAngle = String(format: "%3.1f", moonPhase.angle.radiansToDegrees)
@@ -96,18 +97,33 @@ open class MoonDataGetter: NSObject {
         return loc("NOTAVAILABLENUMBER")
     }
     
+//    /// Function that return the moon phase name based on the moon phase angle (is the midpoint of the illuminated limb of the moon going east)
+//    /// - Parameter phase: the phase is a number from 0 to 1, where 0 and 1 are a new moon, 0.5 is a full moon, 0 - 0.5 is waxing, and 0.5 - 1.0 is waning
+//    private func getMoonPhaseTitle(_ phase: Double) -> String {
+//        if phase == 0 { return loc("position_NEWMOONTITLE") }
+//        if phase > 0 && phase < 0.25 { return loc("position_UPMOONTITLE") }
+//        if phase == 0.25 { return loc("position_FIRSTMOONTITLE") }
+//        if phase > 0.25 && phase < 0.5 { return loc("position_GIBUPMOONTITLE") }
+//        if phase == 0.5 { return loc("position_FULLMOONTITLE") }
+//        if phase > 0.5 && phase < 0.75 { return loc("position_GIPDOWNMOONTITLE") }
+//        if phase == 0.75 { return loc("position_LASTMOONTITLE") }
+//        if phase > 0.75 && phase < 1 { return loc("position_DOWNMOONTITLE") }
+//        if phase == 1 { return loc("position_NEWMOONTITLE") }
+//        return loc("NOTAVAILABLENUMBER")
+//    }
+    
     /// Function that return the moon phase name based on the moon phase angle (is the midpoint of the illuminated limb of the moon going east)
     /// - Parameter phase: the phase is a number from 0 to 1, where 0 and 1 are a new moon, 0.5 is a full moon, 0 - 0.5 is waxing, and 0.5 - 1.0 is waning
     private func getMoonPhaseTitle(_ phase: Double) -> String {
-        if phase == 0 { return loc("position_NEWMOONTITLE") }
-        if phase > 0 && phase < 0.25 { return loc("position_UPMOONTITLE") }
-        if phase == 0.25 { return loc("position_FIRSTMOONTITLE") }
-        if phase > 0.25 && phase < 0.5 { return loc("position_GIBUPMOONTITLE") }
-        if phase == 0.5 { return loc("position_FULLMOONTITLE") }
-        if phase > 0.5 && phase < 0.75 { return loc("position_GIPDOWNMOONTITLE") }
-        if phase == 0.75 { return loc("position_LASTMOONTITLE") }
-        if phase > 0.75 && phase < 1 { return loc("position_DOWNMOONTITLE") }
-        if phase == 1 { return loc("position_NEWMOONTITLE") }
+        if phase >= 0 && phase <= 0.111111111111111 { return loc("position_NEWMOONTITLE") }
+        if phase > 0.111111111111111 && phase <= 0.222222222222222 { return loc("position_UPMOONTITLE") }
+        if phase > 0.222222222222222 && phase <= 0.333333333333333 { return loc("position_FIRSTMOONTITLE") }
+        if phase > 0.333333333333333 && phase <= 0.444444444444444 { return loc("position_GIBUPMOONTITLE") }
+        if phase > 0.444444444444444 && phase <= 0.555555555555555 { return loc("position_FULLMOONTITLE") }
+        if phase > 0.555555555555555 && phase <= 0.666666666666666 { return loc("position_GIPDOWNMOONTITLE") }
+        if phase > 0.666666666666666 && phase <= 0.777777777777777 { return loc("position_LASTMOONTITLE") }
+        if phase > 0.777777777777777 && phase <= 0.888888888888888 { return loc("position_DOWNMOONTITLE") }
+        if phase > 0.888888888888888 && phase <= 1 { return loc("position_NEWMOONTITLE") }
         return loc("NOTAVAILABLENUMBER")
     }
     
@@ -149,7 +165,7 @@ open class MoonDataGetter: NSObject {
     /// Function that return the moon phase icon name based on the moon phase angle (is the midpoint of the illuminated limb of the moon going east)
     /// - Parameter phase: the phase is a number from 0 to 1, where 0 and 1 are a new moon, 0.5 is a full moon, 0 - 0.5 is waxing, and 0.5 - 1.0 is waning
     private func getMoonPhaseIcon(_ phase: Double) -> String {
-        if phase > 0 && phase <= 0.03448275862 { return "wi-moon-alt-new" }
+        if phase >= 0 && phase <= 0.03448275862 { return "wi-moon-alt-new" }
         if phase > 0.03448275862 && phase <= 0.06896551724 { return "wi-moon-alt-waxing-crescent-1" }
         if phase > 0.06896551724 && phase <= 0.10344827586 { return "wi-moon-alt-waxing-crescent-2" }
         if phase > 0.10344827586 && phase <= 0.13793103448 { return "wi-moon-alt-waxing-crescent-3" }

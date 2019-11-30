@@ -27,6 +27,7 @@ public final class GpsMoonInfoModel: NSObject {
     public final var moonRise : String = loc("NOTAVAILABLENUMBER")
     public final var moonSet : String = loc("NOTAVAILABLENUMBER")
     
+    public final var phase : String = loc("NOTAVAILABLENUMBER")
     public final var phaseIcon : String = loc("NOTAVAILABLENUMBER")
     public final var phaseTitle : String = loc("NOTAVAILABLENUMBER")
     public final var phaseAngle : String = loc("NOTAVAILABLENUMBER")
