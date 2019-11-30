@@ -36,7 +36,8 @@ public let hexAppBuildNumber = String(appBuildNumber.int!, radix: 16, uppercase:
 
 //MARK: - Shared functions
 
-///Short function for localize string
+/// Short function for localize string
+/// - Parameter localizedKey: string key to localize
 func loc(_ localizedKey: String) -> String {
     return NSLocalizedString(localizedKey, comment: "")
 }
