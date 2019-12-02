@@ -15,10 +15,11 @@
 import UIKit
 import CoreLocation
 
-public protocol MRGpsDataGetterDelegate: NSObjectProtocol {
+@objc public protocol MRGpsDataGetterDelegate: NSObjectProtocol {
     func gpsDataStartLoading()
     func gpsDataNotAvailable()
-    func gpsHeadingForCompass(newHeading: CLLocationDirection)
+    @objc optional func changeLocationPermission()
+    @objc optional func gpsHeadingForCompass(newHeading: CLLocationDirection)
 }
 
 open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
@@ -115,11 +116,11 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Swift.Error) {
         debugPrint(error.localizedDescription)
-//        self.delegate?.gpsDataNotAvailable()
+//          delegate?.gpsDataNotAvailable()
     }
     
     public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        //non serve poichè avendo il metodo deinit effettua l'aggiornamento dei dati, in caso di cambio impostazioni fa già lui il refresh dell'ui
+        delegate?.changeLocationPermission?()
 //        refreshAllData(openWeatherMapKey: openWeatherMapKey, preferences: preferences)
     }
     
@@ -140,9 +141,9 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     public func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         isHeadingAvailableOnDevice = true
         if Bool(Preferences.shared.getPreference("trueNorth"))! == true {
-            self.delegate?.gpsHeadingForCompass(newHeading: newHeading.trueHeading)
+            delegate?.gpsHeadingForCompass?(newHeading: newHeading.trueHeading)
         } else {
-            self.delegate?.gpsHeadingForCompass(newHeading: newHeading.magneticHeading)
+            delegate?.gpsHeadingForCompass?(newHeading: newHeading.magneticHeading)
         }
     }
     
