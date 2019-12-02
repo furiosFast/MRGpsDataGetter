@@ -109,8 +109,8 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
             locationManager.stopUpdatingLocation()
             delegate?.gpsDataStartLoading()
             delegate?.gpsDataNotAvailable()
-            errorCount = errorCount + 1
         }
+        errorCount = errorCount + 1
         count = count + 1
     }
     
