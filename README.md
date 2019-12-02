@@ -78,7 +78,7 @@ MRGpsDataGetter has different dependencies and therefore needs the following lib
 - [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON) 5.0.0+
 - [SwifterSwift](https://github.com/SwifterSwift/SwifterSwift) 5.1.0+
 
-Adding MRGpsDataGetter to your project (with SPM) will cause the related dependencies to be added.
+It is necessary to add the dependencies of MRGpsDataGetter to each target that implements it!
 
 ## License
 
