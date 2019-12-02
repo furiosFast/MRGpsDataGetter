@@ -32,25 +32,26 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     var count = 0
     var openWeatherMapKey = "NaN"
     var isHeadingAvailableOnDevice = false
-    
+    var isForecastToLoad = true
+
     
     open func initialize(_ timeOut: TimeInterval = 15.0){
         setAlamofire(timeOut)
     }
     
-    open func refreshAllData(openWeatherMapKey: String, preferences: [String : String]){
+    open func refreshAllData(openWeatherMapKey: String, preferences: [String : String], forecastToo: Bool = true){
         setCount(0)
-        setLocationPermission(openWeatherMapKey: openWeatherMapKey, preferences: preferences)
+        setLocationPermission(openWeatherMapKey: openWeatherMapKey, preferences: preferences, forecastMustBeLoaded: isForecastToLoad)
     }
         
-    open func setLocationPermission(openWeatherMapKey: String, preferences : [String : String]){
-        setOptions(openWeatherMapKey, preferences)
+    open func setLocationPermission(openWeatherMapKey: String, preferences : [String : String], forecastMustBeLoaded: Bool = true){
+        setOptions(openWeatherMapKey, preferences, isForecastToLoad)
         DispatchQueue.global().async {
             self.locationManager.delegate = self
             switch CLLocationManager.authorizationStatus() {
                 case .notDetermined:
                     self.locationManager.requestWhenInUseAuthorization()
-                    self.setLocationPermission(openWeatherMapKey: openWeatherMapKey, preferences: preferences)
+                    self.setLocationPermission(openWeatherMapKey: openWeatherMapKey, preferences: preferences, forecastMustBeLoaded: self.isForecastToLoad)
                     break
                 case .restricted, .denied:
                     DispatchQueue.main.async {
@@ -85,8 +86,9 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
             self.delegate?.gpsDataStartLoading()
 
             WeatherDataGetter.shared.getWeatherInfo(openWeatherMapKey: openWeatherMapKey, currentLocation: loc)
-            ForecastDataGetter.shared.getForecastInfo(openWeatherMapKey: openWeatherMapKey, currentLocation: loc)
-
+            if isForecastToLoad {
+                ForecastDataGetter.shared.getForecastInfo(openWeatherMapKey: openWeatherMapKey, currentLocation: loc)
+            }
             GpsDataGetter.shared.getPositionInfo(currentLocation: loc)
             SunDataGetter.shared.getSunInfo(currentLocation: loc)
             MoonDataGetter.shared.getMoonInfo(currentLocation: loc)
@@ -163,9 +165,10 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
         count = value
     }
     
-    private func setOptions(_ openWeatherMapKey: String, _ preferences : [String : String]){
+    private func setOptions(_ openWeatherMapKey: String, _ preferences : [String : String], _ forecastToo: Bool){
         setOpenWeatherMapKey(openWeatherMapKey)
         Preferences.shared.setPreferences(preferences)
+        isForecastToLoad = forecastToo
     }
     
     private func setOpenWeatherMapKey(_ openWeatherMapKey: String){

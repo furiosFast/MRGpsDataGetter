@@ -7,7 +7,7 @@
 [![License](https://img.shields.io/cocoapods/l/Pastel.svg?style=flat)](https://github.com/furiosFast/MRGpsDataGetter/blob/master/LICENSE)
 [![Twitter](https://img.shields.io/badge/twitter-@FastDevsProject-blue.svg?style=flat)](https://twitter.com/FastDevsProject)
 
-Easy access to Sun, Moon and Location informations. In addition Weather and Future Forecasts.
+Easy access to Sun, Moon and Location informations. In addition Weather and 5 day/3 hour Forecast (5 day/3 hour through the OpenWeatherMap.org provider).
 
 ## Requirements
 
