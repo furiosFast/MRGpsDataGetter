@@ -102,13 +102,13 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
                 timerAutoRefresh.invalidate()
             }
         } else {
-            errorCount = errorCount + 1
             if errorCount > 0 {
                 return
             }
             locationManager.stopUpdatingLocation()
             delegate?.gpsDataStartLoading()
             delegate?.gpsDataNotAvailable()
+            errorCount = errorCount + 1
         }
         count = count + 1
     }
