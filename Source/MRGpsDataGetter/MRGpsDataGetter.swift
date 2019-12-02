@@ -39,7 +39,7 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
         setAlamofire(timeOut)
     }
     
-    open func refreshAllData(openWeatherMapKey: String, preferences: [String : String], forecastToo: Bool = true){
+    open func refreshAllData(openWeatherMapKey: String, preferences: [String : String], forecastMustBeLoaded: Bool = true){
         setCount(0)
         setLocationPermission(openWeatherMapKey: openWeatherMapKey, preferences: preferences, forecastMustBeLoaded: isForecastToLoad)
     }
