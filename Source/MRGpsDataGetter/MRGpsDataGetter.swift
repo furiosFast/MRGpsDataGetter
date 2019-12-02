@@ -65,13 +65,13 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
                     self.locationManager.stopUpdatingLocation()
                     self.timerAutoRefresh.invalidate()
                     self.isHeadingAvailableOnDevice = false
-                    print("Permessi per localizzazzione negati!")
+                    debugPrint("Location permits NOT obtained!")
                     break
                 case .authorizedWhenInUse:
                     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
                     self.locationManager.startUpdatingLocation()
                     self.locationManager.startUpdatingHeading()
-                    print("Permessi per localizzazzione (solo se in uso) ottenuti!")
+                    debugPrint("Permissions for location (only if in use) obtained!")
                     break
                 case .authorizedAlways: break
                 @unknown default: break
@@ -83,8 +83,8 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
         currentLocation = nil
         currentLocation = locations.last
         if let loc = self.currentLocation, count == 0 {
-            print("Dati sulla localizzazione ottenuti")
-//            errorCount = 0
+            debugPrint("Location data obtained!")
+            //            errorCount = 0
             locationManager.stopUpdatingLocation()
             delegate?.gpsDataStartLoading()
 
@@ -102,7 +102,8 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
             } else {
                 timerAutoRefresh.invalidate()
             }
-//        } else {
+        } else {
+            debugPrint("Location data NOT obtained!")
 //            if errorCount > 0 {
 //                return
 //            }

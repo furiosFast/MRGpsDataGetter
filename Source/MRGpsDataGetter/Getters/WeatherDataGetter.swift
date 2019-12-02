@@ -67,7 +67,7 @@ open class WeatherDataGetter: NSObject {
             "lang"          : loc("LANG"),
             "appid"         : openWeatherMapKey
         ]
-        print("Weather openweathermap API ENDPOINT iOS " + urlString)
+        debugPrint("Weather openweathermap API ENDPOINT iOS " + urlString)
         
         AFManager.request(urlString, parameters: parameters).responseJSON { response in
             if let er = response.error {
@@ -75,7 +75,6 @@ open class WeatherDataGetter: NSObject {
                 return
             }
             guard let ilJson = response.value else {
-                print("JSON Nil")
                 self.delegate?.weatherDataNotAvailable?(error: "JSON is nil")
                 return
             }

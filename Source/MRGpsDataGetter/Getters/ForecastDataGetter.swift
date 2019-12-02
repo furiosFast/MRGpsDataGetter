@@ -70,7 +70,7 @@ open class ForecastDataGetter: NSObject {
             "lang"          : loc("LANG"),
             "appid"         : openWeatherMapKey
         ]
-        print("Forecast openweathermap API ENDPOINT iOS " + urlString)
+        debugPrint("Forecast openweathermap API ENDPOINT iOS " + urlString)
         
         AFManager.request(urlString, parameters: parameters).responseJSON { response in
             if let er = response.error {
