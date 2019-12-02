@@ -102,8 +102,8 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
             } else {
                 timerAutoRefresh.invalidate()
             }
-        } else {
-            debugPrint("Location data NOT obtained!")
+//        } else {
+//            debugPrint("Location data NOT obtained!")
 //            if errorCount > 0 {
 //                return
 //            }
