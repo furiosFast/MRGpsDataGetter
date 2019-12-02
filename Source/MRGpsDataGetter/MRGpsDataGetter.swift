@@ -83,7 +83,7 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
         if let loc = self.currentLocation, count == 0 {
             print("Dati sulla localizzazione ottenuti")
             locationManager.stopUpdatingLocation()
-            self.delegate?.gpsDataStartLoading()
+            delegate?.gpsDataStartLoading()
 
             WeatherDataGetter.shared.getWeatherInfo(openWeatherMapKey: openWeatherMapKey, currentLocation: loc)
             if isForecastToLoad {
@@ -100,8 +100,9 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
                 timerAutoRefresh.invalidate()
             }
         } else {
-            self.delegate?.gpsDataStartLoading()
-            self.delegate?.gpsDataNotAvailable()
+            locationManager.stopUpdatingLocation()
+            delegate?.gpsDataStartLoading()
+            delegate?.gpsDataNotAvailable()
         }
         count = count + 1
     }
