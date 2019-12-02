@@ -30,6 +30,7 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     var currentLocation: CLLocation?
     var timerAutoRefresh = Timer()
     var count = 0
+    var errorCount = 0
     var openWeatherMapKey = "NaN"
     var isHeadingAvailableOnDevice = false
     var isForecastToLoad = true
@@ -82,6 +83,7 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
         currentLocation = locations.last
         if let loc = self.currentLocation, count == 0 {
             print("Dati sulla localizzazione ottenuti")
+            errorCount = 0
             locationManager.stopUpdatingLocation()
             delegate?.gpsDataStartLoading()
 
@@ -100,6 +102,10 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
                 timerAutoRefresh.invalidate()
             }
         } else {
+            errorCount = errorCount + 1
+            if errorCount > 0 {
+                return
+            }
             locationManager.stopUpdatingLocation()
             delegate?.gpsDataStartLoading()
             delegate?.gpsDataNotAvailable()
@@ -167,6 +173,7 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     //MARK: - Support functions for gps
     private func setCount(_ value: Int) {
         count = value
+        errorCount = value
     }
     
     private func setOptions(_ openWeatherMapKey: String, _ preferences : [String : String], _ forecastToo: Bool){
