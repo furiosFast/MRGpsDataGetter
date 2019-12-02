@@ -100,6 +100,7 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
                 timerAutoRefresh.invalidate()
             }
         } else {
+            self.delegate?.gpsDataStartLoading()
             self.delegate?.gpsDataNotAvailable()
         }
         count = count + 1
