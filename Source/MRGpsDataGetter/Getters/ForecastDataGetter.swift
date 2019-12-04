@@ -97,7 +97,7 @@ open class ForecastDataGetter: NSObject {
                 let weather = GpsWeatherModel()
                 
                 //0
-                weather.currentLocation = currentLocation
+                weather.currentWeatherLocation = currentLocation
                 //1
                 if let weatherDescr = json["list"][i]["weather"][0]["description"].string {
                     weather.weatherDescription = weatherDescr

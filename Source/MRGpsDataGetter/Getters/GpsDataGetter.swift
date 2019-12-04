@@ -42,7 +42,9 @@ open class GpsDataGetter: NSObject {
             self.reversePositionInfo(currentLocation)
         }
         DispatchQueue.global().async {
-            self.geocoder.cancelGeocode()
+            if self.geocoder.isGeocoding {
+                self.geocoder.cancelGeocode()
+            }
             self.reverseGeocodeFromLocation(currentLocation)
         }
         DispatchQueue.main.async {

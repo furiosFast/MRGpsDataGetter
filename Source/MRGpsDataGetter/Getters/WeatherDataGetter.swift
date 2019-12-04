@@ -87,7 +87,7 @@ open class WeatherDataGetter: NSObject {
             }
             
             //0
-            self.weather.currentLocation = currentLocation
+            self.weather.currentWeatherLocation = currentLocation
             //1
             if let weatherDescr = json["weather"][0]["description"].string {
                 self.weather.weatherDescription = weatherDescr

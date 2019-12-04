@@ -48,7 +48,7 @@ public final class GpsWeatherModel: NSObject {
     public final var time : String = loc("NOTAVAILABLENUMBER")
     public final var dateTime : String = loc("NOTAVAILABLENUMBER")
 
-    public final var currentLocation: CLLocation? = nil
-    public final var currentLocationName: String? = loc("NOTAVAILABLENUMBER")
+    public final var currentWeatherLocation: CLLocation? = nil
+//    public final var currentLocationName: String? = loc("NOTAVAILABLENUMBER")
 
 }
