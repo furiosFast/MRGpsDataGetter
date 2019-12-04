@@ -69,7 +69,8 @@ open class WeatherDataGetter: NSObject {
         ]
         debugPrint("Weather openweathermap API ENDPOINT iOS " + urlString)
         
-        AFManager.request(urlString, parameters: parameters).responseJSON { response in
+        guard let url = URL(string: urlString) else { return }
+        AFManager.request(url, parameters: parameters).responseJSON { response in
             if let er = response.error {
                 self.delegate?.weatherDataNotAvailable?(error: er.localizedDescription)
                 return
