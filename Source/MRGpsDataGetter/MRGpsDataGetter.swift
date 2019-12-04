@@ -103,10 +103,10 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
                 timerAutoRefresh.invalidate()
             }
 //        } else {
-//            debugPrint("Location data NOT obtained!")
 //            if errorCount > 0 {
 //                return
 //            }
+//            debugPrint("Location data NOT obtained!")
 //            locationManager.stopUpdatingLocation()
 //            delegate?.gpsDataStartLoading()
 //            delegate?.gpsDataNotAvailable()
