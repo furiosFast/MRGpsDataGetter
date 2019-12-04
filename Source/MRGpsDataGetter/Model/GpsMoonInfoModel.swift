@@ -36,5 +36,6 @@ public final class GpsMoonInfoModel: NSObject {
     public final var horizontalPosition : String = loc("NOTAVAILABLENUMBER")
     
     public final var moonTilt : String = loc("NOTAVAILABLENUMBER")
+    public final var trajectory : String = loc("NOTAVAILABLENUMBER")
     
 }

@@ -164,32 +164,6 @@ func getBeaufortForceColor(_ windSpeedKnot: Double) -> String {
     return hexColor
 }
 
-/// Function that return the zodiac sign of sun/moon based on the right ascension
-/// - Parameter rightAscension: the right asnension of Sun/Moon (in radians).
-func getZodiacSign(_ rightAscension: Double) -> String {
-    var rightAscension = (rightAscension + 360).int % 360
-    if(rightAscension < 0) {
-        rightAscension = -1 * rightAscension
-    }
-    var zodiacSign = loc("NOTAVAILABLENUMBER")
-    switch rightAscension {
-        case 0..<30: zodiacSign = loc("position_PESCITITLE")
-        case 30..<60: zodiacSign = loc("position_ARIETETITLE")
-        case 60..<90: zodiacSign = loc("position_TOROTITLE")
-        case 90..<120: zodiacSign = loc("position_GEMELLITITLE")
-        case 120..<150: zodiacSign = loc("position_CANCROTITLE")
-        case 150..<180: zodiacSign = loc("position_LEONETITLE")
-        case 180..<210: zodiacSign = loc("position_VERGINETITLE")
-        case 210...240: zodiacSign = loc("position_BILANCIATITLE")
-        case 240...270: zodiacSign = loc("position_SCORPIOTITLE")
-        case 270...300: zodiacSign = loc("position_SAGITTARIOTITLE")
-        case 300...330: zodiacSign = loc("position_CAPRICTITLE")
-        case 330...360: zodiacSign = loc("position_ACQUARIOTITLE")
-        default: break
-    }
-    return zodiacSign
-}
-
 //MARK: - Extensions
 
 // Formatter

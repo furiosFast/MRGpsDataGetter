@@ -257,6 +257,7 @@ open class WeatherDataGetter: NSObject {
                 self.weather.clouds = clouds.string + " " + loc("PERCENT")
             }
             
+            
             DispatchQueue.main.async {
                 self.delegate?.weatherDataReady(weather: self.weather)
             }

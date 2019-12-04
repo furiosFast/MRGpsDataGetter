@@ -88,6 +88,8 @@ open class GpsDataGetter: NSObject {
                 gps.speed = String(format: "%3.1f " + loc("MILESHOURS"), currentLocation.speed * meterSecondToMilesHour)
             }
         }
+        
+        
         DispatchQueue.main.async {
             self.delegate?.gpsDataReady(gps: self.gps)
         }

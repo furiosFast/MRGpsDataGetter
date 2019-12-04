@@ -60,6 +60,18 @@
 "position_CREPNAUTICSUNSETTITLE" = "Nautical twilight";
 "position_CREPASTROSUNSETTITLE" = "Astronomical twilight";
 
+"position_NEWMOONTITLE" = "New Moon";
+"position_UPMOONTITLE" = "Waxing crescent";
+"position_FIRSTMOONTITLE" = "First quarter";
+"position_GIBUPMOONTITLE" = "Waxing gibbous";
+"position_FULLMOONTITLE" = "Full moon";
+"position_GIPDOWNMOONTITLE" = "Waning gibbous";
+"position_LASTMOONTITLE" = "Last quarter";
+"position_DOWNMOONTITLE" = "Waning crescent";
+
+"position_ASCENDENT" = "ASCENDENT";
+"position_DESCENDENT" = "DESCENDENT";
+
 "position_ARIETETITLE" = "Aries";
 "position_TOROTITLE" = "Taurus";
 "position_GEMELLITITLE" = "Gemini";
@@ -77,6 +89,8 @@
 
 /************************************************MISURE UNIT******************************************************/
 
+"DAY" = "Day";
+"DAYS" = "Days";
 "DATE" = "Date";
 "TIME" = "Time";
 "HOURS" = "Hours";

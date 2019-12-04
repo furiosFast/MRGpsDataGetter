@@ -60,6 +60,18 @@
 "position_CREPNAUTICSUNSETTITLE" = "Crepuscolo nautico";
 "position_CREPASTROSUNSETTITLE" = "Crepuscolo astronomico";
 
+"position_NEWMOONTITLE" = "Luna nuova";
+"position_UPMOONTITLE" = "Luna crescente";
+"position_FIRSTMOONTITLE" = "Primo quarto";
+"position_GIBUPMOONTITLE" = "Gibbosa crescente";
+"position_FULLMOONTITLE" = "Luna piena";
+"position_GIPDOWNMOONTITLE" = "Gibbosa calante";
+"position_LASTMOONTITLE" = "Ultimo quarto";
+"position_DOWNMOONTITLE" = "Luna calante";
+
+"position_ASCENDENT" = "ASCENDENTE";
+"position_DESCENDENT" = "DISCENDENTE";
+
 "position_ARIETETITLE" = "Ariete";
 "position_TOROTITLE" = "Toro";
 "position_GEMELLITITLE" = "Gemelli";
@@ -77,6 +89,8 @@
 
 /************************************************MISURE UNIT******************************************************/
 
+"DAY" = "Giorno";
+"DAYS" = "Giorni";
 "DATE" = "Data";
 "TIME" = "Tempo";
 "HOURS" = "Ore";

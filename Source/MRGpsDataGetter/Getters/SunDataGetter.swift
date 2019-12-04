@@ -84,7 +84,8 @@ open class SunDataGetter: NSObject {
         let sunCoordinates = BDAstroCalc.sunCoordinates(daysSinceJan12000: Jan12000Date)
         sun.declination = declinationToString(sunCoordinates.declination.radiansToDegrees)
         sun.rightAscension = String(format: "%3.1f", sunCoordinates.rightAscension.radiansToDegrees)
-        sun.zodiacSign = getZodiacSign(sunCoordinates.rightAscension.radiansToDegrees)
+        sun.zodiacSign = getSunZodiacSign(sunCoordinates.rightAscension.radiansToDegrees)
+        
         
         DispatchQueue.main.async {
             self.delegate?.sunDataReady(sun: self.sun)
@@ -145,6 +146,90 @@ open class SunDataGetter: NSObject {
             return loc("position_NIGHTTITLE")
         }
         return loc("NOTAVAILABLENUMBER")
+    }
+    
+//    private func getSun() -> [Double] {
+//        var t: Double = 0, slongitude: Double = 0, sanomaly: Double = 0
+//
+//        // SUN PARAMETERS (Formulae from "Calendrical Calculations")
+//        let lon: Double = (280.46645 + 36000.76983 * t + 0.0003032 * t * t)
+//        let anom: Double = (357.5291 + 35999.0503 * t - 0.0001559 * t * t - 4.8E-07 * t * t * t)
+//        sanomaly = anom * (1.0 / 180.0 / Double.pi) //SunMoonCalculator.DEG_TO_RAD
+//        var c: Double = (1.9146 - 0.004817 * t - 0.000014 * t * t) * sin(sanomaly)
+//        c = c + (0.019993 - 0.000101 * t) * sin(2 * sanomaly)
+//        c = c + 0.00029 * sin(3.0 * sanomaly) // Correction to the mean ecliptic longitude
+//
+//        // Now, let calculate nutation and aberration
+//        let M1: Double = (124.90 - 1934.134 * t + 0.002063 * t * t) * (1.0 / 180.0 / Double.pi)
+//        let M2: Double = (201.11 + 72001.5377 * t + 0.00057 * t * t) * (1.0 / 180.0 / Double.pi)
+//        let d: Double = -0.00569 - 0.0047785 * sin(M1) - 0.0003667 * sin(M2)
+//
+//        slongitude = lon + c + d // apparent longitude (error<0.003 deg)
+//        let slatitude: Double = 0 // Sun's ecliptic latitude is always negligible
+//        let ecc: Double = 0.016708617 - 4.2037E-05 * t - 1.236E-07 * t * t // Eccentricity
+//        let v: Double = sanomaly + c * (1.0 / 180.0 / Double.pi) // True anomaly
+//        let sdistance: Double = 1.000001018 * (1.0 - ecc * ecc) / (1.0 + ecc * cos(v)) // In UA
+//
+//        return [slongitude, slatitude, sdistance, atan(696000 / (149597870.691 * sdistance))]
+//    }
+    
+    /// Function that return the zodiac sign of sun/moon based on the right ascension
+    /// - Parameter rightAscension: the right asnension of Sun/Moon (in radians).
+    private func getSunZodiacSign(_ rightAscension: Double) -> String {
+//        var rightAscension = Double((rightAscension + 360).int % 360)
+//        if(rightAscension < 0) {
+//            rightAscension = -1 * rightAscension
+//        }
+//        var zodiacSign = loc("NOTAVAILABLENUMBER")
+//        if (rightAscension < 33.18) {
+//            zodiacSign = loc("position_ARIETETITLE")
+//        } else if (rightAscension < 51.16) {
+//            zodiacSign = loc("position_TOROTITLE")
+//        } else if (rightAscension < 93.44) {
+//            zodiacSign = loc("position_GEMELLITITLE")
+//        } else if (rightAscension < 119.48) {
+//            zodiacSign = loc("position_CANCROTITLE")
+//        } else if (rightAscension < 135.30) {
+//            zodiacSign = loc("position_LEONETITLE")
+//        } else if (rightAscension < 173.34) {
+//            zodiacSign = loc("position_VERGINETITLE")
+//        } else if (rightAscension < 224.17) {
+//            zodiacSign = loc("position_BILANCIATITLE")
+//        } else if (rightAscension < 242.57) {
+//            zodiacSign = loc("position_SCORPIOTITLE")
+//        } else if (rightAscension < 271.26) {
+//            zodiacSign = loc("position_SAGITTARIOTITLE")
+//        } else if (rightAscension < 302.49) {
+//            zodiacSign = loc("position_CAPRICTITLE")
+//        } else if (rightAscension < 311.72) {
+//            zodiacSign = loc("position_ACQUARIOTITLE")
+//        } else if (rightAscension < 348.58) {
+//            zodiacSign = loc("position_PESCITITLE")
+//        } else {
+//            zodiacSign = loc("position_ARIETETITLE")
+//        }
+        
+        var rightAscension = (rightAscension + 360).int % 360
+        if(rightAscension < 0) {
+            rightAscension = -1 * rightAscension
+        }
+        var zodiacSign = loc("NOTAVAILABLENUMBER")
+        switch rightAscension {
+            case 0..<30: zodiacSign = loc("position_PESCITITLE")
+            case 30..<60: zodiacSign = loc("position_ARIETETITLE")
+            case 60..<90: zodiacSign = loc("position_TOROTITLE")
+            case 90..<120: zodiacSign = loc("position_GEMELLITITLE")
+            case 120..<150: zodiacSign = loc("position_CANCROTITLE")
+            case 150..<180: zodiacSign = loc("position_LEONETITLE")
+            case 180..<210: zodiacSign = loc("position_VERGINETITLE")
+            case 210...240: zodiacSign = loc("position_BILANCIATITLE")
+            case 240...270: zodiacSign = loc("position_SCORPIOTITLE")
+            case 270...300: zodiacSign = loc("position_SAGITTARIOTITLE")
+            case 300...330: zodiacSign = loc("position_CAPRICTITLE")
+            case 330...360: zodiacSign = loc("position_ACQUARIOTITLE")
+            default: break
+        }
+        return zodiacSign
     }
     
 }
