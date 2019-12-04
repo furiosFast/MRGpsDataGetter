@@ -304,7 +304,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\n#buildNumber=$(($buildNumber + 1))\n#/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$SRCROOT/MRGpsDataGetter/Info.plist\"\n";
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$SRCROOT/Source/MRGpsDataGetter/Config/Info.plist\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -478,6 +478,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 500;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = MV5R3CQ49L;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -505,6 +506,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 500;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = MV5R3CQ49L;
 				DYLIB_COMPATIBILITY_VERSION = 1;
