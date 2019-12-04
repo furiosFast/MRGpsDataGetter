@@ -23,7 +23,8 @@ public final class GpsMoonInfoModel: NSObject {
     public final var declination : String = loc("NOTAVAILABLENUMBER")
     public final var rightAscension : String = loc("NOTAVAILABLENUMBER")
     public final var zodiacSign : String = loc("NOTAVAILABLENUMBER")
-    
+    public final var age : String = loc("NOTAVAILABLENUMBER")
+
     public final var moonRise : String = loc("NOTAVAILABLENUMBER")
     public final var moonSet : String = loc("NOTAVAILABLENUMBER")
     

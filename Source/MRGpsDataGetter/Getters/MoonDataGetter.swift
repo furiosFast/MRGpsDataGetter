@@ -67,7 +67,8 @@ open class MoonDataGetter: NSObject {
         let moonCoordinates = BDAstroCalc.moonCoordinates(daysSinceJan12000: Jan12000Date)
         moon.declination = declinationToString(moonCoordinates.declination.radiansToDegrees)
         moon.rightAscension = String(format: "%3.1f", moonCoordinates.rightAscension.radiansToDegrees)
-        moon.zodiacSign = getZodiacSign(moonCoordinates.rightAscension.radiansToDegrees)
+        moon.zodiacSign = getMoonZodicaSign(date: Date())//getZodiacSign(moonCoordinates.rightAscension.radiansToDegrees)
+        moon.age = getMoonAge(date: Date()).string
         
         let moonTilt = BDAstroCalc.moonTilt(date: NSDate(), location: myLocationCoordinates)
         moon.moonTilt = moonTilt.diff.string
@@ -165,6 +166,192 @@ open class MoonDataGetter: NSObject {
         if phase > 0.93103448274 && phase <= 0.96551724136 { return "wi-moon-alt-waning-crescent-6" }
         if phase > 0.96551724136 && phase <= 1 { return "wi-moon-alt-new" }
         return loc("NOTAVAILABLENUMBER")
+    }
+    
+    
+    
+    
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    
+    
+    
+    //Получить знак зодиака для луны
+    public func getMoonZodicaSign(date: Date) -> String {
+        var longitude: Double = 0.0
+        var zodiac: String
+
+        var yy: Double = 0.0
+        var mm: Double = 0.0
+        var k1: Double = 0.0
+        var k2: Double = 0.0
+        var k3: Double = 0.0
+        var jd: Double = 0.0
+        var ip: Double = 0.0
+        var dp: Double = 0.0
+        var rp: Double = 0.0
+
+        let year: Double = Double(Calendar.current.component(.year, from: date))
+        let month: Double = Double(Calendar.current.component(.month, from: date))
+        let day: Double = Double(Calendar.current.component(.day, from: date))
+
+        yy = year - floor((12 - month) / 10)
+        mm = month + 9.0
+        if (mm >= 12) {
+            mm = mm - 12
+        }
+
+        k1 = floor(365.25 * (yy + 4712))
+        k2 = floor(30.6 * mm + 0.5)
+        k3 = floor(floor((yy / 100) + 49) * 0.75) - 38
+
+        jd = k1 + k2 + day + 59
+        if (jd > 2299160) {
+            jd = jd - k3
+        }
+
+        ip = normalize((jd - 2451550.1) / 29.530588853)
+
+        ip = ip * 2 * .pi
+
+        dp = 2 * .pi * normalize((jd - 2451562.2) / 27.55454988)
+
+        rp = normalize((jd - 2451555.8) / 27.321582241)
+        longitude = 360 * rp + 6.3 * sin(dp) + 1.3 * sin(2 * ip - dp) + 0.7 * sin(2 * ip)
+
+        if (longitude < 33.18) {
+            zodiac = "aries"
+        } else if (longitude < 51.16) {
+            zodiac = "cancer"
+        } else if (longitude < 93.44) {
+            zodiac = "gemini"
+        } else if (longitude < 119.48) {
+            zodiac = "cancer"
+        } else if (longitude < 135.30) {
+            zodiac = "leo"
+        } else if (longitude < 173.34) {
+            zodiac = "virgo"
+        } else if (longitude < 224.17) {
+            zodiac = "libra"
+        } else if (longitude < 242.57) {
+            zodiac = "scorpio"
+        } else if (longitude < 271.26) {
+            zodiac = "sagittarius"
+        } else if (longitude < 302.49) {
+            zodiac = "capricorn"
+        } else if (longitude < 311.72) {
+            zodiac = "aquarius"
+        } else if (longitude < 348.58) {
+            zodiac = "pisces"
+        } else {
+            zodiac = "aries"
+        }
+
+        return zodiac
+    }
+    
+    //Получить фазу луны
+       private func getMoonPhaseTitle(date: Date) -> String {
+           let age: Double = self.getMoonAge(date: date)
+
+           var phase: String
+
+           if (age < 1.84566) {
+               phase = "newMoon"
+           } else if (age < 5.53699) {
+               phase = "waxingCrescent"
+           } else if (age < 9.22831) {
+               phase = "firstQuarter"
+           } else if (age < 12.91963) {
+               phase = "waxingGibbous"
+           } else if (age < 16.61096) {
+               phase = "fullMoon"
+           } else if (age < 20.30228) {
+               phase = "waningGibbous"
+           } else if (age < 23.99361) {
+               phase = "lastQuarter"
+           } else if (age < 27.68493) {
+               phase = "waningCrescent"
+           } else {
+               phase = "newMoon"
+           }
+
+           return phase
+       }
+
+       //Получить лунный день
+       private func getMoonAge(date: Date) -> Double {
+           var age: Double = 0.0
+
+           var yy: Double = 0.0
+           var mm: Double = 0.0
+           var k1: Double = 0.0
+           var k2: Double = 0.0
+           var k3: Double = 0.0
+           var jd: Double = 0.0
+           var ip: Double = 0.0
+
+           let year: Double = Double(Calendar.current.component(.year, from: date))
+           let month: Double = Double(Calendar.current.component(.month, from: date))
+           let day: Double = Double(Calendar.current.component(.day, from: date))
+
+           yy = year - floor((12 - month) / 10)
+           mm = month + 9.0
+           if (mm >= 12) {
+               mm = mm - 12
+           }
+
+           k1 = floor(365.25 * (yy + 4712))
+           k2 = floor(30.6 * mm + 0.5)
+           k3 = floor(floor((yy / 100) + 49) * 0.75) - 38
+
+           jd = k1 + k2 + day + 59
+           if (jd > 2299160) {
+               jd = jd - k3
+           }
+
+           ip = normalize((jd - 2451550.1) / 29.530588853)
+           age = ip * 29.53
+
+           return age
+       }
+
+       //Получить знак зодиака для дуны, траекторию луны, фазу луны
+       private func getMoonTrajectory(date: Date) -> String {
+           let age: Double = self.getMoonAge(date: date)
+           var trajectory: String
+
+
+           if (age < 1.84566) {
+               trajectory = "ascendent"
+           } else if (age < 5.53699) {
+               trajectory = "ascendent"
+           } else if (age < 9.22831) {
+               trajectory = "ascendent"
+           } else if (age < 12.91963) {
+               trajectory = "ascendent"
+           } else if (age < 16.61096) {
+               trajectory = "descendent"
+           } else if (age < 20.30228) {
+               trajectory = "descendent"
+           } else if (age < 23.99361) {
+               trajectory = "descendent"
+           } else if (age < 27.68493) {
+               trajectory = "descendent"
+           } else {
+               trajectory = "ascendent"
+           }
+
+           return trajectory
+       }
+    
+    //нормализовать число, т.е. число от 0 до 1
+    private func normalize(_ value: Double) -> Double {
+        var v = value - floor(value)
+        if (v < 0) {
+            v = v + 1
+        }
+        return v
     }
     
 }
