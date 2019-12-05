@@ -40,7 +40,6 @@
 "WIND_SW" = "SO - Libeccio";
 "WIND_W" = "O - Ponente";
 "WIND_NW" = "NO - Maestrale";
-"WIND_NaN" = "Brezza leggera";
 
 //location
 "lOCATION_NaN" = "Nome località non disponibile";
@@ -75,7 +74,7 @@
 "CANCER" = "Cancro";
 "TAURUS" = "Toro";
 "LEO" = "Leone";
-"GEMENI" = "Gemelli";
+"GEMINI" = "Gemelli";
 "VIRGO" = "Vergine";
 "LIBRA" = "Bilancia";
 "CAPRICORN" = "Capricorno";

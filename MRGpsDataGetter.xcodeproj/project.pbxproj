@@ -26,7 +26,6 @@
 		4CEE0A992385B39E00782D39 /* WeatherDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE0A982385B39E00782D39 /* WeatherDataGetter.swift */; };
 		4CEE0A9B2385B77200782D39 /* ForecastDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE0A9A2385B77200782D39 /* ForecastDataGetter.swift */; };
 		4CEE0A9D2385B9C600782D39 /* GpsDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE0A9C2385B9C600782D39 /* GpsDataGetter.swift */; };
-		4CEE0AA62385C8D000782D39 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4CEE0AA82385C8D000782D39 /* Localizable.strings */; };
 		4CEE0AAD2385D1F100782D39 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE0AAA2385D0A400782D39 /* Preferences.swift */; };
 /* End PBXBuildFile section */
 
@@ -288,7 +287,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CEE0AA62385C8D000782D39 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

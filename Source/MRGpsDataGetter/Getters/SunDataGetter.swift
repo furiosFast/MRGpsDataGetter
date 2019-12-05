@@ -131,19 +131,19 @@ open class SunDataGetter: NSObject {
     /// - Parameter altitude: altitude on the sun (in degrees)
     private func getSunPhaseTitle(_ altitude: Double) -> String {
         if (altitude > 0) {
-            return loc("DAYTITLE")
+            return loc("DAY")
         }
         if (altitude <= 0 && altitude >= -6) {
-            return loc("CREPCIVSUNRISETITLE")
+            return loc("CREPCIVSUNRISE")
         }
         if (altitude < -6 && altitude >= -12) {
-            return loc("CREPNAUTICSUNRISETITLE")
+            return loc("CREPNAUTICSUNRISE")
         }
         if (altitude < -12 && altitude >= -18) {
-            return loc("CREPASTROSUNRISETITLE")
+            return loc("CREPASTROSUNRISE")
         }
         if (altitude < -18) {
-            return loc("NIGHTTITLE")
+            return loc("NIGHT")
         }
         return loc("NOTAVAILABLENUMBER")
     }
@@ -182,18 +182,18 @@ open class SunDataGetter: NSObject {
         }
         var zodiacSign = loc("NOTAVAILABLENUMBER")
         switch rightAscension {
-            case 0..<30: zodiacSign = loc("PESCITITLE")
-            case 30..<60: zodiacSign = loc("ARIETETITLE")
-            case 60..<90: zodiacSign = loc("TOROTITLE")
-            case 90..<120: zodiacSign = loc("GEMELLITITLE")
-            case 120..<150: zodiacSign = loc("CANCROTITLE")
-            case 150..<180: zodiacSign = loc("LEONETITLE")
-            case 180..<210: zodiacSign = loc("VERGINETITLE")
-            case 210...240: zodiacSign = loc("BILANCIATITLE")
-            case 240...270: zodiacSign = loc("SCORPIOTITLE")
-            case 270...300: zodiacSign = loc("SAGITTARIOTITLE")
-            case 300...330: zodiacSign = loc("CAPRICTITLE")
-            case 330...360: zodiacSign = loc("ACQUARIOTITLE")
+            case 0..<30: zodiacSign = loc("PESCES")
+            case 30..<60: zodiacSign = loc("ARIES")
+            case 60..<90: zodiacSign = loc("TAURUS")
+            case 90..<120: zodiacSign = loc("GEMINI")
+            case 120..<150: zodiacSign = loc("CANCER")
+            case 150..<180: zodiacSign = loc("LEO")
+            case 180..<210: zodiacSign = loc("VIRGO")
+            case 210...240: zodiacSign = loc("LIBRA")
+            case 240...270: zodiacSign = loc("SCORPIO")
+            case 270...300: zodiacSign = loc("SAGITTARIUS")
+            case 300...330: zodiacSign = loc("CAPRICORN")
+            case 330...360: zodiacSign = loc("AQUARIUS")
             default: break
         }
         return zodiacSign

@@ -139,35 +139,35 @@ open class MoonDataGetter: NSObject {
     /// Function that return the moon phase name based on the moon phase angle (is the midpoint of the illuminated limb of the moon going east)
     /// - Parameter phase: the phase is a number from 0 to 1, where 0 and 1 are a new moon, 0.5 is a full moon, 0 - 0.5 is waxing, and 0.5 - 1.0 is waning
     private func getMoonPhaseTitleFromPhase(_ phase: Double) -> String {
-        if phase >= 0 && phase <= 0.03448275862 { return loc("NEWMOONTITLE") }
-        if phase > 0.03448275862 && phase <= 0.06896551724 { return loc("UPMOONTITLE") }
-        if phase > 0.06896551724 && phase <= 0.10344827586 { return loc("UPMOONTITLE") }
-        if phase > 0.10344827586 && phase <= 0.13793103448 { return loc("UPMOONTITLE") }
-        if phase > 0.13793103448 && phase <= 0.1724137931 { return loc("UPMOONTITLE") }
-        if phase > 0.1724137931 && phase <= 0.20689655172 { return loc("UPMOONTITLE") }
-        if phase > 0.20689655172 && phase <= 0.24137931034 { return loc("UPMOONTITLE") }
-        if phase > 0.24137931034 && phase <= 0.27586206896 { return loc("FIRSTMOONTITLE") }
-        if phase > 0.27586206896 && phase <= 0.31034482758 { return loc("GIBUPMOONTITLE") }
-        if phase > 0.31034482758 && phase <= 0.3448275862 { return loc("GIBUPMOONTITLE") }
-        if phase > 0.3448275862 && phase <= 0.37931034482 { return loc("GIBUPMOONTITLE") }
-        if phase > 0.37931034482 && phase <= 0.41379310344 { return loc("GIBUPMOONTITLE") }
-        if phase > 0.41379310344 && phase <= 0.44827586206 { return loc("GIBUPMOONTITLE") }
-        if phase > 0.44827586206 && phase <= 0.48275862068 { return loc("GIBUPMOONTITLE") }
-        if phase > 0.48275862068 && phase <= 0.5172413793 { return loc("FULLMOONTITLE") }
-        if phase > 0.5172413793 && phase <= 0.55172413792 { return loc("GIPDOWNMOONTITLE") }
-        if phase > 0.55172413792 && phase <= 0.58620689654 { return loc("GIPDOWNMOONTITLE") }
-        if phase > 0.58620689654 && phase <= 0.62068965516 { return loc("GIPDOWNMOONTITLE") }
-        if phase > 0.62068965516 && phase <= 0.65517241378 { return loc("GIPDOWNMOONTITLE") }
-        if phase > 0.65517241378 && phase <= 0.6896551724 { return loc("GIPDOWNMOONTITLE") }
-        if phase > 0.6896551724 && phase <= 0.72413793102 { return loc("GIPDOWNMOONTITLE") }
-        if phase > 0.72413793102 && phase <= 0.75862068964 { return loc("LASTMOONTITLE") }
-        if phase > 0.75862068964 && phase <= 0.79310344826 { return loc("DOWNMOONTITLE") }
-        if phase > 0.79310344826 && phase <= 0.82758620688 { return loc("DOWNMOONTITLE") }
-        if phase > 0.82758620688 && phase <= 0.8620689655 { return loc("DOWNMOONTITLE") }
-        if phase > 0.8620689655 && phase <= 0.89655172412 { return loc("DOWNMOONTITLE") }
-        if phase > 0.89655172412 && phase <= 0.93103448274 { return loc("DOWNMOONTITLE") }
-        if phase > 0.93103448274 && phase <= 0.96551724136 { return loc("DOWNMOONTITLE") }
-        if phase > 0.96551724136 && phase <= 1 { return loc("NEWMOONTITLE") }
+        if phase >= 0 && phase <= 0.03448275862 { return loc("NEWMOON") }
+        if phase > 0.03448275862 && phase <= 0.06896551724 { return loc("UPMOON") }
+        if phase > 0.06896551724 && phase <= 0.10344827586 { return loc("UPMOON") }
+        if phase > 0.10344827586 && phase <= 0.13793103448 { return loc("UPMOON") }
+        if phase > 0.13793103448 && phase <= 0.1724137931 { return loc("UPMOON") }
+        if phase > 0.1724137931 && phase <= 0.20689655172 { return loc("UPMOON") }
+        if phase > 0.20689655172 && phase <= 0.24137931034 { return loc("UPMOON") }
+        if phase > 0.24137931034 && phase <= 0.27586206896 { return loc("FIRSTMOON") }
+        if phase > 0.27586206896 && phase <= 0.31034482758 { return loc("GIBUPMOON") }
+        if phase > 0.31034482758 && phase <= 0.3448275862 { return loc("GIBUPMOON") }
+        if phase > 0.3448275862 && phase <= 0.37931034482 { return loc("GIBUPMOON") }
+        if phase > 0.37931034482 && phase <= 0.41379310344 { return loc("GIBUPMOON") }
+        if phase > 0.41379310344 && phase <= 0.44827586206 { return loc("GIBUPMOON") }
+        if phase > 0.44827586206 && phase <= 0.48275862068 { return loc("GIBUPMOON") }
+        if phase > 0.48275862068 && phase <= 0.5172413793 { return loc("FULLMOON") }
+        if phase > 0.5172413793 && phase <= 0.55172413792 { return loc("GIPDOWNMOON") }
+        if phase > 0.55172413792 && phase <= 0.58620689654 { return loc("GIPDOWNMOON") }
+        if phase > 0.58620689654 && phase <= 0.62068965516 { return loc("GIPDOWNMOON") }
+        if phase > 0.62068965516 && phase <= 0.65517241378 { return loc("GIPDOWNMOON") }
+        if phase > 0.65517241378 && phase <= 0.6896551724 { return loc("GIPDOWNMOON") }
+        if phase > 0.6896551724 && phase <= 0.72413793102 { return loc("GIPDOWNMOON") }
+        if phase > 0.72413793102 && phase <= 0.75862068964 { return loc("LASTMOON") }
+        if phase > 0.75862068964 && phase <= 0.79310344826 { return loc("DOWNMOON") }
+        if phase > 0.79310344826 && phase <= 0.82758620688 { return loc("DOWNMOON") }
+        if phase > 0.82758620688 && phase <= 0.8620689655 { return loc("DOWNMOON") }
+        if phase > 0.8620689655 && phase <= 0.89655172412 { return loc("DOWNMOON") }
+        if phase > 0.89655172412 && phase <= 0.93103448274 { return loc("DOWNMOON") }
+        if phase > 0.93103448274 && phase <= 0.96551724136 { return loc("DOWNMOON") }
+        if phase > 0.96551724136 && phase <= 1 { return loc("NEWMOON") }
         return loc("NOTAVAILABLENUMBER")
     }
     
@@ -179,23 +179,23 @@ open class MoonDataGetter: NSObject {
         var phase: String = loc("NOTAVAILABLENUMBER")
         
         if (age < 1.84566) {
-            phase = loc("NEWMOONTITLE")
+            phase = loc("NEWMOON")
         } else if (age < 5.53699) {
-            phase = loc("UPMOONTITLE")
+            phase = loc("UPMOON")
         } else if (age < 9.22831) {
-            phase = loc("FIRSTMOONTITLE")
+            phase = loc("FIRSTMOON")
         } else if (age < 12.91963) {
-            phase = loc("GIBUPMOONTITLE")
+            phase = loc("GIBUPMOON")
         } else if (age < 16.61096) {
-            phase = loc("FULLMOONTITLE")
+            phase = loc("FULLMOON")
         } else if (age < 20.30228) {
-            phase = loc("GIPDOWNMOONTITLE")
+            phase = loc("GIPDOWNMOON")
         } else if (age < 23.99361) {
-            phase = loc("LASTMOONTITLE")
+            phase = loc("LASTMOON")
         } else if (age < 27.68493) {
-            phase = loc("DOWNMOONTITLE")
+            phase = loc("DOWNMOON")
         } else {
-            phase = loc("NEWMOONTITLE")
+            phase = loc("NEWMOON")
         }
         
         return phase
@@ -279,33 +279,32 @@ open class MoonDataGetter: NSObject {
         longitude = 360 * rp + 6.3 * sin(dp) + 1.3 * sin(2 * ip - dp) + 0.7 * sin(2 * ip)        
         
         if (longitude < 33.18) {
-            zodiac = loc("ARIETETITLE")
+            zodiac = loc("ARIES")
         } else if (longitude < 51.16) {
-            zodiac = loc("TOROTITLE")
+            zodiac = loc("TAURUS")
         } else if (longitude < 93.44) {
-            zodiac = loc("GEMELLITITLE")
+            zodiac = loc("GEMINI")
         } else if (longitude < 119.48) {
-            zodiac = loc("CANCROTITLE")
+            zodiac = loc("CANCER")
         } else if (longitude < 135.30) {
-            zodiac = loc("LEONETITLE")
+            zodiac = loc("LEO")
         } else if (longitude < 173.34) {
-            zodiac = loc("VERGINETITLE")
+            zodiac = loc("VIRGO")
         } else if (longitude < 224.17) {
-            zodiac = loc("BILANCIATITLE")
+            zodiac = loc("LIBRA")
         } else if (longitude < 242.57) {
-            zodiac = loc("SCORPIOTITLE")
+            zodiac = loc("SCORPIO")
         } else if (longitude < 271.26) {
-            zodiac = loc("SAGITTARIOTITLE")
+            zodiac = loc("SAGITTARIUS")
         } else if (longitude < 302.49) {
-            zodiac = loc("CAPRICTITLE")
+            zodiac = loc("CAPRICORN")
         } else if (longitude < 311.72) {
-            zodiac = loc("ACQUARIOTITLE")
+            zodiac = loc("AQUARIUS")
         } else if (longitude < 348.58) {
-            zodiac = loc("PESCITITLE")
+            zodiac = loc("PESCES")
         } else {
-            zodiac = loc("ARIETETITLE")
+            zodiac = loc("ARIES")
         }
-        
         return zodiac
     }
         
