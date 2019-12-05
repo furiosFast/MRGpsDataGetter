@@ -19,7 +19,7 @@ import SwiftyJSON
 import SwifterSwift
 
 @objc public protocol MRGpsDataGetterWeatherDataDelegate: NSObjectProtocol {
-    func weatherDataReady(weather: GpsWeatherModel)
+    func weatherDataReady(weather: WeatherModel)
     @objc optional func weatherDataNotAvailable(error: String)
 }
 
@@ -28,7 +28,7 @@ open class WeatherDataGetter: NSObject {
     public static let shared = WeatherDataGetter()
     open weak var delegate : MRGpsDataGetterWeatherDataDelegate?
     
-    let weather = GpsWeatherModel()
+    let weather = WeatherModel()
     
     
     /// Function that start to retrive current Weather (provider: OpenWeatherMap.org) data based on a specified location
@@ -98,6 +98,7 @@ open class WeatherDataGetter: NSObject {
                 self.weather.weatherOpenWeatherMapIcon = weatherIcon
             }
             //3-4-5
+            //Wind speed. Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour.
             if let windSpeed = Double(json["wind"]["speed"].stringValue) {
                 if Preferences.shared.getPreference("windSpeed") == "meterSecondSpeed" {
                     if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
@@ -265,7 +266,7 @@ open class WeatherDataGetter: NSObject {
     }
     
     /// Get the weather data object
-    open func getOldWeatherData() -> GpsWeatherModel {
+    open func getOldWeatherData() -> WeatherModel {
         return weather
     }
     

@@ -13,7 +13,7 @@
 
 import UIKit
 
-public final class GpsSunInfoModel: NSObject {
+public class SunInfoModel: NSObject {
     
     public final var solarNoon : String = loc("NOTAVAILABLENUMBER")
     public final var nadir : String = loc("NOTAVAILABLENUMBER")

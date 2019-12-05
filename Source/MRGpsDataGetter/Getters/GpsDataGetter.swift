@@ -126,7 +126,7 @@ open class GpsDataGetter: NSObject {
                     if let placemarks = placemarks, let placemark = placemarks.first, let inlandWater = placemark.inlandWater, let ocean = placemark.ocean {
                         self.gps.locationName = ocean + ", " + inlandWater.uppercased()
                     } else {
-                        self.gps.locationName = loc("position_lOCNAMENAN")
+                        self.gps.locationName = loc("lOCATION_NaN")
                     }
                 }
                 self.delegate?.reverseGeocodeFromLocation(locationName: self.gps.locationName)

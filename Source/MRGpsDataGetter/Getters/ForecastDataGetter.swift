@@ -19,7 +19,7 @@ import SwiftyJSON
 import SwifterSwift
 
 @objc public protocol MRGpsDataGetterForecastDataDelegate: NSObjectProtocol {
-    func forecastDataReady(forecast: [GpsWeatherModel])
+    func forecastDataReady(forecast: [ForecastModel])
     @objc optional func forecastDataNotAvailable(error: String)
 }
 
@@ -28,7 +28,7 @@ open class ForecastDataGetter: NSObject {
     public static let shared = ForecastDataGetter()
     open weak var delegate : MRGpsDataGetterForecastDataDelegate?
     
-    var forecast : [GpsWeatherModel] = []
+    var forecast : [ForecastModel] = []
     var plotDataWindName: [String] = []
     var plotData: [Double] = []
     var plotDataTime: [String] = []
@@ -95,7 +95,7 @@ open class ForecastDataGetter: NSObject {
             self.plotDataTime = []
             self.plotDataWindName = []
             for i in 0..<json["list"].count {
-                let weather = GpsWeatherModel()
+                let weather = ForecastModel()
                 
                 //0
                 weather.currentWeatherLocation = currentLocation
@@ -108,48 +108,48 @@ open class ForecastDataGetter: NSObject {
                     weather.weatherOpenWeatherMapIcon = weatherIcon
                 }
                 //3-4-5-6
+                //Wind speed. Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour.
                 if let windSpeed = Double(json["list"][i]["wind"]["speed"].stringValue) {
                     if Preferences.shared.getPreference("windSpeed") == "meterSecondSpeed" {
                         if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
                             weather.windSpeed = (windSpeed * milesHourToMeterSecond).string
-                            weather.beaufortScale = /*loc("positionWind_SCALABEAUFORT") + " " +*/ getBeaufortForce(windSpeed * milesHourToKnot) /*+ ": " + String(format: "%3.1f ", windSpeed * milesHourToMeterSecond)*/
+                            weather.beaufortScale = getBeaufortForce(windSpeed * milesHourToKnot)
                             self.plotData.append(windSpeed * milesHourToMeterSecond)
                         } else {
                             weather.windSpeed = windSpeed.string
-                            weather.beaufortScale = /*loc("positionWind_SCALABEAUFORT") + " " +*/ getBeaufortForce(windSpeed * meterSecondToKnot) /*+ ": " + String(format: "%3.1f ", windSpeed)*/
+                            weather.beaufortScale = getBeaufortForce(windSpeed * meterSecondToKnot)
                             self.plotData.append(windSpeed)
                         }
                     }
                     if Preferences.shared.getPreference("windSpeed") == "kilometerHoursSpeed" {
                         if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
                             weather.windSpeed = (windSpeed * milesHourToKilometerHour).string
-                            weather.beaufortScale = /*loc("positionWind_SCALABEAUFORT") + " " +*/ getBeaufortForce(windSpeed * milesHourToKnot) /*+ ": " + String(format: "%3.1f ", windSpeed * milesHourToKilometerHour)*/
+                            weather.beaufortScale = getBeaufortForce(windSpeed * milesHourToKnot)
                             self.plotData.append(windSpeed * milesHourToKilometerHour)
                         } else {
                             weather.windSpeed = (windSpeed * meterSecondToKilometerHour).string
-                            weather.beaufortScale = /*loc("positionWind_SCALABEAUFORT") + " " +*/ getBeaufortForce(windSpeed * meterSecondToKnot) /*+ ": " + String(format: "%3.1f ", windSpeed * meterSecondToKilometerHour)*/
+                            weather.beaufortScale = getBeaufortForce(windSpeed * meterSecondToKnot)
                             self.plotData.append(windSpeed * meterSecondToKilometerHour)
                         }
                     }
                     if Preferences.shared.getPreference("windSpeed") == "knotSpeed" {
                         if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
                             weather.windSpeed = (windSpeed * milesHourToKnot).string
-                            weather.beaufortScale = /*loc("positionWind_SCALABEAUFORT") + " " +*/ getBeaufortForce(windSpeed * milesHourToKnot) /*+ ": " + String(format: "%3.1f ", windSpeed * milesHourToKnot)*/
+                            weather.beaufortScale = getBeaufortForce(windSpeed * milesHourToKnot)
                             self.plotData.append(windSpeed * milesHourToKnot)
                         } else {
                             weather.windSpeed = (windSpeed * meterSecondToKnot).string
-                            weather.beaufortScale = /*loc("positionWind_SCALABEAUFORT") + " " +*/ getBeaufortForce(windSpeed * meterSecondToKnot) /*+ ": " + String(format: "%3.1f ", windSpeed * meterSecondToKnot)*/
+                            weather.beaufortScale = getBeaufortForce(windSpeed * meterSecondToKnot)
                             self.plotData.append(windSpeed * meterSecondToKnot)
                         }
                     }
                     if Preferences.shared.getPreference("windSpeed") == "milesHoursSpeed" {
                         if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
                             weather.windSpeed = windSpeed.string
-                            weather.beaufortScale = /*loc("positionWind_SCALABEAUFORT") + " " +*/ getBeaufortForce(windSpeed * milesHourToKnot) /*+ ": " + String(format: "%3.1f ", windSpeed)
-                            self.plotData.append(windSpeed)*/
+                            weather.beaufortScale = getBeaufortForce(windSpeed * milesHourToKnot)
                         } else {
                             weather.windSpeed = (windSpeed * meterSecondToMilesHour).string
-                            weather.beaufortScale = /*loc("positionWind_SCALABEAUFORT") + " " +*/ getBeaufortForce(windSpeed * meterSecondToKnot) /*+ ": " + String(format: "%3.1f ", windSpeed * meterSecondToMilesHour)*/
+                            weather.beaufortScale = getBeaufortForce(windSpeed * meterSecondToKnot)
                             self.plotData.append(windSpeed * meterSecondToMilesHour)
                         }
                     }
@@ -292,13 +292,13 @@ open class ForecastDataGetter: NSObject {
     }
     
     /// Get the forecast data object
-    open func getOldForecastData() -> [GpsWeatherModel] {
+    open func getOldForecastData() -> [ForecastModel] {
         return forecast
     }
     
     /// Get the plot data object
-    open func getOldplotDataWindName() -> GpsPlotInfoModel {
-        return GpsPlotInfoModel(plotDataWindName, plotData, plotDataTime)
+    open func getOldplotDataWindName() -> PlotInfoModel {
+        return PlotInfoModel(plotDataWindName, plotData, plotDataTime)
     }
     
 }

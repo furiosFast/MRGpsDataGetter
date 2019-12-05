@@ -1,0 +1,117 @@
+/*
+ Localizable.strings
+ MRGpsDataGetter
+ 
+ Created by Marco on 20/11/19.
+ Copyright © 2019 Fast-Devs Project. All rights reserved.
+ */
+
+
+
+//file lang and openWeatherMap description
+"LANG" = "it";
+"UNITSMETRIC" = "metric";
+"UNITSIMPERIAL" = "imperial";
+
+//cardinal position
+"NNE" = "NNE";
+"NE" = "NE";
+"ENE" = "ENE";
+"E" = "E";
+"ESE" = "ESE";
+"SE" = "SE";
+"SSE" = "SSE";
+"S" = "S";
+"SSW" = "SSO";
+"SW" = "SO";
+"WSW" = "OSO";
+"W" = "O";
+"WNW" = "ONO";
+"NW" = "NO";
+"NNW" = "NNO";
+"N" = "N";
+
+//cardinal wind position
+"WIND_N" = "N - Tramontana";
+"WIND_NE" = "NE - Grecale";
+"WIND_E" = "E - Levante";
+"WIND_SE" = "SE - Scirocco";
+"WIND_S" = "S - Ostro";
+"WIND_SW" = "SO - Libeccio";
+"WIND_W" = "O - Ponente";
+"WIND_NW" = "NO - Maestrale";
+"WIND_NaN" = "Brezza leggera";
+
+//location
+"lOCATION_NaN" = "Nome località non disponibile";
+
+//sun
+"NIGHT" = "Notte fonda";
+"CREPASTROSUNRISE" = "Crepuscolo astronomico";
+"CREPNAUTICSUNRISE" = "Crepuscolo nautico";
+"CREPCIVSUNRISE" = "Crepuscolo civile";
+"DAY" = "Sole alto nel cielo";
+"SUNRISE" = "Alba";
+"SUNSET" = "Tramonto";
+
+//moon
+"NEWMOON" = "Luna nuova";
+"UPMOON" = "Luna crescente";
+"FIRSTMOON" = "Primo quarto";
+"GIBUPMOON" = "Gibbosa crescente";
+"FULLMOON" = "Luna piena";
+"GIPDOWNMOON" = "Gibbosa calante";
+"LASTMOON" = "Ultimo quarto";
+"DOWNMOON" = "Luna calante";
+
+"POSITIONMOON_NEGATIVE" = "Luna sotto l'orizzonte";
+"POSITIONMOON_POSITIVE" = "Luna sopra l'orizzonte";
+
+"ASCENDENT" = "Ascendente";
+"DESCENDENT" = "Discendente";
+
+//zodiac sign (sun/moon)
+"ARIES" = "Ariete";
+"CANCER" = "Cancro";
+"TAURUS" = "Toro";
+"LEO" = "Leone";
+"GEMENI" = "Gemelli";
+"VIRGO" = "Vergine";
+"LIBRA" = "Bilancia";
+"CAPRICORN" = "Capricorno";
+"SCORPIO" = "Scorpione";
+"AQUARIUS" = "Acquario";
+"SAGITTARIUS" = "Sagittario";
+"PESCES" = "Pesci";
+
+
+
+/************************************************MISURE UNIT******************************************************/
+
+"DAY" = "Giorno";
+"DAYS" = "Giorni";
+"DATE" = "Data";
+"TIME" = "Tempo";
+"HOURS" = "Ore";
+"MEDIA" = "Media";
+"MAX" = "Max";
+"KILOMETERS" = "km";
+"METERS" = "m";
+"MILLIMETERS" = "mm";
+"MILES" = "miglia";
+"KNOT" = "kn";
+"KILOMETERSHOUR" = "km/h";
+"METERSSECOND" = "m/s";
+"MILESHOURS" = "mi/h";
+"DEGREE" = "°";
+"CELSUS" = "°C";
+"CELSUSTEXT" = "Celsus";
+"FAHRENHEIT" = "°F";
+"FAHRENHEITTEXT" = "Fahrenheit";
+"KELVIN" = "°K";
+"KELVINTEXT" = "Kelvin";
+"NOTAVAILABLENUMBER" = "NaN";
+"PERCENT" = "%";
+"HPA" = "hPa";
+"ATM" = "aTm";
+"BAR" = "bar";

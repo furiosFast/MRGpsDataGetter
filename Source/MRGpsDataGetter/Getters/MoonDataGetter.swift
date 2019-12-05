@@ -17,7 +17,7 @@ import CoreLocation
 import SwifterSwift
 
 public protocol MRGpsDataGetterMoonDataDelegate: NSObjectProtocol {
-    func moonDataReady(moon: GpsMoonInfoModel)
+    func moonDataReady(moon: MoonInfoModel)
 }
 
 open class MoonDataGetter: NSObject {
@@ -25,7 +25,7 @@ open class MoonDataGetter: NSObject {
     public static let shared = MoonDataGetter()
     open weak var delegate : MRGpsDataGetterMoonDataDelegate?
     
-    let moon = GpsMoonInfoModel()
+    let moon = MoonInfoModel()
     
     
     /// Function that start to retrive all Moon data based on a specified location
@@ -84,7 +84,7 @@ open class MoonDataGetter: NSObject {
     }
     
     /// Get the moon data object
-    open func getOldMoonData() -> GpsMoonInfoModel {
+    open func getOldMoonData() -> MoonInfoModel {
         return moon
     }
     
@@ -94,10 +94,10 @@ open class MoonDataGetter: NSObject {
     /// - Parameter altitude: altitude on the moon (in degrees)
     private func getMoonVisibility(_ altitude: Double) -> String {
         if (altitude >= 0) {
-            return loc("positionPhone_POSITIONMOONPOSITIVETITLE")
+            return loc("POSITIONMOON_POSITIVE")
         }
         if (altitude < 0) {
-            return loc("positionPhone_POSITIONMOONNEGATIVETITLE")
+            return loc("POSITIONMOON_NEGATIVE")
         }
         return loc("NOTAVAILABLENUMBER")
     }
@@ -139,35 +139,35 @@ open class MoonDataGetter: NSObject {
     /// Function that return the moon phase name based on the moon phase angle (is the midpoint of the illuminated limb of the moon going east)
     /// - Parameter phase: the phase is a number from 0 to 1, where 0 and 1 are a new moon, 0.5 is a full moon, 0 - 0.5 is waxing, and 0.5 - 1.0 is waning
     private func getMoonPhaseTitleFromPhase(_ phase: Double) -> String {
-        if phase >= 0 && phase <= 0.03448275862 { return loc("position_NEWMOONTITLE") }
-        if phase > 0.03448275862 && phase <= 0.06896551724 { return loc("position_UPMOONTITLE") }
-        if phase > 0.06896551724 && phase <= 0.10344827586 { return loc("position_UPMOONTITLE") }
-        if phase > 0.10344827586 && phase <= 0.13793103448 { return loc("position_UPMOONTITLE") }
-        if phase > 0.13793103448 && phase <= 0.1724137931 { return loc("position_UPMOONTITLE") }
-        if phase > 0.1724137931 && phase <= 0.20689655172 { return loc("position_UPMOONTITLE") }
-        if phase > 0.20689655172 && phase <= 0.24137931034 { return loc("position_UPMOONTITLE") }
-        if phase > 0.24137931034 && phase <= 0.27586206896 { return loc("position_FIRSTMOONTITLE") }
-        if phase > 0.27586206896 && phase <= 0.31034482758 { return loc("position_GIBUPMOONTITLE") }
-        if phase > 0.31034482758 && phase <= 0.3448275862 { return loc("position_GIBUPMOONTITLE") }
-        if phase > 0.3448275862 && phase <= 0.37931034482 { return loc("position_GIBUPMOONTITLE") }
-        if phase > 0.37931034482 && phase <= 0.41379310344 { return loc("position_GIBUPMOONTITLE") }
-        if phase > 0.41379310344 && phase <= 0.44827586206 { return loc("position_GIBUPMOONTITLE") }
-        if phase > 0.44827586206 && phase <= 0.48275862068 { return loc("position_GIBUPMOONTITLE") }
-        if phase > 0.48275862068 && phase <= 0.5172413793 { return loc("position_FULLMOONTITLE") }
-        if phase > 0.5172413793 && phase <= 0.55172413792 { return loc("position_GIPDOWNMOONTITLE") }
-        if phase > 0.55172413792 && phase <= 0.58620689654 { return loc("position_GIPDOWNMOONTITLE") }
-        if phase > 0.58620689654 && phase <= 0.62068965516 { return loc("position_GIPDOWNMOONTITLE") }
-        if phase > 0.62068965516 && phase <= 0.65517241378 { return loc("position_GIPDOWNMOONTITLE") }
-        if phase > 0.65517241378 && phase <= 0.6896551724 { return loc("position_GIPDOWNMOONTITLE") }
-        if phase > 0.6896551724 && phase <= 0.72413793102 { return loc("position_GIPDOWNMOONTITLE") }
-        if phase > 0.72413793102 && phase <= 0.75862068964 { return loc("position_LASTMOONTITLE") }
-        if phase > 0.75862068964 && phase <= 0.79310344826 { return loc("position_DOWNMOONTITLE") }
-        if phase > 0.79310344826 && phase <= 0.82758620688 { return loc("position_DOWNMOONTITLE") }
-        if phase > 0.82758620688 && phase <= 0.8620689655 { return loc("position_DOWNMOONTITLE") }
-        if phase > 0.8620689655 && phase <= 0.89655172412 { return loc("position_DOWNMOONTITLE") }
-        if phase > 0.89655172412 && phase <= 0.93103448274 { return loc("position_DOWNMOONTITLE") }
-        if phase > 0.93103448274 && phase <= 0.96551724136 { return loc("position_DOWNMOONTITLE") }
-        if phase > 0.96551724136 && phase <= 1 { return loc("position_NEWMOONTITLE") }
+        if phase >= 0 && phase <= 0.03448275862 { return loc("NEWMOONTITLE") }
+        if phase > 0.03448275862 && phase <= 0.06896551724 { return loc("UPMOONTITLE") }
+        if phase > 0.06896551724 && phase <= 0.10344827586 { return loc("UPMOONTITLE") }
+        if phase > 0.10344827586 && phase <= 0.13793103448 { return loc("UPMOONTITLE") }
+        if phase > 0.13793103448 && phase <= 0.1724137931 { return loc("UPMOONTITLE") }
+        if phase > 0.1724137931 && phase <= 0.20689655172 { return loc("UPMOONTITLE") }
+        if phase > 0.20689655172 && phase <= 0.24137931034 { return loc("UPMOONTITLE") }
+        if phase > 0.24137931034 && phase <= 0.27586206896 { return loc("FIRSTMOONTITLE") }
+        if phase > 0.27586206896 && phase <= 0.31034482758 { return loc("GIBUPMOONTITLE") }
+        if phase > 0.31034482758 && phase <= 0.3448275862 { return loc("GIBUPMOONTITLE") }
+        if phase > 0.3448275862 && phase <= 0.37931034482 { return loc("GIBUPMOONTITLE") }
+        if phase > 0.37931034482 && phase <= 0.41379310344 { return loc("GIBUPMOONTITLE") }
+        if phase > 0.41379310344 && phase <= 0.44827586206 { return loc("GIBUPMOONTITLE") }
+        if phase > 0.44827586206 && phase <= 0.48275862068 { return loc("GIBUPMOONTITLE") }
+        if phase > 0.48275862068 && phase <= 0.5172413793 { return loc("FULLMOONTITLE") }
+        if phase > 0.5172413793 && phase <= 0.55172413792 { return loc("GIPDOWNMOONTITLE") }
+        if phase > 0.55172413792 && phase <= 0.58620689654 { return loc("GIPDOWNMOONTITLE") }
+        if phase > 0.58620689654 && phase <= 0.62068965516 { return loc("GIPDOWNMOONTITLE") }
+        if phase > 0.62068965516 && phase <= 0.65517241378 { return loc("GIPDOWNMOONTITLE") }
+        if phase > 0.65517241378 && phase <= 0.6896551724 { return loc("GIPDOWNMOONTITLE") }
+        if phase > 0.6896551724 && phase <= 0.72413793102 { return loc("GIPDOWNMOONTITLE") }
+        if phase > 0.72413793102 && phase <= 0.75862068964 { return loc("LASTMOONTITLE") }
+        if phase > 0.75862068964 && phase <= 0.79310344826 { return loc("DOWNMOONTITLE") }
+        if phase > 0.79310344826 && phase <= 0.82758620688 { return loc("DOWNMOONTITLE") }
+        if phase > 0.82758620688 && phase <= 0.8620689655 { return loc("DOWNMOONTITLE") }
+        if phase > 0.8620689655 && phase <= 0.89655172412 { return loc("DOWNMOONTITLE") }
+        if phase > 0.89655172412 && phase <= 0.93103448274 { return loc("DOWNMOONTITLE") }
+        if phase > 0.93103448274 && phase <= 0.96551724136 { return loc("DOWNMOONTITLE") }
+        if phase > 0.96551724136 && phase <= 1 { return loc("NEWMOONTITLE") }
         return loc("NOTAVAILABLENUMBER")
     }
     
@@ -179,23 +179,23 @@ open class MoonDataGetter: NSObject {
         var phase: String = loc("NOTAVAILABLENUMBER")
         
         if (age < 1.84566) {
-            phase = loc("position_NEWMOONTITLE")
+            phase = loc("NEWMOONTITLE")
         } else if (age < 5.53699) {
-            phase = loc("position_UPMOONTITLE")
+            phase = loc("UPMOONTITLE")
         } else if (age < 9.22831) {
-            phase = loc("position_FIRSTMOONTITLE")
+            phase = loc("FIRSTMOONTITLE")
         } else if (age < 12.91963) {
-            phase = loc("position_GIBUPMOONTITLE")
+            phase = loc("GIBUPMOONTITLE")
         } else if (age < 16.61096) {
-            phase = loc("position_FULLMOONTITLE")
+            phase = loc("FULLMOONTITLE")
         } else if (age < 20.30228) {
-            phase = loc("position_GIPDOWNMOONTITLE")
+            phase = loc("GIPDOWNMOONTITLE")
         } else if (age < 23.99361) {
-            phase = loc("position_LASTMOONTITLE")
+            phase = loc("LASTMOONTITLE")
         } else if (age < 27.68493) {
-            phase = loc("position_DOWNMOONTITLE")
+            phase = loc("DOWNMOONTITLE")
         } else {
-            phase = loc("position_NEWMOONTITLE")
+            phase = loc("NEWMOONTITLE")
         }
         
         return phase
@@ -236,7 +236,6 @@ open class MoonDataGetter: NSObject {
         return loc("NOTAVAILABLENUMBER")
     }
     
-    //Получить знак зодиака для луны
     private func getMoonZodicaSign(_ date: Date) -> String {
         var longitude: Double = 0.0
         var zodiac: String = loc("NOTAVAILABLENUMBER")
@@ -280,66 +279,63 @@ open class MoonDataGetter: NSObject {
         longitude = 360 * rp + 6.3 * sin(dp) + 1.3 * sin(2 * ip - dp) + 0.7 * sin(2 * ip)        
         
         if (longitude < 33.18) {
-            zodiac = loc("position_ARIETETITLE")
+            zodiac = loc("ARIETETITLE")
         } else if (longitude < 51.16) {
-            zodiac = loc("position_TOROTITLE")
+            zodiac = loc("TOROTITLE")
         } else if (longitude < 93.44) {
-            zodiac = loc("position_GEMELLITITLE")
+            zodiac = loc("GEMELLITITLE")
         } else if (longitude < 119.48) {
-            zodiac = loc("position_CANCROTITLE")
+            zodiac = loc("CANCROTITLE")
         } else if (longitude < 135.30) {
-            zodiac = loc("position_LEONETITLE")
+            zodiac = loc("LEONETITLE")
         } else if (longitude < 173.34) {
-            zodiac = loc("position_VERGINETITLE")
+            zodiac = loc("VERGINETITLE")
         } else if (longitude < 224.17) {
-            zodiac = loc("position_BILANCIATITLE")
+            zodiac = loc("BILANCIATITLE")
         } else if (longitude < 242.57) {
-            zodiac = loc("position_SCORPIOTITLE")
+            zodiac = loc("SCORPIOTITLE")
         } else if (longitude < 271.26) {
-            zodiac = loc("position_SAGITTARIOTITLE")
+            zodiac = loc("SAGITTARIOTITLE")
         } else if (longitude < 302.49) {
-            zodiac = loc("position_CAPRICTITLE")
+            zodiac = loc("CAPRICTITLE")
         } else if (longitude < 311.72) {
-            zodiac = loc("position_ACQUARIOTITLE")
+            zodiac = loc("ACQUARIOTITLE")
         } else if (longitude < 348.58) {
-            zodiac = loc("position_PESCITITLE")
+            zodiac = loc("PESCITITLE")
         } else {
-            zodiac = loc("position_ARIETETITLE")
+            zodiac = loc("ARIETETITLE")
         }
         
         return zodiac
     }
-    
-    
-    //Получить знак зодиака для дуны, траекторию луны, фазу луны
+        
     private func getMoonTrajectoryFromAge(_ date: Date) -> String {
-        let age: Double = self.getMoonAge(date)
+        let age: Double = getMoonAge(date)
         var trajectory: String = loc("NOTAVAILABLENUMBER")
         
         if (age < 1.84566) {
-            trajectory = loc("position_ASCENDENT")
+            trajectory = loc("ASCENDENT")
         } else if (age < 5.53699) {
-            trajectory = loc("position_ASCENDENT")
+            trajectory = loc("ASCENDENT")
         } else if (age < 9.22831) {
-            trajectory = loc("position_ASCENDENT")
+            trajectory = loc("ASCENDENT")
         } else if (age < 12.91963) {
-            trajectory = loc("position_ASCENDENT")
+            trajectory = loc("ASCENDENT")
         } else if (age < 16.61096) {
-            trajectory = loc("position_DESCENDENT")
+            trajectory = loc("DESCENDENT")
         } else if (age < 20.30228) {
-            trajectory = loc("position_DESCENDENT")
+            trajectory = loc("DESCENDENT")
         } else if (age < 23.99361) {
-            trajectory = loc("position_DESCENDENT")
+            trajectory = loc("DESCENDENT")
         } else if (age < 27.68493) {
-            trajectory = loc("position_DESCENDENT")
+            trajectory = loc("DESCENDENT")
         } else {
-            trajectory = loc("position_ASCENDENT")
+            trajectory = loc("ASCENDENT")
         }
         
         return trajectory
     }
     
-    //Получить лунный день
     private func getMoonAge(_ date: Date) -> Double {
         var age: Double = 0.0
 
@@ -376,7 +372,6 @@ open class MoonDataGetter: NSObject {
         return age
     }
     
-    //нормализовать число, т.е. число от 0 до 1
     private func normalize(_ value: Double) -> Double {
         var v = value - floor(value)
         if (v < 0) {

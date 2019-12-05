@@ -13,7 +13,7 @@
 
 import UIKit
 
-public final class GpsInfoModel: NSObject {
+public class GpsInfoModel: NSObject {
     
     public final var locationName : String = loc("NOTAVAILABLENUMBER")
 

@@ -80,6 +80,8 @@ MRGpsDataGetter has different dependencies and therefore needs the following lib
 
 It is necessary to add the dependencies of MRGpsDataGetter to each target that implements it!
 
+Another library necessary for the correct functioning of MRGpsDataGetter is [BDAstroCalc](https://github.com/braindrizzlestudio/BDAstroCalc). It is already implemented within the framework.
+
 ## License
 
 SwifterSwift is released under the MIT license. See [LICENSE](https://github.com/furiosFast/MRGpsDataGetter/blob/master/LICENSE) for more information.

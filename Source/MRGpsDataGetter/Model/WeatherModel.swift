@@ -14,7 +14,7 @@
 import UIKit
 import CoreLocation
 
-public final class GpsWeatherModel: NSObject {
+public class WeatherModel: NSObject {
     
     public final var windSpeed : String = loc("NOTAVAILABLENUMBER")
     public final var windDegree : String = loc("NOTAVAILABLENUMBER")

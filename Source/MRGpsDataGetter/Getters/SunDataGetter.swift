@@ -17,7 +17,7 @@ import CoreLocation
 import SwifterSwift
 
 public protocol MRGpsDataGetterSunDataDelegate: NSObjectProtocol {
-    func sunDataReady(sun: GpsSunInfoModel)
+    func sunDataReady(sun: SunInfoModel)
 }
 
 open class SunDataGetter: NSObject {
@@ -25,7 +25,7 @@ open class SunDataGetter: NSObject {
     public static let shared = SunDataGetter()
     open weak var delegate: MRGpsDataGetterSunDataDelegate?
     
-    let sun = GpsSunInfoModel()
+    let sun = SunInfoModel()
     
     
     /// Function that start to retrive all Sun data based on a specified location
@@ -93,7 +93,7 @@ open class SunDataGetter: NSObject {
     }
     
     /// Get the sun data object
-    open func getOldSunData() -> GpsSunInfoModel {
+    open func getOldSunData() -> SunInfoModel {
         return sun
     }
     
@@ -131,19 +131,19 @@ open class SunDataGetter: NSObject {
     /// - Parameter altitude: altitude on the sun (in degrees)
     private func getSunPhaseTitle(_ altitude: Double) -> String {
         if (altitude > 0) {
-            return loc("position_DAYTITLE")
+            return loc("DAYTITLE")
         }
         if (altitude <= 0 && altitude >= -6) {
-            return loc("position_CREPCIVSUNRISETITLE")
+            return loc("CREPCIVSUNRISETITLE")
         }
         if (altitude < -6 && altitude >= -12) {
-            return loc("position_CREPNAUTICSUNRISETITLE")
+            return loc("CREPNAUTICSUNRISETITLE")
         }
         if (altitude < -12 && altitude >= -18) {
-            return loc("position_CREPASTROSUNRISETITLE")
+            return loc("CREPASTROSUNRISETITLE")
         }
         if (altitude < -18) {
-            return loc("position_NIGHTTITLE")
+            return loc("NIGHTTITLE")
         }
         return loc("NOTAVAILABLENUMBER")
     }
@@ -175,58 +175,25 @@ open class SunDataGetter: NSObject {
     
     /// Function that return the zodiac sign of sun/moon based on the right ascension
     /// - Parameter rightAscension: the right asnension of Sun/Moon (in radians).
-    private func getSunZodiacSign(_ rightAscension: Double) -> String {
-//        var rightAscension = Double((rightAscension + 360).int % 360)
-//        if(rightAscension < 0) {
-//            rightAscension = -1 * rightAscension
-//        }
-//        var zodiacSign = loc("NOTAVAILABLENUMBER")
-//        if (rightAscension < 33.18) {
-//            zodiacSign = loc("position_ARIETETITLE")
-//        } else if (rightAscension < 51.16) {
-//            zodiacSign = loc("position_TOROTITLE")
-//        } else if (rightAscension < 93.44) {
-//            zodiacSign = loc("position_GEMELLITITLE")
-//        } else if (rightAscension < 119.48) {
-//            zodiacSign = loc("position_CANCROTITLE")
-//        } else if (rightAscension < 135.30) {
-//            zodiacSign = loc("position_LEONETITLE")
-//        } else if (rightAscension < 173.34) {
-//            zodiacSign = loc("position_VERGINETITLE")
-//        } else if (rightAscension < 224.17) {
-//            zodiacSign = loc("position_BILANCIATITLE")
-//        } else if (rightAscension < 242.57) {
-//            zodiacSign = loc("position_SCORPIOTITLE")
-//        } else if (rightAscension < 271.26) {
-//            zodiacSign = loc("position_SAGITTARIOTITLE")
-//        } else if (rightAscension < 302.49) {
-//            zodiacSign = loc("position_CAPRICTITLE")
-//        } else if (rightAscension < 311.72) {
-//            zodiacSign = loc("position_ACQUARIOTITLE")
-//        } else if (rightAscension < 348.58) {
-//            zodiacSign = loc("position_PESCITITLE")
-//        } else {
-//            zodiacSign = loc("position_ARIETETITLE")
-//        }
-        
+    private func getSunZodiacSign(_ rightAscension: Double) -> String {        
         var rightAscension = (rightAscension + 360).int % 360
         if(rightAscension < 0) {
             rightAscension = -1 * rightAscension
         }
         var zodiacSign = loc("NOTAVAILABLENUMBER")
         switch rightAscension {
-            case 0..<30: zodiacSign = loc("position_PESCITITLE")
-            case 30..<60: zodiacSign = loc("position_ARIETETITLE")
-            case 60..<90: zodiacSign = loc("position_TOROTITLE")
-            case 90..<120: zodiacSign = loc("position_GEMELLITITLE")
-            case 120..<150: zodiacSign = loc("position_CANCROTITLE")
-            case 150..<180: zodiacSign = loc("position_LEONETITLE")
-            case 180..<210: zodiacSign = loc("position_VERGINETITLE")
-            case 210...240: zodiacSign = loc("position_BILANCIATITLE")
-            case 240...270: zodiacSign = loc("position_SCORPIOTITLE")
-            case 270...300: zodiacSign = loc("position_SAGITTARIOTITLE")
-            case 300...330: zodiacSign = loc("position_CAPRICTITLE")
-            case 330...360: zodiacSign = loc("position_ACQUARIOTITLE")
+            case 0..<30: zodiacSign = loc("PESCITITLE")
+            case 30..<60: zodiacSign = loc("ARIETETITLE")
+            case 60..<90: zodiacSign = loc("TOROTITLE")
+            case 90..<120: zodiacSign = loc("GEMELLITITLE")
+            case 120..<150: zodiacSign = loc("CANCROTITLE")
+            case 150..<180: zodiacSign = loc("LEONETITLE")
+            case 180..<210: zodiacSign = loc("VERGINETITLE")
+            case 210...240: zodiacSign = loc("BILANCIATITLE")
+            case 240...270: zodiacSign = loc("SCORPIOTITLE")
+            case 270...300: zodiacSign = loc("SAGITTARIOTITLE")
+            case 300...330: zodiacSign = loc("CAPRICTITLE")
+            case 330...360: zodiacSign = loc("ACQUARIOTITLE")
             default: break
         }
         return zodiacSign

@@ -78,14 +78,14 @@ func declinationToString(_ declination: Double) -> String {
 func getWindName(_ angle: Double) -> String {
     var windNameWithCardinalSign : String = ""
     switch angle {
-        case 23..<67: windNameWithCardinalSign = loc("positionWind_NE")
-        case 67..<114: windNameWithCardinalSign = loc("positionWind_E")
-        case 114..<157: windNameWithCardinalSign = loc("positionWind_SE")
-        case 157..<203: windNameWithCardinalSign = loc("positionWind_S")
-        case 203..<246: windNameWithCardinalSign = loc("positionWind_SW")
-        case 246..<294: windNameWithCardinalSign = loc("positionWind_W")
-        case 294..<339: windNameWithCardinalSign = loc("positionWind_NW")
-        case 339..<361, 0..<23: windNameWithCardinalSign = loc("positionWind_N")
+        case 23..<67: windNameWithCardinalSign = loc("WIND_NE")
+        case 67..<114: windNameWithCardinalSign = loc("WIND_E")
+        case 114..<157: windNameWithCardinalSign = loc("WIND_SE")
+        case 157..<203: windNameWithCardinalSign = loc("WIND_S")
+        case 203..<246: windNameWithCardinalSign = loc("WIND_SW")
+        case 246..<294: windNameWithCardinalSign = loc("WIND_W")
+        case 294..<339: windNameWithCardinalSign = loc("WIND_NW")
+        case 339..<361, 0..<23: windNameWithCardinalSign = loc("WIND_N")
         default: break
     }
     return windNameWithCardinalSign
@@ -96,30 +96,108 @@ func getWindName(_ angle: Double) -> String {
 func getAngleName(_ angle: Double) -> String {
     var name : String = ""
     switch angle {
-        case 11.25..<33.75: name = loc("position_NNE")
-        case 33.75..<56.25: name = loc("position_NE")
-        case 56.25..<78.75: name = loc("position_ENE")
-        case 78.75..<101.25: name = loc("position_E")
-        case 101.25..<123.75: name = loc("position_ESE")
-        case 123.75..<146.25: name = loc("position_SE")
-        case 146.25..<168.75: name = loc("position_SSE")
-        case 168.75..<191.25: name = loc("position_S")
-        case 191.25..<213.75: name = loc("position_SSW")
-        case 213.75..<236.25: name = loc("position_SW")
-        case 236.25..<258.75: name = loc("position_WSW")
-        case 258.75..<281.25: name = loc("position_W")
-        case 281.25..<303.75: name = loc("position_WNW")
-        case 303.75..<326.25: name = loc("position_NW")
-        case 326.25..<348.75: name = loc("position_NNW")
-        case 348.75..<361, 0..<11.25: name = loc("position_N")
+        case 11.25..<33.75: name = loc("NNE")
+        case 33.75..<56.25: name = loc("NE")
+        case 56.25..<78.75: name = loc("ENE")
+        case 78.75..<101.25: name = loc("E")
+        case 101.25..<123.75: name = loc("ESE")
+        case 123.75..<146.25: name = loc("SE")
+        case 146.25..<168.75: name = loc("SSE")
+        case 168.75..<191.25: name = loc("S")
+        case 191.25..<213.75: name = loc("SSW")
+        case 213.75..<236.25: name = loc("SW")
+        case 236.25..<258.75: name = loc("WSW")
+        case 258.75..<281.25: name = loc("W")
+        case 281.25..<303.75: name = loc("WNW")
+        case 303.75..<326.25: name = loc("NW")
+        case 326.25..<348.75: name = loc("NNW")
+        case 348.75..<361, 0..<11.25: name = loc("N")
         default: break
     }
     return name
 }
 
 /// Function that return the Beaufort force degree bassed on the wind speed in knot
+/// - Parameter speedUnitMisure: wind speed misure unit (m/s, km/h, mi/h, kn)
+/// - Parameter windSpeed: wind speed
+//func getBeaufortForce(_ speedUnitMisure: String, _ windSpeed: Double) -> String {
+//    var beaufortForce = "0"
+//    if speedUnitMisure == "meterSecondSpeed" {
+//        switch windSpeed {
+//            case 0..<0.3: beaufortForce = "0"
+//            case 0.3..<1.5: beaufortForce = "1"
+//            case 1.5..<3.4: beaufortForce = "2"
+//            case 3.4..<5.4: beaufortForce = "3"
+//            case 5.4..<7.9: beaufortForce = "4"
+//            case 7.9..<10.7: beaufortForce = "5"
+//            case 10.7..<13.8: beaufortForce = "6"
+//            case 13.8..<17.1: beaufortForce = "7"
+//            case 17.1..<20.7: beaufortForce = "8"
+//            case 20.7..<24.4: beaufortForce = "9"
+//            case 24.4..<28.4: beaufortForce = "10"
+//            case 28.4..<32.6: beaufortForce = "11"
+//            case 32.6..<3000: beaufortForce = "12"
+//            default: break
+//        }
+//    } else if speedUnitMisure == "kilometerHoursSpeed" {
+//        switch windSpeed {
+//            case 0..<1: beaufortForce = "0"
+//            case 1..<6: beaufortForce = "1"
+//            case 6..<11: beaufortForce = "2"
+//            case 11..<19: beaufortForce = "3"
+//            case 19..<29: beaufortForce = "4"
+//            case 29..<39: beaufortForce = "5"
+//            case 39..<50: beaufortForce = "6"
+//            case 50..<62: beaufortForce = "7"
+//            case 62..<75: beaufortForce = "8"
+//            case 75..<87: beaufortForce = "9"
+//            case 87..<102: beaufortForce = "10"
+//            case 102..<117: beaufortForce = "11"
+//            case 117..<3000: beaufortForce = "12"
+//            default: break
+//        }
+//
+//    } else if speedUnitMisure == "milesHoursSpeed" {
+//        switch windSpeed {
+//            case 0..<1: beaufortForce = "0"
+//            case 1..<3: beaufortForce = "1"
+//            case 4..<7: beaufortForce = "2"
+//            case 7..<12: beaufortForce = "3"
+//            case 12..<18: beaufortForce = "4"
+//            case 18..<24: beaufortForce = "5"
+//            case 24..<31: beaufortForce = "6"
+//            case 31..<38: beaufortForce = "7"
+//            case 38..<46: beaufortForce = "8"
+//            case 46..<54: beaufortForce = "9"
+//            case 54..<63: beaufortForce = "10"
+//            case 63..<72: beaufortForce = "11"
+//            case 72..<3000: beaufortForce = "12"
+//            default: break
+//        }
+//
+//    } else { //kn
+//        switch windSpeed {
+//            case 0..<1: beaufortForce = "0"
+//            case 1..<4: beaufortForce = "1"
+//            case 4..<7: beaufortForce = "2"
+//            case 7..<11: beaufortForce = "3"
+//            case 11..<17: beaufortForce = "4"
+//            case 17..<22: beaufortForce = "5"
+//            case 22..<28: beaufortForce = "6"
+//            case 28..<34: beaufortForce = "7"
+//            case 34..<41: beaufortForce = "8"
+//            case 41..<48: beaufortForce = "9"
+//            case 48..<56: beaufortForce = "10"
+//            case 56..<65: beaufortForce = "11"
+//            case 65..<3000: beaufortForce = "12"
+//            default: break
+//        }
+//    }
+//    return beaufortForce
+//}
+
+/// Function that return the Beaufort force degree bassed on the wind speed in knot
 /// - Parameter windSpeedKnot: wind speed (in knot)
-#warning("fare funzione anche per altre velocità del vento")
 func getBeaufortForce(_ windSpeedKnot: Double) -> String {
     var windSpeed = "0"
     switch windSpeedKnot {

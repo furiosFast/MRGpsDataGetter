@@ -13,7 +13,7 @@
 
 import UIKit
 
-public final class GpsMoonInfoModel: NSObject { 
+public class MoonInfoModel: NSObject { 
     
     public final var altitude : String = loc("NOTAVAILABLENUMBER")
     public final var fractionOfMoonIlluminated : String = loc("NOTAVAILABLENUMBER")
