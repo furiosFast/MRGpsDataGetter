@@ -19,7 +19,7 @@ import SwiftyJSON
 import SwifterSwift
 
 @objc public protocol MRGpsDataGetterForecastDataDelegate: NSObjectProtocol {
-    func forecastDataReady(forecast: [ForecastModel])
+    func forecastDataReady(forecast: [WeatherModel])
     @objc optional func forecastDataNotAvailable(error: String)
 }
 
@@ -28,7 +28,7 @@ open class ForecastDataGetter: NSObject {
     public static let shared = ForecastDataGetter()
     open weak var delegate : MRGpsDataGetterForecastDataDelegate?
     
-    var forecast : [ForecastModel] = []
+    var forecast : [WeatherModel] = []
     var plotDataWindName: [String] = []
     var plotData: [Double] = []
     var plotDataTime: [String] = []
@@ -95,7 +95,7 @@ open class ForecastDataGetter: NSObject {
             self.plotDataTime = []
             self.plotDataWindName = []
             for i in 0..<json["list"].count {
-                let weather = ForecastModel()
+                let weather = WeatherModel()
                 
                 //0
                 weather.currentWeatherLocation = currentLocation
@@ -292,7 +292,7 @@ open class ForecastDataGetter: NSObject {
     }
     
     /// Get the forecast data object
-    open func getOldForecastData() -> [ForecastModel] {
+    open func getOldForecastData() -> [WeatherModel] {
         return forecast
     }
     
