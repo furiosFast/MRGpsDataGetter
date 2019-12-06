@@ -95,8 +95,7 @@ open class SunDataGetter: NSObject {
         do {
             let smc:SunMoonCalculator = try SunMoonCalculator(date: Date(), longitude: currentLocation.coordinate.longitude, latitude: currentLocation.coordinate.latitude)
             smc.calcSunAndMoon()
-            sun.distance = "\(Int(smc.sunDistance).formattedWithSeparator) " + loc("AUs")
-            sun.elevation = String(format: "%3.1f", smc.sunElevation.radiansToDegrees) + loc("DEGREE")
+            sun.distance = smc.sunDistance.string + loc("AUs")
             sun.transit = smc.sunTransit.string
             sun.transitElevation = String(format: "%3.1f", smc.sunTransitElevation.radiansToDegrees) + loc("DEGREE")
         } catch {
