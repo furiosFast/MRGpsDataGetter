@@ -601,6 +601,7 @@ public extension Date {
     var second: UInt {
         return UInt(Calendar.current.component(.second, from: self))
     }
+    
 }
 
 // Thread
