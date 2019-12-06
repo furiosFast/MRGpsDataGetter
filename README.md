@@ -78,9 +78,13 @@ MRGpsDataGetter has different dependencies and therefore needs the following lib
 - [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON) 5.0.0+
 - [SwifterSwift](https://github.com/SwifterSwift/SwifterSwift) 5.1.0+
 
-It is necessary to add the dependencies of MRGpsDataGetter to each target that implements it!
+It isn't necessary to add the dependencies of MRGpsDataGetter, becose with SPM all is do automatically!
 
-Another library necessary for the correct functioning of MRGpsDataGetter is [BDAstroCalc](https://github.com/braindrizzlestudio/BDAstroCalc). It is already implemented within the framework.
+Others library's files are necessary for the correct functioning of MRGpsDataGetter:
+- [BDAstroCalc](https://github.com/braindrizzlestudio/BDAstroCalc);
+- [AstrologyCalc](https://github.com/emvakar/AstrologyCalc).
+
+There files are already included into the framework.
 
 ## License
 

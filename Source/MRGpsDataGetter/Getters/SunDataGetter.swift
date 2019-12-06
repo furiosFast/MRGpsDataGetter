@@ -84,7 +84,25 @@ open class SunDataGetter: NSObject {
         let sunCoordinates = BDAstroCalc.sunCoordinates(daysSinceJan12000: Jan12000Date)
         sun.declination = declinationToString(sunCoordinates.declination.radiansToDegrees)
         sun.rightAscension = String(format: "%3.1f", sunCoordinates.rightAscension.radiansToDegrees)
-        sun.zodiacSign = getSunZodiacSign(sunCoordinates.rightAscension.radiansToDegrees)
+        sun.zodiacSign = getZodiacSign(sunCoordinates.rightAscension.radiansToDegrees)
+        
+        sun.previusEclipse = EclipseCalculator().getEclipseFor(date: Date(), eclipseType: .Solar, next: false)
+        sun.nextEclipse = EclipseCalculator().getEclipseFor(date: Date(), eclipseType: .Solar, next: true)
+        
+        
+        
+        /////////////////////////////
+        do {
+            let smc:SunMoonCalculator = try SunMoonCalculator(date: Date(), longitude: currentLocation.coordinate.longitude, latitude: currentLocation.coordinate.latitude)
+            smc.calcSunAndMoon()
+            sun.distance = "\(Int(smc.sunDistance).formattedWithSeparator) " + loc("AUs")
+            sun.elevation = String(format: "%3.1f", smc.sunElevation.radiansToDegrees) + loc("DEGREE")
+            sun.transit = smc.sunTransit.string
+            sun.transitElevation = String(format: "%3.1f", smc.sunTransitElevation.radiansToDegrees) + loc("DEGREE")
+        } catch {
+            debugPrint("Failure!!!")
+        }
+        /////////////////////////////
         
         
         DispatchQueue.main.async {
@@ -146,57 +164,6 @@ open class SunDataGetter: NSObject {
             return loc("NIGHT")
         }
         return loc("NOTAVAILABLENUMBER")
-    }
-    
-//    private func getSun() -> [Double] {
-//        var t: Double = 0, slongitude: Double = 0, sanomaly: Double = 0
-//
-//        // SUN PARAMETERS (Formulae from "Calendrical Calculations")
-//        let lon: Double = (280.46645 + 36000.76983 * t + 0.0003032 * t * t)
-//        let anom: Double = (357.5291 + 35999.0503 * t - 0.0001559 * t * t - 4.8E-07 * t * t * t)
-//        sanomaly = anom * (1.0 / 180.0 / Double.pi) //SunMoonCalculator.DEG_TO_RAD
-//        var c: Double = (1.9146 - 0.004817 * t - 0.000014 * t * t) * sin(sanomaly)
-//        c = c + (0.019993 - 0.000101 * t) * sin(2 * sanomaly)
-//        c = c + 0.00029 * sin(3.0 * sanomaly) // Correction to the mean ecliptic longitude
-//
-//        // Now, let calculate nutation and aberration
-//        let M1: Double = (124.90 - 1934.134 * t + 0.002063 * t * t) * (1.0 / 180.0 / Double.pi)
-//        let M2: Double = (201.11 + 72001.5377 * t + 0.00057 * t * t) * (1.0 / 180.0 / Double.pi)
-//        let d: Double = -0.00569 - 0.0047785 * sin(M1) - 0.0003667 * sin(M2)
-//
-//        slongitude = lon + c + d // apparent longitude (error<0.003 deg)
-//        let slatitude: Double = 0 // Sun's ecliptic latitude is always negligible
-//        let ecc: Double = 0.016708617 - 4.2037E-05 * t - 1.236E-07 * t * t // Eccentricity
-//        let v: Double = sanomaly + c * (1.0 / 180.0 / Double.pi) // True anomaly
-//        let sdistance: Double = 1.000001018 * (1.0 - ecc * ecc) / (1.0 + ecc * cos(v)) // In UA
-//
-//        return [slongitude, slatitude, sdistance, atan(696000 / (149597870.691 * sdistance))]
-//    }
-    
-    /// Function that return the zodiac sign of sun/moon based on the right ascension
-    /// - Parameter rightAscension: the right asnension of Sun/Moon (in radians).
-    private func getSunZodiacSign(_ rightAscension: Double) -> String {        
-        var rightAscension = (rightAscension + 360).int % 360
-        if(rightAscension < 0) {
-            rightAscension = -1 * rightAscension
-        }
-        var zodiacSign = loc("NOTAVAILABLENUMBER")
-        switch rightAscension {
-            case 0..<30: zodiacSign = loc("PESCES")
-            case 30..<60: zodiacSign = loc("ARIES")
-            case 60..<90: zodiacSign = loc("TAURUS")
-            case 90..<120: zodiacSign = loc("GEMINI")
-            case 120..<150: zodiacSign = loc("CANCER")
-            case 150..<180: zodiacSign = loc("LEO")
-            case 180..<210: zodiacSign = loc("VIRGO")
-            case 210...240: zodiacSign = loc("LIBRA")
-            case 240...270: zodiacSign = loc("SCORPIO")
-            case 270...300: zodiacSign = loc("SAGITTARIUS")
-            case 300...330: zodiacSign = loc("CAPRICORN")
-            case 330...360: zodiacSign = loc("AQUARIUS")
-            default: break
-        }
-        return zodiacSign
     }
     
 }

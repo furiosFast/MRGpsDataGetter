@@ -38,4 +38,10 @@ public class MoonInfoModel: NSObject {
     public final var moonTilt : String = loc("NOTAVAILABLENUMBER")
     public final var trajectory : String = loc("NOTAVAILABLENUMBER")
     
+    public final var transit : String = loc("NOTAVAILABLENUMBER")
+    public final var transitElevation : String = loc("NOTAVAILABLENUMBER")
+    
+    public final var previusEclipse: Eclipse?
+    public final var nextEclipse: Eclipse?
+
 }

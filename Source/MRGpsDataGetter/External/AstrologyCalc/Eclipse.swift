@@ -10,7 +10,7 @@ import Foundation
 
 
 /// Provides detailed info about eclipse (lunar or solar).
-public class EclipseInfoModel {
+public class Eclipse {
     
     public enum EclipseType {
         case undefined
@@ -58,6 +58,7 @@ public class EclipseInfoModel {
     /** Julian date for observable phase */
     public var jdBestVisible:Double?
     
+    
     // LUNAR ECLIPSE
     
     /** Penumra radius (in Earth equatorial radii) */
@@ -74,6 +75,7 @@ public class EclipseInfoModel {
     
     /** Semiduration of total phase, in minutes */
     public var sdTotal:Double?
+    
     
     // SOLAR ECLIPSE
     

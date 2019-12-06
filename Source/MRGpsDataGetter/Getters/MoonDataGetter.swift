@@ -60,7 +60,7 @@ open class MoonDataGetter: NSObject {
         let moonPhase = BDAstroCalc.moonPhase(date: NSDate())
         moon.fractionOfMoonIlluminated = String(format: "%3.1f", moonPhase.fractionOfMoonIlluminated * 100) + " " + loc("PERCENT")
         moon.phase = moonPhase.phase.string
-        moon.phaseTitle = getMoonPhaseTitleFromAge(Date())
+        moon.phaseTitle = getMoonPhaseTitleFromPhase(moonPhase.phase)
         moon.phaseIcon = getMoonPhaseIcon(moonPhase.phase)
         moon.phaseAngle = String(format: "%3.1f", moonPhase.angle.radiansToDegrees)
         
@@ -68,15 +68,36 @@ open class MoonDataGetter: NSObject {
         moon.declination = declinationToString(moonCoordinates.declination.radiansToDegrees)
         moon.rightAscension = String(format: "%3.1f", moonCoordinates.rightAscension.radiansToDegrees)
         
-        moon.zodiacSign = getMoonZodicaSign(Date())
-        if getMoonAge(Date()) < 2 {
-            moon.age = String(format: "%3.1f", getMoonAge(Date())) + " " + loc("DAY")
-        } else {
-            moon.age = String(format: "%3.1f", getMoonAge(Date())) + " " + loc("DAYS")
-        }
-        moon.trajectory = getMoonTrajectoryFromAge(Date())        
+        moon.zodiacSign = getZodiacSign(moonCoordinates.rightAscension.radiansToDegrees)
+        
+//        if getMoonAge(Date()) < 2 {
+//            moon.age = String(format: "%3.1f", getMoonAge(Date())) + " " + loc("DAY")
+//        } else {
+//            moon.age = String(format: "%3.1f", getMoonAge(Date())) + " " + loc("DAYS")
+//        }
+        moon.trajectory = getMoonTrajectoryFromAge(Date())
+        
         moon.moonTilt = moonTilt(date: NSDate(), location: myLocationCoordinates).diff.string
         
+        moon.previusEclipse = EclipseCalculator().getEclipseFor(date: Date(), eclipseType: .Lunar, next: false)
+        moon.nextEclipse = EclipseCalculator().getEclipseFor(date: Date(), eclipseType: .Lunar, next: true)
+
+        
+        /////////////////////////////
+        do {
+            let smc:SunMoonCalculator = try SunMoonCalculator(date: Date(), longitude: currentLocation.coordinate.longitude, latitude: currentLocation.coordinate.latitude)
+            smc.calcSunAndMoon()
+            if smc.moonAge < 2 {
+                moon.age = String(format: "%3.1f", smc.moonAge) + " " + loc("DAY")
+            } else {
+                moon.age = String(format: "%3.1f", smc.moonAge) + " " + loc("DAYS")
+            }
+            moon.transit = smc.moonTransit.string
+            moon.transitElevation = String(format: "%3.1f", smc.moonTransitElevation.radiansToDegrees) + loc("DEGREE")
+        } catch {
+            debugPrint("Failure!!!")
+        }
+        /////////////////////////////
         
         DispatchQueue.main.async {
             self.delegate?.moonDataReady(moon: self.moon)
@@ -171,36 +192,6 @@ open class MoonDataGetter: NSObject {
         return loc("NOTAVAILABLENUMBER")
     }
     
-    /// Function that return the moon phase name based on the moon phase angle (is the midpoint of the illuminated limb of the moon going east)
-    /// - Parameter date: date of the moon phase researched
-    private func getMoonPhaseTitleFromAge(_ date: Date) -> String {
-        let age: Double = self.getMoonAge(date)
-        
-        var phase: String = loc("NOTAVAILABLENUMBER")
-        
-        if (age < 1.84566) {
-            phase = loc("NEWMOON")
-        } else if (age < 5.53699) {
-            phase = loc("UPMOON")
-        } else if (age < 9.22831) {
-            phase = loc("FIRSTMOON")
-        } else if (age < 12.91963) {
-            phase = loc("GIBUPMOON")
-        } else if (age < 16.61096) {
-            phase = loc("FULLMOON")
-        } else if (age < 20.30228) {
-            phase = loc("GIPDOWNMOON")
-        } else if (age < 23.99361) {
-            phase = loc("LASTMOON")
-        } else if (age < 27.68493) {
-            phase = loc("DOWNMOON")
-        } else {
-            phase = loc("NEWMOON")
-        }
-        
-        return phase
-    }
-    
     /// Function that return the moon phase icon name based on the moon phase angle (is the midpoint of the illuminated limb of the moon going east)
     /// - Parameter phase: the phase is a number from 0 to 1, where 0 and 1 are a new moon, 0.5 is a full moon, 0 - 0.5 is waxing, and 0.5 - 1.0 is waning
     private func getMoonPhaseIcon(_ phase: Double) -> String {
@@ -235,97 +226,13 @@ open class MoonDataGetter: NSObject {
         if phase > 0.96551724136 && phase <= 1 { return "wi-moon-alt-new" }
         return loc("NOTAVAILABLENUMBER")
     }
-    
-    private func getMoonZodicaSign(_ date: Date) -> String {
-        var longitude: Double = 0.0
-        var zodiac: String = loc("NOTAVAILABLENUMBER")
-        
-        var yy: Double = 0.0
-        var mm: Double = 0.0
-        var k1: Double = 0.0
-        var k2: Double = 0.0
-        var k3: Double = 0.0
-        var jd: Double = 0.0
-        var ip: Double = 0.0
-        var dp: Double = 0.0
-        var rp: Double = 0.0
-        
-        let year: Double = Double(Calendar.current.component(.year, from: date))
-        let month: Double = Double(Calendar.current.component(.month, from: date))
-        let day: Double = Double(Calendar.current.component(.day, from: date))
-        
-        yy = year - floor((12 - month) / 10)
-        mm = month + 9.0
-        if (mm >= 12) {
-            mm = mm - 12
-        }
-        
-        k1 = floor(365.25 * (yy + 4712))
-        k2 = floor(30.6 * mm + 0.5)
-        k3 = floor(floor((yy / 100) + 49) * 0.75) - 38
-        
-        jd = k1 + k2 + day + 59
-        if (jd > 2299160) {
-            jd = jd - k3
-        }
-        
-        ip = normalize((jd - 2451550.1) / 29.530588853)
-        
-        ip = ip * 2 * .pi
-        
-        dp = 2 * .pi * normalize((jd - 2451562.2) / 27.55454988)
-        
-        rp = normalize((jd - 2451555.8) / 27.321582241)
-        longitude = 360 * rp + 6.3 * sin(dp) + 1.3 * sin(2 * ip - dp) + 0.7 * sin(2 * ip)        
-        
-        if (longitude < 33.18) {
-            zodiac = loc("ARIES")
-        } else if (longitude < 51.16) {
-            zodiac = loc("TAURUS")
-        } else if (longitude < 93.44) {
-            zodiac = loc("GEMINI")
-        } else if (longitude < 119.48) {
-            zodiac = loc("CANCER")
-        } else if (longitude < 135.30) {
-            zodiac = loc("LEO")
-        } else if (longitude < 173.34) {
-            zodiac = loc("VIRGO")
-        } else if (longitude < 224.17) {
-            zodiac = loc("LIBRA")
-        } else if (longitude < 242.57) {
-            zodiac = loc("SCORPIO")
-        } else if (longitude < 271.26) {
-            zodiac = loc("SAGITTARIUS")
-        } else if (longitude < 302.49) {
-            zodiac = loc("CAPRICORN")
-        } else if (longitude < 311.72) {
-            zodiac = loc("AQUARIUS")
-        } else if (longitude < 348.58) {
-            zodiac = loc("PESCES")
-        } else {
-            zodiac = loc("ARIES")
-        }
-        return zodiac
-    }
         
     private func getMoonTrajectoryFromAge(_ date: Date) -> String {
         let age: Double = getMoonAge(date)
         var trajectory: String = loc("NOTAVAILABLENUMBER")
         
-        if (age < 1.84566) {
+        if (age < 12.91963) {
             trajectory = loc("ASCENDENT")
-        } else if (age < 5.53699) {
-            trajectory = loc("ASCENDENT")
-        } else if (age < 9.22831) {
-            trajectory = loc("ASCENDENT")
-        } else if (age < 12.91963) {
-            trajectory = loc("ASCENDENT")
-        } else if (age < 16.61096) {
-            trajectory = loc("DESCENDENT")
-        } else if (age < 20.30228) {
-            trajectory = loc("DESCENDENT")
-        } else if (age < 23.99361) {
-            trajectory = loc("DESCENDENT")
         } else if (age < 27.68493) {
             trajectory = loc("DESCENDENT")
         } else {

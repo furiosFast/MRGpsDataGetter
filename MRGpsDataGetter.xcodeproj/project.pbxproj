@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C2CC7AA2399CB3F00A4254C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4CEE0AA82385C8D000782D39 /* Localizable.strings */; };
 		4C34FE7C2387169E00A9C1CC /* PlotInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C34FE7B2387169E00A9C1CC /* PlotInfoModel.swift */; };
 		4C42DE2A238A04FF00B586B5 /* SwifterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4C42DE29238A04FF00B586B5 /* SwifterSwift */; };
-		4C6F498C239886F400488E0F /* EclipseInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F498B239886F400488E0F /* EclipseInfoModel.swift */; };
-		4C6F498E2398870400488E0F /* EclipseDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F498D2398870400488E0F /* EclipseDataGetter.swift */; };
+		4C6F498C239886F400488E0F /* Eclipse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F498B239886F400488E0F /* Eclipse.swift */; };
+		4C6F498E2398870400488E0F /* EclipseCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F498D2398870400488E0F /* EclipseCalculator.swift */; };
+		4CDD6BF8239A4E4800BB02A7 /* SunMoonCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDD6BF7239A4E4800BB02A7 /* SunMoonCalculator.swift */; };
 		4CEE0A672385A8A400782D39 /* MRGpsDataGetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CEE0A652385A8A400782D39 /* MRGpsDataGetter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4CEE0A722385A9A700782D39 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4CEE0A712385A9A700782D39 /* Alamofire */; };
 		4CEE0A752385A9D600782D39 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 4CEE0A742385A9D600782D39 /* SwiftyJSON */; };
@@ -31,11 +33,12 @@
 
 /* Begin PBXFileReference section */
 		4C34FE7B2387169E00A9C1CC /* PlotInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotInfoModel.swift; sourceTree = "<group>"; };
-		4C6F498B239886F400488E0F /* EclipseInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EclipseInfoModel.swift; sourceTree = "<group>"; };
-		4C6F498D2398870400488E0F /* EclipseDataGetter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EclipseDataGetter.swift; sourceTree = "<group>"; };
+		4C6F498B239886F400488E0F /* Eclipse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Eclipse.swift; sourceTree = "<group>"; };
+		4C6F498D2398870400488E0F /* EclipseCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EclipseCalculator.swift; sourceTree = "<group>"; };
 		4C80A4502385FC51000590C4 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4C80A4512385FC6D000590C4 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		4C80A4522385FC6D000590C4 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		4CDD6BF7239A4E4800BB02A7 /* SunMoonCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SunMoonCalculator.swift; sourceTree = "<group>"; };
 		4CEE0A622385A8A400782D39 /* MRGpsDataGetter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MRGpsDataGetter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CEE0A652385A8A400782D39 /* MRGpsDataGetter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MRGpsDataGetter.h; sourceTree = "<group>"; };
 		4CEE0A662385A8A400782D39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -70,6 +73,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C2CC7AB2399E3C000A4254C /* AstrologyCalc */ = {
+			isa = PBXGroup;
+			children = (
+				4C6F498B239886F400488E0F /* Eclipse.swift */,
+				4C6F498D2398870400488E0F /* EclipseCalculator.swift */,
+			);
+			path = AstrologyCalc;
+			sourceTree = "<group>";
+		};
 		4CCC14B7239066FA000310C9 /* Example */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,7 +132,6 @@
 				4CEE0A802385AA2700782D39 /* GpsInfoModel.swift */,
 				4CEE0A7E2385AA2700782D39 /* SunInfoModel.swift */,
 				4CEE0A7D2385AA2700782D39 /* MoonInfoModel.swift */,
-				4C6F498B239886F400488E0F /* EclipseInfoModel.swift */,
 				4CEE0A7F2385AA2700782D39 /* WeatherModel.swift */,
 				4C34FE7B2387169E00A9C1CC /* PlotInfoModel.swift */,
 			);
@@ -133,7 +144,6 @@
 				4CEE0A9C2385B9C600782D39 /* GpsDataGetter.swift */,
 				4CEE0A962385B07900782D39 /* SunDataGetter.swift */,
 				4CEE0A902385AD6000782D39 /* MoonDataGetter.swift */,
-				4C6F498D2398870400488E0F /* EclipseDataGetter.swift */,
 				4CEE0A982385B39E00782D39 /* WeatherDataGetter.swift */,
 				4CEE0A9A2385B77200782D39 /* ForecastDataGetter.swift */,
 			);
@@ -158,6 +168,8 @@
 		4CEE0A8D2385AB2000782D39 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				4CDD6BF7239A4E4800BB02A7 /* SunMoonCalculator.swift */,
+				4C2CC7AB2399E3C000A4254C /* AstrologyCalc */,
 				4CEE0A8A2385AB1C00782D39 /* BDAstroCalc */,
 			);
 			path = External;
@@ -287,6 +299,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C2CC7AA2399CB3F00A4254C /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,7 +334,7 @@
 				4CEE0A952385AFCA00782D39 /* BDAstroCalc.swift in Sources */,
 				4CEE0A842385AA2700782D39 /* GpsInfoModel.swift in Sources */,
 				4CEE0A812385AA2700782D39 /* MoonInfoModel.swift in Sources */,
-				4C6F498E2398870400488E0F /* EclipseDataGetter.swift in Sources */,
+				4C6F498E2398870400488E0F /* EclipseCalculator.swift in Sources */,
 				4CEE0A8F2385AD2000782D39 /* ConfigShared.swift in Sources */,
 				4CEE0A912385AD6000782D39 /* MoonDataGetter.swift in Sources */,
 				4CEE0A822385AA2700782D39 /* SunInfoModel.swift in Sources */,
@@ -331,7 +344,8 @@
 				4CEE0A9B2385B77200782D39 /* ForecastDataGetter.swift in Sources */,
 				4CEE0A992385B39E00782D39 /* WeatherDataGetter.swift in Sources */,
 				4CEE0A832385AA2700782D39 /* WeatherModel.swift in Sources */,
-				4C6F498C239886F400488E0F /* EclipseInfoModel.swift in Sources */,
+				4CDD6BF8239A4E4800BB02A7 /* SunMoonCalculator.swift in Sources */,
+				4C6F498C239886F400488E0F /* Eclipse.swift in Sources */,
 				4CEE0A972385B07900782D39 /* SunDataGetter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
