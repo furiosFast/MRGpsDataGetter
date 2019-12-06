@@ -70,11 +70,11 @@ open class MoonDataGetter: NSObject {
         
         moon.zodiacSign = getZodiacSign(moonCoordinates.rightAscension.radiansToDegrees)
         
-//        if getMoonAge(Date()) < 2 {
-//            moon.age = String(format: "%3.1f", getMoonAge(Date())) + " " + loc("DAY")
-//        } else {
-//            moon.age = String(format: "%3.1f", getMoonAge(Date())) + " " + loc("DAYS")
-//        }
+        if getMoonAge(Date()) < 2 {
+            moon.age = String(format: "%3.1f", getMoonAge(Date())) + " " + loc("DAY")
+        } else {
+            moon.age = String(format: "%3.1f", getMoonAge(Date())) + " " + loc("DAYS")
+        }
         moon.trajectory = getMoonTrajectoryFromAge(Date())
         
         moon.moonTilt = moonTilt(date: NSDate(), location: myLocationCoordinates).diff.string
@@ -87,12 +87,7 @@ open class MoonDataGetter: NSObject {
         do {
             let smc:SunMoonCalculator = try SunMoonCalculator(date: Date(), longitude: currentLocation.coordinate.longitude, latitude: currentLocation.coordinate.latitude)
             smc.calcSunAndMoon()
-            if smc.moonAge < 2 {
-                moon.age = String(format: "%3.1f", smc.moonAge) + " " + loc("DAY")
-            } else {
-                moon.age = String(format: "%3.1f", smc.moonAge) + " " + loc("DAYS")
-            }
-            moon.transit = smc.moonTransit.string
+            moon.transit = Date(timeIntervalSince1970: smc.moonTransit).string(withFormat: timeFormat)
             moon.transitElevation = String(format: "%3.1f", smc.moonTransitElevation.radiansToDegrees) + loc("DEGREE")
         } catch {
             debugPrint("Failure!!!")
