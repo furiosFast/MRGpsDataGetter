@@ -86,6 +86,7 @@ open class MoonDataGetter: NSObject {
             let smc:SunMoonCalculator = try SunMoonCalculator(date: Date(), longitude: currentLocation.coordinate.longitude, latitude: currentLocation.coordinate.latitude)
             smc.calcSunAndMoon()
             moon.phaseTitle = smc.moonPhase
+            //culmine di altezza della luna
             moon.transit = (try SunMoonCalculator.getDate(jd: smc.moonTransit).getDateAsString())
             moon.transitElevation = String(format: "%3.1f", smc.moonTransitElevation.radiansToDegrees) + loc("DEGREE")
         } catch {
