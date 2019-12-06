@@ -86,8 +86,11 @@ open class MoonDataGetter: NSObject {
             let smc:SunMoonCalculator = try SunMoonCalculator(date: Date(), longitude: currentLocation.coordinate.longitude, latitude: currentLocation.coordinate.latitude)
             smc.calcSunAndMoon()
             moon.phaseTitle = smc.moonPhase
-            moon.transit = Date(timeIntervalSince1970: smc.moonTransit).string(withFormat: "dd/MM/yyyy - HH:mm:ss")
-            moon.transitElevation = String(format: "%3.1f", smc.moonTransitElevation.radiansToDegrees) + loc("DEGREE")
+//            moon.transit = Date(timeIntervalSince1970: smc.moonTransit).string(withFormat: "dd/MM/yyyy - HH:mm:ss")
+//            moon.transitElevation = String(format: "%3.1f", smc.moonTransitElevation.radiansToDegrees) + loc("DEGREE")
+            
+            moon.transitElevation = ("Transit:\t\t\(try SunMoonCalculator.getDate(jd: smc.sunTransit).getDateAsString()) (max. elevation \(Float(smc.sunTransitElevation.toDegrees))\u{00b0})")
+
         } catch {
             debugPrint("Failure!!!")
         }

@@ -602,6 +602,15 @@ public extension Date {
         return UInt(Calendar.current.component(.second, from: self))
     }
     
+    func getDateAsString(utc: Bool? = false) -> String {
+        var calendar:Calendar = Calendar.init(identifier: .gregorian)
+        if utc! {
+            calendar.timeZone = TimeZone.init(abbreviation: "UTC")!
+        }
+        let dc:DateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: self)
+        return String(format: "%d/%02d/%02d %02d:%02d:%02d", dc.year!, dc.month!, dc.day!, dc.hour!, dc.minute!, dc.second!)
+    }
+    
 }
 
 // Thread
