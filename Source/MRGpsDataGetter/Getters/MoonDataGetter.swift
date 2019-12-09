@@ -43,6 +43,8 @@ open class MoonDataGetter: NSObject {
         if Bool(Preferences.shared.getPreference("minutesTimes"))! == true {
             timeFormat = "HH:mm"
         }
+
+        //BDAstroCalc
         let myLocationCoordinates = CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
         let Jan12000Date = BDAstroCalc.daysSinceJan12000(date: NSDate())
         
@@ -60,7 +62,6 @@ open class MoonDataGetter: NSObject {
         let moonPhase = BDAstroCalc.moonPhase(date: NSDate())
         moon.fractionOfMoonIlluminated = String(format: "%3.1f", moonPhase.fractionOfMoonIlluminated * 100) + " " + loc("PERCENT")
         moon.phase = moonPhase.phase.string
-//        moon.phaseTitle = getMoonPhaseTitleFromPhase(moonPhase.phase)
         moon.phaseIcon = getMoonPhaseIcon(moonPhase.phase)
         moon.phaseAngle = String(format: "%3.1f", moonPhase.angle.radiansToDegrees)
         
@@ -69,7 +70,6 @@ open class MoonDataGetter: NSObject {
         moon.rightAscension = String(format: "%3.1f", moonCoordinates.rightAscension.radiansToDegrees)
         moon.moonTilt = moonTilt(date: NSDate(), location: myLocationCoordinates).diff.string
 
-        
         moon.zodiacSign = getMoonZodicaSignFromAge(Date())
         if getMoonAge(Date()) < 2 {
             moon.age = String(format: "%3.1f", getMoonAge(Date())) + " " + loc("DAY")
@@ -77,22 +77,21 @@ open class MoonDataGetter: NSObject {
             moon.age = String(format: "%3.1f", getMoonAge(Date())) + " " + loc("DAYS")
         }
         moon.trajectory = getMoonTrajectoryFromAge(Date())
+
+        //AstrologyCalc
         moon.previusEclipse = EclipseCalculator().getEclipseFor(date: Date(), eclipseType: .Lunar, next: false)
         moon.nextEclipse = EclipseCalculator().getEclipseFor(date: Date(), eclipseType: .Lunar, next: true)
-
         
-        /////////////////////////////
+        //SunMoonCalculator
         do {
             let smc:SunMoonCalculator = try SunMoonCalculator(date: Date(), longitude: currentLocation.coordinate.longitude, latitude: currentLocation.coordinate.latitude)
             smc.calcSunAndMoon()
             moon.phaseTitle = smc.moonPhase
-            //culmine di altezza della luna
-            moon.transit = (try SunMoonCalculator.getDate(jd: smc.moonTransit).getDateAsString())
-            moon.transitElevation = String(format: "%3.1f", smc.moonTransitElevation.radiansToDegrees) + loc("DEGREE")
+            moon.moonNoon = (try SunMoonCalculator.getDate(jd: smc.moonTransit).getDateAsString())
+            moon.nadir = (try SunMoonCalculator.getDate(jd: smc.moonTransit)).plusHours(12).getDateAsString()
         } catch {
-            debugPrint("Failure!!!")
+            debugPrint("Failure in SunMoonCalculator (moon)")
         }
-        /////////////////////////////
         
         
         DispatchQueue.main.async {

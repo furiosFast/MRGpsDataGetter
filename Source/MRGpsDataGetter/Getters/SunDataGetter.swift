@@ -44,12 +44,9 @@ open class SunDataGetter: NSObject {
             timeFormat = "HH:mm"
         }
         
+        //BDAstroCalc
         let myLocationCoordinates = CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
         let Jan12000Date = BDAstroCalc.daysSinceJan12000(date: NSDate())
-        
-        let sunRiseSet = BDAstroCalc.sunRiseAndSet(date: NSDate(), location: myLocationCoordinates)
-        sun.solarNoon = (sunRiseSet.solarNoon as Date).string(withFormat: timeFormat)
-        sun.nadir = (sunRiseSet.nadir as Date).string(withFormat: timeFormat)
         
         let sunLocation = BDAstroCalc.sunPosition(date: NSDate(), location: myLocationCoordinates)
         let azim = (sunLocation.azimuth + Double.pi).radiansToDegrees
@@ -84,24 +81,22 @@ open class SunDataGetter: NSObject {
         let sunCoordinates = BDAstroCalc.sunCoordinates(daysSinceJan12000: Jan12000Date)
         sun.declination = declinationToString(sunCoordinates.declination.radiansToDegrees)
         sun.rightAscension = String(format: "%3.1f", sunCoordinates.rightAscension.radiansToDegrees)
-        sun.zodiacSign = getZodiacSign(sunCoordinates.rightAscension.radiansToDegrees)
+        sun.zodiacSign = getSunZodiacSign(sunCoordinates.rightAscension.radiansToDegrees)
         
+        //AstrologyCalc
         sun.previusEclipse = EclipseCalculator().getEclipseFor(date: Date(), eclipseType: .Solar, next: false)
         sun.nextEclipse = EclipseCalculator().getEclipseFor(date: Date(), eclipseType: .Solar, next: true)
         
-        
-        /////////////////////////////
+        //SunMoonCalculator
         do {
             let smc:SunMoonCalculator = try SunMoonCalculator(date: Date(), longitude: currentLocation.coordinate.longitude, latitude: currentLocation.coordinate.latitude)
             smc.calcSunAndMoon()
-            sun.distance = String(format: "%3.2f", smc.sunDistance) + " " + loc("AUs")
-            //culmine di altezza del sole
-            sun.transit = (try SunMoonCalculator.getDate(jd: smc.sunTransit).getDateAsString())
-            sun.transitElevation = String(format: "%3.1f", smc.sunTransitElevation.radiansToDegrees) + loc("DEGREE")
+            sun.distance = String(format: "%3.4f", smc.sunDistance) + " " + loc("AUs")
+            sun.solarNoon = (try SunMoonCalculator.getDate(jd: smc.sunTransit).getDateAsString())
+            sun.nadir = (try SunMoonCalculator.getDate(jd: smc.sunTransit)).plusHours(12).getDateAsString()
         } catch {
-            debugPrint("Failure!!!")
+            debugPrint("Failure in SunMoonCalculator (sun)")
         }
-        /////////////////////////////
         
         
         DispatchQueue.main.async {
@@ -163,6 +158,32 @@ open class SunDataGetter: NSObject {
             return loc("NIGHT")
         }
         return loc("NOTAVAILABLENUMBER")
+    }
+    
+    /// Function that return the zodiac sign of sun/moon based on the right ascension
+    /// - Parameter rightAscension: the right asnension of Sun/Moon (in radians).
+    private func getSunZodiacSign(_ rightAscension: Double) -> String {
+        var rightAscension = (rightAscension + 360).int % 360
+        if(rightAscension < 0) {
+            rightAscension = -1 * rightAscension
+        }
+        var zodiacSign = loc("NOTAVAILABLENUMBER")
+        switch rightAscension {
+            case 0..<30: zodiacSign = loc("PESCES")
+            case 30..<60: zodiacSign = loc("ARIES")
+            case 60..<90: zodiacSign = loc("TAURUS")
+            case 90..<120: zodiacSign = loc("GEMINI")
+            case 120..<150: zodiacSign = loc("CANCER")
+            case 150..<180: zodiacSign = loc("LEO")
+            case 180..<210: zodiacSign = loc("VIRGO")
+            case 210...240: zodiacSign = loc("LIBRA")
+            case 240...270: zodiacSign = loc("SCORPIO")
+            case 270...300: zodiacSign = loc("SAGITTARIUS")
+            case 300...330: zodiacSign = loc("CAPRICORN")
+            case 330...360: zodiacSign = loc("AQUARIUS")
+            default: break
+        }
+        return zodiacSign
     }
     
 }

@@ -47,9 +47,6 @@ public class SunInfoModel: NSObject {
     public final var phaseTitle : String = loc("NOTAVAILABLENUMBER")
 
     public final var distance : String = loc("NOTAVAILABLENUMBER")
-    public final var transit : String = loc("NOTAVAILABLENUMBER")
-    public final var transitElevation : String = loc("NOTAVAILABLENUMBER")
-
     
     public final var daylightHours : String = loc("NOTAVAILABLENUMBER")
     

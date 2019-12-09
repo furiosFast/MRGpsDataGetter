@@ -73,6 +73,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C28C3E6239E422B00350932 /* SunMoonCalculator */ = {
+			isa = PBXGroup;
+			children = (
+				4CDD6BF7239A4E4800BB02A7 /* SunMoonCalculator.swift */,
+			);
+			path = SunMoonCalculator;
+			sourceTree = "<group>";
+		};
 		4C2CC7AB2399E3C000A4254C /* AstrologyCalc */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,9 +176,9 @@
 		4CEE0A8D2385AB2000782D39 /* External */ = {
 			isa = PBXGroup;
 			children = (
-				4CDD6BF7239A4E4800BB02A7 /* SunMoonCalculator.swift */,
-				4C2CC7AB2399E3C000A4254C /* AstrologyCalc */,
 				4CEE0A8A2385AB1C00782D39 /* BDAstroCalc */,
+				4C28C3E6239E422B00350932 /* SunMoonCalculator */,
+				4C2CC7AB2399E3C000A4254C /* AstrologyCalc */,
 			);
 			path = External;
 			sourceTree = "<group>";

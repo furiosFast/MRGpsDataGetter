@@ -90,8 +90,9 @@ MRGpsDataGetter has different dependencies and therefore needs the following lib
 It isn't necessary to add the dependencies of MRGpsDataGetter, becose with SPM all is do automatically!
 
 Others library's files are necessary for the correct functioning of MRGpsDataGetter:
-- [BDAstroCalc](https://github.com/braindrizzlestudio/BDAstroCalc);
-- [AstrologyCalc](https://github.com/emvakar/AstrologyCalc).
+- [BDAstroCalc](https://github.com/braindrizzlestudio/BDAstroCalc)
+- [AstrologyCalc](https://github.com/emvakar/AstrologyCalc)
+- [SunMoonCalculator](https://github.com/kanchudeep/SunMoonCalculator)
 
 There files are already included into the framework.
 
