@@ -92,8 +92,8 @@ open class SunDataGetter: NSObject {
             let smc:SunMoonCalculator = try SunMoonCalculator(date: Date(), longitude: currentLocation.coordinate.longitude, latitude: currentLocation.coordinate.latitude)
             smc.calcSunAndMoon()
             sun.distance = String(format: "%3.4f", smc.sunDistance) + " " + loc("AUs")
-            sun.solarNoon = (try SunMoonCalculator.getDate(jd: smc.sunTransit).getDateAsString())
-            sun.nadir = (try SunMoonCalculator.getDate(jd: smc.sunTransit)).plusHours(12).getDateAsString()
+            sun.solarNoon = getDateFrom(try SunMoonCalculator.getDate(jd: smc.sunTransit)).string(withFormat: timeFormat)
+            sun.nadir = getDateFrom(try SunMoonCalculator.getDate(jd: smc.sunTransit)).plusHours(12).string(withFormat: timeFormat)
         } catch {
             debugPrint("Failure in SunMoonCalculator (sun)")
         }

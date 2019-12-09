@@ -386,7 +386,7 @@ class SunMoonCalculator {
         // Set radiusAU = 0 for geocentric calculations
         // (rise/set/transit will have no sense in this case)
         let radiusAU:Double = SunMoonCalculator.EARTH_RADIUS / SunMoonCalculator.AU
-        var correction:[Double] = [
+        let correction:[Double] = [
             radiusAU * cos(obsLat) * cos(lst),
             radiusAU * cos(obsLat) * sin(lst),
             radiusAU * sin(obsLat)]

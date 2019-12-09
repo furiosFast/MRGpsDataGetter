@@ -242,6 +242,19 @@ func getBeaufortForceColor(_ windSpeedKnot: Double) -> String {
     return hexColor
 }
 
+
+func getDateFrom(_ date: Date, utc: Bool? = false) -> Date {
+    var calendar:Calendar = Calendar.init(identifier: .gregorian)
+    if utc! {
+        calendar.timeZone = TimeZone.init(abbreviation: "UTC")!
+    }
+    let dc: DateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+    if let dt = NSCalendar.current.date(from: dc) {
+        return dt
+    }
+    return date
+}
+
 //MARK: - Extensions
 
 // Formatter
@@ -574,15 +587,6 @@ public extension Date {
     
     var second: UInt {
         return UInt(Calendar.current.component(.second, from: self))
-    }
-    
-    func getDateAsString(utc:Bool? = false) -> String {
-        var calendar:Calendar = Calendar.init(identifier: .gregorian)
-        if utc! {
-            calendar.timeZone = TimeZone.init(abbreviation: "UTC")!
-        }
-        let dc:DateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: self)
-        return String(format: "%02d/%02d/%d %02d:%02d:%02d", dc.day!, dc.month!, dc.year!, dc.hour!, dc.minute!, dc.second!)
     }
     
 }

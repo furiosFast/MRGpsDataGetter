@@ -84,11 +84,11 @@ open class MoonDataGetter: NSObject {
         
         //SunMoonCalculator
         do {
-            let smc:SunMoonCalculator = try SunMoonCalculator(date: Date(), longitude: currentLocation.coordinate.longitude, latitude: currentLocation.coordinate.latitude)
+            let smc: SunMoonCalculator = try SunMoonCalculator(date: Date(), longitude: currentLocation.coordinate.longitude, latitude: currentLocation.coordinate.latitude)
             smc.calcSunAndMoon()
             moon.phaseTitle = smc.moonPhase
-            moon.moonNoon = (try SunMoonCalculator.getDate(jd: smc.moonTransit).getDateAsString())
-            moon.nadir = (try SunMoonCalculator.getDate(jd: smc.moonTransit)).plusHours(12).getDateAsString()
+            moon.moonNoon = getDateFrom(try SunMoonCalculator.getDate(jd: smc.moonTransit)).string(withFormat: timeFormat)
+            moon.nadir = getDateFrom(try SunMoonCalculator.getDate(jd: smc.moonTransit)).minusHours(12).string(withFormat: timeFormat)
         } catch {
             debugPrint("Failure in SunMoonCalculator (moon)")
         }
