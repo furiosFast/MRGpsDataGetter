@@ -31,9 +31,7 @@ open class MoonDataGetter: NSObject {
     /// Function that start to retrive all Moon data based on a specified location
     /// - Parameter currentLocation: location
     open func getMoonInfo(currentLocation: CLLocation){
-        DispatchQueue.global().async {
-            self.reverseMoonInfo(currentLocation)
-        }
+        reverseMoonInfo(currentLocation)
     }
     
     /// Private function that start to retrive all Moon data based on a specified location

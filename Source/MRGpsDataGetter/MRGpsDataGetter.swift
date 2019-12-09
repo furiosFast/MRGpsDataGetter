@@ -87,14 +87,33 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
             //            errorCount = 0
             locationManager.stopUpdatingLocation()
             delegate?.gpsDataStartLoading()
-
-            WeatherDataGetter.shared.getWeatherInfo(openWeatherMapKey: openWeatherMapKey, currentLocation: loc)
-            if isForecastToLoad {
-                ForecastDataGetter.shared.getForecastInfo(openWeatherMapKey: openWeatherMapKey, currentLocation: loc)
+            
+            //
+            DispatchQueue.global().async {
+                WeatherDataGetter.shared.getWeatherInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
             }
-            GpsDataGetter.shared.getPositionInfo(currentLocation: loc)
-            SunDataGetter.shared.getSunInfo(currentLocation: loc)
-            MoonDataGetter.shared.getMoonInfo(currentLocation: loc)
+            
+            //
+            DispatchQueue.global().async {
+                if self.isForecastToLoad {
+                    ForecastDataGetter.shared.getForecastInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
+                }
+            }
+            
+            //
+            DispatchQueue.global().async {
+                GpsDataGetter.shared.getPositionInfo(currentLocation: loc)
+            }
+            
+            //
+            DispatchQueue.global().async {
+                SunDataGetter.shared.getSunInfo(currentLocation: loc)
+            }
+            
+            //
+            DispatchQueue.global().async {
+                MoonDataGetter.shared.getMoonInfo(currentLocation: loc)
+            }
             
             if let b = Bool(Preferences.shared.getPreference("autoRefreshSunMoonInfo")), b == true {
                 timerAutoRefresh.invalidate()

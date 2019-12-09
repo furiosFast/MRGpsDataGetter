@@ -38,9 +38,7 @@ open class GpsDataGetter: NSObject {
     /// Function that start to retrive all GPS data and the location on name of a specified location
     /// - Parameter currentLocation: location
     open func getPositionInfo(currentLocation: CLLocation) {
-        DispatchQueue.global().async {
-            self.reversePositionInfo(currentLocation)
-        }
+        reversePositionInfo(currentLocation)
         DispatchQueue.global().async {
             if self.geocoder.isGeocoding {
                 self.geocoder.cancelGeocode()

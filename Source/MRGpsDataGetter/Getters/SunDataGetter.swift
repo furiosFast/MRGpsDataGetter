@@ -31,9 +31,7 @@ open class SunDataGetter: NSObject {
     /// Function that start to retrive all Sun data based on a specified location
     /// - Parameter currentLocation: location
     open func getSunInfo(currentLocation: CLLocation) {
-        DispatchQueue.global().async {
-            self.reverseSolarInfo(currentLocation)
-        }
+        reverseSolarInfo(currentLocation)
     }
     
     /// Private function that start to retrive all Sun data based on a specified location

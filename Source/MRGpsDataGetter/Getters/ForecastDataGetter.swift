@@ -39,9 +39,7 @@ open class ForecastDataGetter: NSObject {
     ///   - openWeatherMapKey: OpenWeatherMapKey.org key
     ///   - currentLocation: location
     open func getForecastInfo(openWeatherMapKey: String, currentLocation: CLLocation) {
-        DispatchQueue.global().async {
-            self.getForecastInfoFromWeb(openWeatherMapKey, currentLocation)
-        }
+        getForecastInfoFromWeb(openWeatherMapKey, currentLocation)
     }
     
     /// Private function that start to retrive the Forecast for the next 5 days (provider: OpenWeatherMap.org) data based on a specified location

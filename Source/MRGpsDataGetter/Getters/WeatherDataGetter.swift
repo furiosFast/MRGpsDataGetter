@@ -36,9 +36,7 @@ open class WeatherDataGetter: NSObject {
     ///   - openWeatherMapKey: OpenWeatherMapKey.org key
     ///   - currentLocation: location
     open func getWeatherInfo(openWeatherMapKey: String, currentLocation: CLLocation) {
-        DispatchQueue.global().async {
-            self.getWeatherInfoFromWeb(openWeatherMapKey, currentLocation)
-        }
+        getWeatherInfoFromWeb(openWeatherMapKey, currentLocation)
     }
     
     /// Private function that start to retrive current Weather (provider: OpenWeatherMap.org) data based on a specified location
