@@ -88,32 +88,29 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
             locationManager.stopUpdatingLocation()
             delegate?.gpsDataStartLoading()
             
-            //
+            //Weather info thread
             DispatchQueue.global().async {
                 WeatherDataGetter.shared.getWeatherInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
             }
-            
-            //
+            //Forecast info thread
             DispatchQueue.global().async {
                 if self.isForecastToLoad {
                     ForecastDataGetter.shared.getForecastInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
                 }
             }
-            
-            //
+            //GPS info thread
             DispatchQueue.global().async {
                 GpsDataGetter.shared.getPositionInfo(currentLocation: loc)
             }
-            
-            //
+            //Sun info thread
             DispatchQueue.global().async {
                 SunDataGetter.shared.getSunInfo(currentLocation: loc)
             }
-            
-            //
+            //Moon info thread
             DispatchQueue.global().async {
                 MoonDataGetter.shared.getMoonInfo(currentLocation: loc)
             }
+            
             
             if let b = Bool(Preferences.shared.getPreference("autoRefreshSunMoonInfo")), b == true {
                 timerAutoRefresh.invalidate()

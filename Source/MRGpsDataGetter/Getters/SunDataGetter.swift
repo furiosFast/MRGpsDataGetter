@@ -158,8 +158,8 @@ open class SunDataGetter: NSObject {
         return loc("NOTAVAILABLENUMBER")
     }
     
-    /// Function that return the zodiac sign of sun/moon based on the right ascension
-    /// - Parameter rightAscension: the right asnension of Sun/Moon (in radians).
+    /// Function that return the zodiac sign of sun based on the right ascension
+    /// - Parameter rightAscension: the right asnension of Sun (in radians).
     private func getSunZodiacSign(_ rightAscension: Double) -> String {
         var rightAscension = (rightAscension + 360).int % 360
         if(rightAscension < 0) {

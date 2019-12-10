@@ -250,6 +250,8 @@ open class MoonDataGetter: NSObject {
         return loc("NOTAVAILABLENUMBER")
     }
     
+    /// Function that return the zodiac sign of moon from the moon age at the specified date
+    /// - Parameter date: a date
     private func getMoonZodicaSignFromAge(_ date: Date) -> String {
         var longitude: Double = 0.0
         var zodiac: String = loc("NOTAVAILABLENUMBER")
@@ -321,7 +323,9 @@ open class MoonDataGetter: NSObject {
         }
         return zodiac
     }
-        
+    
+    /// Function that return the moon trajectory from the moon age at the specified date
+    /// - Parameter date: a date
     private func getMoonTrajectoryFromAge(_ date: Date) -> String {
         let age: Double = getMoonAge(date)
         var trajectory: String = loc("NOTAVAILABLENUMBER")
@@ -349,6 +353,8 @@ open class MoonDataGetter: NSObject {
         return trajectory
     }
     
+    /// Get the the age of the moon in days
+    /// - Parameter date: a date
     private func getMoonAge(_ date: Date) -> Double {
         var age: Double = 0.0
 
@@ -385,6 +391,8 @@ open class MoonDataGetter: NSObject {
         return age
     }
     
+    /// Function that normalize che value passed from parameter. Used in the function for the moon age calc
+    /// - Parameter value: the value to normalize
     private func normalize(_ value: Double) -> Double {
         var v = value - floor(value)
         if (v < 0) {

@@ -19,7 +19,6 @@ import SwifterSwift
 
 @objc public protocol MRGpsDataGetterGpsDataDelegate: NSObjectProtocol {
     func gpsDataReady(gps: GpsInfoModel)
-    @objc optional func setGpsMap(currentLocation: CLLocation)
     @objc optional func reverseGeocodeFromString(location: CLLocation)
     @objc optional func reverseGeocodeFromStringError(error: String)
     func reverseGeocodeFromLocation(locationName: String)
@@ -39,14 +38,12 @@ open class GpsDataGetter: NSObject {
     /// - Parameter currentLocation: location
     open func getPositionInfo(currentLocation: CLLocation) {
         reversePositionInfo(currentLocation)
+        
         DispatchQueue.global().async {
             if self.geocoder.isGeocoding {
                 self.geocoder.cancelGeocode()
             }
             self.reverseGeocodeFromLocation(currentLocation)
-        }
-        DispatchQueue.main.async {
-            self.delegate?.setGpsMap?(currentLocation: currentLocation)
         }
     }
     
@@ -103,10 +100,14 @@ open class GpsDataGetter: NSObject {
     open func reverseGeocodeFromString(_ locationAddress: String){
         geocoder.geocodeAddressString(locationAddress) { (placemarks, error) in
             if let error = error {
-                self.delegate?.reverseGeocodeFromStringError?(error: error.localizedDescription)
+                DispatchQueue.main.async {
+                    self.delegate?.reverseGeocodeFromStringError?(error: error.localizedDescription)
+                }
             } else {
                 if let placemarks = placemarks, let placemark = placemarks.first, let location = placemark.location {
-                    self.delegate?.reverseGeocodeFromString?(location: location)
+                    DispatchQueue.main.async {
+                        self.delegate?.reverseGeocodeFromString?(location: location)
+                    }
                 }
             }
         }
@@ -116,7 +117,9 @@ open class GpsDataGetter: NSObject {
     open func reverseGeocodeFromLocation(_ currentLocation: CLLocation){
         geocoder.reverseGeocodeLocation(currentLocation) { (placemarks, error) in
             if let error = error {
-                self.delegate?.reverseGeocodeFromLocationError?(error: error.localizedDescription)
+                DispatchQueue.main.async {
+                    self.delegate?.reverseGeocodeFromLocationError?(error: error.localizedDescription)
+                }
             } else {
                 if let placemarks = placemarks, let placemark = placemarks.first, let locality = placemark.locality, let isoCountryCode = placemark.isoCountryCode {
                     self.gps.locationName = locality + ", " + isoCountryCode.uppercased()
@@ -127,7 +130,9 @@ open class GpsDataGetter: NSObject {
                         self.gps.locationName = loc("lOCATION_NaN")
                     }
                 }
-                self.delegate?.reverseGeocodeFromLocation(locationName: self.gps.locationName)
+                DispatchQueue.main.async {
+                    self.delegate?.reverseGeocodeFromLocation(locationName: self.gps.locationName)
+                }
             }
         }
     }
