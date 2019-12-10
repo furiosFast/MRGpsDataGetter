@@ -88,6 +88,23 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
             locationManager.stopUpdatingLocation()
             delegate?.gpsDataStartLoading()
             
+            ///////////CORE///////////////
+            //GPS info thread
+            DispatchQueue.global().async {
+                GpsDataGetter.shared.getPositionInfo(currentLocation: loc)
+            }
+            //Location name thread
+            DispatchQueue.global().async {
+                GpsDataGetter.shared.getGeocodeFromLocation(currentLocation: loc)
+            }
+            //Sun info thread
+            DispatchQueue.global().async {
+                SunDataGetter.shared.getSunInfo(currentLocation: loc)
+            }
+            //Moon info thread
+            DispatchQueue.global().async {
+                MoonDataGetter.shared.getMoonInfo(currentLocation: loc)
+            }
             //Weather info thread
             DispatchQueue.global().async {
                 WeatherDataGetter.shared.getWeatherInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
@@ -98,20 +115,8 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
                     ForecastDataGetter.shared.getForecastInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
                 }
             }
-            //GPS info thread
-            DispatchQueue.global().async {
-                GpsDataGetter.shared.getPositionInfo(currentLocation: loc)
-            }
-            //Sun info thread
-            DispatchQueue.global().async {
-                SunDataGetter.shared.getSunInfo(currentLocation: loc)
-            }
-            //Moon info thread
-            DispatchQueue.global().async {
-                MoonDataGetter.shared.getMoonInfo(currentLocation: loc)
-            }
-            
-            
+            //////////////////////////////
+
             if let b = Bool(Preferences.shared.getPreference("autoRefreshSunMoonInfo")), b == true {
                 timerAutoRefresh.invalidate()
                     timerAutoRefresh = Timer.scheduledTimer(timeInterval: Double(Preferences.shared.getPreference("sunMoonRefreshSeconds"))!, target: self, selector: #selector(self.autoRefreshSunMoonInfo), userInfo: nil, repeats: true)

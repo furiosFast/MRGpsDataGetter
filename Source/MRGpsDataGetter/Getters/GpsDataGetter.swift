@@ -34,17 +34,10 @@ open class GpsDataGetter: NSObject {
     let gps = GpsInfoModel()
     
     
-    /// Function that start to retrive all GPS data and the location on name of a specified location
+    /// Function that start to retrive all GPS data of a specified location
     /// - Parameter currentLocation: location
     open func getPositionInfo(currentLocation: CLLocation) {
         reversePositionInfo(currentLocation)
-        
-        DispatchQueue.global().async {
-            if self.geocoder.isGeocoding {
-                self.geocoder.cancelGeocode()
-            }
-            self.reverseGeocodeFromLocation(currentLocation)
-        }
     }
     
     /// Private function that start to retrive all GPS data of a specified location
@@ -95,9 +88,19 @@ open class GpsDataGetter: NSObject {
         return gps
     }
     
+    
     /// Function that retrieve the location object based on the location name
+    /// - Parameter locationAddress: location address
+    open func getGeocodeFromString(locationAddress: String) {
+        if geocoder.isGeocoding {
+            geocoder.cancelGeocode()
+        }
+        reverseGeocodeFromString(locationAddress)
+    }
+    
+    /// Private function that retrieve the location object based on the location name
     /// - Parameter locationAddress: location name
-    open func reverseGeocodeFromString(_ locationAddress: String){
+    private func reverseGeocodeFromString(_ locationAddress: String){
         geocoder.geocodeAddressString(locationAddress) { (placemarks, error) in
             if let error = error {
                 DispatchQueue.main.async {
@@ -113,8 +116,18 @@ open class GpsDataGetter: NSObject {
         }
     }
     
+    
     /// Function that retrieve the location name based on the location object
-    open func reverseGeocodeFromLocation(_ currentLocation: CLLocation){
+    /// - Parameter currentLocation: location
+    open func getGeocodeFromLocation(currentLocation: CLLocation) {
+        if geocoder.isGeocoding {
+            geocoder.cancelGeocode()
+        }
+        reverseGeocodeFromLocation(currentLocation)
+    }
+    
+    /// Private function that retrieve the location name based on the location object
+    private func reverseGeocodeFromLocation(_ currentLocation: CLLocation){
         geocoder.reverseGeocodeLocation(currentLocation) { (placemarks, error) in
             if let error = error {
                 DispatchQueue.main.async {
