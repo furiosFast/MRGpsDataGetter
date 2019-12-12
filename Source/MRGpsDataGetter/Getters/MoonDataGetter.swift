@@ -46,20 +46,20 @@ open class MoonDataGetter: NSObject {
         let myLocationCoordinates = CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
         let Jan12000Date = BDAstroCalc.daysSinceJan12000(date: NSDate())
         
-//        let moonRiseSet = BDAstroCalc.moonRiseAndSet(date: NSDate(), location: myLocationCoordinates)
-//        moon.moonRise = (moonRiseSet.rise).string(withFormat: timeFormat)
-//        moon.moonSet = (moonRiseSet.set).string(withFormat: timeFormat)
+        let moonRiseSet = BDAstroCalc.moonRiseAndSet(date: NSDate(), location: myLocationCoordinates)
+        moon.moonRise = (moonRiseSet.rise).string(withFormat: timeFormat)
+        moon.moonSet = (moonRiseSet.set).string(withFormat: timeFormat)
         
         let moonLocation = BDAstroCalc.moonPosition(date: NSDate(), location: myLocationCoordinates)
-//        let azim = ((moonLocation.azimuth + Double.pi).radiansToDegrees).truncatingRemainder(dividingBy: 360)
-//        moon.altitude = String(format: "%3.1f", moonLocation.altitude.radiansToDegrees) + loc("DEGREE")
-//        moon.azimuth = String(format: "%3.1f", azim) + loc("DEGREE") + " " + getAngleName(azim)
-//        moon.distance = "\(Int(moonLocation.distance).formattedWithSeparator) " + loc("KILOMETERS")
+        let azim = ((moonLocation.azimuth + Double.pi).radiansToDegrees).truncatingRemainder(dividingBy: 360)
+        moon.altitude = String(format: "%3.1f", moonLocation.altitude.radiansToDegrees) + loc("DEGREE")
+        moon.azimuth = String(format: "%3.1f", azim) + loc("DEGREE") + " " + getAngleName(azim)
+        moon.distance = "\(Int(moonLocation.distance).formattedWithSeparator) " + loc("KILOMETERS")
         moon.horizontalPosition = getMoonVisibility(moonLocation.altitude.radiansToDegrees)
         
         let moonPhase = BDAstroCalc.moonPhase(date: NSDate())
-//        moon.fractionOfMoonIlluminated = String(format: "%3.1f", moonPhase.fractionOfMoonIlluminated * 100) + " " + loc("PERCENT")
-//        moon.phase = moonPhase.phase.string
+        moon.fractionOfMoonIlluminated = String(format: "%3.1f", moonPhase.fractionOfMoonIlluminated * 100) + " " + loc("PERCENT")
+        moon.phase = moonPhase.phase.string
         moon.phaseIcon = getMoonPhaseIcon(moonPhase.phase)
         moon.phaseAngle = String(format: "%3.1f", moonPhase.angle.radiansToDegrees)
         
@@ -307,6 +307,5 @@ open class MoonDataGetter: NSObject {
         }
         return v
     }
-    
     
 }
