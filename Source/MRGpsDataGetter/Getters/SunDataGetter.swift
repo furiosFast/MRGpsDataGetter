@@ -47,9 +47,9 @@ open class SunDataGetter: NSObject {
         let Jan12000Date = BDAstroCalc.daysSinceJan12000(date: NSDate())
         
         let sunLocation = BDAstroCalc.sunPosition(date: NSDate(), location: myLocationCoordinates)
-        let azim = (sunLocation.azimuth + Double.pi).radiansToDegrees
-        sun.altitude = String(format: "%3.1f", sunLocation.altitude.radiansToDegrees) + loc("DEGREE")
-        sun.azimuth = String(format: "%3.1f", azim) + loc("DEGREE") + " " + getAngleName(azim)
+//        let azim = (sunLocation.azimuth + Double.pi).radiansToDegrees
+//        sun.altitude = String(format: "%3.1f", sunLocation.altitude.radiansToDegrees) + loc("DEGREE")
+//        sun.azimuth = String(format: "%3.1f", azim) + loc("DEGREE") + " " + getAngleName(azim)
         
         let sunTimes = BDAstroCalc.sunSignificantTimes(date: NSDate(), location: myLocationCoordinates)
         sun.astronomicalDuskSunrise = (sunTimes["nightEnd"]! as Date).string(withFormat: timeFormat)
@@ -89,13 +89,11 @@ open class SunDataGetter: NSObject {
         do {
             let smc:SunMoonCalculator = try SunMoonCalculator(date: Date(), longitude: currentLocation.coordinate.longitude, latitude: currentLocation.coordinate.latitude)
             smc.calcSunAndMoon()
+//            sun.sunriseStart = getDateFrom(try SunMoonCalculator.getDate(jd: smc.sunRise)).string(withFormat: timeFormat)
+//            sun.sunsetStart = getDateFrom(try SunMoonCalculator.getDate(jd: smc.sunSet)).string(withFormat: timeFormat)
             
-            
-            sun.sunriseStart = getDateFrom(try SunMoonCalculator.getDate(jd: smc.sunRise)).string(withFormat: timeFormat)
-            sun.sunsetStart = getDateFrom(try SunMoonCalculator.getDate(jd: smc.sunSet)).string(withFormat: timeFormat)
             sun.altitude = String(format: "%3.1f", smc.sunElevation.radiansToDegrees) + loc("DEGREE")
-            sun.azimuth = String(format: "%3.1f", smc.sunAzimuth.radiansToDegrees) + loc("DEGREE") + " " + getAngleName(azim)
-            
+            sun.azimuth = String(format: "%3.1f", smc.sunAzimuth.radiansToDegrees) + loc("DEGREE") + " " + getAngleName(smc.sunAzimuth.radiansToDegrees)
             
             sun.distance = String(format: "%3.4f", smc.sunDistance) + " " + loc("AUs")
             sun.solarNoon = getDateFrom(try SunMoonCalculator.getDate(jd: smc.sunTransit)).string(withFormat: timeFormat)
