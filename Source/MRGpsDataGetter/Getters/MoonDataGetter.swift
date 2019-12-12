@@ -69,11 +69,6 @@ open class MoonDataGetter: NSObject {
         moon.moonTilt = moonTilt(date: NSDate(), location: myLocationCoordinates).diff.string
 
         moon.zodiacSign = getMoonZodicaSignFromAge(Date())
-        if getMoonAge(Date()) < 2 {
-            moon.age = String(format: "%3.1f", getMoonAge(Date())) + " " + loc("DAY")
-        } else {
-            moon.age = String(format: "%3.1f", getMoonAge(Date())) + " " + loc("DAYS")
-        }
         moon.trajectory = getMoonTrajectoryFromAge(Date())
 
         //AstrologyCalc
@@ -85,6 +80,12 @@ open class MoonDataGetter: NSObject {
             let smc: SunMoonCalculator = try SunMoonCalculator(date: Date(), longitude: currentLocation.coordinate.longitude, latitude: currentLocation.coordinate.latitude)
             smc.calcSunAndMoon()
             moon.phaseTitle = smc.moonPhase
+            
+            if smc.moonAge < 2 {
+                moon.age = String(format: "%3.1f", smc.moonAge) + " " + loc("DAY")
+            } else {
+                moon.age = String(format: "%3.1f", smc.moonAge) + " " + loc("DAYS")
+            }
             moon.moonNoon = getDateFrom(try SunMoonCalculator.getDate(jd: smc.moonTransit)).string(withFormat: timeFormat)
             moon.nadir = getDateFrom(try SunMoonCalculator.getDate(jd: smc.moonTransit)).minusHours(12).string(withFormat: timeFormat)
         } catch {
