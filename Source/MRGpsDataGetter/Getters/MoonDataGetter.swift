@@ -79,14 +79,14 @@ open class MoonDataGetter: NSObject {
             let smc: SunMoonCalculator = try SunMoonCalculator(date: Date(), longitude: currentLocation.coordinate.longitude, latitude: currentLocation.coordinate.latitude)
             smc.calcSunAndMoon()
             
-            moon.moonRise = getDateFrom(try SunMoonCalculator.getDate(jd: smc.moonRise)).string(withFormat: timeFormat)
-            moon.moonSet = getDateFrom(try SunMoonCalculator.getDate(jd: smc.moonSet)).string(withFormat: timeFormat)
+//            moon.moonRise = getDateFrom(try SunMoonCalculator.getDate(jd: smc.moonRise)).string(withFormat: timeFormat)
+//            moon.moonSet = getDateFrom(try SunMoonCalculator.getDate(jd: smc.moonSet)).string(withFormat: timeFormat)
  
-            moon.altitude = String(format: "%3.1f", smc.moonElevation.radiansToDegrees) + loc("DEGREE")
-            moon.azimuth = String(format: "%3.1f", smc.moonAzimuth.radiansToDegrees) + loc("DEGREE") + " " + getAngleName(smc.moonAzimuth.radiansToDegrees)
-            moon.distance = "\(Int(smc.moonDistance * SunMoonCalculator.AU).formattedWithSeparator) " + loc("KILOMETERS")
+//            moon.altitude = String(format: "%3.1f", smc.moonElevation.radiansToDegrees) + loc("DEGREE")
+//            moon.azimuth = String(format: "%3.1f", smc.moonAzimuth.radiansToDegrees) + loc("DEGREE") + " " + getAngleName(smc.moonAzimuth.radiansToDegrees)
+//            moon.distance = "\(Int(smc.moonDistance * SunMoonCalculator.AU).formattedWithSeparator) " + loc("KILOMETERS")
             
-            moon.fractionOfMoonIlluminated = String(format: "%3.1f", smc.moonIllumination * 100) + " " + loc("PERCENT")
+//            moon.fractionOfMoonIlluminated = String(format: "%3.1f", smc.moonIllumination * 100) + " " + loc("PERCENT")
             moon.phaseTitle = smc.moonPhase
             
             moon.moonNoon = getDateFrom(try SunMoonCalculator.getDate(jd: smc.moonTransit)).minusHours(12).string(withFormat: timeFormat)
