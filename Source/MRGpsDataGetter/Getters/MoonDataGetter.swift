@@ -68,8 +68,7 @@ open class MoonDataGetter: NSObject {
         moon.rightAscension = String(format: "%3.1f", moonCoordinates.rightAscension.radiansToDegrees)
         moon.moonTilt = moonTilt(date: NSDate(), location: myLocationCoordinates).diff.string
 
-        moon.zodiacSign = getMoonZodicaSignFromAge(Date())
-        moon.trajectory = getMoonTrajectoryFromAge(Date())
+        moon.zodiacSign = getMoonZodicaSign(Date())
 
         //AstrologyCalc
         moon.previusEclipse = EclipseCalculator().getEclipseFor(date: Date(), eclipseType: .Lunar, next: false)
@@ -80,14 +79,15 @@ open class MoonDataGetter: NSObject {
             let smc: SunMoonCalculator = try SunMoonCalculator(date: Date(), longitude: currentLocation.coordinate.longitude, latitude: currentLocation.coordinate.latitude)
             smc.calcSunAndMoon()
             moon.phaseTitle = smc.moonPhase
-            
+            moon.moonNoon = getDateFrom(try SunMoonCalculator.getDate(jd: smc.moonTransit)).string(withFormat: timeFormat)
+            moon.nadir = getDateFrom(try SunMoonCalculator.getDate(jd: smc.moonTransit)).minusHours(12).string(withFormat: timeFormat)
+            moon.trajectory = getMoonTrajectoryFromAge(smc.moonAge, Date())
+
             if smc.moonAge < 2 {
                 moon.age = String(format: "%3.1f", smc.moonAge) + " " + loc("DAY")
             } else {
                 moon.age = String(format: "%3.1f", smc.moonAge) + " " + loc("DAYS")
             }
-            moon.moonNoon = getDateFrom(try SunMoonCalculator.getDate(jd: smc.moonTransit)).string(withFormat: timeFormat)
-            moon.nadir = getDateFrom(try SunMoonCalculator.getDate(jd: smc.moonTransit)).minusHours(12).string(withFormat: timeFormat)
         } catch {
             debugPrint("Failure in SunMoonCalculator (moon)")
         }
@@ -188,7 +188,7 @@ open class MoonDataGetter: NSObject {
     
     /// Function that return the zodiac sign of moon from the moon age at the specified date
     /// - Parameter date: a date
-    private func getMoonZodicaSignFromAge(_ date: Date) -> String {
+    private func getMoonZodicaSign(_ date: Date) -> String {
         var longitude: Double = 0.0
         var zodiac: String = loc("NOTAVAILABLENUMBER")
         
@@ -262,25 +262,24 @@ open class MoonDataGetter: NSObject {
     
     /// Function that return the moon trajectory from the moon age at the specified date
     /// - Parameter date: a date
-    private func getMoonTrajectoryFromAge(_ date: Date) -> String {
-        let age: Double = getMoonAge(date)
+    private func getMoonTrajectoryFromAge(_ moonAge: Double, _ date: Date) -> String {
         var trajectory: String = loc("NOTAVAILABLENUMBER")
         
-        if (age < 1.84566) {
+        if (moonAge < 1.84566) {
             trajectory = loc("ASCENDENT")
-        } else if (age < 5.53699) {
+        } else if (moonAge < 5.53699) {
             trajectory = loc("ASCENDENT")
-        } else if (age < 9.22831) {
+        } else if (moonAge < 9.22831) {
             trajectory = loc("ASCENDENT")
-        } else if (age < 12.91963) {
+        } else if (moonAge < 12.91963) {
             trajectory = loc("ASCENDENT")
-        } else if (age < 16.61096) {
+        } else if (moonAge < 16.61096) {
             trajectory = loc("DESCENDENT")
-        } else if (age < 20.30228) {
+        } else if (moonAge < 20.30228) {
             trajectory = loc("DESCENDENT")
-        } else if (age < 23.99361) {
+        } else if (moonAge < 23.99361) {
             trajectory = loc("DESCENDENT")
-        } else if (age < 27.68493) {
+        } else if (moonAge < 27.68493) {
             trajectory = loc("DESCENDENT")
         } else {
             trajectory = loc("ASCENDENT")
@@ -289,45 +288,7 @@ open class MoonDataGetter: NSObject {
         return trajectory
     }
     
-    /// Get the the age of the moon in days
-    /// - Parameter date: a date
-    private func getMoonAge(_ date: Date) -> Double {
-        var age: Double = 0.0
-
-        var yy: Double = 0.0
-        var mm: Double = 0.0
-        var k1: Double = 0.0
-        var k2: Double = 0.0
-        var k3: Double = 0.0
-        var jd: Double = 0.0
-        var ip: Double = 0.0
-
-        let year: Double = Double(Calendar.current.component(.year, from: date))
-        let month: Double = Double(Calendar.current.component(.month, from: date))
-        let day: Double = Double(Calendar.current.component(.day, from: date))
-
-        yy = year - floor((12 - month) / 10)
-        mm = month + 9.0
-        if (mm >= 12) {
-            mm = mm - 12
-        }
-
-        k1 = floor(365.25 * (yy + 4712))
-        k2 = floor(30.6 * mm + 0.5)
-        k3 = floor(floor((yy / 100) + 49) * 0.75) - 38
-
-        jd = k1 + k2 + day + 59
-        if (jd > 2299160) {
-            jd = jd - k3
-        }
-
-        ip = normalize((jd - 2451550.1) / 29.530588853)
-        age = ip * 29.53
-
-        return age
-    }
-    
-    /// Function that normalize che value passed from parameter. Used in the function for the moon age calc
+    /// Function that normalize che value passed from parameter. Used in the moon's functions
     /// - Parameter value: the value to normalize
     private func normalize(_ value: Double) -> Double {
         var v = value - floor(value)
@@ -336,5 +297,6 @@ open class MoonDataGetter: NSObject {
         }
         return v
     }
+    
     
 }
