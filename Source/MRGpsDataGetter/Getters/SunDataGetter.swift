@@ -129,9 +129,9 @@ open class SunDataGetter: NSObject {
             }
             let diff = getDaylightHoursDifference(t, y).split(separator: ":")
             if(t.timeIntervalSince(y) > 0) {
-                return t.string(withFormat: timeFormat) + " (+" + diff[1] + ":" + diff[2] + ")"
+                return t.string(withFormat: timeFormat) + " (+ " + diff[1] + ":" + diff[2] + ")"
             } else {
-                return t.string(withFormat: timeFormat) + " (-" + diff[1] + ":" + diff[2] + ")"
+                return t.string(withFormat: timeFormat) + " (- " + diff[1] + ":" + diff[2] + ")"
             }
         } else {
             return todayTime
