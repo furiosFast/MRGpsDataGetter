@@ -113,7 +113,7 @@ open class SunDataGetter: NSObject {
         return sun
     }
     
-    //MARK: - Support functions for sun data
+    //MARK: - Support functions
     
     /// Function that return the today sun lyght hours and the difference of minutes of sun lyght of today and yesterday
     /// - Parameters:
@@ -123,11 +123,15 @@ open class SunDataGetter: NSObject {
         let todayTime = getDaylightHoursDifference(today["sunriseStart"]! as Date, today["sunsetEnd"]! as Date)
         let yesterdayTime = getDaylightHoursDifference(yesterday["sunriseStart"]! as Date, yesterday["sunsetEnd"]! as Date)
         if let t = todayTime.date(withFormat: "HH:mm:ss"), let y = yesterdayTime.date(withFormat: "HH:mm:ss") {
+            var timeFormat = "HH:mm:ss"
+            if Bool(Preferences.shared.getPreference("minutesTimes"))! == true {
+                timeFormat = "HH:mm"
+            }
             let diff = getDaylightHoursDifference(t, y).split(separator: ":")
             if(t.timeIntervalSince(y) > 0) {
-                return todayTime + " (+" + diff[1] + ":" + diff[2] + ")"
+                return t.string(withFormat: timeFormat) + " (+" + diff[1] + ":" + diff[2] + ")"
             } else {
-                return todayTime + " (-" + diff[1] + ":" + diff[2] + ")"
+                return t.string(withFormat: timeFormat) + " (-" + diff[1] + ":" + diff[2] + ")"
             }
         } else {
             return todayTime

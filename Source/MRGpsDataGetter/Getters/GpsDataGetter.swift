@@ -150,7 +150,7 @@ open class GpsDataGetter: NSObject {
         }
     }
     
-    //MARK: - Support functions for gps data
+    //MARK: - Support functions
     
     /// Function that format the latitute coord from a double value
     /// - Parameter latitude: the position latitute (in degrees)

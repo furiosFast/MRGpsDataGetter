@@ -113,7 +113,7 @@ open class MoonDataGetter: NSObject {
         return moon
     }
     
-    //MARK: - Support functions for moon data
+    //MARK: - Support functions
     
     /// Function that return the visibility of the moon in sky (if it is under or hover the horizon)
     /// - Parameter altitude: altitude on the moon (in degrees)
