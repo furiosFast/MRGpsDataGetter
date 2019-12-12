@@ -79,8 +79,8 @@ open class MoonDataGetter: NSObject {
             let smc: SunMoonCalculator = try SunMoonCalculator(date: Date(), longitude: currentLocation.coordinate.longitude, latitude: currentLocation.coordinate.latitude)
             smc.calcSunAndMoon()
             moon.phaseTitle = smc.moonPhase
-            moon.moonNoon = getDateFrom(try SunMoonCalculator.getDate(jd: smc.moonTransit)).string(withFormat: timeFormat)
-            moon.nadir = getDateFrom(try SunMoonCalculator.getDate(jd: smc.moonTransit)).minusHours(12).string(withFormat: timeFormat)
+            moon.moonNoon = getDateFrom(try SunMoonCalculator.getDate(jd: smc.moonTransit)).minusHours(12).string(withFormat: timeFormat)
+            moon.nadir = getDateFrom(try SunMoonCalculator.getDate(jd: smc.moonTransit)).string(withFormat: timeFormat)
             moon.trajectory = getMoonTrajectoryFromAge(smc.moonAge, Date())
 
             if smc.moonAge < 2 {
