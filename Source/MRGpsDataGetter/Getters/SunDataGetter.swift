@@ -89,6 +89,14 @@ open class SunDataGetter: NSObject {
         do {
             let smc:SunMoonCalculator = try SunMoonCalculator(date: Date(), longitude: currentLocation.coordinate.longitude, latitude: currentLocation.coordinate.latitude)
             smc.calcSunAndMoon()
+            
+            
+            sun.sunriseStart = getDateFrom(try SunMoonCalculator.getDate(jd: smc.sunRise)).string(withFormat: timeFormat)
+            sun.sunsetStart = getDateFrom(try SunMoonCalculator.getDate(jd: smc.sunSet)).string(withFormat: timeFormat)
+            sun.altitude = String(format: "%3.1f", smc.sunElevation.radiansToDegrees) + loc("DEGREE")
+            sun.azimuth = String(format: "%3.1f", smc.sunAzimuth.radiansToDegrees) + loc("DEGREE") + " " + getAngleName(azim)
+            
+            
             sun.distance = String(format: "%3.4f", smc.sunDistance) + " " + loc("AUs")
             sun.solarNoon = getDateFrom(try SunMoonCalculator.getDate(jd: smc.sunTransit)).string(withFormat: timeFormat)
             sun.nadir = getDateFrom(try SunMoonCalculator.getDate(jd: smc.sunTransit)).plusHours(12).string(withFormat: timeFormat)
