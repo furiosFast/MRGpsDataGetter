@@ -93,7 +93,6 @@
 		4CCC14B7239066FA000310C9 /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				4CEE0A922385AED400782D39 /* Resources */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -129,6 +128,7 @@
 				4CEE0A6F2385A93E00782D39 /* Getters */,
 				4CEE0AAC2385D10700782D39 /* Other */,
 				4CF8B7762386089600DEAC15 /* Config */,
+				4CEE0A922385AED400782D39 /* Resources */,
 				4CEE0A8D2385AB2000782D39 /* External */,
 			);
 			path = MRGpsDataGetter;
