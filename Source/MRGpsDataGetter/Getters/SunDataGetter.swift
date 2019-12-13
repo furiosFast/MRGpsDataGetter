@@ -93,6 +93,7 @@ open class SunDataGetter: NSObject {
 //            sun.sunsetStart = getDateFrom(try SunMoonCalculator.getDate(jd: smc.sunSet)).string(withFormat: timeFormat)
             
             sun.altitude = String(format: "%3.1f", smc.sunElevation.radiansToDegrees) + loc("DEGREE")
+            sun.horizontalPosition = getSunMoonVisibility(smc.sunElevation.radiansToDegrees, isSun: true)
             sun.azimuth = String(format: "%3.1f", smc.sunAzimuth.radiansToDegrees) + loc("DEGREE") + " " + getAngleName(smc.sunAzimuth.radiansToDegrees)
             
             sun.distance = String(format: "%3.4f", smc.sunDistance) + " " + loc("AUs")

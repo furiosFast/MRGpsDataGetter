@@ -73,6 +73,25 @@ func declinationToString(_ declination: Double) -> String {
 //    return String(format: "%dh %dm %ds", abs(decDegrees), decMinutes, decSeconds)
 //}
 
+/// Function that return the visibility of the Sun/Moon in sky (if it is under or hover the horizon)
+/// - Parameter altitude: altitude on the moon (in degrees)
+/// - Parameter isSun: true for sun, false for moon
+func getSunMoonVisibility(_ altitude: Double, isSun: Bool) -> String {
+    if (altitude >= 0) {
+        if isSun {
+            return loc("POSITIONSUN_POSITIVE")
+        }
+        return loc("POSITIONMOON_POSITIVE")
+    }
+    if (altitude < 0) {
+        if isSun {
+            return loc("POSITIONSUN_NEGATIVE")
+        }
+        return loc("POSITIONMOON_NEGATIVE")
+    }
+    return loc("NOTAVAILABLENUMBER")
+}
+
 /// Function that return the wind name based on the device heading (compass)
 /// - Parameter angle: wind angle (in degrees)
 func getWindName(_ angle: Double) -> String {

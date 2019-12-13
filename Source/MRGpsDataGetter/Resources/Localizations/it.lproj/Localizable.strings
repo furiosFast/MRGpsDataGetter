@@ -53,6 +53,9 @@
 "SUNRISE" = "Alba";
 "SUNSET" = "Tramonto";
 
+"POSITIONSUN_NEGATIVE" = "Sole sotto l'orizzonte";
+"POSITIONSUN_POSITIVE" = "Sole sopra l'orizzonte";
+
 //moon
 "NEWMOON" = "Luna nuova";
 "UPMOON" = "Luna crescente";

@@ -53,6 +53,9 @@
 "SUNRISE" = "Sunrise";
 "SUNSET" = "Sunset";
 
+"POSITIONSUN_NEGATIVE" = "Sole under the horizon";
+"POSITIONSUN_POSITIVE" = "Sole over the horizon";
+
 //moon
 "NEWMOON" = "New Moon";
 "UPMOON" = "Waxing crescent";

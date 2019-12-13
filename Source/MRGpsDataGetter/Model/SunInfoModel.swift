@@ -45,6 +45,7 @@ public class SunInfoModel: NSObject {
     public final var rightAscension : String = loc("NOTAVAILABLENUMBER")
     public final var zodiacSign : String = loc("NOTAVAILABLENUMBER")
     public final var phaseTitle : String = loc("NOTAVAILABLENUMBER")
+    public final var horizontalPosition : String = loc("NOTAVAILABLENUMBER")
 
     public final var distance : String = loc("NOTAVAILABLENUMBER")
     

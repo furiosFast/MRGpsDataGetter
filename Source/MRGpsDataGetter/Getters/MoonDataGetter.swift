@@ -55,7 +55,7 @@ open class MoonDataGetter: NSObject {
 //        moon.altitude = String(format: "%3.1f", moonLocation.altitude.radiansToDegrees) + loc("DEGREE")
         moon.azimuth = String(format: "%3.1f", azim) + loc("DEGREE") + " " + getAngleName(azim)
         moon.distance = "\(Int(moonLocation.distance).formattedWithSeparator) " + loc("KILOMETERS")
-        moon.horizontalPosition = getMoonVisibility(moonLocation.altitude.radiansToDegrees)
+        moon.horizontalPosition = getSunMoonVisibility(moonLocation.altitude.radiansToDegrees, isSun: false)
         
         let moonPhase = BDAstroCalc.moonPhase(date: NSDate())
 //        moon.fractionOfMoonIlluminated = String(format: "%3.1f", moonPhase.fractionOfMoonIlluminated * 100) + " " + loc("PERCENT")
@@ -114,18 +114,6 @@ open class MoonDataGetter: NSObject {
     }
     
     //MARK: - Support functions
-    
-    /// Function that return the visibility of the moon in sky (if it is under or hover the horizon)
-    /// - Parameter altitude: altitude on the moon (in degrees)
-    private func getMoonVisibility(_ altitude: Double) -> String {
-        if (altitude >= 0) {
-            return loc("POSITIONMOON_POSITIVE")
-        }
-        if (altitude < 0) {
-            return loc("POSITIONMOON_NEGATIVE")
-        }
-        return loc("NOTAVAILABLENUMBER")
-    }
     
     /// The moon tilt angle with the help of BDAstroCalc library. The slope angle of the observed moon-sun line (α) and slope angle of the expected moon-sun line (β).
     /// - Parameters:
