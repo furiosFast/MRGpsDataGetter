@@ -32,7 +32,9 @@ open class GpsDataGetter: NSObject {
     
     lazy var geocoder = CLGeocoder()
     let gps = GpsInfoModel()
-    
+    var timeoutGeocodeFromString = Timer()
+    var timeoutGeocodeFromLocation = Timer()
+
     
     /// Function that start to retrive all GPS data of a specified location
     /// - Parameter currentLocation: location
@@ -96,6 +98,8 @@ open class GpsDataGetter: NSObject {
             geocoder.cancelGeocode()
         }
         reverseGeocodeFromString(locationAddress)
+        timeoutGeocodeFromString.invalidate()
+        timeoutGeocodeFromString = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(stopGeocodeFromString), userInfo: nil, repeats: false)
     }
     
     /// Private function that retrieve the location object based on the location name
@@ -116,6 +120,13 @@ open class GpsDataGetter: NSObject {
         }
     }
     
+    @objc private func stopGeocodeFromString(){
+        if geocoder.isGeocoding {
+            geocoder.cancelGeocode()
+        }
+        self.delegate?.reverseGeocodeFromStringError?(error: "reverseGeocodeFromString timeout error")
+    }
+    
     
     /// Function that retrieve the location name based on the location object
     /// - Parameter currentLocation: location
@@ -124,6 +135,8 @@ open class GpsDataGetter: NSObject {
             geocoder.cancelGeocode()
         }
         reverseGeocodeFromLocation(currentLocation)
+        timeoutGeocodeFromLocation.invalidate()
+        timeoutGeocodeFromLocation = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(stopGeocodeFromLocation), userInfo: nil, repeats: false)
     }
     
     /// Private function that retrieve the location name based on the location object
@@ -148,6 +161,13 @@ open class GpsDataGetter: NSObject {
                 }
             }
         }
+    }
+    
+    @objc private func stopGeocodeFromLocation(){
+        if geocoder.isGeocoding {
+            geocoder.cancelGeocode()
+        }
+        self.delegate?.reverseGeocodeFromLocationError?(error: "reverseGeocodeFromLocation timeout error")
     }
     
     //MARK: - Support functions
