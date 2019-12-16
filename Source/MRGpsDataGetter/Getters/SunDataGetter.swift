@@ -152,7 +152,7 @@ open class SunDataGetter: NSObject {
     /// - Parameter altitude: altitude on the sun (in degrees)
     private func getSunPhaseTitle(_ altitude: Double) -> String {
         if (altitude > 0) {
-            return loc("DAY")
+            return loc("DAYLIGHT")
         }
         if (altitude <= 0 && altitude >= -6) {
             return loc("CREPCIVSUNRISE")

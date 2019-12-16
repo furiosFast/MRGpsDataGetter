@@ -49,7 +49,7 @@
 "CREPASTROSUNRISE" = "Crepuscolo astronomico";
 "CREPNAUTICSUNRISE" = "Crepuscolo nautico";
 "CREPCIVSUNRISE" = "Crepuscolo civile";
-"DAY" = "Sole alto nel cielo";
+"DAYLIGHT" = "Sole alto nel cielo";
 "SUNRISE" = "Alba";
 "SUNSET" = "Tramonto";
 

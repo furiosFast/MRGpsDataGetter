@@ -49,7 +49,7 @@
 "CREPASTROSUNRISE" = "Astronomical twilight";
 "CREPNAUTICSUNRISE" = "Nautical twilight";
 "CREPCIVSUNRISE" = "Civil twilight";
-"DAY" = "Daylight";
+"DAYLIGHT" = "Daylight";
 "SUNRISE" = "Sunrise";
 "SUNSET" = "Sunset";
 
