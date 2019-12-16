@@ -13,6 +13,8 @@
 
 import UIKit
 import Alamofire
+import Foundation
+import Dispatch
 
 //MARK: - Shared variables
 
@@ -32,16 +34,28 @@ public let appVersionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundle
 public let copyright = Bundle.main.object(forInfoDictionaryKey: "NSHumanReadableCopyright") as! String
 public let appBuildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
 public let hexAppBuildNumber = String(appBuildNumber.int!, radix: 16, uppercase: true)
+public var _localizableBundle: Bundle?
 
 
 //MARK: - Shared functions
 
 /// Short function for localize string
 /// - Parameter localizedKey: string key to localize
-func loc(_ localizedKey: String) -> String {
-    return NSLocalizedString(localizedKey, comment: "")
-}
+//func loc(_ localizedKey: String) -> String {
+//    return NSLocalizedString(localizedKey, comment: "")
+//}
 
+func loc(_ key: String) -> String {
+    let bundles: [Bundle] = [Bundle.main, Bundle.localizableBundle]
+    for bundle in bundles {
+        let string = NSLocalizedString(key,
+                                       tableName: "MRGpsDataGetterLocalizable",
+                                       bundle: bundle,
+                                       comment: "")
+        if key != string { return string }
+    }
+    return key
+}
 
 /// Function that set the Alamofire configuration
 /// - Parameter timeOut: time interval that indicate the time out for every call to the web service made with alamofire
@@ -624,4 +638,17 @@ extension Thread {
         }
     }
 
+}
+
+//Bundle
+extension Bundle {
+    
+    static var localizableBundle: Bundle {
+        if let bundle = _localizableBundle { return bundle }
+
+        let bundle = Bundle(for: MRGpsDataGetter.self)
+        _localizableBundle = bundle
+        return bundle
+    }
+    
 }
