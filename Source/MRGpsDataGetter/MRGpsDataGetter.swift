@@ -41,6 +41,12 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
         setAlamofire(timeOut)
     }
     
+    open func setOptions(_ openWeatherMapKey: String, _ preferences : [String : String], _ forecastToo: Bool){
+        setOpenWeatherMapKey(openWeatherMapKey)
+        Preferences.shared.setPreferences(preferences)
+        isForecastToLoad = forecastToo
+    }
+    
     open func refreshAllData(openWeatherMapKey: String, preferences: [String : String], forecastMustBeLoaded: Bool = true){
         setCount(0)
         setLocationPermission(openWeatherMapKey: openWeatherMapKey, preferences: preferences, forecastMustBeLoaded: forecastMustBeLoaded)
@@ -119,7 +125,7 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
 
             if let b = Bool(Preferences.shared.getPreference("autoRefreshSunMoonInfo")), b == true {
                 timerAutoRefresh.invalidate()
-                timerAutoRefresh = Timer.scheduledTimer(timeInterval: Double(Preferences.shared.getPreference("sunMoonRefreshSeconds"))!, target: self, selector: #selector(self.autoRefreshSunMoonInfo), userInfo: nil, repeats: true)
+                timerAutoRefresh = Timer.scheduledTimer(timeInterval: Double(Preferences.shared.getPreference("sunMoonRefreshSeconds"))!, target: self, selector: #selector(self.refreshSunMoonPositionInfo), userInfo: nil, repeats: true)
             } else {
                 timerAutoRefresh.invalidate()
             }
@@ -146,7 +152,7 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
 //        refreshAllData(openWeatherMapKey: openWeatherMapKey, preferences: preferences)
     }
     
-    @objc private func autoRefreshSunMoonInfo(){
+    @objc private func refreshSunMoonPositionInfo(){
         if let loc = currentLocation, count > 0 {
             DispatchQueue.global().async {
                 GpsDataGetter.shared.getPositionInfo(currentLocation: loc)
@@ -197,12 +203,6 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     private func setCount(_ value: Int) {
         count = value
 //        errorCount = value
-    }
-    
-    private func setOptions(_ openWeatherMapKey: String, _ preferences : [String : String], _ forecastToo: Bool){
-        setOpenWeatherMapKey(openWeatherMapKey)
-        Preferences.shared.setPreferences(preferences)
-        isForecastToLoad = forecastToo
     }
     
     private func setOpenWeatherMapKey(_ openWeatherMapKey: String){
