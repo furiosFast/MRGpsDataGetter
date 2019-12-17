@@ -37,11 +37,11 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     var isForecastToLoad = true
 
     
-    open func initialize(_ timeOut: TimeInterval = 15.0){
+    open func initialize(timeOut: TimeInterval = 15.0){
         setAlamofire(timeOut)
     }
     
-    open func setOptions(_ openWeatherMapKey: String, _ preferences : [String : String], _ forecastToo: Bool){
+    open func setOptions(openWeatherMapKey: String, preferences : [String : String], forecastToo: Bool){
         setOpenWeatherMapKey(openWeatherMapKey)
         Preferences.shared.setPreferences(preferences)
         isForecastToLoad = forecastToo
@@ -53,7 +53,7 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     }
         
     open func setLocationPermission(openWeatherMapKey: String, preferences : [String : String], forecastMustBeLoaded: Bool = true){
-        setOptions(openWeatherMapKey, preferences, forecastMustBeLoaded)
+        setOptions(openWeatherMapKey: openWeatherMapKey, preferences: preferences, forecastToo: forecastMustBeLoaded)
         DispatchQueue.global().async {
             self.locationManager.delegate = self
             switch CLLocationManager.authorizationStatus() {
