@@ -38,6 +38,8 @@
 		4C80A4502385FC51000590C4 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4C80A4512385FC6D000590C4 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		4C80A4522385FC6D000590C4 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		4CC35F8223AAEB910020A6D7 /* MRGpsDataGetter.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MRGpsDataGetter.podspec; sourceTree = "<group>"; };
+		4CC35F8423AAEB9B0020A6D7 /* _config.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = _config.yml; sourceTree = "<group>"; };
 		4CDD6BF7239A4E4800BB02A7 /* SunMoonCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SunMoonCalculator.swift; sourceTree = "<group>"; };
 		4CEE0A622385A8A400782D39 /* MRGpsDataGetter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MRGpsDataGetter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CEE0A652385A8A400782D39 /* MRGpsDataGetter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MRGpsDataGetter.h; sourceTree = "<group>"; };
@@ -103,6 +105,8 @@
 				4C80A4502385FC51000590C4 /* README.md */,
 				4C80A4512385FC6D000590C4 /* Package.swift */,
 				4C80A4522385FC6D000590C4 /* LICENSE */,
+				4CC35F8223AAEB910020A6D7 /* MRGpsDataGetter.podspec */,
+				4CC35F8423AAEB9B0020A6D7 /* _config.yml */,
 				4CCC14B7239066FA000310C9 /* Example */,
 				4CF8B77723860A1A00DEAC15 /* Source */,
 				4CEE0A632385A8A400782D39 /* Products */,

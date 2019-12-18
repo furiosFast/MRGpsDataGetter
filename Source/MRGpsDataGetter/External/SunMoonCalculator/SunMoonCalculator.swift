@@ -210,23 +210,23 @@ class SunMoonCalculator {
      - returns:    Phase of the Moon*/
     static func getMoonPhaseName(lunarAge:Double) -> String {
         if lunarAge >= 0 && lunarAge <= LUNAR_CYCLE_DAYS && (lunarAge < 1 || lunarAge > LUNAR_CYCLE_DAYS - 1) {
-            return "New Moon"
+            return loc("NEWMOON")
         } else if lunarAge >= 1 && lunarAge < 6.4 {
-            return "Waxing Crescent"
+            return loc("UPMOON")
         } else if lunarAge >= 6.4 && lunarAge < 8.4 {
-            return "First Quarter"
+            return loc("FIRSTMOON")
         } else if lunarAge >= 8.4 && lunarAge < 13.8 {
-            return "Waxing Gibbous"
+            return loc("GIBUPMOON")
         } else if lunarAge >= 13.8 && lunarAge < 15.8 {
-            return "Full Moon"
+            return loc("FULLMOON")
         } else if lunarAge >= 15.8 && lunarAge < 21.1 {
-            return "Waning Gibbous"
+            return loc("GIPDOWNMOON")
         } else if lunarAge >= 21.1 && lunarAge < 23.1 {
-            return "Third Quarter"
+            return loc("LASTMOON")
         } else if lunarAge >= 23.1 && lunarAge <= LUNAR_CYCLE_DAYS - 1 {
-            return "Waning Crescent"
+            return loc("DOWNMOON")
         } else {
-            return "-"
+            return loc("NOTAVAIABLENUMBER")
         }
     }
     
