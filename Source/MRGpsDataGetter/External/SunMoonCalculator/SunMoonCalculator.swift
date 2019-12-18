@@ -222,7 +222,7 @@ class SunMoonCalculator {
         } else if lunarAge >= 15.8 && lunarAge < 21.1 {
             return "Waning Gibbous"
         } else if lunarAge >= 21.1 && lunarAge < 23.1 {
-            return "Last/Third Quarter"
+            return "Third Quarter"
         } else if lunarAge >= 23.1 && lunarAge <= LUNAR_CYCLE_DAYS - 1 {
             return "Waning Crescent"
         } else {

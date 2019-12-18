@@ -47,35 +47,38 @@ open class GpsDataGetter: NSObject {
     private func reversePositionInfo(_ currentLocation: CLLocation){
         gps.latitude = latitudeToString(currentLocation.coordinate.latitude)
         gps.longitude = longitudeToString(currentLocation.coordinate.longitude)
-        gps.altitude = String(format: "%3.1f " + loc("METERS"), currentLocation.altitude)
-        gps.verticalAccuracy = String(format: "%3.1f " + loc("METERS"), currentLocation.verticalAccuracy)
-        gps.horizontalAccuracy = String(format: "%3.1f " + loc("METERS"), currentLocation.horizontalAccuracy)
+        gps.altitude = String(format: "%3.1f" + " " + loc("METERS"), currentLocation.altitude)
+        gps.verticalAccuracy = String(format: "%3.1f" + " " + loc("METERS"), currentLocation.verticalAccuracy)
+        gps.horizontalAccuracy = String(format: "%3.1f" + " " + loc("METERS"), currentLocation.horizontalAccuracy)
         gps.course = currentLocation.course.string
+        if let floor = currentLocation.floor {
+            gps.floor = floor.level.string
+        }
         if(currentLocation.speed < 0) {
             if Preferences.shared.getPreference("windSpeed") == "meterSecondSpeed" {
-                gps.speed = "0.0 " + loc("METERSSECOND")
+                gps.speed = "0.0" + " " + loc("METERSSECOND")
             }
             if Preferences.shared.getPreference("windSpeed") == "kilometerHoursSpeed" {
-                gps.speed = "0.0 " + loc("KILOMETERSHOUR")
+                gps.speed = "0.0" + " " + loc("KILOMETERSHOUR")
             }
             if Preferences.shared.getPreference("windSpeed") == "knotSpeed" {
-                gps.speed = "0.0 " + loc("KNOT")
+                gps.speed = "0.0" + " " + loc("KNOT")
             }
             if Preferences.shared.getPreference("windSpeed") == "milesHoursSpeed" {
-                gps.speed = "0.0 " + loc("MILESHOURS")
+                gps.speed = "0.0" + " " + loc("MILESHOURS")
             }
         } else {
             if Preferences.shared.getPreference("windSpeed") == "meterSecondSpeed" {
-                gps.speed = String(format: "%3.1f " + loc("METERSSECOND"), currentLocation.speed)
+                gps.speed = String(format: "%3.1f" + " " + loc("METERSSECOND"), currentLocation.speed)
             }
             if Preferences.shared.getPreference("windSpeed") == "kilometerHoursSpeed" {
-                gps.speed = String(format: "%3.1f " + loc("KILOMETERSHOUR"), currentLocation.speed * meterSecondToKilometerHour)
+                gps.speed = String(format: "%3.1f" + " " + loc("KILOMETERSHOUR"), currentLocation.speed * meterSecondToKilometerHour)
             }
             if Preferences.shared.getPreference("windSpeed") == "knotSpeed" {
-                gps.speed = String(format: "%3.1f " + loc("KNOT"), currentLocation.speed * meterSecondToKnot)
+                gps.speed = String(format: "%3.1f" + " " + loc("KNOT"), currentLocation.speed * meterSecondToKnot)
             }
             if Preferences.shared.getPreference("windSpeed") == "milesHoursSpeed" {
-                gps.speed = String(format: "%3.1f " + loc("MILESHOURS"), currentLocation.speed * meterSecondToMilesHour)
+                gps.speed = String(format: "%3.1f" + " " + loc("MILESHOURS"), currentLocation.speed * meterSecondToMilesHour)
             }
         }
         

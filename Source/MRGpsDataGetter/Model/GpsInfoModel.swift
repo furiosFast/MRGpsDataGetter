@@ -24,5 +24,6 @@ public class GpsInfoModel: NSObject {
     public final var verticalAccuracy : String = loc("NOTAVAILABLENUMBER")
     public final var horizontalAccuracy : String = loc("NOTAVAILABLENUMBER")
     public final var course : String = loc("NOTAVAILABLENUMBER")
+    public final var floor : String = loc("NOTAVAILABLENUMBER")
 
 }
