@@ -50,12 +50,11 @@ open class MoonDataGetter: NSObject {
 //        moon.moonRise = (moonRiseSet.rise).string(withFormat: timeFormat)
 //        moon.moonSet = (moonRiseSet.set).string(withFormat: timeFormat)
         
-        let moonLocation = BDAstroCalc.moonPosition(date: NSDate(), location: myLocationCoordinates)
-        let azim = ((moonLocation.azimuth + Double.pi).radiansToDegrees).truncatingRemainder(dividingBy: 360)
+//        let moonLocation = BDAstroCalc.moonPosition(date: NSDate(), location: myLocationCoordinates)
+//        let azim = ((moonLocation.azimuth + Double.pi).radiansToDegrees).truncatingRemainder(dividingBy: 360)
 //        moon.altitude = String(format: "%3.1f", moonLocation.altitude.radiansToDegrees) + loc("DEGREE")
-        moon.azimuth = String(format: "%3.1f", azim) + loc("DEGREE") + " " + getAngleName(azim)
-        moon.distance = "\(Int(moonLocation.distance).formattedWithSeparator) " + loc("KILOMETERS")
-        moon.horizontalPosition = getSunMoonVisibility(moonLocation.altitude.radiansToDegrees, isSun: false)
+//        moon.azimuth = String(format: "%3.1f", azim) + loc("DEGREE") + " " + getAngleName(azim)
+//        moon.distance = "\(Int(moonLocation.distance).formattedWithSeparator) " + loc("KILOMETERS")
         
         let moonPhase = BDAstroCalc.moonPhase(date: NSDate())
 //        moon.fractionOfMoonIlluminated = String(format: "%3.1f", moonPhase.fractionOfMoonIlluminated * 100) + " " + loc("PERCENT")
@@ -83,8 +82,9 @@ open class MoonDataGetter: NSObject {
             moon.moonSet = getDateFrom(try SunMoonCalculator.getDate(jd: smc.moonSet)).string(withFormat: timeFormat)
  
             moon.altitude = String(format: "%3.1f", smc.moonElevation.radiansToDegrees) + loc("DEGREE")
-//            moon.azimuth = String(format: "%3.1f", smc.moonAzimuth.radiansToDegrees) + loc("DEGREE") + " " + getAngleName(smc.moonAzimuth.radiansToDegrees)
-//            moon.distance = "\(Int(smc.moonDistance * SunMoonCalculator.AU).formattedWithSeparator) " + loc("KILOMETERS")
+            moon.horizontalPosition = getSunMoonVisibility(smc.moonElevation.radiansToDegrees, isSun: false)
+            moon.azimuth = String(format: "%3.1f", smc.moonAzimuth.radiansToDegrees) + loc("DEGREE") + " " + getAngleName(smc.moonAzimuth.radiansToDegrees)
+            moon.distance = "\(Int(smc.moonDistance * SunMoonCalculator.AU).formattedWithSeparator) " + loc("KILOMETERS")
             
             moon.fractionOfMoonIlluminated = String(format: "%3.1f", smc.moonIllumination * 100) + " " + loc("PERCENT")
             moon.phaseTitle = smc.moonPhase
