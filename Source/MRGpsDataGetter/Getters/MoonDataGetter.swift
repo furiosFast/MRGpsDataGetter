@@ -46,9 +46,9 @@ open class MoonDataGetter: NSObject {
         let myLocationCoordinates = CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
         let Jan12000Date = BDAstroCalc.daysSinceJan12000(date: NSDate())
         
-        let moonRiseSet = BDAstroCalc.moonRiseAndSet(date: NSDate(), location: myLocationCoordinates)
+//        let moonRiseSet = BDAstroCalc.moonRiseAndSet(date: NSDate(), location: myLocationCoordinates)
 //        moon.moonRise = (moonRiseSet.rise).string(withFormat: timeFormat)
-        moon.moonSet = (moonRiseSet.set).string(withFormat: timeFormat)
+//        moon.moonSet = (moonRiseSet.set).string(withFormat: timeFormat)
         
         let moonLocation = BDAstroCalc.moonPosition(date: NSDate(), location: myLocationCoordinates)
         let azim = ((moonLocation.azimuth + Double.pi).radiansToDegrees).truncatingRemainder(dividingBy: 360)
@@ -80,7 +80,7 @@ open class MoonDataGetter: NSObject {
             smc.calcSunAndMoon()
             
             moon.moonRise = getDateFrom(try SunMoonCalculator.getDate(jd: smc.moonRise)).string(withFormat: timeFormat)
-//            moon.moonSet = getDateFrom(try SunMoonCalculator.getDate(jd: smc.moonSet)).string(withFormat: timeFormat)
+            moon.moonSet = getDateFrom(try SunMoonCalculator.getDate(jd: smc.moonSet)).string(withFormat: timeFormat)
  
             moon.altitude = String(format: "%3.1f", smc.moonElevation.radiansToDegrees) + loc("DEGREE")
 //            moon.azimuth = String(format: "%3.1f", smc.moonAzimuth.radiansToDegrees) + loc("DEGREE") + " " + getAngleName(smc.moonAzimuth.radiansToDegrees)
