@@ -110,31 +110,31 @@ public class EclipseCalculator {
                 // AFFC, p. 134
                 // non-central eclipse
                 if fabs(gamma) > 0.9972 && fabs(gamma) < 0.9972 + fabs(u) {
-                    e.type = .SolarNoncenral
+                    e.type = loc("SOLARNONCENTRAL")
                     e.phase = (phase).string
                 } else {
                     // central eclipse
 
                     e.phase = (phase).string
                     if u < 0 {
-                        e.type = .SolarCentralTotal
+                        e.type = loc("SOLARCENTRALTOTAL")
                     }
                     if u > 0.0047 {
-                        e.type = .SolarCentralAnnular
+                        e.type = loc("SOLARCENTRALANNULAR")
                     }
                     if u > 0 && u < 0.0047{
                         C = 0.00464 * (1 - gamma * gamma).squareRoot()
                         if (u < C) {
-                            e.type = .SolarCentralAnnularTotal
+                            e.type = loc("SOLARCENTRALANNULARTOTAL")
                         } else {
-                            e.type = .SolarCentralAnnular
+                            e.type = loc("SOLARCENTRALANNULAR")
                         }
                     }
                 }
                 
                 // partial eclipse
                 if fabs(gamma) > 0.9972 && fabs(gamma) < 1.5432 + u {
-                    e.type = .SolarPartial
+                    e.type = loc("SOLARPARTIAL")
                     phase = (1.5432 + u - fabs(gamma)) / (0.5461 + u + u)
                     e.phase = ((1.5432 + u - fabs(gamma)) / (0.5461 + u + u)).string
                 }
@@ -150,17 +150,17 @@ public class EclipseCalculator {
                 e.phase = ((1.0129 - u - fabs(gamma)) / 0.5450).string
                 
                 if phase >= 1 {
-                    e.type = .LunarUmbralTotal
+                    e.type = loc("LUNARUMBRALTOTAL")
                 }
                 
                 if phase > 0 && phase < 1 {
-                    e.type = .LunarUmbralPartial
+                    e.type = loc("LUNARUMBRALPARTIAL")
                 }
                 
                 // Check if elipse is penumral only
                 if phase < 0 {
                     // AFC, p. 135, f. 33.3
-                    e.type = .LunarPenumbral
+                    e.type = loc("LUNARPENUMBRAL")
                     e.phase = ((1.5572 + u - fabs(gamma)) / 0.5450).string
                 }
                 

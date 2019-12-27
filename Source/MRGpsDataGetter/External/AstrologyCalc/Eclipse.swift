@@ -12,18 +12,6 @@ import Foundation
 /// Provides detailed info about eclipse (lunar or solar).
 public class Eclipse {
     
-    public enum EclipseType {
-        case undefined
-        case SolarNoncenral
-        case SolarPartial
-        case SolarCentralTotal
-        case SolarCentralAnnular
-        case SolarCentralAnnularTotal
-        case LunarUmbralTotal
-        case LunarUmbralPartial
-        case LunarPenumbral
-    }
-    
     // Local visibility circumstances (lunar & solar both)
     public static let VISIBILITY_NONE             = 0;
     public static let VISIBILITY_PARTIAL          = 1;
@@ -42,7 +30,7 @@ public class Eclipse {
     public var phase : String = loc("NOTAVAILABLENUMBER")
     
     /** Type of eclipse */
-    public var type: EclipseType = .undefined
+    public var type : String = loc("NOTAVAILABLENUMBER")
     
     /** Minimal distance between:
      a) solar eclipse: center of Moon shadow axis and Earth center;

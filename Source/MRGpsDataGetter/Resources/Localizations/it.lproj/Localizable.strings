@@ -56,6 +56,13 @@
 "POSITIONSUN_NEGATIVE" = "Sole sotto l'orizzonte";
 "POSITIONSUN_POSITIVE" = "Sole sopra l'orizzonte";
 
+"SOLARNONCENTRAL" = "Eclissi solare non centrale";
+"SOLARCENTRALTOTAL" = "Eclissi solare centrale totale";
+"SOLARCENTRALANNULAR" = "Eclissi solare centrale anulare";
+"SOLARCENTRALANNULARTOTAL" = "Eclissi solare centrale anulare totale";
+"SOLARCENTRALANNULAR" = "Eclissi solare centrale anulare";
+"SOLARPARTIAL" = "Eclissi solare parziale";
+
 //moon
 "NEWMOON" = "Luna nuova";
 "UPMOON" = "Luna crescente";
@@ -71,6 +78,10 @@
 
 "ASCENDENT" = "Ascendente";
 "DESCENDENT" = "Discendente";
+
+"LUNARUMBRALTOTAL" = "Eclissi totale";
+"LUNARUMBRALPARTIAL" = "Eclissi parziale";
+"LUNARPENUMBRAL" = "Eclissi di penombra";
 
 //zodiac sign (sun/moon)
 "ARIES" = "Ariete";

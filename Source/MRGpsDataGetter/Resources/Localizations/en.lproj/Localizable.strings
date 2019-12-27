@@ -56,6 +56,13 @@
 "POSITIONSUN_NEGATIVE" = "Sole under the horizon";
 "POSITIONSUN_POSITIVE" = "Sole over the horizon";
 
+"SOLARNONCENTRAL" = "Non-central solar eclipse";
+"SOLARCENTRALTOTAL" = "Total central solar eclipse";
+"SOLARCENTRALANNULAR" = "Central annular solar eclipse";
+"SOLARCENTRALANNULARTOTAL" = "Total annular central solar eclipse";
+"SOLARCENTRALANNULAR" = "Central annular solar eclipse";
+"SOLARPARTIAL" = "Partial solar eclipse";
+
 //moon
 "NEWMOON" = "New Moon";
 "UPMOON" = "Waxing crescent";
@@ -71,6 +78,10 @@
 
 "ASCENDENT" = "Ascendent";
 "DESCENDENT" = "Descendent";
+
+"LUNARUMBRALTOTAL" = "Total eclipse";
+"LUNARUMBRALPARTIAL" = "Partial eclipse";
+"LUNARPENUMBRAL" = "Eclipse of penumbra";
 
 //zodiac sign (sun/moon)
 "ARIES" = "Aries";
