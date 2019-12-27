@@ -36,58 +36,58 @@ public class Eclipse {
     public static let VISIBILITY_END_PENUMBRA     = 8;
     
     /** UTC date & time of maximal phase of eclipse (for Earth center) */
-    public var maxPhaseDate:Date?
+    public var maxPhaseDate : String = loc("NOTAVAILABLENUMBER")
     
     /** Maximal phase of eclipse */
-    public var phase:Double = 0
+    public var phase : String = loc("NOTAVAILABLENUMBER")
     
     /** Type of eclipse */
-    public var type:EclipseType = .undefined
+    public var type: EclipseType = .undefined
     
     /** Minimal distance between:
      a) solar eclipse: center of Moon shadow axis and Earth center;
      b) lunar eclipse: Moon center and Earth shadow axis. */
-    public var gamma:Double = 0
+    public var gamma : String = loc("NOTAVAILABLENUMBER")
     
     /** Radius of ...  */
-    public var u:Double = 0
+    public var u : String = loc("NOTAVAILABLENUMBER")
     
     /** Eclipse visibiliy for local point */
-    public var visibility:Int?
+    public var visibility : String = loc("NOTAVAILABLENUMBER")
     
     /** Julian date for observable phase */
-    public var jdBestVisible:Double?
+    public var jdBestVisible : String = loc("NOTAVAILABLENUMBER")
     
     
     // LUNAR ECLIPSE
     
     /** Penumra radius (in Earth equatorial radii) */
-    public var rho:Double?
+    public var rho : String = loc("NOTAVAILABLENUMBER")
     
     /** Umbra radius (in Earth equatorial radii) */
-    public var sigma:Double?
+    public var sigma : String = loc("NOTAVAILABLENUMBER")
     
     /** Semiduration of partial phase in penumbra, in minutes */
-    public var sdPenumbra:Double?
+    public var sdPenumbra : String = loc("NOTAVAILABLENUMBER")
     
     /** Semiduration of partial phase, in minutes */
-    public var sdPartial:Double?
+    public var sdPartial : String = loc("NOTAVAILABLENUMBER")
     
     /** Semiduration of total phase, in minutes */
-    public var sdTotal:Double?
+    public var sdTotal : String = loc("NOTAVAILABLENUMBER")
     
     
     // SOLAR ECLIPSE
     
     /** Maximal local phase of eclipse */
-    public var phaseLocal:Double?
+    public var phaseLocal : String = loc("NOTAVAILABLENUMBER")
     
     /** UTC date & time eclipse maximum for local point */
-    public var jdLocal:Double?
+    public var jdLocal : String = loc("NOTAVAILABLENUMBER")
     
     /** Time of partial phase beginning for local point */
-    public var jdLocalPartialStart:Double?
+    public var jdLocalPartialStart : String = loc("NOTAVAILABLENUMBER")
     
     /** Time of partial phase ending for local point */
-    public var jdLocalPartialEnd:Double?
+    public var jdLocalPartialEnd : String = loc("NOTAVAILABLENUMBER")
 }
