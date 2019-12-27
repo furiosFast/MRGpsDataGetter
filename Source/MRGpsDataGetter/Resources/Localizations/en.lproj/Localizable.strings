@@ -56,12 +56,12 @@
 "POSITIONSUN_NEGATIVE" = "Sole under the horizon";
 "POSITIONSUN_POSITIVE" = "Sole over the horizon";
 
-"SOLARNONCENTRAL" = "Non-central solar eclipse";
-"SOLARCENTRALTOTAL" = "Total central solar eclipse";
-"SOLARCENTRALANNULAR" = "Central annular solar eclipse";
-"SOLARCENTRALANNULARTOTAL" = "Total annular central solar eclipse";
-"SOLARCENTRALANNULAR" = "Central annular solar eclipse";
-"SOLARPARTIAL" = "Partial solar eclipse";
+"SOLARNONCENTRAL" = "Non-central eclipse";
+"SOLARCENTRALTOTAL" = "Total central eclipse";
+"SOLARCENTRALANNULAR" = "Central annular eclipse";
+"SOLARCENTRALANNULARTOTAL" = "Total annular central eclipse";
+"SOLARCENTRALANNULAR" = "Central annular eclipse";
+"SOLARPARTIAL" = "Partial eclipse";
 
 //moon
 "NEWMOON" = "New Moon";

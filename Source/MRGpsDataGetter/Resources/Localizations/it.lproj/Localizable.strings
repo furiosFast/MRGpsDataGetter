@@ -56,12 +56,12 @@
 "POSITIONSUN_NEGATIVE" = "Sole sotto l'orizzonte";
 "POSITIONSUN_POSITIVE" = "Sole sopra l'orizzonte";
 
-"SOLARNONCENTRAL" = "Eclissi solare non centrale";
-"SOLARCENTRALTOTAL" = "Eclissi solare centrale totale";
-"SOLARCENTRALANNULAR" = "Eclissi solare centrale anulare";
-"SOLARCENTRALANNULARTOTAL" = "Eclissi solare centrale anulare totale";
-"SOLARCENTRALANNULAR" = "Eclissi solare centrale anulare";
-"SOLARPARTIAL" = "Eclissi solare parziale";
+"SOLARNONCENTRAL" = "Eclissi non centrale";
+"SOLARCENTRALTOTAL" = "Eclissi centrale totale";
+"SOLARCENTRALANNULAR" = "Eclissi centrale anulare";
+"SOLARCENTRALANNULARTOTAL" = "Eclissi centrale anulare totale";
+"SOLARCENTRALANNULAR" = "Eclissi centrale anulare";
+"SOLARPARTIAL" = "Eclissi parziale";
 
 //moon
 "NEWMOON" = "Luna nuova";
