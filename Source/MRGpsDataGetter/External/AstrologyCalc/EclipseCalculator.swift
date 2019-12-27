@@ -142,8 +142,8 @@ public class EclipseCalculator {
                 // LUNAR ECLIPSE
                 
                 
-                e.rho = String(format: "%3.1f", 1.2847 + u) + loc("DEGREE")
-                e.sigma = String(format: "%3.1f", 0.7494 - u) + loc("DEGREE")
+                e.rho = String(format: "%3.1f", (1.2847 + u).radiansToDegrees) + loc("DEGREE")
+                e.sigma = String(format: "%3.1f", (0.7494 - u).radiansToDegrees) + loc("DEGREE")
                 
                 // Phase for umbral eclipse
                 // AFFC, p. 135, f. 33.4
