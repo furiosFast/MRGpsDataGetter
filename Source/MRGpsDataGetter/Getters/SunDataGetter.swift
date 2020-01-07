@@ -82,7 +82,7 @@ open class SunDataGetter: NSObject {
         
         //AstrologyCalc
         sun.previusEclipse = EclipseCalculator().getEclipseFor(date: Date(), eclipseType: .Solar, next: false)
-        //sun.nextEclipse = EclipseCalculator().getEclipseFor(date: Date(), eclipseType: .Solar, next: true)
+        sun.nextEclipse = EclipseCalculator().getEclipseFor(date: Date(), eclipseType: .Solar, next: true)
         
         //SunMoonCalculator
         do {
