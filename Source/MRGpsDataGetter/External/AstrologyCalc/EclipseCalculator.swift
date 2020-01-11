@@ -181,13 +181,22 @@ public class EclipseCalculator {
                 
                 // semiduration in penumbra
                 C = u + 1.5573
-                e.sdPenumbra = (60.0 / n * (C * C - gamma * gamma).squareRoot()).string
+                let sdPenumbra = 60.0 / n * (C * C - gamma * gamma).squareRoot()
+                if !sdPenumbra.isNaN {
+                    e.sdPenumbra = sdPenumbra.string
+                }
                 
                 // semiduration of partial phase
-                e.sdPartial = (60.0 / n * (P * P - gamma * gamma).squareRoot()).string
+                let sdPartial = 60.0 / n * (P * P - gamma * gamma).squareRoot()
+                if !sdPartial.isNaN {
+                    e.sdPartial = sdPartial.string
+                }
                 
                 // semiduration of total phase
-                e.sdTotal = (60.0 / n * (Tau * Tau - gamma * gamma).squareRoot()).string
+                let sdTotal = 60.0 / n * (Tau * Tau - gamma * gamma).squareRoot()
+                if !sdTotal.isNaN {
+                    e.sdTotal = sdTotal.string
+                }
             }
         } while (!eclipseFound)
         
