@@ -38,7 +38,7 @@ open class SunDataGetter: NSObject {
     /// - Parameter currentLocation: location
     private func reverseSolarInfo(_ currentLocation: CLLocation){
         var timeFormat = "HH:mm:ss"
-        if Bool(Preferences.shared.getPreference("minutesTimes"))! == true {
+        if let b = Preferences.shared.getPreference("minutesTimes").bool, b {
             timeFormat = "HH:mm"
         }
         
@@ -125,7 +125,7 @@ open class SunDataGetter: NSObject {
         let yesterdayTime = getDaylightHoursDifference(yesterday["sunriseStart"]! as Date, yesterday["sunsetEnd"]! as Date)
         if let t = todayTime.date(withFormat: "HH:mm:ss"), let y = yesterdayTime.date(withFormat: "HH:mm:ss") {
             var timeFormat = "HH:mm:ss"
-            if Bool(Preferences.shared.getPreference("minutesTimes"))! == true {
+            if let b = Preferences.shared.getPreference("minutesTimes").bool, b {
                 timeFormat = "HH:mm"
             }
             let diff = getDaylightHoursDifference(t, y).split(separator: ":")

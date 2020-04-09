@@ -82,7 +82,7 @@ public class EclipseCalculator {
             timeByJulianDate += (0.1734 - 0.000393 * T) * sin(M) + 0.0021 * sin(M + M) - 0.4068 * sin(M_) + 0.0161 * sin(M_ + M_) - 0.0051 * sin(M + M_) - 0.0074 * sin(M - M_) - 0.0104 * sin(F + F)
             
             var timeFormat = "HH:mm:ss"
-            if Bool(Preferences.shared.getPreference("minutesTimes"))! == true {
+            if let b = Preferences.shared.getPreference("minutesTimes").bool, b {
                 timeFormat = "HH:mm"
             }
             e.maxPhaseDate = gregorianDateFrom(julianTime: timeByJulianDate).string(withFormat: "dd/MM/yyyy - " + timeFormat)

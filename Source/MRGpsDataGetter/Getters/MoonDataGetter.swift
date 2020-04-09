@@ -38,7 +38,7 @@ open class MoonDataGetter: NSObject {
     /// - Parameter currentLocation: location
     private func reverseMoonInfo(_ currentLocation: CLLocation){
         var timeFormat = "HH:mm:ss"
-        if Bool(Preferences.shared.getPreference("minutesTimes"))! == true {
+        if let b = Preferences.shared.getPreference("minutesTimes").bool, b {
             timeFormat = "HH:mm"
         }
 
