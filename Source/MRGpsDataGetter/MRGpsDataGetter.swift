@@ -127,7 +127,7 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
             }
             //////////////////////////////
 
-            if let b = Bool(Preferences.shared.getPreference("autoRefreshSunMoonInfo")), b == true {
+            if let b = Preferences.shared.getPreference("autoRefreshSunMoonInfo").bool, b {
                 timerAutoRefresh.invalidate()
                 timerAutoRefresh = Timer.scheduledTimer(timeInterval: Double(Preferences.shared.getPreference("sunMoonRefreshSeconds"))!, target: self, selector: #selector(self.refreshSunMoonPositionInfo), userInfo: nil, repeats: true)
             } else {
@@ -172,7 +172,7 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     
     public func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         isHeadingAvailableOnDevice = true
-        if Bool(Preferences.shared.getPreference("trueNorth"))! == true {
+        if let b = Preferences.shared.getPreference("trueNorth").bool, b {
             delegate?.gpsHeadingForCompass?(newHeading: newHeading.trueHeading)
         } else {
             delegate?.gpsHeadingForCompass?(newHeading: newHeading.magneticHeading)
