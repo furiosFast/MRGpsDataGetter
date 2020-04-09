@@ -35,16 +35,18 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     var openWeatherMapKey = "NaN"
     var isHeadingAvailableOnDevice = false
     var isForecastToLoad = true
-
+    var isLocationDataToLoadOnly = false
+    
     
     open func initialize(timeOut: TimeInterval = 15.0){
         setAlamofire(timeOut)
     }
     
-    open func setOptions(openWeatherMapKey: String, preferences : [String : String], forecastToo: Bool){
+    open func setOptions(openWeatherMapKey: String, preferences : [String : String], forecastToo: Bool, onlyLodationData: Bool){
         setOpenWeatherMapKey(openWeatherMapKey)
         Preferences.shared.setPreferences(preferences)
         isForecastToLoad = forecastToo
+        isLocationDataToLoadOnly = onlyLodationData
     }
     
     open func refreshAllData(openWeatherMapKey: String, preferences: [String : String], forecastMustBeLoaded: Bool = true){
@@ -52,14 +54,14 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
         setLocationPermission(openWeatherMapKey: openWeatherMapKey, preferences: preferences, forecastMustBeLoaded: forecastMustBeLoaded)
     }
         
-    open func setLocationPermission(openWeatherMapKey: String, preferences : [String : String], forecastMustBeLoaded: Bool = true){
-        setOptions(openWeatherMapKey: openWeatherMapKey, preferences: preferences, forecastToo: forecastMustBeLoaded)
+    open func setLocationPermission(openWeatherMapKey: String, preferences: [String : String], forecastMustBeLoaded: Bool = true, isLocationDataToLoadOnly: Bool = false){
+        setOptions(openWeatherMapKey: openWeatherMapKey, preferences: preferences, forecastToo: forecastMustBeLoaded, onlyLodationData: isLocationDataToLoadOnly)
         DispatchQueue.global().async {
             self.locationManager.delegate = self
             switch CLLocationManager.authorizationStatus() {
                 case .notDetermined:
                     self.locationManager.requestWhenInUseAuthorization()
-                    self.setLocationPermission(openWeatherMapKey: openWeatherMapKey, preferences: preferences, forecastMustBeLoaded: self.isForecastToLoad)
+                    self.setLocationPermission(openWeatherMapKey: openWeatherMapKey, preferences: preferences, forecastMustBeLoaded: self.isForecastToLoad, isLocationDataToLoadOnly: self.isLocationDataToLoadOnly)
                     break
                 case .restricted, .denied:
                     DispatchQueue.main.async {
@@ -103,22 +105,24 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
             DispatchQueue.global().async {
                 GpsDataGetter.shared.getGeocodeFromLocation(currentLocation: loc)
             }
-            //Sun info thread
-            DispatchQueue.global().async {
-                SunDataGetter.shared.getSunInfo(currentLocation: loc)
-            }
-            //Moon info thread
-            DispatchQueue.global().async {
-                MoonDataGetter.shared.getMoonInfo(currentLocation: loc)
-            }
-            //Weather info thread
-            DispatchQueue.global().async {
-                WeatherDataGetter.shared.getWeatherInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
-            }
-            //Forecast info thread
-            DispatchQueue.global().async {
-                if self.isForecastToLoad {
-                    ForecastDataGetter.shared.getForecastInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
+            if !self.isLocationDataToLoadOnly {
+                //Sun info thread
+                DispatchQueue.global().async {
+                    SunDataGetter.shared.getSunInfo(currentLocation: loc)
+                }
+                //Moon info thread
+                DispatchQueue.global().async {
+                    MoonDataGetter.shared.getMoonInfo(currentLocation: loc)
+                }
+                //Weather info thread
+                DispatchQueue.global().async {
+                    WeatherDataGetter.shared.getWeatherInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
+                }
+                //Forecast info thread
+                DispatchQueue.global().async {
+                    if self.isForecastToLoad {
+                        ForecastDataGetter.shared.getForecastInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
+                    }
                 }
             }
             //////////////////////////////
