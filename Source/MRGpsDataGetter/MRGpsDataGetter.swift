@@ -29,7 +29,8 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     
     var locationManager: CLLocationManager = CLLocationManager()
     var currentLocation: CLLocation?
-    var timerAutoRefresh = Timer()
+    var timerAutoRefreshSunMoon = Timer()
+    var timerAutoRefreshWeather = Timer()
     var count = 0
 //    var errorCount = 0
     var openWeatherMapKey = "NaN"
@@ -42,11 +43,11 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
         setAlamofire(timeOut)
     }
     
-    open func setOptions(openWeatherMapKey: String, preferences : [String : String], forecastToo: Bool, onlyLodationData: Bool){
+    open func setOptions(openWeatherMapKey: String, preferences : [String : String], forecastToo: Bool, onlyLocationData: Bool){
         setOpenWeatherMapKey(openWeatherMapKey)
         Preferences.shared.setPreferences(preferences)
         isForecastToLoad = forecastToo
-        isLocationDataToLoadOnly = onlyLodationData
+        isLocationDataToLoadOnly = onlyLocationData
     }
     
     open func refreshAllData(openWeatherMapKey: String, preferences: [String : String], forecastMustBeLoaded: Bool = true, isLocationDataToLoadOnly: Bool = false){
@@ -55,7 +56,7 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     }
         
     open func setLocationPermission(openWeatherMapKey: String, preferences: [String : String], forecastMustBeLoaded: Bool = true, isLocationDataToLoadOnly: Bool = false){
-        setOptions(openWeatherMapKey: openWeatherMapKey, preferences: preferences, forecastToo: forecastMustBeLoaded, onlyLodationData: isLocationDataToLoadOnly)
+        setOptions(openWeatherMapKey: openWeatherMapKey, preferences: preferences, forecastToo: forecastMustBeLoaded, onlyLocationData: isLocationDataToLoadOnly)
         DispatchQueue.global().async {
             self.locationManager.delegate = self
             switch CLLocationManager.authorizationStatus() {
@@ -71,7 +72,8 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
                     self.locationManager.delegate = nil
                     self.locationManager.stopUpdatingHeading()
                     self.locationManager.stopUpdatingLocation()
-                    self.timerAutoRefresh.invalidate()
+                    self.timerAutoRefreshSunMoon.invalidate()
+                    self.timerAutoRefreshWeather.invalidate()
                     self.isHeadingAvailableOnDevice = false
                     debugPrint("Location permits NOT obtained!")
                     break
@@ -114,6 +116,14 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
                 DispatchQueue.global().async {
                     MoonDataGetter.shared.getMoonInfo(currentLocation: loc)
                 }
+                if let b = Preferences.shared.getPreference("autoRefreshSunMoonInfo").bool, let d = Preferences.shared.getPreference("sunMoonRefreshSeconds").double(), b {
+                    timerAutoRefreshSunMoon.invalidate()
+                    timerAutoRefreshSunMoon = Timer.scheduledTimer(timeInterval: d, target: self, selector: #selector(self.refreshSunMoonPositionInfo), userInfo: nil, repeats: true)
+                } else {
+                    timerAutoRefreshSunMoon.invalidate()
+                }
+                
+
                 //Weather info thread
                 DispatchQueue.global().async {
                     WeatherDataGetter.shared.getWeatherInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
@@ -124,15 +134,16 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
                         ForecastDataGetter.shared.getForecastInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
                     }
                 }
+                if let b = Preferences.shared.getPreference("autoRefreshWeatherInfo").bool, let d = Preferences.shared.getPreference("weatherRefreshSeconds").double(), b {
+                    timerAutoRefreshWeather.invalidate()
+                    timerAutoRefreshWeather = Timer.scheduledTimer(timeInterval: d, target: self, selector: #selector(self.refreshWeatherPositionInfo), userInfo: nil, repeats: true)
+                } else {
+                    timerAutoRefreshWeather.invalidate()
+                }
             }
             //////////////////////////////
 
-            if let b = Preferences.shared.getPreference("autoRefreshSunMoonInfo").bool, let d = Preferences.shared.getPreference("sunMoonRefreshSeconds").double(), b {
-                timerAutoRefresh.invalidate()
-                timerAutoRefresh = Timer.scheduledTimer(timeInterval: d, target: self, selector: #selector(self.refreshSunMoonPositionInfo), userInfo: nil, repeats: true)
-            } else {
-                timerAutoRefresh.invalidate()
-            }
+
 //        } else {
 //            if errorCount > 0 {
 //                return
@@ -166,6 +177,19 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
             }
             DispatchQueue.global().async {
                 MoonDataGetter.shared.getMoonInfo(currentLocation: loc)
+            }
+        }
+    }
+
+    @objc private func refreshWeatherPositionInfo(){
+        if let loc = currentLocation, count > 0 {
+            DispatchQueue.global().async {
+                WeatherDataGetter.shared.getWeatherInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
+            }
+            DispatchQueue.global().async {
+                if self.isForecastToLoad {
+                    ForecastDataGetter.shared.getForecastInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
+                }
             }
         }
     }
