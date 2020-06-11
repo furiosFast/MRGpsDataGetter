@@ -134,12 +134,6 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
                         ForecastDataGetter.shared.getForecastInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
                     }
                 }
-                if let b = Preferences.shared.getPreference("autoRefreshWeatherInfo").bool, let d = Preferences.shared.getPreference("weatherRefreshMinutes").double(), b {
-                    timerAutoRefreshWeather.invalidate()
-                    timerAutoRefreshWeather = Timer.scheduledTimer(timeInterval: d, target: self, selector: #selector(self.refreshWeatherPositionInfo), userInfo: nil, repeats: true)
-                } else {
-                    timerAutoRefreshWeather.invalidate()
-                }
             }
             //////////////////////////////
 
