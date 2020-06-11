@@ -43,7 +43,7 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
         setAlamofire(timeOut)
     }
     
-    open func setOptions(openWeatherMapKey: String, preferences : [String : String], forecastToo: Bool, onlyLocationData: Bool){
+    private func setOptions(openWeatherMapKey: String, preferences : [String : String], forecastToo: Bool, onlyLocationData: Bool){
         setOpenWeatherMapKey(openWeatherMapKey)
         Preferences.shared.setPreferences(preferences)
         isForecastToLoad = forecastToo
