@@ -98,4 +98,4 @@ There files are already included into the framework.
 
 ## License
 
-SwifterSwift is released under the MIT license. See [LICENSE](https://github.com/furiosFast/MRGpsDataGetter/blob/master/LICENSE) for more information.
+MRGpsDataGetter is released under the MIT license. See [LICENSE](https://github.com/furiosFast/MRGpsDataGetter/blob/master/LICENSE) for more information.
