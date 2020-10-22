@@ -16,7 +16,6 @@ import PackageDescription
 
 let package = Package(
     name: "MRGpsDataGetter",
-    defaultLocalization: "en",
     platforms: [
         // Some platform where run yours library
         .iOS(.v11), .tvOS(.v11), .watchOS(.v4)
