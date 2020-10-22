@@ -105,6 +105,7 @@
 "DAYS" = "Days";
 "DATE" = "Date";
 "TIME" = "Time";
+"HOUR" = "Hour";
 "HOURS" = "Hours";
 "MEDIA" = "Average";
 "MAX" = "Max";
