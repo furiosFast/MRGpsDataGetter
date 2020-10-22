@@ -64,14 +64,18 @@ open class SunDataGetter: NSObject {
         sun.astronomicalDuskSunset = (sunTimes["nightStart"]! as Date).string(withFormat: timeFormat)
         
         sun.blueHourSunriseStart = (sunTimes["dawn"]! as Date).string(withFormat: timeFormat)
-        sun.blueHourSunriseEnd = ((sunTimes["dawn"]! as Date).plusMinutes((Date().minutesBetween(date1: (sunTimes["dawn"]! as Date), date2: (sunTimes["sunriseStart"]! as Date))/2))).string(withFormat: timeFormat)
-        sun.blueHourSunsetStart = ((sunTimes["sunsetEnd"]! as Date).plusMinutes((Date().minutesBetween(date1: (sunTimes["sunsetEnd"]! as Date), date2: (sunTimes["dusk"]! as Date))/2))).string(withFormat: timeFormat)
+//        sun.blueHourSunriseEnd = ((sunTimes["dawn"]! as Date).plusMinutes((Date().minutesBetween(date1: (sunTimes["dawn"]! as Date), date2: (sunTimes["sunriseStart"]! as Date))/2))).string(withFormat: timeFormat)
+//        sun.blueHourSunsetStart = ((sunTimes["sunsetEnd"]! as Date).plusMinutes((Date().minutesBetween(date1: (sunTimes["sunsetEnd"]! as Date), date2: (sunTimes["dusk"]! as Date))/2))).string(withFormat: timeFormat)
+        sun.blueHourSunriseEnd = (sunTimes["dawn"]! as Date).adding(.minute, value: ((sunTimes["dawn"]! as Date).minutesSince((sunTimes["sunriseStart"]! as Date))/2).int).string(withFormat: timeFormat)
+        sun.blueHourSunsetStart = (sunTimes["sunsetEnd"]! as Date).adding(.minute, value: ((sunTimes["sunsetEnd"]! as Date).minutesSince((sunTimes["dusk"]! as Date))/2).int).string(withFormat: timeFormat)
         sun.blueHourSunsetEnd = (sunTimes["dusk"]! as Date).string(withFormat: timeFormat)
 
-        sun.goldenHourSunriseStart = ((sunTimes["dawn"]! as Date).plusMinutes((Date().minutesBetween(date1: (sunTimes["dawn"]! as Date), date2: (sunTimes["sunriseStart"]! as Date))/2))).string(withFormat: timeFormat)
+//        sun.goldenHourSunriseStart = ((sunTimes["dawn"]! as Date).plusMinutes((Date().minutesBetween(date1: (sunTimes["dawn"]! as Date), date2: (sunTimes["sunriseStart"]! as Date))/2))).string(withFormat: timeFormat)
+        sun.goldenHourSunriseStart = (sunTimes["dawn"]! as Date).adding(.minute, value: ((sunTimes["dawn"]! as Date).minutesSince((sunTimes["sunriseStart"]! as Date))/2).int).string(withFormat: timeFormat)
         sun.goldenHourSunriseEnd = (sunTimes["goldenHourEnd"]! as Date).string(withFormat: timeFormat)
         sun.goldenHourSunsetStart = (sunTimes["goldenHourStart"]! as Date).string(withFormat: timeFormat)
-        sun.goldenHourSunsetEnd = ((sunTimes["sunsetEnd"]! as Date).plusMinutes((Date().minutesBetween(date1: (sunTimes["sunsetEnd"]! as Date), date2: (sunTimes["dusk"]! as Date))/2))).string(withFormat: timeFormat)
+//        sun.goldenHourSunsetEnd = ((sunTimes["sunsetEnd"]! as Date).plusMinutes((Date().minutesBetween(date1: (sunTimes["sunsetEnd"]! as Date), date2: (sunTimes["dusk"]! as Date))/2))).string(withFormat: timeFormat)
+        sun.goldenHourSunsetEnd = (sunTimes["sunsetEnd"]! as Date).adding(.minute, value: ((sunTimes["sunsetEnd"]! as Date).minutesSince((sunTimes["dusk"]! as Date))/2).int).string(withFormat: timeFormat)
         
         sun.daylightHours = getTodayDaylightHours(sunTimes, BDAstroCalc.sunSignificantTimes(date: Date().yesterday as NSDate, location: myLocationCoordinates))
         
@@ -79,10 +83,6 @@ open class SunDataGetter: NSObject {
         sun.declination = declinationToString(sunCoordinates.declination.radiansToDegrees)
         sun.rightAscension = String(format: "%3.1f", sunCoordinates.rightAscension.radiansToDegrees)
         sun.zodiacSign = getSunZodiacSign(sunCoordinates.rightAscension.radiansToDegrees)
-        
-        //AstrologyCalc
-        sun.previusEclipse = EclipseCalculator().getEclipseFor(date: Date(), eclipseType: .Solar, next: false)
-        sun.nextEclipse = EclipseCalculator().getEclipseFor(date: Date(), eclipseType: .Solar, next: true)
         
         //SunMoonCalculator
         do {
@@ -98,7 +98,7 @@ open class SunDataGetter: NSObject {
             
             sun.distance = String(format: "%3.4f", smc.sunDistance) + " " + loc("AUs")
             sun.solarNoon = getDateFrom(try SunMoonCalculator.getDate(jd: smc.sunTransit)).string(withFormat: timeFormat)
-            sun.nadir = getDateFrom(try SunMoonCalculator.getDate(jd: smc.sunTransit)).plusHours(12).string(withFormat: timeFormat)
+            sun.nadir = getDateFrom(try SunMoonCalculator.getDate(jd: smc.sunTransit)).adding(.hour, value: 12).string(withFormat: timeFormat)
         } catch {
             debugPrint("Failure in SunMoonCalculator (sun)")
         }

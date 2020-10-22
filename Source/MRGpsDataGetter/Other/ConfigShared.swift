@@ -297,14 +297,14 @@ extension Int {
 }
 
 // String
-public extension String {
-    
-    func toDate(format: String) -> Date? {
-        return DateFormatter(format: format).date(from: self)
-    }
-
-}
-
+//public extension String {
+//
+//    func toDate(format: String) -> Date? {
+//        return DateFormatter(format: format).date(from: self)
+//    }
+//
+//}
+//
 // TimeInterval
 extension TimeInterval {
 
@@ -316,298 +316,298 @@ extension TimeInterval {
 
         return String(format: "%0.2d:%0.2d:%0.2d", hours, minutes, seconds)
     }
-    
+
 }
 
 
 // Date
-let componentFlags : Set<Calendar.Component> = [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day, Calendar.Component.weekdayOrdinal, Calendar.Component.hour,Calendar.Component.minute, Calendar.Component.second, Calendar.Component.weekday, Calendar.Component.weekdayOrdinal]
-
-extension DateComponents {
-    mutating func to12am() {
-        self.hour = 0
-        self.minute = 0
-        self.second = 0
-    }
-    
-    mutating func to12pm() {
-        self.hour = 23
-        self.minute = 59
-        self.second = 59
-    }
-}
-
-extension DateFormatter {
-    convenience init (format: String) {
-        self.init()
-        dateFormat = format
-        locale = Locale.current
-    }
-}
-
-public extension Date {
-    
-    func toString (format:String) -> String? {
-        return DateFormatter(format: format).string(from: self)
-    }
-    
-    //Crea una data direttamente dai valori passati
-    static func customDate(year ye:Int, month mo:Int, day da:Int, hour ho:Int, minute mi:Int, second se:Int) -> Date {
-        var comps = DateComponents()
-        comps.year = ye
-        comps.month = mo
-        comps.day = da
-        comps.hour = ho
-        comps.minute = mi
-        comps.second = se
-        let date = NSCalendar.current.date(from: comps)
-        return date!
-    }
-    
-    func localeString() -> String {
-        let df = DateFormatter()
-        df.locale = NSLocale.current
-        df.timeStyle = .medium
-        df.dateStyle = .short
-        return df.string(from: self)
-    }
-    
-    struct Gregorian {
-        static let calendar = Calendar(identifier: .gregorian)
-    }
-    var startOfWeek: Date? {
-        return Gregorian.calendar.date(from: Gregorian.calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))
-    }
-    
-    func startOfWeek(weekday: Int?) -> Date {
-        var cal = Calendar.current
-        var component = cal.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)
-        component.to12am()
-        cal.firstWeekday = weekday ?? 1
-        return cal.date(from: component)!
-    }
-    
-    func endOfWeek(weekday: Int) -> Date {
-        let cal = Calendar.current
-        var component = DateComponents()
-        component.weekOfYear = 1
-        component.day = -1
-        component.to12pm()
-        return cal.date(byAdding: component, to: startOfWeek(weekday: weekday))!
-    }
-    
-    static func customDateUInt(year ye:UInt, month mo:UInt, day da:UInt, hour ho:UInt, minute mi:UInt, second se:UInt) -> Date {
-        var comps = DateComponents()
-        comps.year = Int(ye)
-        comps.month = Int(mo)
-        comps.day = Int(da)
-        comps.hour = Int(ho)
-        comps.minute = Int(mi)
-        comps.second = Int(se)
-        let date = NSCalendar.current.date(from: comps)
-        return date!
-    }
-    
-    static func dateOfMonthAgo() -> Date {
-        return Date().addingTimeInterval(-24 * 30 * 60 * 60)
-    }
-    
-    static func dateOfWeekAgo() -> Date {
-        return Date().addingTimeInterval(-24 * 7 * 60 * 60)
-    }
-    
-    func sameDate(ofDate:Date) -> Bool {
-        let cal = NSCalendar.current
-        let dif = cal.compare(self, to: ofDate, toGranularity: Calendar.Component.day)
-        if dif == .orderedSame {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    static func currentCalendar() -> Calendar {
-        return Calendar.autoupdatingCurrent
-    }
-    
-    func isEqualToDateIgnoringTime(_ aDate:Date) -> Bool {
-        let components1 = Date.currentCalendar().dateComponents(componentFlags, from: self)
-        let components2 = Date.currentCalendar().dateComponents(componentFlags, from: aDate)
-        
-        return ((components1.year == components2.year) &&
-            (components1.month == components2.month) &&
-            (components1.day == components2.day))
-    }
-    
-    func plusSeconds(_ s: Int) -> Date {
-        return self.addComponentsToDate(seconds: s, minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: 0)
-    }
-    
-    func minusSeconds(_ s: UInt) -> Date {
-        return self.addComponentsToDate(seconds: -Int(s), minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: 0)
-    }
-    
-    func plusMinutes(_ m: Int) -> Date {
-        return self.addComponentsToDate(seconds: 0, minutes: m, hours: 0, days: 0, weeks: 0, months: 0, years: 0)
-    }
-    
-    func minusMinutes(_ m: UInt) -> Date {
-        return self.addComponentsToDate(seconds: 0, minutes: -Int(m), hours: 0, days: 0, weeks: 0, months: 0, years: 0)
-    }
-    
-    func plusHours(_ h: UInt) -> Date {
-        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: Int(h), days: 0, weeks: 0, months: 0, years: 0)
-    }
-    
-    func minusHours(_ h: UInt) -> Date {
-        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: -Int(h), days: 0, weeks: 0, months: 0, years: 0)
-    }
-    
-    func plusDays(_ d: UInt) -> Date {
-        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: Int(d), weeks: 0, months: 0, years: 0)
-    }
-    
-    func minusDays(_ d: UInt) -> Date {
-        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: -Int(d), weeks: 0, months: 0, years: 0)
-    }
-    
-    func plusWeeks(_ w: UInt) -> Date {
-        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: Int(w), months: 0, years: 0)
-    }
-    
-    func minusWeeks(_ w: UInt) -> Date {
-        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: -Int(w), months: 0, years: 0)
-    }
-    
-    func plusMonths(_ m: UInt) -> Date {
-        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: Int(m), years: 0)
-    }
-    
-    func minusMonths(_ m: UInt) -> Date {
-        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: -Int(m), years: 0)
-    }
-    
-    func plusYears(_ y: UInt) -> Date {
-        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: Int(y))
-    }
-    
-    func minusYears(_ y: UInt) -> Date {
-        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: -Int(y))
-    }
-    
-    private func addComponentsToDate(seconds sec: Int, minutes min: Int, hours hrs: Int, days d: Int, weeks wks: Int, months mts: Int, years yrs: Int) -> Date {
-        var dc:DateComponents = DateComponents()
-        dc.second = sec
-        dc.minute = min
-        dc.hour = hrs
-        dc.day = d
-        dc.weekOfYear = wks
-        dc.month = mts
-        dc.year = yrs
-        return Calendar.current.date(byAdding: dc, to: self, wrappingComponents: false)!
-    }
-    
-    func midnightUTCDate() -> Date {
-        var dc:DateComponents = Calendar.current.dateComponents([Calendar.Component.year, Calendar.Component.month, Calendar.Component.day], from: self)
-        dc.hour = 0
-        dc.minute = 0
-        dc.second = 0
-        dc.nanosecond = 0
-        (dc as NSDateComponents).timeZone = TimeZone(secondsFromGMT: 0)
-        
-        return Calendar.current.date(from: dc)!
-    }
-    
-    func secondsBetween(date1 d1:Date, date2 d2:Date) -> Int {
-        let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
-        return dc.second!
-    }
-
-    func minutesBetween(date1 d1: Date, date2 d2: Date) -> Int {
-        let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
-        return dc.minute!
-    }
-
-    func hoursBetween(date1 d1: Date, date2 d2: Date) -> Int {
-        let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
-        return dc.hour!
-    }
-
-    func daysBetween(date1 d1: Date, date2 d2: Date) -> Int {
-        let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
-        return dc.day!
-    }
-
-    func weeksBetween(date1 d1: Date, date2 d2: Date) -> Int {
-        let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
-        return dc.weekOfYear!
-    }
-
-    func monthsBetween(date1 d1: Date, date2 d2: Date) -> Int {
-        let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
-        return dc.month!
-    }
-
-    func yearsBetween(date1 d1: Date, date2 d2: Date) -> Int {
-        let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
-        return dc.year!
-    }
-    
-    var yesterday: Date {
-        return Calendar.current.date(byAdding: .day, value: -1, to: noon)!
-    }
-    
-    var tomorrow: Date {
-        return Calendar.current.date(byAdding: .day, value: 1, to: noon)!
-    }
-    
-    var noon: Date {
-        return Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: self)!
-    }
-    
-    var isLastDayOfMonth: Bool {
-        return tomorrow.month != month
-    }
-    
-    
-    //Comparison Methods
-    
-    func isGreaterThan(_ date: Date) -> Bool {
-        return (self.compare(date) == .orderedDescending)
-    }
-    
-    func isLessThan(_ date: Date) -> Bool {
-        return (self.compare(date) == .orderedAscending)
-    }
-    
-    
-    //Computed Properties
-    
-    var day: UInt {
-        return UInt(Calendar.current.component(.day, from: self))
-    }
-    
-    var month: UInt {
-        return UInt(Calendar.current.component(.month, from: self))
-    }
-    
-    var year: UInt {
-        return UInt(Calendar.current.component(.year, from: self))
-    }
-    
-    var hour: UInt {
-        return UInt(Calendar.current.component(.hour, from: self))
-    }
-    
-    var minute: UInt {
-        return UInt(Calendar.current.component(.minute, from: self))
-    }
-    
-    var second: UInt {
-        return UInt(Calendar.current.component(.second, from: self))
-    }
-    
-}
+//let componentFlags : Set<Calendar.Component> = [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day, Calendar.Component.weekdayOrdinal, Calendar.Component.hour,Calendar.Component.minute, Calendar.Component.second, Calendar.Component.weekday, Calendar.Component.weekdayOrdinal]
+//
+//extension DateComponents {
+//    mutating func to12am() {
+//        self.hour = 0
+//        self.minute = 0
+//        self.second = 0
+//    }
+//
+//    mutating func to12pm() {
+//        self.hour = 23
+//        self.minute = 59
+//        self.second = 59
+//    }
+//}
+//
+//extension DateFormatter {
+//    convenience init (format: String) {
+//        self.init()
+//        dateFormat = format
+//        locale = Locale.current
+//    }
+//}
+//
+//public extension Date {
+//
+//    func toString (format:String) -> String? {
+//        return DateFormatter(format: format).string(from: self)
+//    }
+//
+//    //Crea una data direttamente dai valori passati
+//    static func customDate(year ye:Int, month mo:Int, day da:Int, hour ho:Int, minute mi:Int, second se:Int) -> Date {
+//        var comps = DateComponents()
+//        comps.year = ye
+//        comps.month = mo
+//        comps.day = da
+//        comps.hour = ho
+//        comps.minute = mi
+//        comps.second = se
+//        let date = NSCalendar.current.date(from: comps)
+//        return date!
+//    }
+//
+//    func localeString() -> String {
+//        let df = DateFormatter()
+//        df.locale = NSLocale.current
+//        df.timeStyle = .medium
+//        df.dateStyle = .short
+//        return df.string(from: self)
+//    }
+//
+//    struct Gregorian {
+//        static let calendar = Calendar(identifier: .gregorian)
+//    }
+//    var startOfWeek: Date? {
+//        return Gregorian.calendar.date(from: Gregorian.calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))
+//    }
+//
+//    func startOfWeek(weekday: Int?) -> Date {
+//        var cal = Calendar.current
+//        var component = cal.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)
+//        component.to12am()
+//        cal.firstWeekday = weekday ?? 1
+//        return cal.date(from: component)!
+//    }
+//
+//    func endOfWeek(weekday: Int) -> Date {
+//        let cal = Calendar.current
+//        var component = DateComponents()
+//        component.weekOfYear = 1
+//        component.day = -1
+//        component.to12pm()
+//        return cal.date(byAdding: component, to: startOfWeek(weekday: weekday))!
+//    }
+//
+//    static func customDateUInt(year ye:UInt, month mo:UInt, day da:UInt, hour ho:UInt, minute mi:UInt, second se:UInt) -> Date {
+//        var comps = DateComponents()
+//        comps.year = Int(ye)
+//        comps.month = Int(mo)
+//        comps.day = Int(da)
+//        comps.hour = Int(ho)
+//        comps.minute = Int(mi)
+//        comps.second = Int(se)
+//        let date = NSCalendar.current.date(from: comps)
+//        return date!
+//    }
+//
+//    static func dateOfMonthAgo() -> Date {
+//        return Date().addingTimeInterval(-24 * 30 * 60 * 60)
+//    }
+//
+//    static func dateOfWeekAgo() -> Date {
+//        return Date().addingTimeInterval(-24 * 7 * 60 * 60)
+//    }
+//
+//    func sameDate(ofDate:Date) -> Bool {
+//        let cal = NSCalendar.current
+//        let dif = cal.compare(self, to: ofDate, toGranularity: Calendar.Component.day)
+//        if dif == .orderedSame {
+//            return true
+//        } else {
+//            return false
+//        }
+//    }
+//
+//    static func currentCalendar() -> Calendar {
+//        return Calendar.autoupdatingCurrent
+//    }
+//
+//    func isEqualToDateIgnoringTime(_ aDate:Date) -> Bool {
+//        let components1 = Date.currentCalendar().dateComponents(componentFlags, from: self)
+//        let components2 = Date.currentCalendar().dateComponents(componentFlags, from: aDate)
+//
+//        return ((components1.year == components2.year) &&
+//            (components1.month == components2.month) &&
+//            (components1.day == components2.day))
+//    }
+//
+//    func plusSeconds(_ s: Int) -> Date {
+//        return self.addComponentsToDate(seconds: s, minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: 0)
+//    }
+//
+//    func minusSeconds(_ s: UInt) -> Date {
+//        return self.addComponentsToDate(seconds: -Int(s), minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: 0)
+//    }
+//
+//    func plusMinutes(_ m: Int) -> Date {
+//        return self.addComponentsToDate(seconds: 0, minutes: m, hours: 0, days: 0, weeks: 0, months: 0, years: 0)
+//    }
+//
+//    func minusMinutes(_ m: UInt) -> Date {
+//        return self.addComponentsToDate(seconds: 0, minutes: -Int(m), hours: 0, days: 0, weeks: 0, months: 0, years: 0)
+//    }
+//
+//    func plusHours(_ h: UInt) -> Date {
+//        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: Int(h), days: 0, weeks: 0, months: 0, years: 0)
+//    }
+//
+//    func minusHours(_ h: UInt) -> Date {
+//        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: -Int(h), days: 0, weeks: 0, months: 0, years: 0)
+//    }
+//
+//    func plusDays(_ d: UInt) -> Date {
+//        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: Int(d), weeks: 0, months: 0, years: 0)
+//    }
+//
+//    func minusDays(_ d: UInt) -> Date {
+//        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: -Int(d), weeks: 0, months: 0, years: 0)
+//    }
+//
+//    func plusWeeks(_ w: UInt) -> Date {
+//        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: Int(w), months: 0, years: 0)
+//    }
+//
+//    func minusWeeks(_ w: UInt) -> Date {
+//        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: -Int(w), months: 0, years: 0)
+//    }
+//
+//    func plusMonths(_ m: UInt) -> Date {
+//        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: Int(m), years: 0)
+//    }
+//
+//    func minusMonths(_ m: UInt) -> Date {
+//        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: -Int(m), years: 0)
+//    }
+//
+//    func plusYears(_ y: UInt) -> Date {
+//        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: Int(y))
+//    }
+//
+//    func minusYears(_ y: UInt) -> Date {
+//        return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: -Int(y))
+//    }
+//
+//    private func addComponentsToDate(seconds sec: Int, minutes min: Int, hours hrs: Int, days d: Int, weeks wks: Int, months mts: Int, years yrs: Int) -> Date {
+//        var dc:DateComponents = DateComponents()
+//        dc.second = sec
+//        dc.minute = min
+//        dc.hour = hrs
+//        dc.day = d
+//        dc.weekOfYear = wks
+//        dc.month = mts
+//        dc.year = yrs
+//        return Calendar.current.date(byAdding: dc, to: self, wrappingComponents: false)!
+//    }
+//
+//    func midnightUTCDate() -> Date {
+//        var dc:DateComponents = Calendar.current.dateComponents([Calendar.Component.year, Calendar.Component.month, Calendar.Component.day], from: self)
+//        dc.hour = 0
+//        dc.minute = 0
+//        dc.second = 0
+//        dc.nanosecond = 0
+//        (dc as NSDateComponents).timeZone = TimeZone(secondsFromGMT: 0)
+//
+//        return Calendar.current.date(from: dc)!
+//    }
+//
+//    func secondsBetween(date1 d1:Date, date2 d2:Date) -> Int {
+//        let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
+//        return dc.second!
+//    }
+//
+//    func minutesBetween(date1 d1: Date, date2 d2: Date) -> Int {
+//        let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
+//        return dc.minute!
+//    }
+//
+//    func hoursBetween(date1 d1: Date, date2 d2: Date) -> Int {
+//        let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
+//        return dc.hour!
+//    }
+//
+//    func daysBetween(date1 d1: Date, date2 d2: Date) -> Int {
+//        let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
+//        return dc.day!
+//    }
+//
+//    func weeksBetween(date1 d1: Date, date2 d2: Date) -> Int {
+//        let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
+//        return dc.weekOfYear!
+//    }
+//
+//    func monthsBetween(date1 d1: Date, date2 d2: Date) -> Int {
+//        let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
+//        return dc.month!
+//    }
+//
+//    func yearsBetween(date1 d1: Date, date2 d2: Date) -> Int {
+//        let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
+//        return dc.year!
+//    }
+//
+//    var yesterday: Date {
+//        return Calendar.current.date(byAdding: .day, value: -1, to: noon)!
+//    }
+//
+//    var tomorrow: Date {
+//        return Calendar.current.date(byAdding: .day, value: 1, to: noon)!
+//    }
+//
+//    var noon: Date {
+//        return Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: self)!
+//    }
+//
+//    var isLastDayOfMonth: Bool {
+//        return tomorrow.month != month
+//    }
+//
+//
+//    //Comparison Methods
+//
+//    func isGreaterThan(_ date: Date) -> Bool {
+//        return (self.compare(date) == .orderedDescending)
+//    }
+//
+//    func isLessThan(_ date: Date) -> Bool {
+//        return (self.compare(date) == .orderedAscending)
+//    }
+//
+//
+//    //Computed Properties
+//
+//    var day: UInt {
+//        return UInt(Calendar.current.component(.day, from: self))
+//    }
+//
+//    var month: UInt {
+//        return UInt(Calendar.current.component(.month, from: self))
+//    }
+//
+//    var year: UInt {
+//        return UInt(Calendar.current.component(.year, from: self))
+//    }
+//
+//    var hour: UInt {
+//        return UInt(Calendar.current.component(.hour, from: self))
+//    }
+//
+//    var minute: UInt {
+//        return UInt(Calendar.current.component(.minute, from: self))
+//    }
+//
+//    var second: UInt {
+//        return UInt(Calendar.current.component(.second, from: self))
+//    }
+//
+//}
 
 // Thread
 extension Thread {

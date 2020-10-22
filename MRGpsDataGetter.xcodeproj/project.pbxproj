@@ -10,9 +10,8 @@
 		4C2CC7AA2399CB3F00A4254C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4CEE0AA82385C8D000782D39 /* Localizable.strings */; };
 		4C34FE7C2387169E00A9C1CC /* PlotInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C34FE7B2387169E00A9C1CC /* PlotInfoModel.swift */; };
 		4C42DE2A238A04FF00B586B5 /* SwifterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4C42DE29238A04FF00B586B5 /* SwifterSwift */; };
-		4C6F498C239886F400488E0F /* Eclipse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F498B239886F400488E0F /* Eclipse.swift */; };
-		4C6F498E2398870400488E0F /* EclipseCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F498D2398870400488E0F /* EclipseCalculator.swift */; };
 		4CDD6BF8239A4E4800BB02A7 /* SunMoonCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDD6BF7239A4E4800BB02A7 /* SunMoonCalculator.swift */; };
+		4CE0897524F59C8D007F7ECC /* EKAstrologyCalc in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE0897424F59C8D007F7ECC /* EKAstrologyCalc */; };
 		4CEE0A672385A8A400782D39 /* MRGpsDataGetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CEE0A652385A8A400782D39 /* MRGpsDataGetter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4CEE0A722385A9A700782D39 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4CEE0A712385A9A700782D39 /* Alamofire */; };
 		4CEE0A752385A9D600782D39 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 4CEE0A742385A9D600782D39 /* SwiftyJSON */; };
@@ -33,8 +32,6 @@
 
 /* Begin PBXFileReference section */
 		4C34FE7B2387169E00A9C1CC /* PlotInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotInfoModel.swift; sourceTree = "<group>"; };
-		4C6F498B239886F400488E0F /* Eclipse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Eclipse.swift; sourceTree = "<group>"; };
-		4C6F498D2398870400488E0F /* EclipseCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EclipseCalculator.swift; sourceTree = "<group>"; };
 		4C80A4502385FC51000590C4 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4C80A4512385FC6D000590C4 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		4C80A4522385FC6D000590C4 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -68,6 +65,7 @@
 			files = (
 				4C42DE2A238A04FF00B586B5 /* SwifterSwift in Frameworks */,
 				4CEE0A752385A9D600782D39 /* SwiftyJSON in Frameworks */,
+				4CE0897524F59C8D007F7ECC /* EKAstrologyCalc in Frameworks */,
 				4CEE0A722385A9A700782D39 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -81,15 +79,6 @@
 				4CDD6BF7239A4E4800BB02A7 /* SunMoonCalculator.swift */,
 			);
 			path = SunMoonCalculator;
-			sourceTree = "<group>";
-		};
-		4C2CC7AB2399E3C000A4254C /* AstrologyCalc */ = {
-			isa = PBXGroup;
-			children = (
-				4C6F498B239886F400488E0F /* Eclipse.swift */,
-				4C6F498D2398870400488E0F /* EclipseCalculator.swift */,
-			);
-			path = AstrologyCalc;
 			sourceTree = "<group>";
 		};
 		4CCC14B7239066FA000310C9 /* Example */ = {
@@ -182,7 +171,6 @@
 			children = (
 				4CEE0A8A2385AB1C00782D39 /* BDAstroCalc */,
 				4C28C3E6239E422B00350932 /* SunMoonCalculator */,
-				4C2CC7AB2399E3C000A4254C /* AstrologyCalc */,
 			);
 			path = External;
 			sourceTree = "<group>";
@@ -262,6 +250,7 @@
 				4CEE0A712385A9A700782D39 /* Alamofire */,
 				4CEE0A742385A9D600782D39 /* SwiftyJSON */,
 				4C42DE29238A04FF00B586B5 /* SwifterSwift */,
+				4CE0897424F59C8D007F7ECC /* EKAstrologyCalc */,
 			);
 			productName = MRGpsDataGetter;
 			productReference = 4CEE0A622385A8A400782D39 /* MRGpsDataGetter.framework */;
@@ -273,7 +262,7 @@
 		4CEE0A592385A8A400782D39 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1120;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Fast-Devs Project";
 				TargetAttributes = {
 					4CEE0A612385A8A400782D39 = {
@@ -296,6 +285,7 @@
 				4CEE0A702385A9A700782D39 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				4CEE0A732385A9D600782D39 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				4C42DE28238A04FF00B586B5 /* XCRemoteSwiftPackageReference "SwifterSwift" */,
+				4CE0897324F59C8D007F7ECC /* XCRemoteSwiftPackageReference "EKAstrologyCalc" */,
 			);
 			productRefGroup = 4CEE0A632385A8A400782D39 /* Products */;
 			projectDirPath = "";
@@ -346,7 +336,6 @@
 				4CEE0A952385AFCA00782D39 /* BDAstroCalc.swift in Sources */,
 				4CEE0A842385AA2700782D39 /* GpsInfoModel.swift in Sources */,
 				4CEE0A812385AA2700782D39 /* MoonInfoModel.swift in Sources */,
-				4C6F498E2398870400488E0F /* EclipseCalculator.swift in Sources */,
 				4CEE0A8F2385AD2000782D39 /* ConfigShared.swift in Sources */,
 				4CEE0A912385AD6000782D39 /* MoonDataGetter.swift in Sources */,
 				4CEE0A822385AA2700782D39 /* SunInfoModel.swift in Sources */,
@@ -357,7 +346,6 @@
 				4CEE0A992385B39E00782D39 /* WeatherDataGetter.swift in Sources */,
 				4CEE0A832385AA2700782D39 /* WeatherModel.swift in Sources */,
 				4CDD6BF8239A4E4800BB02A7 /* SunMoonCalculator.swift in Sources */,
-				4C6F498C239886F400488E0F /* Eclipse.swift in Sources */,
 				4CEE0A972385B07900782D39 /* SunDataGetter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -404,6 +392,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -429,7 +418,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -437,7 +426,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TVOS_DEPLOYMENT_TARGET = 11.0;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 				WATCHOS_DEPLOYMENT_TARGET = 4.0;
@@ -471,6 +460,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -490,14 +480,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				TVOS_DEPLOYMENT_TARGET = 11.0;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -592,6 +582,14 @@
 				minimumVersion = 5.1.0;
 			};
 		};
+		4CE0897324F59C8D007F7ECC /* XCRemoteSwiftPackageReference "EKAstrologyCalc" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/emvakar/EKAstrologyCalc.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		4CEE0A702385A9A700782D39 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -615,6 +613,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4C42DE28238A04FF00B586B5 /* XCRemoteSwiftPackageReference "SwifterSwift" */;
 			productName = SwifterSwift;
+		};
+		4CE0897424F59C8D007F7ECC /* EKAstrologyCalc */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CE0897324F59C8D007F7ECC /* XCRemoteSwiftPackageReference "EKAstrologyCalc" */;
+			productName = EKAstrologyCalc;
 		};
 		4CEE0A712385A9A700782D39 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

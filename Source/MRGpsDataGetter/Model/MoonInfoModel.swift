@@ -12,6 +12,7 @@
 //
 
 import UIKit
+import EKAstrologyCalc
 
 public class MoonInfoModel: NSObject { 
     
@@ -41,7 +42,7 @@ public class MoonInfoModel: NSObject {
     public final var moonNoon : String = loc("NOTAVAILABLENUMBER")
     public final var nadir : String = loc("NOTAVAILABLENUMBER")
     
-    public final var previusEclipse: Eclipse?
-    public final var nextEclipse: Eclipse?
+    public final var previusEclipse: EKEclipse?
+    public final var nextEclipse: EKEclipse?
 
 }

@@ -93,6 +93,7 @@ Others library's files are necessary for the correct functioning of MRGpsDataGet
 - [BDAstroCalc](https://github.com/braindrizzlestudio/BDAstroCalc)
 - [AstrologyCalc](https://github.com/emvakar/AstrologyCalc)
 - [SunMoonCalculator](https://github.com/kanchudeep/SunMoonCalculator)
+- [EKAstrologyCalc](https://github.com/emvakar/EKAstrologyCalc)
 
 There files are already included into the framework.
 

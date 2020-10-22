@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.3
 //
 //  Package.swift
 //  MRGpsDataGetter
@@ -16,6 +16,7 @@ import PackageDescription
 
 let package = Package(
     name: "MRGpsDataGetter",
+    defaultLocalization: "en",
     platforms: [
         // Some platform where run yours library
         .iOS(.v11), .tvOS(.v11), .watchOS(.v4)
@@ -29,11 +30,14 @@ let package = Package(
         .package(url: "https://github.com/Alamofire/Alamofire.git", from: "5.0.0-rc.3"),
         .package(url: "https://github.com/SwiftyJSON/SwiftyJSON.git", from: "5.0.0"),
         .package(url: "https://github.com/SwifterSwift/SwifterSwift.git", from: "5.1.0"),
+        .package(url: "https://github.com/emvakar/EKAstrologyCalc.git", from: "1.0.3"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
-        .target(name: "MRGpsDataGetter", dependencies: [.product(name: "Alamofire"), .product(name: "SwiftyJSON"), .product(name: "SwifterSwift")]),
+        .target(name: "MRGpsDataGetter",
+                dependencies: [.product(name: "Alamofire"), .product(name: "SwiftyJSON"), .product(name: "SwifterSwift"), .product(name: "EKAstrologyCalc")],
+                resources: [.process("Resources/Localizations")]),
 //        .target(name: "MRGpsDataGetter"),
     ],
     swiftLanguageVersions: [
