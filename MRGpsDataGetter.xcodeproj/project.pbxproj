@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4C2CC7AA2399CB3F00A4254C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4CEE0AA82385C8D000782D39 /* Localizable.strings */; };
 		4C34FE7C2387169E00A9C1CC /* PlotInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C34FE7B2387169E00A9C1CC /* PlotInfoModel.swift */; };
 		4C42DE2A238A04FF00B586B5 /* SwifterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4C42DE29238A04FF00B586B5 /* SwifterSwift */; };
+		4CAD083B254257FC00C95FF7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4CAD083A254257FC00C95FF7 /* Localizable.strings */; };
+		4CAD083E2542580300C95FF7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4CAD083D2542580300C95FF7 /* Localizable.strings */; };
 		4CDD6BF8239A4E4800BB02A7 /* SunMoonCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDD6BF7239A4E4800BB02A7 /* SunMoonCalculator.swift */; };
 		4CE0897524F59C8D007F7ECC /* EKAstrologyCalc in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE0897424F59C8D007F7ECC /* EKAstrologyCalc */; };
 		4CEE0A672385A8A400782D39 /* MRGpsDataGetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CEE0A652385A8A400782D39 /* MRGpsDataGetter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -35,6 +36,8 @@
 		4C80A4502385FC51000590C4 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4C80A4512385FC6D000590C4 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		4C80A4522385FC6D000590C4 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		4CAD083A254257FC00C95FF7 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		4CAD083D2542580300C95FF7 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		4CC35F8223AAEB910020A6D7 /* MRGpsDataGetter.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MRGpsDataGetter.podspec; sourceTree = "<group>"; };
 		4CC35F8423AAEB9B0020A6D7 /* _config.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = _config.yml; sourceTree = "<group>"; };
 		4CDD6BF7239A4E4800BB02A7 /* SunMoonCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SunMoonCalculator.swift; sourceTree = "<group>"; };
@@ -53,8 +56,6 @@
 		4CEE0A982385B39E00782D39 /* WeatherDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataGetter.swift; sourceTree = "<group>"; };
 		4CEE0A9A2385B77200782D39 /* ForecastDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDataGetter.swift; sourceTree = "<group>"; };
 		4CEE0A9C2385B9C600782D39 /* GpsDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GpsDataGetter.swift; sourceTree = "<group>"; };
-		4CEE0AA72385C8D000782D39 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		4CEE0AA92385C8E400782D39 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4CEE0AAA2385D0A400782D39 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,6 +80,22 @@
 				4CDD6BF7239A4E4800BB02A7 /* SunMoonCalculator.swift */,
 			);
 			path = SunMoonCalculator;
+			sourceTree = "<group>";
+		};
+		4CAD082D2542577D00C95FF7 /* en */ = {
+			isa = PBXGroup;
+			children = (
+				4CAD083A254257FC00C95FF7 /* Localizable.strings */,
+			);
+			path = en;
+			sourceTree = "<group>";
+		};
+		4CAD082E2542578100C95FF7 /* it */ = {
+			isa = PBXGroup;
+			children = (
+				4CAD083D2542580300C95FF7 /* Localizable.strings */,
+			);
+			path = it;
 			sourceTree = "<group>";
 		};
 		4CCC14B7239066FA000310C9 /* Example */ = {
@@ -178,17 +195,10 @@
 		4CEE0A922385AED400782D39 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				4CEE0AA32385C83900782D39 /* Localizations */,
+				4CAD082D2542577D00C95FF7 /* en */,
+				4CAD082E2542578100C95FF7 /* it */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		4CEE0AA32385C83900782D39 /* Localizations */ = {
-			isa = PBXGroup;
-			children = (
-				4CEE0AA82385C8D000782D39 /* Localizable.strings */,
-			);
-			path = Localizations;
 			sourceTree = "<group>";
 		};
 		4CEE0AAC2385D10700782D39 /* Other */ = {
@@ -301,7 +311,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C2CC7AA2399CB3F00A4254C /* Localizable.strings in Resources */,
+				4CAD083E2542580300C95FF7 /* Localizable.strings in Resources */,
+				4CAD083B254257FC00C95FF7 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,18 +362,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		4CEE0AA82385C8D000782D39 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4CEE0AA72385C8D000782D39 /* en */,
-				4CEE0AA92385C8E400782D39 /* it */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		4CEE0A682385A8A400782D39 /* Debug */ = {
