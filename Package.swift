@@ -37,7 +37,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(name: "MRGpsDataGetter",
                 dependencies: ["Alamofire", "SwiftyJSON", "SwifterSwift", "EKAstrologyCalc"],
-                resources: [.copy("Resources")]),
+                resources: [.process("Resources")]),
 //        .target(name: "MRGpsDataGetter"),
     ],
     swiftLanguageVersions: [
