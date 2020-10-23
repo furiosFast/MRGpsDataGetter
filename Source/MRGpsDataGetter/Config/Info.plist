@@ -17,7 +17,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>628</string>
+	<string>631</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2019-2020 Fast-Devs Project by Marco Ricca. All rights reserved.</string>
 </dict>

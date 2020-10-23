@@ -82,9 +82,17 @@
 			path = SunMoonCalculator;
 			sourceTree = "<group>";
 		};
+		4C6FC1C62542CAE8004BAC57 /* it.lproj */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = it.lproj;
+			sourceTree = "<group>";
+		};
 		4CAD082D2542577D00C95FF7 /* en.lproj */ = {
 			isa = PBXGroup;
 			children = (
+				4C6FC1C62542CAE8004BAC57 /* it.lproj */,
 				4CAD083A254257FC00C95FF7 /* Localizable.strings */,
 			);
 			path = en.lproj;
@@ -288,7 +296,6 @@
 			knownRegions = (
 				en,
 				Base,
-				it,
 			);
 			mainGroup = 4CEE0A582385A8A400782D39;
 			packageReferences = (
@@ -512,7 +519,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.fastdevsproject.altervista.MRGpsDataGetter;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -540,7 +547,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.fastdevsproject.altervista.MRGpsDataGetter;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
