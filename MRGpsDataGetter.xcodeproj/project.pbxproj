@@ -82,20 +82,20 @@
 			path = SunMoonCalculator;
 			sourceTree = "<group>";
 		};
-		4CAD082D2542577D00C95FF7 /* en */ = {
+		4CAD082D2542577D00C95FF7 /* en.lproj */ = {
 			isa = PBXGroup;
 			children = (
 				4CAD083A254257FC00C95FF7 /* Localizable.strings */,
 			);
-			path = en;
+			path = en.lproj;
 			sourceTree = "<group>";
 		};
-		4CAD082E2542578100C95FF7 /* it */ = {
+		4CAD082E2542578100C95FF7 /* it.lproj */ = {
 			isa = PBXGroup;
 			children = (
 				4CAD083D2542580300C95FF7 /* Localizable.strings */,
 			);
-			path = it;
+			path = it.lproj;
 			sourceTree = "<group>";
 		};
 		4CCC14B7239066FA000310C9 /* Example */ = {
@@ -195,8 +195,8 @@
 		4CEE0A922385AED400782D39 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				4CAD082D2542577D00C95FF7 /* en */,
-				4CAD082E2542578100C95FF7 /* it */,
+				4CAD082D2542577D00C95FF7 /* en.lproj */,
+				4CAD082E2542578100C95FF7 /* it.lproj */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
