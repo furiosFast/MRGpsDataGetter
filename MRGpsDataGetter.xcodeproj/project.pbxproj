@@ -85,6 +85,7 @@
 		4C6FC1C62542CAE8004BAC57 /* it.lproj */ = {
 			isa = PBXGroup;
 			children = (
+				4CAD083A254257FC00C95FF7 /* Localizable.strings */,
 			);
 			path = it.lproj;
 			sourceTree = "<group>";
@@ -93,7 +94,6 @@
 			isa = PBXGroup;
 			children = (
 				4C6FC1C62542CAE8004BAC57 /* it.lproj */,
-				4CAD083A254257FC00C95FF7 /* Localizable.strings */,
 			);
 			path = en.lproj;
 			sourceTree = "<group>";
