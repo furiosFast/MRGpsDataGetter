@@ -50,4 +50,5 @@ public class SunInfoModel: NSObject {
     public final var distance : String = loc("NOTAVAILABLENUMBER")
     
     public final var daylightHours : String = loc("NOTAVAILABLENUMBER")
+    
 }

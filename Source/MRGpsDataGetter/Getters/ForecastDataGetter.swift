@@ -103,7 +103,11 @@ open class ForecastDataGetter: NSObject {
                 }
                 //2
                 if let weatherIcon = json["list"][i]["weather"][0]["icon"].string {
-                    weather.weatherOpenWeatherMapIcon = weatherIcon
+                    if let img = UIImage(named: weatherIcon, in: .module, compatibleWith: nil) {
+                        weather.weatherOpenWeatherMapIcon = img
+                    } else {
+                        weather.weatherOpenWeatherMapIcon = UIImage(named: "01d", in: .module, compatibleWith: nil)!
+                    }
                 }
                 //3-4-5-6
                 //Wind speed. Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour.

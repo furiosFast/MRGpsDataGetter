@@ -23,7 +23,7 @@ public class WeatherModel: NSObject {
     public final var beaufortScaleWindColour : String = loc("NOTAVAILABLENUMBER")
 
     public final var weatherDescription : String = loc("NOTAVAILABLENUMBER")
-    public final var weatherOpenWeatherMapIcon : String = loc("NOTAVAILABLENUMBER")
+    public final var weatherOpenWeatherMapIcon : UIImage = UIImage(named: "01d", in: .module, compatibleWith: nil)!
     
     public final var rain1h : String = loc("NOTAVAILABLENUMBER")
     public final var rain3h : String = loc("NOTAVAILABLENUMBER")
@@ -49,6 +49,5 @@ public class WeatherModel: NSObject {
     public final var dateTime : String = loc("NOTAVAILABLENUMBER")
 
     public final var currentWeatherLocation: CLLocation? = nil
-//    public final var currentLocationName: String? = loc("NOTAVAILABLENUMBER")
 
 }
