@@ -39,7 +39,7 @@ public let hexAppBuildNumber = String(appBuildNumber.int!, radix: 16, uppercase:
 /// Short function for localize string
 /// - Parameter localizedKey: string key to localize
 func loc(_ localizedKey: String) -> String {
-    return NSLocalizedString(localizedKey, bundle: Bundle.module, comment: "")
+    return NSLocalizedString(localizedKey, bundle: .module, comment: "")
 }
 
 /// Function that set the Alamofire configuration
