@@ -96,7 +96,7 @@ open class WeatherDataGetter: NSObject {
                 if let img = UIImage(named: weatherIcon, in: .module, compatibleWith: nil) {
                     self.weather.weatherOpenWeatherMapIcon = img
                 } else {
-                    self.weather.weatherOpenWeatherMapIcon = UIImage(named: "01d", in: .module)!
+                    self.weather.weatherOpenWeatherMapIcon = UIImage(named: "01d", in: .module, compatibleWith: nil)!
                 }
             }
             //3-4-5

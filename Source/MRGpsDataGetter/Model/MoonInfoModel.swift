@@ -30,7 +30,7 @@ public class MoonInfoModel: NSObject {
     public final var moonSet : String = loc("NOTAVAILABLENUMBER")
     
     public final var phase : String = loc("NOTAVAILABLENUMBER")
-    public final var phaseIcon : UIImage = UIImage((named: "moon", in: .module)!
+    public final var phaseIcon : UIImage = UIImage(named: "moon", in: .module, compatibleWith: nil)!
     public final var phaseTitle : String = loc("NOTAVAILABLENUMBER")
     public final var phaseAngle : String = loc("NOTAVAILABLENUMBER")
 
