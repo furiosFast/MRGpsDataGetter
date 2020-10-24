@@ -3,14 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		4C34FE7C2387169E00A9C1CC /* PlotInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C34FE7B2387169E00A9C1CC /* PlotInfoModel.swift */; };
 		4C42DE2A238A04FF00B586B5 /* SwifterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4C42DE29238A04FF00B586B5 /* SwifterSwift */; };
-		4CAD083B254257FC00C95FF7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4CAD083A254257FC00C95FF7 /* Localizable.strings */; };
-		4CAD083E2542580300C95FF7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4CAD083D2542580300C95FF7 /* Localizable.strings */; };
+		4CBA32CE254447590051C208 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4CBA32D0254447590051C208 /* Localizable.strings */; };
 		4CDD6BF8239A4E4800BB02A7 /* SunMoonCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDD6BF7239A4E4800BB02A7 /* SunMoonCalculator.swift */; };
 		4CE0897524F59C8D007F7ECC /* EKAstrologyCalc in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE0897424F59C8D007F7ECC /* EKAstrologyCalc */; };
 		4CEE0A672385A8A400782D39 /* MRGpsDataGetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CEE0A652385A8A400782D39 /* MRGpsDataGetter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -36,8 +35,8 @@
 		4C80A4502385FC51000590C4 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4C80A4512385FC6D000590C4 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		4C80A4522385FC6D000590C4 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		4CAD083A254257FC00C95FF7 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
-		4CAD083D2542580300C95FF7 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		4CBA32CF254447590051C208 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4CBA32D22544475D0051C208 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4CC35F8223AAEB910020A6D7 /* MRGpsDataGetter.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MRGpsDataGetter.podspec; sourceTree = "<group>"; };
 		4CC35F8423AAEB9B0020A6D7 /* _config.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = _config.yml; sourceTree = "<group>"; };
 		4CDD6BF7239A4E4800BB02A7 /* SunMoonCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SunMoonCalculator.swift; sourceTree = "<group>"; };
@@ -82,22 +81,6 @@
 			path = SunMoonCalculator;
 			sourceTree = "<group>";
 		};
-		4CAD082D2542577D00C95FF7 /* en.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				4CAD083A254257FC00C95FF7 /* Localizable.strings */,
-			);
-			path = en.lproj;
-			sourceTree = "<group>";
-		};
-		4CAD082E2542578100C95FF7 /* it.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				4CAD083D2542580300C95FF7 /* Localizable.strings */,
-			);
-			path = it.lproj;
-			sourceTree = "<group>";
-		};
 		4CCC14B7239066FA000310C9 /* Example */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,7 +99,6 @@
 				4CCC14B7239066FA000310C9 /* Example */,
 				4CF8B77723860A1A00DEAC15 /* Source */,
 				4CEE0A632385A8A400782D39 /* Products */,
-				4CEE0A762385A9E300782D39 /* Frameworks */,
 			);
 			indentWidth = 4;
 			sourceTree = "<group>";
@@ -168,13 +150,6 @@
 			path = Getters;
 			sourceTree = "<group>";
 		};
-		4CEE0A762385A9E300782D39 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		4CEE0A8A2385AB1C00782D39 /* BDAstroCalc */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,8 +170,7 @@
 		4CEE0A922385AED400782D39 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				4CAD082D2542577D00C95FF7 /* en.lproj */,
-				4CAD082E2542578100C95FF7 /* it.lproj */,
+				4CBA32D0254447590051C208 /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -204,8 +178,8 @@
 		4CEE0AAC2385D10700782D39 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				4CEE0A8E2385AD2000782D39 /* ConfigShared.swift */,
 				4CEE0AAA2385D0A400782D39 /* Preferences.swift */,
+				4CEE0A8E2385AD2000782D39 /* ConfigShared.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -282,12 +256,13 @@
 				};
 			};
 			buildConfigurationList = 4CEE0A5C2385A8A400782D39 /* Build configuration list for PBXProject "MRGpsDataGetter" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				it,
 			);
 			mainGroup = 4CEE0A582385A8A400782D39;
 			packageReferences = (
@@ -310,8 +285,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CAD083E2542580300C95FF7 /* Localizable.strings in Resources */,
-				4CAD083B254257FC00C95FF7 /* Localizable.strings in Resources */,
+				4CBA32CE254447590051C208 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +335,18 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		4CBA32D0254447590051C208 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4CBA32CF254447590051C208 /* en */,
+				4CBA32D22544475D0051C208 /* it */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		4CEE0A682385A8A400782D39 /* Debug */ = {
@@ -496,6 +482,7 @@
 		4CEE0A6B2385A8A400782D39 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 500;
@@ -524,6 +511,7 @@
 		4CEE0A6C2385A8A400782D39 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 500;
