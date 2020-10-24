@@ -1,0 +1,52 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Alamofire",
+        "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
+        "state": {
+          "branch": null,
+          "revision": "097e1f03166d49b31f824507fb85ad843b14fc13",
+          "version": "5.3.0"
+        }
+      },
+      {
+        "package": "EKAstrologyCalc",
+        "repositoryURL": "https://github.com/emvakar/EKAstrologyCalc.git",
+        "state": {
+          "branch": null,
+          "revision": "8ea7cf2100b844a724626dd6bdc55ee00d8af5d3",
+          "version": "1.0.5"
+        }
+      },
+      {
+        "package": "ESDateHelper",
+        "repositoryURL": "https://github.com/ESKARIA/ESDateHelper.git",
+        "state": {
+          "branch": null,
+          "revision": "c6c6af34536f3afd3996b6a922f66e2bea0479ab",
+          "version": "1.1.0"
+        }
+      },
+      {
+        "package": "SwifterSwift",
+        "repositoryURL": "https://github.com/SwifterSwift/SwifterSwift.git",
+        "state": {
+          "branch": null,
+          "revision": "dc813f3aa92f904a009fe543b99d5649dce7c134",
+          "version": "5.2.0"
+        }
+      },
+      {
+        "package": "SwiftyJSON",
+        "repositoryURL": "https://github.com/SwiftyJSON/SwiftyJSON.git",
+        "state": {
+          "branch": null,
+          "revision": "2b6054efa051565954e1d2b9da831680026cd768",
+          "version": "5.0.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
