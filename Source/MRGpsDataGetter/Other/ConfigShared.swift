@@ -32,14 +32,13 @@ public let appVersionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundle
 public let copyright = Bundle.main.object(forInfoDictionaryKey: "NSHumanReadableCopyright") as! String
 public let appBuildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
 public let hexAppBuildNumber = String(appBuildNumber.int!, radix: 16, uppercase: true)
-public let MRGpsDataGetterBundle = Bundle.module
 
 
 //MARK: - Shared functions
 
 /// Short function for localize string
 /// - Parameter localizedKey: string key to localize
-func loc(_ localizedKey: String) -> String {
+public func loc(_ localizedKey: String) -> String {
     return NSLocalizedString(localizedKey, bundle: .module, comment: "")
 }
 
