@@ -157,36 +157,36 @@ open class MoonDataGetter: NSObject {
     /// Function that return the moon phase icon name based on the moon phase angle (is the midpoint of the illuminated limb of the moon going east)
     /// - Parameter phase: the phase is a number from 0 to 1, where 0 and 1 are a new moon, 0.5 is a full moon, 0 - 0.5 is waxing, and 0.5 - 1.0 is waning
     private func getMoonPhaseIcon(_ phase: Double) -> UIImage {
-        if phase >= 0 && phase <= 0.03448275862 { return UIImage(named: "wi-moon-alt-new", in: .module, compatibleWith: nil)! }
-        if phase > 0.03448275862 && phase <= 0.06896551724 { return UIImage(named: "wi-moon-alt-waxing-crescent-1", in: .module, compatibleWith: nil)! }
-        if phase > 0.06896551724 && phase <= 0.10344827586 { return UIImage(named: "wi-moon-alt-waxing-crescent-2", in: .module, compatibleWith: nil)! }
-        if phase > 0.10344827586 && phase <= 0.13793103448 { return UIImage(named: "wi-moon-alt-waxing-crescent-3", in: .module, compatibleWith: nil)! }
-        if phase > 0.13793103448 && phase <= 0.1724137931 { return UIImage(named: "wi-moon-alt-waxing-crescent-4", in: .module, compatibleWith: nil)! }
-        if phase > 0.1724137931 && phase <= 0.20689655172 { return UIImage(named: "wi-moon-alt-waxing-crescent-5", in: .module, compatibleWith: nil)! }
-        if phase > 0.20689655172 && phase <= 0.24137931034 { return UIImage(named: "wi-moon-alt-waxing-crescent-6", in: .module, compatibleWith: nil)! }
-        if phase > 0.24137931034 && phase <= 0.27586206896 { return UIImage(named: "wi-moon-alt-first-quarter", in: .module, compatibleWith: nil)! }
-        if phase > 0.27586206896 && phase <= 0.31034482758 { return UIImage(named: "wi-moon-alt-waxing-gibbous-1", in: .module, compatibleWith: nil)! }
-        if phase > 0.31034482758 && phase <= 0.3448275862 { return UIImage(named: "wi-moon-alt-waxing-gibbous-2", in: .module, compatibleWith: nil)! }
-        if phase > 0.3448275862 && phase <= 0.37931034482 { return UIImage(named: "wi-moon-alt-waxing-gibbous-3", in: .module, compatibleWith: nil)! }
-        if phase > 0.37931034482 && phase <= 0.41379310344 { return UIImage(named: "wi-moon-alt-waxing-gibbous-4", in: .module, compatibleWith: nil)! }
-        if phase > 0.41379310344 && phase <= 0.44827586206 { return UIImage(named: "wi-moon-alt-waxing-gibbous-5", in: .module, compatibleWith: nil)! }
-        if phase > 0.44827586206 && phase <= 0.48275862068 { return UIImage(named: "wi-moon-alt-waxing-gibbous-6", in: .module, compatibleWith: nil)! }
-        if phase > 0.48275862068 && phase <= 0.5172413793 { return UIImage(named: "wi-moon-alt-full", in: .module, compatibleWith: nil)! }
-        if phase > 0.5172413793 && phase <= 0.55172413792 { return UIImage(named: "wi-moon-alt-waning-gibbous-1", in: .module, compatibleWith: nil)! }
-        if phase > 0.55172413792 && phase <= 0.58620689654 { return UIImage(named: "wi-moon-alt-waning-gibbous-2", in: .module, compatibleWith: nil)! }
-        if phase > 0.58620689654 && phase <= 0.62068965516 { return UIImage(named: "wi-moon-alt-waning-gibbous-3", in: .module, compatibleWith: nil)! }
-        if phase > 0.62068965516 && phase <= 0.65517241378 { return UIImage(named: "wi-moon-alt-waning-gibbous-4", in: .module, compatibleWith: nil)! }
-        if phase > 0.65517241378 && phase <= 0.6896551724 { return UIImage(named: "wi-moon-alt-waning-gibbous-5", in: .module, compatibleWith: nil)! }
-        if phase > 0.6896551724 && phase <= 0.72413793102 { return UIImage(named: "wi-moon-alt-waning-gibbous-6", in: .module, compatibleWith: nil)! }
-        if phase > 0.72413793102 && phase <= 0.75862068964 { return UIImage(named: "wi-moon-alt-third-quarter", in: .module, compatibleWith: nil)! }
-        if phase > 0.75862068964 && phase <= 0.79310344826 { return UIImage(named: "wi-moon-alt-waning-crescent-1", in: .module, compatibleWith: nil)! }
-        if phase > 0.79310344826 && phase <= 0.82758620688 { return UIImage(named: "wi-moon-alt-waning-crescent-2", in: .module, compatibleWith: nil)! }
-        if phase > 0.82758620688 && phase <= 0.8620689655 { return UIImage(named: "wi-moon-alt-waning-crescent-3", in: .module, compatibleWith: nil)! }
-        if phase > 0.8620689655 && phase <= 0.89655172412 { return UIImage(named: "wi-moon-alt-waning-crescent-4", in: .module, compatibleWith: nil)! }
-        if phase > 0.89655172412 && phase <= 0.93103448274 { return UIImage(named: "wi-moon-alt-waning-crescent-5", in: .module, compatibleWith: nil)! }
-        if phase > 0.93103448274 && phase <= 0.96551724136 { return UIImage(named: "wi-moon-alt-waning-crescent-6", in: .module, compatibleWith: nil)! }
-        if phase > 0.96551724136 && phase <= 1 { return UIImage(named: "wi-moon-alt-new", in: .module, compatibleWith: nil)! }
-        return UIImage(named: "moon", in: .module, compatibleWith: nil)!
+        if phase >= 0 && phase <= 0.03448275862 { return UIImage(named: "wi-moon-alt-new", in: .module)! }
+        if phase > 0.03448275862 && phase <= 0.06896551724 { return UIImage(named: "wi-moon-alt-waxing-crescent-1", in: .module)! }
+        if phase > 0.06896551724 && phase <= 0.10344827586 { return UIImage(named: "wi-moon-alt-waxing-crescent-2", in: .module)! }
+        if phase > 0.10344827586 && phase <= 0.13793103448 { return UIImage(named: "wi-moon-alt-waxing-crescent-3", in: .module)! }
+        if phase > 0.13793103448 && phase <= 0.1724137931 { return UIImage(named: "wi-moon-alt-waxing-crescent-4", in: .module)! }
+        if phase > 0.1724137931 && phase <= 0.20689655172 { return UIImage(named: "wi-moon-alt-waxing-crescent-5", in: .module)! }
+        if phase > 0.20689655172 && phase <= 0.24137931034 { return UIImage(named: "wi-moon-alt-waxing-crescent-6", in: .module)! }
+        if phase > 0.24137931034 && phase <= 0.27586206896 { return UIImage(named: "wi-moon-alt-first-quarter", in: .module)! }
+        if phase > 0.27586206896 && phase <= 0.31034482758 { return UIImage(named: "wi-moon-alt-waxing-gibbous-1", in: .module)! }
+        if phase > 0.31034482758 && phase <= 0.3448275862 { return UIImage(named: "wi-moon-alt-waxing-gibbous-2", in: .module)! }
+        if phase > 0.3448275862 && phase <= 0.37931034482 { return UIImage(named: "wi-moon-alt-waxing-gibbous-3", in: .module)! }
+        if phase > 0.37931034482 && phase <= 0.41379310344 { return UIImage(named: "wi-moon-alt-waxing-gibbous-4", in: .module)! }
+        if phase > 0.41379310344 && phase <= 0.44827586206 { return UIImage(named: "wi-moon-alt-waxing-gibbous-5", in: .module)! }
+        if phase > 0.44827586206 && phase <= 0.48275862068 { return UIImage(named: "wi-moon-alt-waxing-gibbous-6", in: .module)! }
+        if phase > 0.48275862068 && phase <= 0.5172413793 { return UIImage(named: "wi-moon-alt-full", in: .module)! }
+        if phase > 0.5172413793 && phase <= 0.55172413792 { return UIImage(named: "wi-moon-alt-waning-gibbous-1", in: .module)! }
+        if phase > 0.55172413792 && phase <= 0.58620689654 { return UIImage(named: "wi-moon-alt-waning-gibbous-2", in: .module)! }
+        if phase > 0.58620689654 && phase <= 0.62068965516 { return UIImage(named: "wi-moon-alt-waning-gibbous-3", in: .module)! }
+        if phase > 0.62068965516 && phase <= 0.65517241378 { return UIImage(named: "wi-moon-alt-waning-gibbous-4", in: .module)! }
+        if phase > 0.65517241378 && phase <= 0.6896551724 { return UIImage(named: "wi-moon-alt-waning-gibbous-5", in: .module)! }
+        if phase > 0.6896551724 && phase <= 0.72413793102 { return UIImage(named: "wi-moon-alt-waning-gibbous-6", in: .module)! }
+        if phase > 0.72413793102 && phase <= 0.75862068964 { return UIImage(named: "wi-moon-alt-third-quarter", in: .module)! }
+        if phase > 0.75862068964 && phase <= 0.79310344826 { return UIImage(named: "wi-moon-alt-waning-crescent-1", in: .module)! }
+        if phase > 0.79310344826 && phase <= 0.82758620688 { return UIImage(named: "wi-moon-alt-waning-crescent-2", in: .module)! }
+        if phase > 0.82758620688 && phase <= 0.8620689655 { return UIImage(named: "wi-moon-alt-waning-crescent-3", in: .module)! }
+        if phase > 0.8620689655 && phase <= 0.89655172412 { return UIImage(named: "wi-moon-alt-waning-crescent-4", in: .module)! }
+        if phase > 0.89655172412 && phase <= 0.93103448274 { return UIImage(named: "wi-moon-alt-waning-crescent-5", in: .module)! }
+        if phase > 0.93103448274 && phase <= 0.96551724136 { return UIImage(named: "wi-moon-alt-waning-crescent-6", in: .module)! }
+        if phase > 0.96551724136 && phase <= 1 { return UIImage(named: "wi-moon-alt-new", in: .module)! }
+        return UIImage(named: "moon", in: .module)!
     }
     
     /// Function that return the zodiac sign of moon from the moon age at the specified date
