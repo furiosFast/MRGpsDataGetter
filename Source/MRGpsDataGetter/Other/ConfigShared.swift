@@ -32,21 +32,20 @@ public let appVersionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundle
 public let copyright = Bundle.main.object(forInfoDictionaryKey: "NSHumanReadableCopyright") as! String
 public let appBuildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
 public let hexAppBuildNumber = String(appBuildNumber.int!, radix: 16, uppercase: true)
-public enum SharedResource {
-    static public let localizableURL = Bundle.module.url(forResource: "Localizable", withExtension: "strings")
-}
 
 
 //MARK: - Shared functions
+
+/// Public function for get localized string from this Bundle
+/// - Parameter localizedKey: string key to localize
+public func locFromBundle(_ localizedKey: String) -> String {
+    return loc(localizedKey)
+}
 
 /// Short function for localize string
 /// - Parameter localizedKey: string key to localize
 func loc(_ localizedKey: String) -> String {
     return NSLocalizedString(localizedKey, bundle: .module, comment: "")
-}
-
-public func getBundleUrl() -> URL {
-    return Bundle.module.bundleURL
 }
 
 /// Function that set the Alamofire configuration
