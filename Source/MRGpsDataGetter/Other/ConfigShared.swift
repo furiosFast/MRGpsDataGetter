@@ -32,6 +32,7 @@ public let appVersionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundle
 public let copyright = Bundle.main.object(forInfoDictionaryKey: "NSHumanReadableCopyright") as! String
 public let appBuildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
 public let hexAppBuildNumber = String(appBuildNumber.int!, radix: 16, uppercase: true)
+public let bundleUrl = Bundle.module.bundleURL
 
 
 //MARK: - Shared functions
