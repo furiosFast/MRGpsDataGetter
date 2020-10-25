@@ -42,6 +42,10 @@ public func locFromBundle(_ localizedKey: String) -> String {
     return loc(localizedKey)
 }
 
+public func imgFromBundle(named: String) -> UIImage? {
+    return UIImage(named: named, in: .module, compatibleWith: nil)
+}
+
 /// Short function for localize string
 /// - Parameter localizedKey: string key to localize
 func loc(_ localizedKey: String) -> String {

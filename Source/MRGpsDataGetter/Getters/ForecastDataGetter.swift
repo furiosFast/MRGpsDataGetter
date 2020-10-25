@@ -103,10 +103,10 @@ open class ForecastDataGetter: NSObject {
                 }
                 //2
                 if let weatherIcon = json["list"][i]["weather"][0]["icon"].string {
-                    if let img = UIImage(named: weatherIcon, in: .module, compatibleWith: nil) {
+                    if let img = UIImage(named: weatherIcon) {
                         weather.weatherOpenWeatherMapIcon = img
                     } else {
-                        weather.weatherOpenWeatherMapIcon = UIImage(named: "01d", in: .module, compatibleWith: nil)!
+                        weather.weatherOpenWeatherMapIcon = UIImage(named: "01d")!
                     }
                 }
                 //3-4-5-6
