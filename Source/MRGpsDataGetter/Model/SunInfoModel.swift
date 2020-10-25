@@ -15,6 +15,8 @@ import UIKit
 
 public class SunInfoModel: NSObject {
     
+    public final var sunIcon : UIImage = UIImage(named: "sun", in: .module, with: nil)!
+
     public final var solarNoon : String = loc("NOTAVAILABLENUMBER")
     public final var nadir : String = loc("NOTAVAILABLENUMBER")
     
