@@ -58,7 +58,7 @@ open class MoonDataGetter: NSObject {
 //        moon.distance = "\(Int(moonLocation.distance).formattedWithSeparator) " + loc("KILOMETERS")
         
         let moonPhase = BDAstroCalc.moonPhase(date: NSDate())
-        moon.fractionOfMoonIlluminated = String(format: "%3.1f", moonPhase.fractionOfMoonIlluminated * 100) + " " + loc("PERCENT")
+//        moon.fractionOfMoonIlluminated = String(format: "%3.1f", moonPhase.fractionOfMoonIlluminated * 100) + " " + loc("PERCENT")
         moon.phase = moonPhase.phase.string
         moon.phaseIcon = getMoonPhaseIcon(moonPhase.phase)
         moon.phaseAngle = String(format: "%3.1f", moonPhase.angle.radiansToDegrees)
@@ -91,7 +91,7 @@ open class MoonDataGetter: NSObject {
             moon.azimuth = String(format: "%3.1f", smc.moonAzimuth.radiansToDegrees) + loc("DEGREE") + " " + getAngleName(smc.moonAzimuth.radiansToDegrees)
             moon.distance = "\(Int(smc.moonDistance * SunMoonCalculator.AU).formattedWithSeparator) " + loc("KILOMETERS")
             
-//            moon.fractionOfMoonIlluminated = String(format: "%3.1f", smc.moonIllumination * 100) + " " + loc("PERCENT")
+            moon.fractionOfMoonIlluminated = String(format: "%3.1f", smc.moonIllumination * 100) + " " + loc("PERCENT")
             moon.phaseTitle = smc.moonPhase
             
             moon.moonNoon = getDateFrom(try SunMoonCalculator.getDate(jd: smc.moonTransit)).string(withFormat: timeFormat)
