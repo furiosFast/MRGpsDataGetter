@@ -113,15 +113,15 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
                     SunDataGetter.shared.getSunInfo(currentLocation: loc)
                 }
                 //Moon info thread
-                DispatchQueue.global().async {
-                    MoonDataGetter.shared.getMoonInfo(currentLocation: loc)
-                }
-                if let b = Preferences.shared.getPreference("autoRefreshSunMoonInfo").bool, let d = Preferences.shared.getPreference("sunMoonRefreshSeconds").double(), b {
-                    timerAutoRefreshSunMoon.invalidate()
-                    timerAutoRefreshSunMoon = Timer.scheduledTimer(timeInterval: d, target: self, selector: #selector(self.refreshSunMoonPositionInfo), userInfo: nil, repeats: true)
-                } else {
-                    timerAutoRefreshSunMoon.invalidate()
-                }
+//                DispatchQueue.global().async {
+//                    MoonDataGetter.shared.getMoonInfo(currentLocation: loc)
+//                }
+//                if let b = Preferences.shared.getPreference("autoRefreshSunMoonInfo").bool, let d = Preferences.shared.getPreference("sunMoonRefreshSeconds").double(), b {
+//                    timerAutoRefreshSunMoon.invalidate()
+//                    timerAutoRefreshSunMoon = Timer.scheduledTimer(timeInterval: d, target: self, selector: #selector(self.refreshSunMoonPositionInfo), userInfo: nil, repeats: true)
+//                } else {
+//                    timerAutoRefreshSunMoon.invalidate()
+//                }
                 
 
                 //Weather info thread
