@@ -98,7 +98,8 @@ open class ForecastDataGetter: NSObject {
                 //0
                 weather.currentWeatherLocation = currentLocation
                 //1
-                if let weatherDescr = json["list"][i]["weather"][0]["description"].string {
+                if var weatherDescr = json["list"][i]["weather"][0]["description"].string {
+                    weatherDescr.firstCharacterUppercased()
                     weather.weatherDescription = weatherDescr
                 }
                 //2
