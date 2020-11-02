@@ -23,7 +23,7 @@ public protocol MRGpsDataGetterMoonDataDelegate: NSObjectProtocol {
 
 open class MoonDataGetter: NSObject {
     
-    public static let shared = MoonDataGetter()
+    public static var shared = MoonDataGetter()
     open weak var delegate : MRGpsDataGetterMoonDataDelegate?
     
     let moon = MoonInfoModel()

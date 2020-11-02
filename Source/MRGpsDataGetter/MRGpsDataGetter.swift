@@ -24,7 +24,7 @@ import CoreLocation
 
 open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     
-    public static let shared = MRGpsDataGetter()
+    public static var shared = MRGpsDataGetter()
     open weak var delegate : MRGpsDataGetterDelegate?
     
     var locationManager: CLLocationManager = CLLocationManager()

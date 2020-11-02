@@ -25,7 +25,7 @@ import SwifterSwift
 
 open class ForecastDataGetter: NSObject {
     
-    public static let shared = ForecastDataGetter()
+    public static var shared = ForecastDataGetter()
     open weak var delegate : MRGpsDataGetterForecastDataDelegate?
     
     var forecast : [WeatherModel] = []

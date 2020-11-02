@@ -27,7 +27,7 @@ import SwifterSwift
 
 open class GpsDataGetter: NSObject {
     
-    public static let shared = GpsDataGetter()
+    public static var shared = GpsDataGetter()
     open weak var delegate : MRGpsDataGetterGpsDataDelegate?
     
     lazy var geocoder = CLGeocoder()
