@@ -83,6 +83,8 @@
 "LUNARUMBRALPARTIAL" = "Partial eclipse";
 "LUNARPENUMBRAL" = "Eclipse of penumbra";
 
+"ECLIPSENOTVISIBLE" = "Not visible";
+
 //zodiac sign (sun/moon)
 "ARIES" = "Aries";
 "CANCER" = "Cancer";

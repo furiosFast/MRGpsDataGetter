@@ -83,6 +83,8 @@
 "LUNARUMBRALPARTIAL" = "Eclissi parziale";
 "LUNARPENUMBRAL" = "Eclissi di penombra";
 
+"ECLIPSENOTVISIBLE" = "Non visibile";
+
 //zodiac sign (sun/moon)
 "ARIES" = "Ariete";
 "CANCER" = "Cancro";
