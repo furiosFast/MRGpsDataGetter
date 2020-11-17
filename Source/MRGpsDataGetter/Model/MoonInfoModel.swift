@@ -12,7 +12,7 @@
 //
 
 import UIKit
-import EKAstrologyCalc
+//import EKAstrologyCalc
 
 public class MoonInfoModel: NSObject { 
     

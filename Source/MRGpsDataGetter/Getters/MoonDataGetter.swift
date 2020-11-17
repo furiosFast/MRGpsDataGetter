@@ -15,7 +15,7 @@
 import UIKit
 import CoreLocation
 import SwifterSwift
-import EKAstrologyCalc
+//import EKAstrologyCalc
 
 public protocol MRGpsDataGetterMoonDataDelegate: NSObjectProtocol {
     func moonDataReady(moon: MoonInfoModel)
