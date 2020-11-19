@@ -126,7 +126,7 @@
 "FAHRENHEITTEXT" = "Fahrenheit";
 "KELVIN" = "°K";
 "KELVINTEXT" = "Kelvin";
-"NOTAVAILABLENUMBER" = "NaN";
+"NOTAVAILABLENUMBER" = "-";
 "PERCENT" = "%";
 "HPA" = "hPa";
 "ATM" = "aTm";
