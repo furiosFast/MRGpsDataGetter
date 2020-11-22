@@ -194,10 +194,19 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     
     public func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         isHeadingAvailableOnDevice = true
-        if let b = Preferences.shared.getPreference("trueNorth").bool, b {
-            delegate?.gpsHeadingForCompass?(newHeading: newHeading.trueHeading)
+        
+        if UIDevice.current.orientation == .faceDown {
+            if let b = Preferences.shared.getPreference("trueNorth").bool, b {
+                delegate?.gpsHeadingForCompass?(newHeading: -newHeading.trueHeading)
+            } else {
+                delegate?.gpsHeadingForCompass?(newHeading: -newHeading.magneticHeading)
+            }
         } else {
-            delegate?.gpsHeadingForCompass?(newHeading: newHeading.magneticHeading)
+            if let b = Preferences.shared.getPreference("trueNorth").bool, b {
+                delegate?.gpsHeadingForCompass?(newHeading: newHeading.trueHeading)
+            } else {
+                delegate?.gpsHeadingForCompass?(newHeading: newHeading.magneticHeading)
+            }
         }
     }
     
