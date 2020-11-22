@@ -40,9 +40,6 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     
     
     open func initialize(timeOut: TimeInterval = 15.0){
-        #if !os(watchOS)
-        UIDevice.current.beginGeneratingDeviceOrientationNotifications()
-        #endif
         setAlamofire(timeOut)
     }
     
@@ -198,27 +195,11 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     public func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         isHeadingAvailableOnDevice = true
         
-        #if os(watchOS)
         if let b = Preferences.shared.getPreference("trueNorth").bool, b {
             delegate?.gpsHeadingForCompass?(newHeading: newHeading.trueHeading)
         } else {
             delegate?.gpsHeadingForCompass?(newHeading: newHeading.magneticHeading)
         }
-        #else
-        if UIDevice.current.orientation == .faceDown {
-            if let b = Preferences.shared.getPreference("trueNorth").bool, b {
-                delegate?.gpsHeadingForCompass?(newHeading: -newHeading.trueHeading)
-            } else {
-                delegate?.gpsHeadingForCompass?(newHeading: -newHeading.magneticHeading)
-            }
-        } else {
-            if let b = Preferences.shared.getPreference("trueNorth").bool, b {
-                delegate?.gpsHeadingForCompass?(newHeading: newHeading.trueHeading)
-            } else {
-                delegate?.gpsHeadingForCompass?(newHeading: newHeading.magneticHeading)
-            }
-        }
-        #endif
     }
     
     public func locationManagerShouldDisplayHeadingCalibration(_ manager: CLLocationManager) -> Bool {
