@@ -195,6 +195,13 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     public func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         isHeadingAvailableOnDevice = true
         
+        #if os(watchOS)
+        if let b = Preferences.shared.getPreference("trueNorth").bool, b {
+            delegate?.gpsHeadingForCompass?(newHeading: newHeading.trueHeading)
+        } else {
+            delegate?.gpsHeadingForCompass?(newHeading: newHeading.magneticHeading)
+        }
+        #else
         if UIDevice.current.orientation == .faceDown {
             if let b = Preferences.shared.getPreference("trueNorth").bool, b {
                 delegate?.gpsHeadingForCompass?(newHeading: -newHeading.trueHeading)
@@ -208,6 +215,7 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
                 delegate?.gpsHeadingForCompass?(newHeading: newHeading.magneticHeading)
             }
         }
+        #endif
     }
     
     public func locationManagerShouldDisplayHeadingCalibration(_ manager: CLLocationManager) -> Bool {
