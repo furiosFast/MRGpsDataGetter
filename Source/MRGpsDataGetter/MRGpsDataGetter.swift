@@ -40,6 +40,9 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     
     
     open func initialize(timeOut: TimeInterval = 15.0){
+        #if !os(watchOS)
+        UIDevice.current.beginGeneratingDeviceOrientationNotifications()
+        #endif
         setAlamofire(timeOut)
     }
     
