@@ -99,9 +99,9 @@ open class MoonDataGetter: NSObject {
 //            moon.trajectory = getMoonTrajectoryFromAge(smc.moonAge, Date())
 
             if smc.moonAge < 2 {
-                moon.age = String(format: "%3.1f", smc.moonAge) + " " + loc("DAY")
+                moon.age = smc.moonAge.int.string + " " + loc("DAY").lowercased()
             } else {
-                moon.age = String(format: "%3.1f", smc.moonAge) + " " + loc("DAYS")
+                moon.age = smc.moonAge.int.string + " " + loc("DAYS").lowercased()
             }
         } catch {
             debugPrint("Failure in SunMoonCalculator (moon)")
