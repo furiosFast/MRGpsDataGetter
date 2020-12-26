@@ -114,6 +114,7 @@ open class SunDataGetter: NSObject {
         return sun
     }
     
+    
     //MARK: - Support functions
     
     /// Function that return the today sun lyght hours and the difference of minutes of sun lyght of today and yesterday

@@ -118,6 +118,7 @@ open class MoonDataGetter: NSObject {
         return moon
     }
     
+    
     //MARK: - Support functions
     
     /// The moon tilt angle with the help of BDAstroCalc library. The slope angle of the observed moon-sun line (α) and slope angle of the expected moon-sun line (β).

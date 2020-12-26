@@ -47,13 +47,6 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
         Preferences.shared.setPreferences(preferences)
     }
     
-    private func setOptions(openWeatherMapKey: String, preferences : [String : String], forecastToo: Bool, onlyLocationData: Bool){
-        setOpenWeatherMapKey(openWeatherMapKey)
-        Preferences.shared.setPreferences(preferences)
-        isForecastToLoad = forecastToo
-        isLocationDataToLoadOnly = onlyLocationData
-    }
-    
     open func refreshAllData(openWeatherMapKey: String, preferences: [String : String], forecastMustBeLoaded: Bool = true, isLocationDataToLoadOnly: Bool = false){
         setCount(0)
         setLocationPermission(openWeatherMapKey: openWeatherMapKey, preferences: preferences, forecastMustBeLoaded: forecastMustBeLoaded, isLocationDataToLoadOnly: isLocationDataToLoadOnly)
@@ -165,6 +158,68 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
 //        refreshAllData(openWeatherMapKey: openWeatherMapKey, preferences: preferences)
     }
     
+    public func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        isHeadingAvailableOnDevice = true
+        
+        if let b = Preferences.shared.getPreference("trueNorth").bool, b {
+            delegate?.gpsHeadingForCompass?(newHeading: newHeading.trueHeading)
+        } else {
+            delegate?.gpsHeadingForCompass?(newHeading: newHeading.magneticHeading)
+        }
+    }
+    
+    public func locationManagerShouldDisplayHeadingCalibration(_ manager: CLLocationManager) -> Bool {
+        return false
+    }
+    
+    open func isHeadingAvailable() -> Bool {
+        return isHeadingAvailableOnDevice
+    }
+    
+    open func startHeading() {
+        UIDevice.current.beginGeneratingDeviceOrientationNotifications()
+        locationManager.startUpdatingHeading()
+    }
+    
+    open func stopHeading() {
+        locationManager.stopUpdatingHeading()
+        UIDevice.current.endGeneratingDeviceOrientationNotifications()
+    }
+    
+    open func setCurrentLocation(_ currentLocation: CLLocation) {
+        return self.currentLocation = currentLocation
+    }
+    
+    open func getCurrentLocation() -> CLLocation? {
+        return currentLocation
+    }
+    
+    open func getCurrentDeviceOrientation() -> UIDeviceOrientation {
+        return UIDevice.current.orientation
+    }
+    
+    
+    //MARK: - Support functions for gps
+    
+    private func setCount(_ value: Int) {
+        count = value
+//        errorCount = value
+    }
+    
+    private func setOpenWeatherMapKey(_ openWeatherMapKey: String){
+        if self.openWeatherMapKey == "NaN" {
+            self.openWeatherMapKey = openWeatherMapKey
+        }
+    }
+    
+    private func setOptions(openWeatherMapKey: String, preferences : [String : String], forecastToo: Bool, onlyLocationData: Bool){
+        setOpenWeatherMapKey(openWeatherMapKey)
+        Preferences.shared.setPreferences(preferences)
+        isForecastToLoad = forecastToo
+        isLocationDataToLoadOnly = onlyLocationData
+        UIDevice.current.beginGeneratingDeviceOrientationNotifications()
+    }
+
     @objc private func refreshSunMoonPositionInfo(){
         if let loc = currentLocation, count > 0 {
             DispatchQueue.global().async {
@@ -192,50 +247,4 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
         }
     }
     
-    public func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        isHeadingAvailableOnDevice = true
-        
-        if let b = Preferences.shared.getPreference("trueNorth").bool, b {
-            delegate?.gpsHeadingForCompass?(newHeading: newHeading.trueHeading)
-        } else {
-            delegate?.gpsHeadingForCompass?(newHeading: newHeading.magneticHeading)
-        }
-    }
-    
-    public func locationManagerShouldDisplayHeadingCalibration(_ manager: CLLocationManager) -> Bool {
-        return false
-    }
-    
-    open func isHeadingAvailable() -> Bool {
-        return isHeadingAvailableOnDevice
-    }
-    
-    open func startHeading() {
-        locationManager.startUpdatingHeading()
-    }
-    
-    open func stopHeading() {
-        locationManager.stopUpdatingHeading()
-    }
-    
-    open func setCurrentLocation(_ currentLocation: CLLocation) {
-        return self.currentLocation = currentLocation
-    }
-    
-    open func getCurrentLocation() -> CLLocation? {
-        return currentLocation
-    }
-    
-    //MARK: - Support functions for gps
-    private func setCount(_ value: Int) {
-        count = value
-//        errorCount = value
-    }
-    
-    private func setOpenWeatherMapKey(_ openWeatherMapKey: String){
-        if self.openWeatherMapKey == "NaN" {
-            self.openWeatherMapKey = openWeatherMapKey
-        }
-    }
-
 }

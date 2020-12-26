@@ -173,6 +173,7 @@ open class GpsDataGetter: NSObject {
         self.delegate?.reverseGeocodeFromLocationError?(error: "reverseGeocodeFromLocation timeout error")
     }
     
+    
     //MARK: - Support functions
     
     /// Function that format the latitute coord from a double value
