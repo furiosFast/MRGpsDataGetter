@@ -177,13 +177,17 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     }
     
     open func startHeading() {
+        #if !os(watchOS)
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
+        #endif
         locationManager.startUpdatingHeading()
     }
     
     open func stopHeading() {
         locationManager.stopUpdatingHeading()
+        #if !os(watchOS)
         UIDevice.current.endGeneratingDeviceOrientationNotifications()
+        #endif
     }
     
     open func setCurrentLocation(_ currentLocation: CLLocation) {
@@ -194,9 +198,11 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
         return currentLocation
     }
     
+    #if !os(watchOS)
     open func getCurrentDeviceOrientation() -> UIDeviceOrientation {
         return UIDevice.current.orientation
     }
+    #endif
     
     
     //MARK: - Support functions for gps
@@ -217,7 +223,9 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
         Preferences.shared.setPreferences(preferences)
         isForecastToLoad = forecastToo
         isLocationDataToLoadOnly = onlyLocationData
+        #if !os(watchOS)
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
+        #endif
     }
 
     @objc private func refreshSunMoonPositionInfo(){
