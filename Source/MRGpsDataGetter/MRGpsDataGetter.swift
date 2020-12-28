@@ -227,17 +227,17 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
         }
     }
 
-    @objc private func refreshWeatherPositionInfo(){
-        if let loc = currentLocation, count > 0 {
-            DispatchQueue.global().async {
-                WeatherDataGetter.shared.getWeatherInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
-            }
-            DispatchQueue.global().async {
-                if self.isForecastToLoad {
-                    ForecastDataGetter.shared.getForecastInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
-                }
-            }
-        }
-    }
+//    @objc private func refreshWeatherPositionInfo(){
+//        if let loc = currentLocation, count > 0 {
+//            DispatchQueue.global().async {
+//                WeatherDataGetter.shared.getWeatherInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
+//            }
+//            DispatchQueue.global().async {
+//                if self.isForecastToLoad {
+//                    ForecastDataGetter.shared.getForecastInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
+//                }
+//            }
+//        }
+//    }
     
 }
