@@ -211,7 +211,7 @@ open class WeatherDataGetter: NSObject {
                 self.weather.umidity = hum.string + " " + loc("PERCENT")
             }
             //16
-            if let temp = Double(json["main"]["temp"].stringValue) {
+            if let temp = Double(json["main"]["temp"].stringValue.replacingOccurrences(of: "-0", with: "0")) {
                 if Preferences.shared.getPreference("weatherTemp") == "celsusTemp" {
                     self.weather.temp = String(format: "%3.1f", temp) + " " + loc("CELSUS")
                 }
@@ -223,7 +223,7 @@ open class WeatherDataGetter: NSObject {
                 }
             }
             //17
-            if let tempMin = Double(json["main"]["temp_min"].stringValue) {
+            if let tempMin = Double(json["main"]["temp_min"].stringValue.replacingOccurrences(of: "-0", with: "0")) {
                 if Preferences.shared.getPreference("weatherTemp") == "celsusTemp" {
                     self.weather.tempMin = String(format: "%3.1f", tempMin) + " " + loc("CELSUS")
                 }
@@ -235,7 +235,7 @@ open class WeatherDataGetter: NSObject {
                 }
             }
             //18
-            if let tempMax = Double(json["main"]["temp_max"].stringValue) {
+            if let tempMax = Double(json["main"]["temp_max"].stringValue.replacingOccurrences(of: "-0", with: "0")) {
                 if Preferences.shared.getPreference("weatherTemp") == "celsusTemp" {
                     self.weather.tempMax = String(format: "%3.1f", tempMax) + " " + loc("CELSUS")
                 }
