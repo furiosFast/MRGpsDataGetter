@@ -34,7 +34,6 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     var count = 0
 //    var errorCount = 0
     var openWeatherMapKey = "NaN"
-    var isHeadingAvailableOnDevice = false
     var isForecastToLoad = true
     var isLocationDataToLoadOnly = false
     
@@ -71,7 +70,6 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
                     self.locationManager.stopUpdatingLocation()
                     self.timerAutoRefreshSunMoon.invalidate()
                     self.timerAutoRefreshWeather.invalidate()
-                    self.isHeadingAvailableOnDevice = false
                     debugPrint("Location permits NOT obtained!")
                     break
                 case .authorizedWhenInUse:
@@ -159,8 +157,6 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     }
     
     public func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        isHeadingAvailableOnDevice = true
-        
         if let b = Preferences.shared.getPreference("trueNorth").bool, b {
             delegate?.gpsHeadingForCompass?(newHeading: newHeading.trueHeading)
         } else {
@@ -173,7 +169,7 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     }
     
     open func isHeadingAvailable() -> Bool {
-        return isHeadingAvailableOnDevice
+        return CLLocationManager.headingAvailable()
     }
     
     open func startHeading() {
