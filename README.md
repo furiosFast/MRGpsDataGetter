@@ -1,7 +1,6 @@
 # MRGpsDataGetter
 
 [![SPM ready](https://img.shields.io/badge/SPM-ready-orange.svg)](https://swift.org/package-manager/)
-![CocoaPods](https://img.shields.io/cocoapods/v/MRGpsDataGetter.svg)
 ![Platform](https://img.shields.io/badge/platforms-iOS%2011.0%20%7C%20tvOS%2011.0%20%7C%20watchOS%204.0-F28D00.svg)
 [![Swift](https://img.shields.io/badge/Swift-5.0-orange.svg)](https://swift.org)
 [![Xcode](https://img.shields.io/badge/Xcode-12.0-blue.svg)](https://developer.apple.com/xcode)
@@ -28,14 +27,6 @@ Once you have your Swift package set up, adding MRGpsDataGetter as a dependency 
 dependencies: [
     .package(url: "https://github.com/furiosFast/MRGpsDataGetter.git", from: "1.0.0")
 ]
-```
-
-### CocoaPods
-
-[CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate Alamofire into your Xcode project using CocoaPods, specify it in your `Podfile`:
-
-```ruby
-pod 'MRGpsDataGetter', '~> 1.0.0'
 ```
 
 ### Manually
