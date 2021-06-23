@@ -79,9 +79,9 @@
 "ASCENDENT" = "Ascendent";
 "DESCENDENT" = "Descendent";
 
-"LUNARUMBRALTOTAL" = "Total eclipse";
-"LUNARUMBRALPARTIAL" = "Partial eclipse";
-"LUNARPENUMBRAL" = "Eclipse of penumbra";
+"LUNARUMBRALTOTAL" = "Total";
+"LUNARUMBRALPARTIAL" = "Partial";
+"LUNARPENUMBRAL" = "Of penumbra";
 
 "ECLIPSENOTVISIBLE" = "Not visible";
 
