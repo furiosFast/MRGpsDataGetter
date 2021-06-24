@@ -67,9 +67,6 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
                     self.locationManager.delegate = nil
                     self.locationManager.stopUpdatingHeading()
                     self.locationManager.stopUpdatingLocation()
-                    #if os(iOS)
-                    UIDevice.current.endGeneratingDeviceOrientationNotifications()
-                    #endif
                     self.timerAutoRefreshSunMoon.invalidate()
                     debugPrint("Location permits NOT obtained!")
                     break
@@ -77,9 +74,6 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
                     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
                     self.locationManager.startUpdatingLocation()
                     self.locationManager.startUpdatingHeading()
-                    #if os(iOS)
-                    UIDevice.current.beginGeneratingDeviceOrientationNotifications()
-                    #endif
                     debugPrint("Permissions for location (only if in use) obtained!")
                     break
                 case .authorizedAlways: break
@@ -161,27 +155,11 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     }
     
     public func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        #if os(iOS)
-        if UIDevice.current.orientation == .faceDown {
-            if let b = Preferences.shared.getPreference("trueNorth").bool, b {
-                delegate?.gpsHeadingForCompass?(newHeading: -newHeading.trueHeading)
-            } else {
-                delegate?.gpsHeadingForCompass?(newHeading: -newHeading.magneticHeading)
-            }
-        } else {
-            if let b = Preferences.shared.getPreference("trueNorth").bool, b {
-                delegate?.gpsHeadingForCompass?(newHeading: newHeading.trueHeading)
-            } else {
-                delegate?.gpsHeadingForCompass?(newHeading: newHeading.magneticHeading)
-            }
-        }
-        #else
         if let b = Preferences.shared.getPreference("trueNorth").bool, b {
             delegate?.gpsHeadingForCompass?(newHeading: newHeading.trueHeading)
         } else {
             delegate?.gpsHeadingForCompass?(newHeading: newHeading.magneticHeading)
         }
-        #endif
     }
     
     public func locationManagerShouldDisplayHeadingCalibration(_ manager: CLLocationManager) -> Bool {
