@@ -67,7 +67,9 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
                     self.locationManager.delegate = nil
                     self.locationManager.stopUpdatingHeading()
                     self.locationManager.stopUpdatingLocation()
+                    #if os(iOS)
                     UIDevice.current.endGeneratingDeviceOrientationNotifications()
+                    #endif
                     self.timerAutoRefreshSunMoon.invalidate()
                     debugPrint("Location permits NOT obtained!")
                     break
@@ -75,7 +77,9 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
                     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
                     self.locationManager.startUpdatingLocation()
                     self.locationManager.startUpdatingHeading()
+                    #if os(iOS)
                     UIDevice.current.beginGeneratingDeviceOrientationNotifications()
+                    #endif
                     debugPrint("Permissions for location (only if in use) obtained!")
                     break
                 case .authorizedAlways: break
