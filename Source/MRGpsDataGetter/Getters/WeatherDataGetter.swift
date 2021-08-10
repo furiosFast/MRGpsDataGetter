@@ -203,8 +203,6 @@ open class WeatherDataGetter: NSObject {
                 if Preferences.shared.getPreference("pressureUnit") == "hPa" {
                     self.weather.pressureGroundLevel = String(format: "%3.1f", pres) + " " + loc("HPA")
                 }
-            } else {
-                self.weather.pressureGroundLevel = self.weather.pressure
             }
             //15
             if let hum = Double(json["main"]["humidity"].stringValue) {
