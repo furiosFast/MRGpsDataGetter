@@ -156,7 +156,7 @@ open class GpsDataGetter: NSObject {
                     if let placemarks = placemarks, let placemark = placemarks.first, let inlandWater = placemark.inlandWater, let ocean = placemark.ocean {
                         self.gps.locationName = ocean + ", " + inlandWater.uppercased()
                     } else {
-                        self.gps.locationName = loc("lOCATION_NaN")
+                        self.gps.locationName = loc("NOTAVAILABLENUMBER")
                     }
                 }
                 DispatchQueue.main.async {

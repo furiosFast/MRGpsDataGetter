@@ -15,7 +15,7 @@ import UIKit
 
 public class GpsInfoModel: NSObject {
     
-    public final var locationName : String = loc("lOCATION_NaN")
+    public final var locationName : String = loc("NOTAVAILABLENUMBER")
 
     public final var latitude : String = loc("NOTAVAILABLENUMBER")
     public final var longitude : String = loc("NOTAVAILABLENUMBER")
