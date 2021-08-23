@@ -41,6 +41,9 @@
 "WIND_W" = "O - Ponente";
 "WIND_NW" = "NO - Maestrale";
 
+//location
+"lOCATION_NaN" = "Nome località non disponibile";
+
 //sun
 "NIGHT" = "Notte fonda";
 "CREPASTROSUNRISE" = "Crepuscolo astronomico";

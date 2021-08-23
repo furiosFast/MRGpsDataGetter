@@ -41,6 +41,9 @@
 "WIND_W" = "W - Ponente";
 "WIND_NW" = "NW - Mistral";
 
+//location
+"lOCATION_NaN" = "Location name not available";
+
 //sun
 "NIGHT" = "Night";
 "CREPASTROSUNRISE" = "Astronomical twilight";
