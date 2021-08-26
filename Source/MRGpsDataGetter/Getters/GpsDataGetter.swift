@@ -14,7 +14,6 @@
 
 import UIKit
 import CoreLocation
-import MapKit
 import SwifterSwift
 
 @objc public protocol MRGpsDataGetterGpsDataDelegate: NSObjectProtocol {
@@ -45,15 +44,20 @@ open class GpsDataGetter: NSObject {
     /// Private function that start to retrive all GPS data of a specified location
     /// - Parameter currentLocation: location
     private func reversePositionInfo(_ currentLocation: CLLocation){
+        gps.timestamp = currentLocation.timestamp
         gps.latitude = latitudeToString(currentLocation.coordinate.latitude)
         gps.longitude = longitudeToString(currentLocation.coordinate.longitude)
+        gps.horizontalAccuracy = String(format: "%3.1f" + " " + loc("METERS"), currentLocation.horizontalAccuracy)
         gps.altitude = String(format: "%3.1f" + " " + loc("METERS"), currentLocation.altitude)
         gps.verticalAccuracy = String(format: "%3.1f" + " " + loc("METERS"), currentLocation.verticalAccuracy)
-        gps.horizontalAccuracy = String(format: "%3.1f" + " " + loc("METERS"), currentLocation.horizontalAccuracy)
-        gps.course = currentLocation.course.string
+        gps.course = String(format: "%3.1f" + " " + loc("DEGREE"), currentLocation.course)
+        if #available(iOS 13.4, *) {
+            gps.courseAccuracy = String(format: "%3.1f" + " " + loc("DEGREE"), currentLocation.courseAccuracy)
+        }
         if let floor = currentLocation.floor {
             gps.floor = floor.level.string
         }
+
         if(currentLocation.speed < 0) {
             if Preferences.shared.getPreference("windSpeed") == "meterSecondSpeed" {
                 gps.speed = "0.0" + " " + loc("METERSSECOND")
@@ -81,6 +85,7 @@ open class GpsDataGetter: NSObject {
                 gps.speed = String(format: "%3.1f" + " " + loc("MILESHOURS"), currentLocation.speed * meterSecondToMilesHour)
             }
         }
+        gps.speedAccuracy = String(format: "%3.1f" + " " + loc("METERSSECOND"), currentLocation.speedAccuracy)
         
         
         DispatchQueue.main.async {

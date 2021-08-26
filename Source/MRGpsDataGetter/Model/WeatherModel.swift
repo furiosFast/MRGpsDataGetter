@@ -16,12 +16,20 @@ import CoreLocation
 
 public class WeatherModel: NSObject {
     
-    public final var windSpeed : String = loc("NOTAVAILABLENUMBER")
+    public final var timestamp : Date? = nil
+    public final var currentWeatherLocation: CLLocation? = nil
+
     public final var windDegree : String = loc("NOTAVAILABLENUMBER")
     public final var windName : String = loc("NOTAVAILABLENUMBER")
-    public final var beaufortScale : String = loc("NOTAVAILABLENUMBER")
-    public final var beaufortScaleWindColour : String = loc("NOTAVAILABLENUMBER")
+    public final var windSpeed : String = loc("NOTAVAILABLENUMBER")
+    public final var beaufortScaleWindSpeed : String = loc("NOTAVAILABLENUMBER")
+    public final var beaufortScaleWindColourForWindSpeed : String = loc("NOTAVAILABLENUMBER")
+    
+    public final var windGust : String = loc("NOTAVAILABLENUMBER")
+    public final var beaufortScaleWindGust : String = loc("NOTAVAILABLENUMBER")
+    public final var beaufortScaleWindColourForWindGust : String = loc("NOTAVAILABLENUMBER")
 
+    public final var weatherGroup : String = loc("NOTAVAILABLENUMBER")
     public final var weatherDescription : String = loc("NOTAVAILABLENUMBER")
     public final var weatherOpenWeatherMapIconName : String = loc("NOTAVAILABLENUMBER")
     public final var weatherOpenWeatherMapIcon : UIImage = UIImage(named: "01d", in: .module, with: nil)!
@@ -31,6 +39,7 @@ public class WeatherModel: NSObject {
     public final var snow1h : String = loc("NOTAVAILABLENUMBER")
     public final var snow3h : String = loc("NOTAVAILABLENUMBER")
     public final var visibility : String = loc("NOTAVAILABLENUMBER")
+    public final var rainProbability : String = loc("NOTAVAILABLENUMBER")
     public final var umidity : String = loc("NOTAVAILABLENUMBER")
     public final var pressure : String = loc("NOTAVAILABLENUMBER")
     public final var pressureSeaLevel : String = loc("NOTAVAILABLENUMBER")
@@ -42,13 +51,12 @@ public class WeatherModel: NSObject {
     public final var lowMarea : String = loc("NOTAVAILABLENUMBER")
 
     public final var temp : String = loc("NOTAVAILABLENUMBER")
+    public final var feelsLike : String = loc("NOTAVAILABLENUMBER")
     public final var tempMin : String = loc("NOTAVAILABLENUMBER")
     public final var tempMax : String = loc("NOTAVAILABLENUMBER")
     
     public final var date : String = loc("NOTAVAILABLENUMBER")
     public final var time : String = loc("NOTAVAILABLENUMBER")
     public final var dateTime : String = loc("NOTAVAILABLENUMBER")
-
-    public final var currentWeatherLocation: CLLocation? = nil
 
 }
