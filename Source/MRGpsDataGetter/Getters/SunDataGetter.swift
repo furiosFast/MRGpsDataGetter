@@ -42,6 +42,8 @@ open class SunDataGetter: NSObject {
             timeFormat = "HH:mm"
         }
         
+        sun.timestamp = Date()
+
         //BDAstroCalc
         let myLocationCoordinates = CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
         let Jan12000Date = BDAstroCalc.daysSinceJan12000(date: NSDate())

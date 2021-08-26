@@ -85,9 +85,18 @@ open class WeatherDataGetter: NSObject {
                 }
             }
             
+            //-1
+            if let timestamp = json["dt"].int {
+                self.weather.timestamp = Date.init(milliseconds: timestamp)
+            }
             //0
             self.weather.currentWeatherLocation = currentLocation
             //1
+            if var weatherDescr = json["weather"][0]["main"].string {
+                weatherDescr.firstCharacterUppercased()
+                self.weather.weatherGroup = weatherDescr
+            }
+            //1.1
             if var weatherDescr = json["weather"][0]["description"].string {
                 weatherDescr.firstCharacterUppercased()
                 self.weather.weatherDescription = weatherDescr
@@ -108,43 +117,78 @@ open class WeatherDataGetter: NSObject {
                 if Preferences.shared.getPreference("windSpeed") == "meterSecondSpeed" {
                     if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
                         self.weather.windSpeed = (windSpeed * milesHourToMeterSecond).string
-                        self.weather.beaufortScale = getBeaufortForce(windSpeed * milesHourToKnot)
                     } else {
                         self.weather.windSpeed = windSpeed.string
-                        self.weather.beaufortScale = getBeaufortForce(windSpeed * meterSecondToKnot)
                     }
                 }
                 if Preferences.shared.getPreference("windSpeed") == "kilometerHoursSpeed" {
                     if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
                         self.weather.windSpeed = (windSpeed * milesHourToKilometerHour).string
-                        self.weather.beaufortScale = getBeaufortForce(windSpeed * milesHourToKnot)
                     } else {
                         self.weather.windSpeed = (windSpeed * meterSecondToKilometerHour).string
-                        self.weather.beaufortScale = getBeaufortForce(windSpeed * meterSecondToKnot)
                     }
                 }
                 if Preferences.shared.getPreference("windSpeed") == "knotSpeed" {
                     if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
                         self.weather.windSpeed = (windSpeed * milesHourToKnot).string
-                        self.weather.beaufortScale = getBeaufortForce(windSpeed * milesHourToKnot)
                     } else {
                         self.weather.windSpeed = (windSpeed * meterSecondToKnot).string
-                        self.weather.beaufortScale = getBeaufortForce(windSpeed * meterSecondToKnot)
                     }
                 }
                 if Preferences.shared.getPreference("windSpeed") == "milesHoursSpeed" {
                     if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
                         self.weather.windSpeed = windSpeed.string
-                        self.weather.beaufortScale = getBeaufortForce(windSpeed * milesHourToKnot)
                     } else {
                         self.weather.windSpeed = (windSpeed * meterSecondToMilesHour).string
-                        self.weather.beaufortScale = getBeaufortForce(windSpeed * meterSecondToKnot)
                     }
                 }
+                
                 if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                    self.weather.beaufortScaleWindColour = getBeaufortForceColor(windSpeed * milesHourToKnot)
+                    self.weather.beaufortScaleWindSpeed = getBeaufortForce(windSpeed * milesHourToKnot)
+                    self.weather.beaufortScaleWindColourForWindSpeed = getBeaufortForceColor(windSpeed * milesHourToKnot)
                 } else {
-                    self.weather.beaufortScaleWindColour = getBeaufortForceColor(windSpeed * meterSecondToKnot)
+                    self.weather.beaufortScaleWindSpeed = getBeaufortForce(windSpeed * meterSecondToKnot)
+                    self.weather.beaufortScaleWindColourForWindSpeed = getBeaufortForceColor(windSpeed * meterSecondToKnot)
+                }
+            }
+            //3.1-4.1-5.1
+            //Wind gust. Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour.
+            if let windGust = Double(json["wind"]["gust"].stringValue) {
+                if Preferences.shared.getPreference("windSpeed") == "meterSecondSpeed" {
+                    if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
+                        self.weather.windGust = (windGust * milesHourToMeterSecond).string
+                    } else {
+                        self.weather.windGust = windGust.string
+                    }
+                }
+                if Preferences.shared.getPreference("windSpeed") == "kilometerHoursSpeed" {
+                    if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
+                        self.weather.windGust = (windGust * milesHourToKilometerHour).string
+                    } else {
+                        self.weather.windGust = (windGust * meterSecondToKilometerHour).string
+                    }
+                }
+                if Preferences.shared.getPreference("windSpeed") == "knotSpeed" {
+                    if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
+                        self.weather.windGust = (windGust * milesHourToKnot).string
+                    } else {
+                        self.weather.windGust = (windGust * meterSecondToKnot).string
+                    }
+                }
+                if Preferences.shared.getPreference("windSpeed") == "milesHoursSpeed" {
+                    if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
+                        self.weather.windGust = windGust.string
+                    } else {
+                        self.weather.windGust = (windGust * meterSecondToMilesHour).string
+                    }
+                }
+                
+                if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
+                    self.weather.beaufortScaleWindGust = getBeaufortForce(windGust * milesHourToKnot)
+                    self.weather.beaufortScaleWindColourForWindGust = getBeaufortForceColor(windGust * milesHourToKnot)
+                } else {
+                    self.weather.beaufortScaleWindGust = getBeaufortForce(windGust * meterSecondToKnot)
+                    self.weather.beaufortScaleWindColourForWindGust = getBeaufortForceColor(windGust * meterSecondToKnot)
                 }
             }
             //6-7-8
@@ -167,6 +211,10 @@ open class WeatherDataGetter: NSObject {
             //11
             if let vis = Double(json["visibility"].stringValue) {
                 self.weather.visibility = String(format: "%3.1f", vis/1000) + " " + loc("KILOMETERS")
+            }
+            //11.1
+            if let rainProb = Double(json["main"]["pop"].stringValue) {
+                self.weather.rainProbability = rainProb.string + " " + loc("PERCENT")
             }
             //12
             if let pres = Double(json["main"]["pressure"].stringValue) {
@@ -218,6 +266,18 @@ open class WeatherDataGetter: NSObject {
                 }
                 if Preferences.shared.getPreference("weatherTemp") == "kelvinTemp" {
                     self.weather.temp = String(format: "%3.1f", temp) + " " + loc("KELVIN")
+                }
+            }
+            //16.1
+            if let feelsLike = Double(json["main"]["feels_like"].stringValue.replacingOccurrences(of: "-0", with: "0")) {
+                if Preferences.shared.getPreference("weatherTemp") == "celsusTemp" {
+                    self.weather.feelsLike = String(format: "%3.1f", feelsLike) + " " + loc("CELSUS")
+                }
+                if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
+                    self.weather.feelsLike = String(format: "%3.1f", feelsLike) + " " + loc("FAHRENHEIT")
+                }
+                if Preferences.shared.getPreference("weatherTemp") == "kelvinTemp" {
+                    self.weather.feelsLike = String(format: "%3.1f", feelsLike) + " " + loc("KELVIN")
                 }
             }
             //17

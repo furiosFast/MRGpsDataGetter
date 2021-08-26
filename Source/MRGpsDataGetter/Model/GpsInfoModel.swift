@@ -15,15 +15,19 @@ import UIKit
 
 public class GpsInfoModel: NSObject {
     
+    public final var timestamp : Date? = nil
+    
     public final var locationName : String = loc("lOCATION_NaN")
 
     public final var latitude : String = loc("NOTAVAILABLENUMBER")
     public final var longitude : String = loc("NOTAVAILABLENUMBER")
-    public final var altitude : String = loc("NOTAVAILABLENUMBER")
-    public final var speed : String = loc("NOTAVAILABLENUMBER")
-    public final var verticalAccuracy : String = loc("NOTAVAILABLENUMBER")
     public final var horizontalAccuracy : String = loc("NOTAVAILABLENUMBER")
+    public final var altitude : String = loc("NOTAVAILABLENUMBER")
+    public final var verticalAccuracy : String = loc("NOTAVAILABLENUMBER")
     public final var course : String = loc("NOTAVAILABLENUMBER")
+    public final var courseAccuracy : String = loc("NOTAVAILABLENUMBER")
+    public final var speed : String = loc("NOTAVAILABLENUMBER")
+    public final var speedAccuracy : String = loc("NOTAVAILABLENUMBER")
     public final var floor : String = loc("NOTAVAILABLENUMBER")
 
 }

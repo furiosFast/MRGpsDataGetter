@@ -42,6 +42,8 @@ open class MoonDataGetter: NSObject {
         if let b = Preferences.shared.getPreference("minutesTimes").bool, b {
             timeFormat = "HH:mm"
         }
+        
+        moon.timestamp = Date()
 
         //BDAstroCalc
         let myLocationCoordinates = CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)

@@ -92,12 +92,20 @@ open class ForecastDataGetter: NSObject {
             self.plotData = []
             self.plotDataTime = []
             self.plotDataWindName = []
+            let timestamp = Date()
             for i in 0..<json["list"].count {
                 let weather = WeatherModel()
                 
+                //-1
+                weather.timestamp = timestamp
                 //0
                 weather.currentWeatherLocation = currentLocation
                 //1
+                if var weatherDescr = json["list"][i]["weather"][0]["main"].string {
+                    weatherDescr.firstCharacterUppercased()
+                    weather.weatherGroup = weatherDescr
+                }
+                //1.1
                 if var weatherDescr = json["list"][i]["weather"][0]["description"].string {
                     weatherDescr.firstCharacterUppercased()
                     weather.weatherDescription = weatherDescr
@@ -118,50 +126,80 @@ open class ForecastDataGetter: NSObject {
                     if Preferences.shared.getPreference("windSpeed") == "meterSecondSpeed" {
                         if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
                             weather.windSpeed = (windSpeed * milesHourToMeterSecond).string
-                            weather.beaufortScale = getBeaufortForce(windSpeed * milesHourToKnot)
-                            self.plotData.append(windSpeed * milesHourToMeterSecond)
                         } else {
                             weather.windSpeed = windSpeed.string
-                            weather.beaufortScale = getBeaufortForce(windSpeed * meterSecondToKnot)
-                            self.plotData.append(windSpeed)
                         }
                     }
                     if Preferences.shared.getPreference("windSpeed") == "kilometerHoursSpeed" {
                         if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
                             weather.windSpeed = (windSpeed * milesHourToKilometerHour).string
-                            weather.beaufortScale = getBeaufortForce(windSpeed * milesHourToKnot)
-                            self.plotData.append(windSpeed * milesHourToKilometerHour)
                         } else {
                             weather.windSpeed = (windSpeed * meterSecondToKilometerHour).string
-                            weather.beaufortScale = getBeaufortForce(windSpeed * meterSecondToKnot)
-                            self.plotData.append(windSpeed * meterSecondToKilometerHour)
                         }
                     }
                     if Preferences.shared.getPreference("windSpeed") == "knotSpeed" {
                         if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
                             weather.windSpeed = (windSpeed * milesHourToKnot).string
-                            weather.beaufortScale = getBeaufortForce(windSpeed * milesHourToKnot)
-                            self.plotData.append(windSpeed * milesHourToKnot)
                         } else {
                             weather.windSpeed = (windSpeed * meterSecondToKnot).string
-                            weather.beaufortScale = getBeaufortForce(windSpeed * meterSecondToKnot)
-                            self.plotData.append(windSpeed * meterSecondToKnot)
                         }
                     }
                     if Preferences.shared.getPreference("windSpeed") == "milesHoursSpeed" {
                         if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
                             weather.windSpeed = windSpeed.string
-                            weather.beaufortScale = getBeaufortForce(windSpeed * milesHourToKnot)
                         } else {
                             weather.windSpeed = (windSpeed * meterSecondToMilesHour).string
-                            weather.beaufortScale = getBeaufortForce(windSpeed * meterSecondToKnot)
-                            self.plotData.append(windSpeed * meterSecondToMilesHour)
                         }
                     }
+                    
                     if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                        weather.beaufortScaleWindColour = getBeaufortForceColor(windSpeed * milesHourToKnot)
+                        weather.beaufortScaleWindSpeed = getBeaufortForce(windSpeed * milesHourToKnot)
+                        weather.beaufortScaleWindColourForWindSpeed = getBeaufortForceColor(windSpeed * milesHourToKnot)
+                        self.plotData.append(windSpeed * milesHourToKilometerHour)
                     } else {
-                        weather.beaufortScaleWindColour = getBeaufortForceColor(windSpeed * meterSecondToKnot)
+                        weather.beaufortScaleWindSpeed = getBeaufortForce(windSpeed * meterSecondToKnot)
+                        weather.beaufortScaleWindColourForWindSpeed = getBeaufortForceColor(windSpeed * meterSecondToKnot)
+                        self.plotData.append(windSpeed * meterSecondToMilesHour)
+                    }
+                }
+                //3.1-4.1-5.1
+                //Wind gust. Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour.
+                if let windGust = Double(json["list"][i]["wind"]["gust"].stringValue) {
+                    if Preferences.shared.getPreference("windSpeed") == "meterSecondSpeed" {
+                        if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
+                            weather.windGust = (windGust * milesHourToMeterSecond).string
+                        } else {
+                            weather.windGust = windGust.string
+                        }
+                    }
+                    if Preferences.shared.getPreference("windSpeed") == "kilometerHoursSpeed" {
+                        if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
+                            weather.windGust = (windGust * milesHourToKilometerHour).string
+                        } else {
+                            weather.windGust = (windGust * meterSecondToKilometerHour).string
+                        }
+                    }
+                    if Preferences.shared.getPreference("windSpeed") == "knotSpeed" {
+                        if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
+                            weather.windGust = (windGust * milesHourToKnot).string
+                        } else {
+                            weather.windGust = (windGust * meterSecondToKnot).string
+                        }
+                    }
+                    if Preferences.shared.getPreference("windSpeed") == "milesHoursSpeed" {
+                        if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
+                            weather.windGust = windGust.string
+                        } else {
+                            weather.windGust = (windGust * meterSecondToMilesHour).string
+                        }
+                    }
+                    
+                    if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
+                        weather.beaufortScaleWindGust = getBeaufortForce(windGust * milesHourToKnot)
+                        weather.beaufortScaleWindColourForWindGust = getBeaufortForceColor(windGust * milesHourToKnot)
+                    } else {
+                        weather.beaufortScaleWindGust = getBeaufortForce(windGust * meterSecondToKnot)
+                        weather.beaufortScaleWindColourForWindGust = getBeaufortForceColor(windGust * meterSecondToKnot)
                     }
                 }
                 //7-8-9
@@ -179,8 +217,12 @@ open class ForecastDataGetter: NSObject {
                     weather.rain3h = String(format: "%3.1f", rain) + " " + loc("MILLIMETERS")
                 }
                 //12
-                if let vis = Double(json["list"][i]["main"]["visibility"].stringValue) {
+                if let vis = Double(json["list"][i]["visibility"].stringValue) {
                     weather.visibility = String(format: "%3.1f", vis/1000) + " " + loc("KILOMETERS")
+                }
+                //12.1
+                if let rainProb = Double(json["list"][i]["pop"].stringValue) {
+                    weather.rainProbability = rainProb.string + " " + loc("PERCENT")
                 }
                 //13
                 if let pres = Double(json["list"][i]["main"]["pressure"].stringValue) {
@@ -232,6 +274,18 @@ open class ForecastDataGetter: NSObject {
                     }
                     if Preferences.shared.getPreference("weatherTemp") == "kelvinTemp" {
                         weather.temp = String(format: "%3.0f", temp) + " " + loc("KELVIN")
+                    }
+                }
+                //17.1
+                if let feelsLike = Double(json["list"][i]["main"]["feels_like"].stringValue.replacingOccurrences(of: "-0", with: "0")) {
+                    if Preferences.shared.getPreference("weatherTemp") == "celsusTemp" {
+                        weather.feelsLike = String(format: "%3.1f", feelsLike) + " " + loc("CELSUS")
+                    }
+                    if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
+                        weather.feelsLike = String(format: "%3.1f", feelsLike) + " " + loc("FAHRENHEIT")
+                    }
+                    if Preferences.shared.getPreference("weatherTemp") == "kelvinTemp" {
+                        weather.feelsLike = String(format: "%3.1f", feelsLike) + " " + loc("KELVIN")
                     }
                 }
                 //18

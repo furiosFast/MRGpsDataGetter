@@ -15,6 +15,8 @@ import UIKit
 
 public class SunInfoModel: NSObject {
     
+    public final var timestamp : Date? = nil
+
     public final var sunIcon : UIImage = UIImage(named: "sun", in: .module, with: nil)!
 
     public final var solarNoon : String = loc("NOTAVAILABLENUMBER")

@@ -16,6 +16,8 @@ import UIKit
 
 public class MoonInfoModel: NSObject { 
     
+    public final var timestamp : Date? = nil
+
     public final var altitude : String = loc("NOTAVAILABLENUMBER")
     public final var fractionOfMoonIlluminated : String = loc("NOTAVAILABLENUMBER")
     public final var azimuth : String = loc("NOTAVAILABLENUMBER")

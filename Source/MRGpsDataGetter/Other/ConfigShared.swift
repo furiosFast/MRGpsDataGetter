@@ -226,7 +226,7 @@ func getAngleName(_ angle: Double) -> String {
 //    return beaufortForce
 //}
 
-/// Function that return the Beaufort force degree bassed on the wind speed in knot
+/// Function that return the Beaufort force degree based on the wind speed in knot
 /// - Parameter windSpeedKnot: wind speed (in knot)
 func getBeaufortForce(_ windSpeedKnot: Double) -> String {
     var windSpeed = "0"
