@@ -51,9 +51,15 @@ open class GpsDataGetter: NSObject {
         gps.altitude = String(format: "%3.1f" + " " + loc("METERS"), currentLocation.altitude)
         gps.verticalAccuracy = String(format: "%3.1f" + " " + loc("METERS"), currentLocation.verticalAccuracy)
         gps.course = String(format: "%3.1f" + " " + loc("DEGREE"), currentLocation.course)
+        #if os(iOS)
         if #available(iOS 13.4, *) {
             gps.courseAccuracy = String(format: "%3.1f" + " " + loc("DEGREE"), currentLocation.courseAccuracy)
         }
+        #elseif os(watchOS)
+        if #available(watchOS 6.2, *) {
+            gps.courseAccuracy = String(format: "%3.1f" + " " + loc("DEGREE"), currentLocation.courseAccuracy)
+        }
+        #endif
         if let floor = currentLocation.floor {
             gps.floor = floor.level.string
         }
