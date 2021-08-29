@@ -92,9 +92,9 @@ open class WeatherDataGetter: NSObject {
             //0
             self.weather.currentWeatherLocation = currentLocation
             //1
-            if var weatherDescr = json["weather"][0]["main"].string {
-                weatherDescr.firstCharacterUppercased()
-                self.weather.weatherGroup = weatherDescr
+            if var weatherGroup = json["weather"][0]["main"].string {
+                weatherGroup.firstCharacterUppercased()
+                self.weather.weatherGroup = weatherGroup
             }
             //1.1
             if var weatherDescr = json["weather"][0]["description"].string {
@@ -214,7 +214,7 @@ open class WeatherDataGetter: NSObject {
             }
             //11.1
             if let rainProb = Double(json["main"]["pop"].stringValue) {
-                self.weather.rainProbability = rainProb.string + " " + loc("PERCENT")
+                self.weather.rainProbability = (rainProb * 100).string + " " + loc("PERCENT")
             }
             //12
             if let pres = Double(json["main"]["pressure"].stringValue) {

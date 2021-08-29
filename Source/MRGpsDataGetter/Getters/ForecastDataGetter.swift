@@ -101,9 +101,9 @@ open class ForecastDataGetter: NSObject {
                 //0
                 weather.currentWeatherLocation = currentLocation
                 //1
-                if var weatherDescr = json["list"][i]["weather"][0]["main"].string {
-                    weatherDescr.firstCharacterUppercased()
-                    weather.weatherGroup = weatherDescr
+                if var weatherGroup = json["list"][i]["weather"][0]["main"].string {
+                    weatherGroup.firstCharacterUppercased()
+                    weather.weatherGroup = weatherGroup
                 }
                 //1.1
                 if var weatherDescr = json["list"][i]["weather"][0]["description"].string {
@@ -222,7 +222,7 @@ open class ForecastDataGetter: NSObject {
                 }
                 //12.1
                 if let rainProb = Double(json["list"][i]["pop"].stringValue) {
-                    weather.rainProbability = rainProb.string + " " + loc("PERCENT")
+                    weather.rainProbability = (rainProb * 100).string + " " + loc("PERCENT")
                 }
                 //13
                 if let pres = Double(json["list"][i]["main"]["pressure"].stringValue) {
@@ -324,10 +324,10 @@ open class ForecastDataGetter: NSObject {
                     }
                 }
                 //24
-                if let rain = Double(json["list"][i]["rain"]["3h"].stringValue) {
-                    weather.rain3h = String(format: "%3.1f", rain) + " " + loc("MILLIMETERS")
+                if let rain = Double(json["list"][i]["snow"]["1h"].stringValue) {
+                    weather.snow1h = String(format: "%3.1f", rain) + " " + loc("MILLIMETERS")
                 } else {
-                    weather.rain3h = "0.0 " + loc("MILLIMETERS")
+                    weather.snow1h = "0.0 " + loc("MILLIMETERS")
                 }
                 //25
                 if let snow = Double(json["list"][i]["snow"]["3h"].stringValue) {
