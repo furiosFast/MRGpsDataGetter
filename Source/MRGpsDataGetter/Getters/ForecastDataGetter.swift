@@ -267,13 +267,13 @@ open class ForecastDataGetter: NSObject {
                 //17
                 if let temp = Double(json["list"][i]["main"]["temp"].stringValue.replacingOccurrences(of: "-0", with: "0")) {
                     if Preferences.shared.getPreference("weatherTemp") == "celsusTemp" {
-                        weather.temp = String(format: "%3.0f", temp) + " " + loc("CELSUS")
+                        weather.temp = String(format: "%3.1f", temp) + " " + loc("CELSUS")
                     }
                     if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                        weather.temp = String(format: "%3.0f", temp) + " " + loc("FAHRENHEIT")
+                        weather.temp = String(format: "%3.1f", temp) + " " + loc("FAHRENHEIT")
                     }
                     if Preferences.shared.getPreference("weatherTemp") == "kelvinTemp" {
-                        weather.temp = String(format: "%3.0f", temp) + " " + loc("KELVIN")
+                        weather.temp = String(format: "%3.1f", temp) + " " + loc("KELVIN")
                     }
                 }
                 //17.1
