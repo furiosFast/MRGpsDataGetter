@@ -86,9 +86,7 @@ open class WeatherDataGetter: NSObject {
             }
             
             //-1
-            if let timestamp = json["dt"].int {
-                self.weather.timestamp = Date.init(milliseconds: timestamp)
-            }
+            self.weather.timestamp = Date()
             //0
             self.weather.currentWeatherLocation = currentLocation
             //1
