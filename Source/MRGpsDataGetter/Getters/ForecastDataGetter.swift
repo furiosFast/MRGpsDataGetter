@@ -195,11 +195,11 @@ open class ForecastDataGetter: NSObject {
                     }
                     
                     if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                        weather.beaufortScaleWindGust = getBeaufortForce(windGust * milesHourToKnot)
-                        weather.beaufortScaleWindColourForWindGust = getBeaufortForceColor(windGust * milesHourToKnot)
+                        weather.beaufortScaleWindSpeedGust = getBeaufortForce(windGust * milesHourToKnot)
+                        weather.beaufortScaleWindColourForWindSpeedGust = getBeaufortForceColor(windGust * milesHourToKnot)
                     } else {
-                        weather.beaufortScaleWindGust = getBeaufortForce(windGust * meterSecondToKnot)
-                        weather.beaufortScaleWindColourForWindGust = getBeaufortForceColor(windGust * meterSecondToKnot)
+                        weather.beaufortScaleWindSpeedGust = getBeaufortForce(windGust * meterSecondToKnot)
+                        weather.beaufortScaleWindColourForWindSpeedGust = getBeaufortForceColor(windGust * meterSecondToKnot)
                     }
                 }
                 //7-8-9
@@ -223,7 +223,7 @@ open class ForecastDataGetter: NSObject {
                 //12.1
                 if let rainProb = Double(json["list"][i]["pop"].stringValue) {
                     if rainProb != 0 {
-                        self.weather.rainProbability = String(format: "%3.1f", (rainProb * 100)) + " " + loc("PERCENT")
+                        weather.rainProbability = String(format: "%3.1f", (rainProb * 100)) + " " + loc("PERCENT")
                     }
                 }
                 //13

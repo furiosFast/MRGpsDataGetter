@@ -182,11 +182,11 @@ open class WeatherDataGetter: NSObject {
                 }
                 
                 if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                    self.weather.beaufortScaleWindGust = getBeaufortForce(windGust * milesHourToKnot)
-                    self.weather.beaufortScaleWindColourForWindGust = getBeaufortForceColor(windGust * milesHourToKnot)
+                    self.weather.beaufortScaleWindSpeedGust = getBeaufortForce(windGust * milesHourToKnot)
+                    self.weather.beaufortScaleWindColourForWindSpeedGust = getBeaufortForceColor(windGust * milesHourToKnot)
                 } else {
-                    self.weather.beaufortScaleWindGust = getBeaufortForce(windGust * meterSecondToKnot)
-                    self.weather.beaufortScaleWindColourForWindGust = getBeaufortForceColor(windGust * meterSecondToKnot)
+                    self.weather.beaufortScaleWindSpeedGust = getBeaufortForce(windGust * meterSecondToKnot)
+                    self.weather.beaufortScaleWindColourForWindSpeedGust = getBeaufortForceColor(windGust * meterSecondToKnot)
                 }
             }
             //6-7-8
