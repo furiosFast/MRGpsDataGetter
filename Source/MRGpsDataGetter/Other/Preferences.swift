@@ -17,6 +17,7 @@ import UIKit
 class Preferences: NSObject {
 
     static let shared = Preferences()
+    
     var prefs = [String : String]()
     
     

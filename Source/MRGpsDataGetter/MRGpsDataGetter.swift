@@ -45,6 +45,10 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
         Preferences.shared.setPreferences(preferences)
     }
     
+    open func getPreferences() -> [String : String] {
+        return Preferences.shared.prefs
+    }
+    
     open func refreshAllData(openWeatherMapKey: String, preferences: [String : String], forecastMustBeLoaded: Bool = true, isLocationDataToLoadOnly: Bool = false){
         setCount(0)
         setLocationPermission(openWeatherMapKey: openWeatherMapKey, preferences: preferences, forecastMustBeLoaded: forecastMustBeLoaded, isLocationDataToLoadOnly: isLocationDataToLoadOnly)
