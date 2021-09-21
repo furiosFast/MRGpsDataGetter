@@ -223,7 +223,7 @@ open class ForecastDataGetter: NSObject {
                 //12.1
                 if let rainProb = Double(json["list"][i]["pop"].stringValue) {
                     if rainProb != 0 {
-                        weather.rainProbability = (rainProb * 100).string + " " + loc("PERCENT")
+                        self.weather.rainProbability = String(format: "%3.1f", (rainProb * 100)) + " " + loc("PERCENT")
                     }
                 }
                 //13
