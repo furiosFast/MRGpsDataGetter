@@ -11,8 +11,8 @@ Easy access to Sun, Moon and Location informations. In addition Weather and 5 da
 
 ## Requirements
 
-- iOS 11.0+ / tvOS 11.0+ / watchOS 4.0+
-- Xcode 10.2+
+- iOS 13.0+ / tvOS 13.0+ / watchOS 6.1+
+- Xcode 12.0+
 - Swift 5+
 
 ## Installation

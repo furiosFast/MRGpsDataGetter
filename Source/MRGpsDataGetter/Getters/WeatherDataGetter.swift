@@ -197,14 +197,10 @@ open class WeatherDataGetter: NSObject {
             //9
             if let rain = Double(json["rain"]["1h"].stringValue) {
                 self.weather.rain1h = String(format: "%3.1f", rain) + " " + loc("MILLIMETERS")
-            } else {
-                self.weather.rain1h = "0.0 " + loc("MILLIMETERS")
             }
             //10
             if let rain = Double(json["rain"]["3h"].stringValue) {
                 self.weather.rain3h = String(format: "%3.1f", rain) + " " + loc("MILLIMETERS")
-            } else {
-                self.weather.rain3h = "0.0 " + loc("MILLIMETERS")
             }
             //11
             if let vis = Double(json["visibility"].stringValue) {
@@ -305,14 +301,10 @@ open class WeatherDataGetter: NSObject {
             //19
             if let snow = Double(json["snow"]["1h"].stringValue) {
                 self.weather.snow1h = String(format: "%3.1f", snow) + " " + loc("MILLIMETERS")
-            } else {
-                self.weather.snow1h = "0.0 " + loc("MILLIMETERS")
             }
             //20
             if let snow = Double(json["snow"]["3h"].stringValue) {
                 self.weather.snow3h = String(format: "%3.1f", snow) + " " + loc("MILLIMETERS")
-            } else {
-                self.weather.snow3h = "0.0 " + loc("MILLIMETERS")
             }
             //21
             if let clouds = Double(json["clouds"]["all"].stringValue) {
