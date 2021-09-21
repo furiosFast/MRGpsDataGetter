@@ -208,7 +208,9 @@ open class WeatherDataGetter: NSObject {
             }
             //11.1
             if let rainProb = Double(json["main"]["pop"].stringValue) {
-                self.weather.rainProbability = (rainProb * 100).string + " " + loc("PERCENT")
+                if rainProb != 0 {
+                    self.weather.rainProbability = (rainProb * 100).string + " " + loc("PERCENT")
+                }
             }
             //12
             if let pres = Double(json["main"]["pressure"].stringValue) {
