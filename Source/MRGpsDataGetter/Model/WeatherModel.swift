@@ -25,7 +25,7 @@ public class WeatherModel: NSObject {
     public final var beaufortScaleWindSpeed : String = loc("NOTAVAILABLENUMBER")
     public final var beaufortScaleWindColourForWindSpeed : String = loc("NOTAVAILABLENUMBER")
     
-    public final var windGust : String = loc("NOTAVAILABLENUMBER")
+    public final var windSpeedGust : String = loc("NOTAVAILABLENUMBER")
     public final var beaufortScaleWindGust : String = loc("NOTAVAILABLENUMBER")
     public final var beaufortScaleWindColourForWindGust : String = loc("NOTAVAILABLENUMBER")
 

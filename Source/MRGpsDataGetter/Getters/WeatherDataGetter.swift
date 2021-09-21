@@ -154,30 +154,30 @@ open class WeatherDataGetter: NSObject {
             if let windGust = Double(json["wind"]["gust"].stringValue) {
                 if Preferences.shared.getPreference("windSpeed") == "meterSecondSpeed" {
                     if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                        self.weather.windGust = (windGust * milesHourToMeterSecond).string
+                        self.weather.windSpeedGust = (windGust * milesHourToMeterSecond).string
                     } else {
-                        self.weather.windGust = windGust.string
+                        self.weather.windSpeedGust = windGust.string
                     }
                 }
                 if Preferences.shared.getPreference("windSpeed") == "kilometerHoursSpeed" {
                     if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                        self.weather.windGust = (windGust * milesHourToKilometerHour).string
+                        self.weather.windSpeedGust = (windGust * milesHourToKilometerHour).string
                     } else {
-                        self.weather.windGust = (windGust * meterSecondToKilometerHour).string
+                        self.weather.windSpeedGust = (windGust * meterSecondToKilometerHour).string
                     }
                 }
                 if Preferences.shared.getPreference("windSpeed") == "knotSpeed" {
                     if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                        self.weather.windGust = (windGust * milesHourToKnot).string
+                        self.weather.windSpeedGust = (windGust * milesHourToKnot).string
                     } else {
-                        self.weather.windGust = (windGust * meterSecondToKnot).string
+                        self.weather.windSpeedGust = (windGust * meterSecondToKnot).string
                     }
                 }
                 if Preferences.shared.getPreference("windSpeed") == "milesHoursSpeed" {
                     if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                        self.weather.windGust = windGust.string
+                        self.weather.windSpeedGust = windGust.string
                     } else {
-                        self.weather.windGust = (windGust * meterSecondToMilesHour).string
+                        self.weather.windSpeedGust = (windGust * meterSecondToMilesHour).string
                     }
                 }
                 
