@@ -28,8 +28,8 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     open weak var delegate : MRGpsDataGetterDelegate?
     
     public let gpsDataGetter = GpsDataGetter()
-    public let moonDataGetter = MoonDataGetter()
     public let sunDataGetter = SunDataGetter()
+    public let moonDataGetter = MoonDataGetter()
     public let weatherDataGetter = WeatherDataGetter()
     public let forecastDataGetter = ForecastDataGetter()
     
@@ -243,5 +243,25 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     //            }
     //        }
     //    }
+    
+    open func getGpsDataGetter() -> GpsDataGetter {
+        return gpsDataGetter
+    }
+
+    open func getSunDataGetter() -> SunDataGetter {
+        return sunDataGetter
+    }
+    
+    open func getMoonDataGetter() -> MoonDataGetter? {
+        return moonDataGetter
+    }
+        
+    open func getWeatherDataGetter() -> WeatherDataGetter? {
+        return weatherDataGetter
+    }
+        
+    open func getForecastDataGetter() -> ForecastDataGetter? {
+        return forecastDataGetter
+    }
     
 }
