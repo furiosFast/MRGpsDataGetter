@@ -22,7 +22,6 @@ public protocol MRGpsDataGetterSunDataDelegate: NSObjectProtocol {
 
 open class SunDataGetter: NSObject {
     
-    public static var shared = SunDataGetter()
     open weak var delegate: MRGpsDataGetterSunDataDelegate?
     
     let sun = SunInfoModel()

@@ -27,11 +27,17 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     public static var shared = MRGpsDataGetter()
     open weak var delegate : MRGpsDataGetterDelegate?
     
+    public let gpsDataGetter = GpsDataGetter()
+    public let moonDataGetter = MoonDataGetter()
+    public let sunDataGetter = SunDataGetter()
+    public let weatherDataGetter = WeatherDataGetter()
+    public let forecastDataGetter = ForecastDataGetter()
+    
     var locationManager: CLLocationManager = CLLocationManager()
     var currentLocation: CLLocation?
     var timerAutoRefreshSunMoon = Timer()
     var count = 0
-//    var errorCount = 0
+    //    var errorCount = 0
     var openWeatherMapKey = "NaN"
     var isForecastToLoad = true
     var isLocationDataToLoadOnly = false
@@ -53,8 +59,9 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
         setCount(0)
         setLocationPermission(openWeatherMapKey: openWeatherMapKey, preferences: preferences, forecastMustBeLoaded: forecastMustBeLoaded, isLocationDataToLoadOnly: isLocationDataToLoadOnly)
     }
-        
+    
     open func setLocationPermission(openWeatherMapKey: String, preferences: [String : String], forecastMustBeLoaded: Bool = true, isLocationDataToLoadOnly: Bool = false){
+        delegate?.gpsDataStartLoading()
         setOptions(openWeatherMapKey: openWeatherMapKey, preferences: preferences, forecastToo: forecastMustBeLoaded, onlyLocationData: isLocationDataToLoadOnly)
         DispatchQueue.global().async {
             self.locationManager.delegate = self
@@ -93,25 +100,24 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
             debugPrint("Location data obtained!")
             //            errorCount = 0
             locationManager.stopUpdatingLocation()
-            delegate?.gpsDataStartLoading()
             
             ///////////CORE///////////////
             //GPS info thread
             DispatchQueue.global().async {
-                GpsDataGetter.shared.getPositionInfo(currentLocation: loc)
+                self.gpsDataGetter.getPositionInfo(currentLocation: loc)
             }
             //Location name thread
             DispatchQueue.global().async {
-                GpsDataGetter.shared.getGeocodeFromLocation(currentLocation: loc)
+                self.gpsDataGetter.getGeocodeFromLocation(currentLocation: loc)
             }
             if !self.isLocationDataToLoadOnly {
                 //Sun info thread
                 DispatchQueue.global().async {
-                    SunDataGetter.shared.getSunInfo(currentLocation: loc)
+                    self.sunDataGetter.getSunInfo(currentLocation: loc)
                 }
                 //Moon info thread
                 DispatchQueue.global().async {
-                    MoonDataGetter.shared.getMoonInfo(currentLocation: loc)
+                    self.moonDataGetter.getMoonInfo(currentLocation: loc)
                 }
                 if let b = Preferences.shared.getPreference("autoRefreshSunMoonInfo").bool, let d = Preferences.shared.getPreference("sunMoonRefreshSeconds").double(), b {
                     timerAutoRefreshSunMoon.invalidate()
@@ -120,42 +126,42 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
                     timerAutoRefreshSunMoon.invalidate()
                 }
                 
-
+                
                 //Weather info thread
                 DispatchQueue.global().async {
-                    WeatherDataGetter.shared.getWeatherInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
+                    self.weatherDataGetter.getWeatherInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
                 }
                 //Forecast info thread
                 DispatchQueue.global().async {
                     if self.isForecastToLoad {
-                        ForecastDataGetter.shared.getForecastInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
+                        self.forecastDataGetter.getForecastInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
                     }
                 }
             }
             //////////////////////////////
-
-
-//        } else {
-//            if errorCount > 0 {
-//                return
-//            }
-//            debugPrint("Location data NOT obtained!")
-//            locationManager.stopUpdatingLocation()
-//            delegate?.gpsDataStartLoading()
-//            delegate?.gpsDataNotAvailable()
-//            errorCount = errorCount + 1
+            
+            
+            //        } else {
+            //            if errorCount > 0 {
+            //                return
+            //            }
+            //            debugPrint("Location data NOT obtained!")
+            //            locationManager.stopUpdatingLocation()
+            //            delegate?.gpsDataStartLoading()
+            //            delegate?.gpsDataNotAvailable()
+            //            errorCount = errorCount + 1
         }
         count = count + 1
     }
     
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Swift.Error) {
         debugPrint(error.localizedDescription)
-//          delegate?.gpsDataNotAvailable()
+        //          delegate?.gpsDataNotAvailable()
     }
     
     public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         delegate?.changeLocationPermission?()
-//        refreshAllData(openWeatherMapKey: openWeatherMapKey, preferences: preferences)
+        //        refreshAllData(openWeatherMapKey: openWeatherMapKey, preferences: preferences)
     }
     
     public func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
@@ -195,7 +201,7 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     
     private func setCount(_ value: Int) {
         count = value
-//        errorCount = value
+        //        errorCount = value
     }
     
     private func setOpenWeatherMapKey(_ openWeatherMapKey: String){
@@ -210,32 +216,32 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
         isForecastToLoad = forecastToo
         isLocationDataToLoadOnly = onlyLocationData
     }
-
+    
     @objc private func refreshSunMoonPositionInfo(){
         if let loc = currentLocation, count > 0 {
             DispatchQueue.global().async {
-                GpsDataGetter.shared.getPositionInfo(currentLocation: loc)
+                self.gpsDataGetter.getPositionInfo(currentLocation: loc)
             }
             DispatchQueue.global().async {
-                SunDataGetter.shared.getSunInfo(currentLocation: loc)
+                self.sunDataGetter.getSunInfo(currentLocation: loc)
             }
             DispatchQueue.global().async {
-                MoonDataGetter.shared.getMoonInfo(currentLocation: loc)
+                self.moonDataGetter.getMoonInfo(currentLocation: loc)
             }
         }
     }
-
-//    @objc private func refreshWeatherPositionInfo(){
-//        if let loc = currentLocation, count > 0 {
-//            DispatchQueue.global().async {
-//                WeatherDataGetter.shared.getWeatherInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
-//            }
-//            DispatchQueue.global().async {
-//                if self.isForecastToLoad {
-//                    ForecastDataGetter.shared.getForecastInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
-//                }
-//            }
-//        }
-//    }
+    
+    //    @objc private func refreshWeatherPositionInfo(){
+    //        if let loc = currentLocation, count > 0 {
+    //            DispatchQueue.global().async {
+    //                WeatherDataGetter.shared.getWeatherInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
+    //            }
+    //            DispatchQueue.global().async {
+    //                if self.isForecastToLoad {
+    //                    ForecastDataGetter.shared.getForecastInfo(openWeatherMapKey: self.openWeatherMapKey, currentLocation: loc)
+    //                }
+    //            }
+    //        }
+    //    }
     
 }
