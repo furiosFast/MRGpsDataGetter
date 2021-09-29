@@ -252,15 +252,15 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
         return sunDataGetter
     }
     
-    open func getMoonDataGetter() -> MoonDataGetter? {
+    open func getMoonDataGetter() -> MoonDataGetter {
         return moonDataGetter
     }
         
-    open func getWeatherDataGetter() -> WeatherDataGetter? {
+    open func getWeatherDataGetter() -> WeatherDataGetter {
         return weatherDataGetter
     }
         
-    open func getForecastDataGetter() -> ForecastDataGetter? {
+    open func getForecastDataGetter() -> ForecastDataGetter {
         return forecastDataGetter
     }
     
