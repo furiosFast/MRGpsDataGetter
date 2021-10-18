@@ -334,7 +334,9 @@ open class ForecastDataGetter: NSObject {
                 }
                 //26
                 if let clouds = Double(json["list"][i]["clouds"]["all"].stringValue) {
-                    weather.clouds = clouds.string + " " + loc("PERCENT")
+                    if clouds.string != "0.0" {
+                        weather.clouds = clouds.string + " " + loc("PERCENT")
+                    }
                 }
                 
                 self.forecast.append(weather)

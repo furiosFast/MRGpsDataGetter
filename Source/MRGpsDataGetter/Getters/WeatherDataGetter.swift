@@ -309,7 +309,9 @@ open class WeatherDataGetter: NSObject {
             }
             //21
             if let clouds = Double(json["clouds"]["all"].stringValue) {
-                self.weather.clouds = clouds.string + " " + loc("PERCENT")
+                if clouds.string != "0.0" {
+                    self.weather.clouds = clouds.string + " " + loc("PERCENT")
+                }
             }
             
             
