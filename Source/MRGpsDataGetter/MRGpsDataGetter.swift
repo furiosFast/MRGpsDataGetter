@@ -61,7 +61,9 @@ open class MRGpsDataGetter: NSObject, CLLocationManagerDelegate {
     }
     
     open func setLocationPermission(openWeatherMapKey: String, preferences: [String : String], forecastMustBeLoaded: Bool = true, isLocationDataToLoadOnly: Bool = false){
-        delegate?.gpsDataStartLoading()
+        DispatchQueue.main.async {
+            self.delegate?.gpsDataStartLoading()
+        }
         setOptions(openWeatherMapKey: openWeatherMapKey, preferences: preferences, forecastToo: forecastMustBeLoaded, onlyLocationData: isLocationDataToLoadOnly)
         DispatchQueue.global().async {
             self.locationManager.delegate = self
