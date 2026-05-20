@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:6.0
 //
 //  Package.swift
 //  MRGpsDataGetter
@@ -18,29 +18,27 @@ let package = Package(
     name: "MRGpsDataGetter",
     defaultLocalization: "en",
     platforms: [
-        // Some platform where run yours library
-        .iOS(.v13), .tvOS(.v13), .watchOS(.v6)
+        .iOS(.v18), .tvOS(.v18), .watchOS(.v11),
     ],
     products: [
-        // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(name: "MRGpsDataGetter", targets: ["MRGpsDataGetter"]),
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/Alamofire/Alamofire.git", from: "5.0.0-rc.3"),
-        .package(url: "https://github.com/SwiftyJSON/SwiftyJSON.git", from: "5.0.0"),
-        .package(url: "https://github.com/SwifterSwift/SwifterSwift.git", from: "5.1.0"),
-//        .package(url: "https://github.com/emvakar/EKAstrologyCalc.git", from: "1.0.3"),
+        .package(url: "https://github.com/SwifterSwift/SwifterSwift.git", from: "8.0.0"),
         .package(url: "https://github.com/eskaria/ESDateHelper.git", from: "1.1.0"),
+        .package(url: "https://github.com/emvakar/EKAstrologyCalc.git", from: "1.0.6"),
     ],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages which this package depends on.
-        .target(name: "MRGpsDataGetter", dependencies: ["Alamofire", "SwiftyJSON", "SwifterSwift", "ESDateHelper"], resources: [.process("Resources")]),
-//        .target(name: "MRGpsDataGetter", dependencies: ["Alamofire", "SwiftyJSON", "SwifterSwift", "ESDateHelper", "EKAstrologyCalc"], resources: [.process("Resources")]),
-//        .target(name: "MRGpsDataGetter"),
-    ],
-    swiftLanguageVersions: [
-        .v5
+        .target(
+            name: "MRGpsDataGetter",
+            dependencies: ["SwifterSwift", "ESDateHelper", "EKAstrologyCalc"],
+            resources: [.process("Resources")],
+            swiftSettings: [.swiftLanguageMode(.v5)]
+        ),
+        .testTarget(
+            name: "MRGpsDataGetterTests",
+            dependencies: ["MRGpsDataGetter"],
+            swiftSettings: [.swiftLanguageMode(.v5)]
+        ),
     ]
 )

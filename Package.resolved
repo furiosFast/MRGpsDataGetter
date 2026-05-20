@@ -1,43 +1,33 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "Alamofire",
-        "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
-        "state": {
-          "branch": null,
-          "revision": "f82c23a8a7ef8dc1a49a8bfc6a96883e79121864",
-          "version": "5.5.0"
-        }
-      },
-      {
-        "package": "ESDateHelper",
-        "repositoryURL": "https://github.com/eskaria/ESDateHelper.git",
-        "state": {
-          "branch": null,
-          "revision": "c6c6af34536f3afd3996b6a922f66e2bea0479ab",
-          "version": "1.1.0"
-        }
-      },
-      {
-        "package": "SwifterSwift",
-        "repositoryURL": "https://github.com/SwifterSwift/SwifterSwift.git",
-        "state": {
-          "branch": null,
-          "revision": "dc813f3aa92f904a009fe543b99d5649dce7c134",
-          "version": "5.2.0"
-        }
-      },
-      {
-        "package": "SwiftyJSON",
-        "repositoryURL": "https://github.com/SwiftyJSON/SwiftyJSON.git",
-        "state": {
-          "branch": null,
-          "revision": "b3dcd7dbd0d488e1a7077cb33b00f2083e382f07",
-          "version": "5.0.1"
-        }
+  "originHash" : "10be38c7202bfe538797e46086bceaa8820221a2ca664c1ac6cb41447958f4be",
+  "pins" : [
+    {
+      "identity" : "ekastrologycalc",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/emvakar/EKAstrologyCalc.git",
+      "state" : {
+        "revision" : "7793834ddca681572a05f6e262d4e2d1c3c55fdd",
+        "version" : "1.0.6"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "esdatehelper",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/eskaria/ESDateHelper.git",
+      "state" : {
+        "revision" : "6a1fedbbfc0a7ac1a8137d89fbcae0f9bf4e1ff3",
+        "version" : "1.1.1"
+      }
+    },
+    {
+      "identity" : "swifterswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SwifterSwift/SwifterSwift.git",
+      "state" : {
+        "revision" : "5d948a15446bddb6c367bc7e7100cfcbaa0e9b57",
+        "version" : "8.0.0"
+      }
+    }
+  ],
+  "version" : 3
 }
