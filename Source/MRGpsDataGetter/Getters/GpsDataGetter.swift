@@ -11,10 +11,9 @@
 //  Copyright © 2019 Fast-Devs Project. All rights reserved.
 //
 
-
-import UIKit
 import CoreLocation
 import SwifterSwift
+import UIKit
 
 @objc public protocol MRGpsDataGetterGpsDataDelegate: NSObjectProtocol {
     func gpsDataReady(gps: GpsInfoModel)
@@ -25,24 +24,22 @@ import SwifterSwift
 }
 
 open class GpsDataGetter: NSObject {
-    
-    open weak var delegate : MRGpsDataGetterGpsDataDelegate?
-    
+    open weak var delegate: MRGpsDataGetterGpsDataDelegate?
+
     lazy var geocoder = CLGeocoder()
     let gps = GpsInfoModel()
     var timeoutGeocodeFromString = Timer()
     var timeoutGeocodeFromLocation = Timer()
 
-    
     /// Function that start to retrive all GPS data of a specified location
     /// - Parameter currentLocation: location
     open func getPositionInfo(currentLocation: CLLocation) {
         reversePositionInfo(currentLocation)
     }
-    
+
     /// Private function that start to retrive all GPS data of a specified location
     /// - Parameter currentLocation: location
-    private func reversePositionInfo(_ currentLocation: CLLocation){
+    private func reversePositionInfo(_ currentLocation: CLLocation) {
         gps.timestamp = currentLocation.timestamp
         gps.latitude = latitudeToString(currentLocation.coordinate.latitude)
         gps.longitude = longitudeToString(currentLocation.coordinate.longitude)
@@ -51,59 +48,31 @@ open class GpsDataGetter: NSObject {
         gps.verticalAccuracy = String(format: "%3.1f" + " " + loc("METERS"), currentLocation.verticalAccuracy)
         gps.course = String(format: "%3.1f" + " " + loc("DEGREE"), currentLocation.course)
         #if os(iOS)
-        if #available(iOS 13.4, *) {
-            gps.courseAccuracy = String(format: "%3.1f" + " " + loc("DEGREE"), currentLocation.courseAccuracy)
-        }
+            if #available(iOS 13.4, *) {
+                gps.courseAccuracy = String(format: "%3.1f" + " " + loc("DEGREE"), currentLocation.courseAccuracy)
+            }
         #elseif os(watchOS)
-        if #available(watchOS 6.2, *) {
-            gps.courseAccuracy = String(format: "%3.1f" + " " + loc("DEGREE"), currentLocation.courseAccuracy)
-        }
+            if #available(watchOS 6.2, *) {
+                gps.courseAccuracy = String(format: "%3.1f" + " " + loc("DEGREE"), currentLocation.courseAccuracy)
+            }
         #endif
         if let floor = currentLocation.floor {
             gps.floor = floor.level.string
         }
 
-        if(currentLocation.speed < 0) {
-            if Preferences.shared.getPreference("windSpeed") == "meterSecondSpeed" {
-                gps.speed = "0.0" + " " + loc("METERSSECOND")
-            }
-            if Preferences.shared.getPreference("windSpeed") == "kilometerHoursSpeed" {
-                gps.speed = "0.0" + " " + loc("KILOMETERSHOUR")
-            }
-            if Preferences.shared.getPreference("windSpeed") == "knotSpeed" {
-                gps.speed = "0.0" + " " + loc("KNOT")
-            }
-            if Preferences.shared.getPreference("windSpeed") == "milesHoursSpeed" {
-                gps.speed = "0.0" + " " + loc("MILESHOURS")
-            }
-        } else {
-            if Preferences.shared.getPreference("windSpeed") == "meterSecondSpeed" {
-                gps.speed = String(format: "%3.1f" + " " + loc("METERSSECOND"), currentLocation.speed)
-            }
-            if Preferences.shared.getPreference("windSpeed") == "kilometerHoursSpeed" {
-                gps.speed = String(format: "%3.1f" + " " + loc("KILOMETERSHOUR"), currentLocation.speed * meterSecondToKilometerHour)
-            }
-            if Preferences.shared.getPreference("windSpeed") == "knotSpeed" {
-                gps.speed = String(format: "%3.1f" + " " + loc("KNOT"), currentLocation.speed * meterSecondToKnot)
-            }
-            if Preferences.shared.getPreference("windSpeed") == "milesHoursSpeed" {
-                gps.speed = String(format: "%3.1f" + " " + loc("MILESHOURS"), currentLocation.speed * meterSecondToMilesHour)
-            }
-        }
-        gps.speedAccuracy = String(format: "%3.1f" + " " + loc("METERSSECOND"), currentLocation.speedAccuracy)
-        
-        
+        gps.speed = String(format: "%3.1f", max(0, currentLocation.speed))
+        gps.speedAccuracy = String(format: "%3.1f", currentLocation.speedAccuracy)
+
         DispatchQueue.main.async {
             self.delegate?.gpsDataReady(gps: self.gps)
         }
     }
-    
+
     /// Get the gps data object
     open func getOldGpsData() -> GpsInfoModel {
         return gps
     }
-    
-    
+
     /// Function that retrieve the location object based on the location name
     /// - Parameter locationAddress: location address
     open func getGeocodeFromString(locationAddress: String) {
@@ -114,11 +83,11 @@ open class GpsDataGetter: NSObject {
         timeoutGeocodeFromString.invalidate()
         timeoutGeocodeFromString = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(stopGeocodeFromString), userInfo: nil, repeats: false)
     }
-    
+
     /// Private function that retrieve the location object based on the location name
     /// - Parameter locationAddress: location name
-    private func reverseGeocodeFromString(_ locationAddress: String){
-        geocoder.geocodeAddressString(locationAddress) { (placemarks, error) in
+    private func reverseGeocodeFromString(_ locationAddress: String) {
+        geocoder.geocodeAddressString(locationAddress) { placemarks, error in
             if let error = error {
                 DispatchQueue.main.async {
                     self.delegate?.reverseGeocodeFromStringError?(error: error.localizedDescription)
@@ -132,15 +101,14 @@ open class GpsDataGetter: NSObject {
             }
         }
     }
-    
-    @objc private func stopGeocodeFromString(){
+
+    @objc private func stopGeocodeFromString() {
         if geocoder.isGeocoding {
             geocoder.cancelGeocode()
         }
-        self.delegate?.reverseGeocodeFromStringError?(error: "reverseGeocodeFromString timeout error")
+        delegate?.reverseGeocodeFromStringError?(error: "reverseGeocodeFromString timeout error")
     }
-    
-    
+
     /// Function that retrieve the location name based on the location object
     /// - Parameter currentLocation: location
     open func getGeocodeFromLocation(currentLocation: CLLocation) {
@@ -151,10 +119,10 @@ open class GpsDataGetter: NSObject {
         timeoutGeocodeFromLocation.invalidate()
         timeoutGeocodeFromLocation = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(stopGeocodeFromLocation), userInfo: nil, repeats: false)
     }
-    
+
     /// Private function that retrieve the location name based on the location object
-    private func reverseGeocodeFromLocation(_ currentLocation: CLLocation){
-        geocoder.reverseGeocodeLocation(currentLocation) { (placemarks, error) in
+    private func reverseGeocodeFromLocation(_ currentLocation: CLLocation) {
+        geocoder.reverseGeocodeLocation(currentLocation) { placemarks, error in
             if let error = error {
                 DispatchQueue.main.async {
                     self.delegate?.reverseGeocodeFromLocationError?(error: error.localizedDescription)
@@ -170,22 +138,21 @@ open class GpsDataGetter: NSObject {
                     }
                 }
                 DispatchQueue.main.async {
-                    self.delegate?.reverseGeocodeFromLocation(locationName: self.gps.locationName)
+                    self.delegate?.reverseGeocodeFromLocation(locationName: self.gps.locationName ?? "")
                 }
             }
         }
     }
-    
-    @objc private func stopGeocodeFromLocation(){
+
+    @objc private func stopGeocodeFromLocation() {
         if geocoder.isGeocoding {
             geocoder.cancelGeocode()
         }
-        self.delegate?.reverseGeocodeFromLocationError?(error: "reverseGeocodeFromLocation timeout error")
+        delegate?.reverseGeocodeFromLocationError?(error: "reverseGeocodeFromLocation timeout error")
     }
-    
-    
-    //MARK: - Support functions
-    
+
+    // MARK: - Support functions
+
     /// Function that format the latitute coord from a double value
     /// - Parameter latitude: the position latitute (in degrees)
     private func latitudeToString(_ latitude: Double) -> String {
@@ -207,5 +174,4 @@ open class GpsDataGetter: NSObject {
         longSeconds %= 60
         return String(format: "%d° %d' %d\" %@", abs(longDegrees), longMinutes, longSeconds, longDegrees >= 0 ? "E" : "W")
     }
-    
 }
