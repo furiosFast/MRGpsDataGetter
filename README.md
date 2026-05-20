@@ -1,31 +1,35 @@
 # MRGpsDataGetter
 
 [![SPM ready](https://img.shields.io/badge/SPM-ready-orange.svg)](https://swift.org/package-manager/)
-![Platform](https://img.shields.io/badge/platforms-iOS%2011.0%20%7C%20tvOS%2011.0%20%7C%20watchOS%204.0-F28D00.svg)
-[![Swift](https://img.shields.io/badge/Swift-5.0-orange.svg)](https://swift.org)
-[![Xcode](https://img.shields.io/badge/Xcode-12.0-blue.svg)](https://developer.apple.com/xcode)
+![Platform](https://img.shields.io/badge/platforms-iOS%2018.0%20%7C%20tvOS%2018.0%20%7C%20watchOS%2011.0-F28D00.svg)
+[![Swift](https://img.shields.io/badge/Swift-6.0-orange.svg)](https://swift.org)
+[![Xcode](https://img.shields.io/badge/Xcode-16.0-blue.svg)](https://developer.apple.com/xcode)
 [![License](https://img.shields.io/cocoapods/l/Pastel.svg?style=flat)](https://github.com/furiosFast/MRGpsDataGetter/blob/master/LICENSE)
-[![Twitter](https://img.shields.io/badge/twitter-@FastDevsProject-blue.svg?style=flat)](https://twitter.com/FastDevsProject)
 
-Easy access to Sun, Moon and Location informations. In addition Weather and 5 day/3 hour Forecast (5 day/3 hour through the OpenWeatherMap.org provider).
+Easy access to Sun, Moon, Location, Weather and Forecast data. Weather data is provided by Apple WeatherKit (hourly + 10-day daily forecast, alerts, UV index, and more).
 
 ## Requirements
 
-- iOS 13.0+ / tvOS 13.0+ / watchOS 6.1+
-- Xcode 12.0+
-- Swift 5+
+- iOS 18.0+ / tvOS 18.0+ / watchOS 11.0+
+- Xcode 16.0+
+- Swift 6.0+
+- Apple Developer Program membership (for WeatherKit entitlement)
+
+## Setup
+
+1. Enable **WeatherKit** capability in your Xcode project (Signing & Capabilities)
+2. Enable **WeatherKit** in your App ID on the Apple Developer Portal
+3. Wait up to 30 minutes for propagation
 
 ## Installation
 
 ### Swift Package Manager
 
-The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the `swift` compiler. It is in early development, but MRGpsDataGetter does support its use on supported platforms.
-
-Once you have your Swift package set up, adding MRGpsDataGetter as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
+Add MRGpsDataGetter as a dependency in your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/furiosFast/MRGpsDataGetter.git", from: "1.0.0")
+    .package(url: "https://github.com/furiosFast/MRGpsDataGetter.git", from: "2.0.0")
 ]
 ```
 
@@ -35,24 +39,147 @@ dependencies: [
 
 ```swift
 import MRGpsDataGetter
+
+// Configure preferences
+MRGpsDataGetter.shared.preferences = MRGpsPreferences(
+    speedUnit: .kilometersPerHour,
+    showMinutesInTimes: true,
+    autoRefreshSunMoon: true,
+    sunMoonRefreshInterval: 60,
+    useTrueNorth: true
+)
+
+// Set delegates
+MRGpsDataGetter.shared.delegate = self
+MRGpsDataGetter.shared.weatherDataGetter.delegate = self
+MRGpsDataGetter.shared.forecastDataGetter.delegate = self
+MRGpsDataGetter.shared.sunDataGetter.delegate = self
+MRGpsDataGetter.shared.moonDataGetter.delegate = self
+MRGpsDataGetter.shared.gpsDataGetter.delegate = self
+
+// Start fetching all data
+MRGpsDataGetter.shared.refreshAllData()
 ```
 
-## Requirements
+### Weather Data
 
-MRGpsDataGetter has different dependencies and therefore needs the following libraries (also available via SPM):
-- [Alamofie](https://github.com/Alamofire/Alamofire) 5.0.0-rc.3+
-- [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON) 5.0.0+
-- [SwifterSwift](https://github.com/SwifterSwift/SwifterSwift) 5.1.0+
+Weather data is returned as raw values (no formatting, no localization). The app client is responsible for formatting and unit conversion.
 
-It isn't necessary to add the dependencies of MRGpsDataGetter, becose with SPM all is do automatically!
+```swift
+func weatherDataReady(weather: WeatherModel) {
+    if let temp = weather.temp {
+        print("Temperature: \(temp)°C")
+    }
+    if let wind = weather.windSpeed {
+        print("Wind: \(wind) m/s")
+    }
+    if let pressure = weather.pressure {
+        print("Pressure: \(pressure) hPa")
+    }
+    if let symbol = weather.weatherSymbolName {
+        let image = UIImage(systemName: symbol)
+    }
+}
+```
 
-Others library's files are necessary for the correct functioning of MRGpsDataGetter:
+### Forecast Data
+
+Hourly and daily forecasts are delivered separately via delegate:
+
+```swift
+func forecastDataReady(forecast: [WeatherModel]) {
+    // Hourly forecast array
+    for hour in forecast {
+        print("\(hour.time ?? "") - \(hour.temp ?? 0)°C")
+    }
+}
+
+func dailyForecastDataReady(forecast: [WeatherModel]) {
+    // 10-day daily forecast
+    for day in forecast {
+        print("\(day.dateTime ?? "") - \(day.tempMin ?? 0)°C / \(day.tempMax ?? 0)°C")
+    }
+}
+```
+
+### Weather Alerts
+
+```swift
+func weatherAlertsReady(alerts: [WeatherAlertModel]) {
+    for alert in alerts {
+        print("[\(alert.severity)] \(alert.summary)")
+    }
+}
+```
+
+### Sun & Moon Data
+
+```swift
+func sunDataReady(sun: SunInfoModel) {
+    print("Sunrise: \(sun.sunriseStart ?? "")")
+    print("Sunset: \(sun.sunsetStart ?? "")")
+    print("Zodiac: \(sun.zodiacSign ?? "")")
+}
+
+func moonDataReady(moon: MoonInfoModel) {
+    print("Moon rise: \(moon.moonRise ?? "")")
+    print("Phase: \(moon.phaseTitle ?? "")")
+    print("Illumination: \(moon.fractionOfMoonIlluminated ?? "")%")
+}
+```
+
+### Apple Weather Attribution (required)
+
+You **must** display Apple Weather attribution in your app:
+
+```swift
+Task {
+    let attribution = try await MRGpsDataGetter.shared.getWeatherAttribution()
+    // Display attribution.combinedMarkDarkURL or attribution.combinedMarkLightURL
+    // Link to attribution.legalPageURL
+}
+```
+
+## Data Units
+
+All weather data is returned in SI base units:
+
+| Field | Unit |
+|-------|------|
+| Temperature | Celsius (°C) |
+| Wind speed | m/s |
+| Pressure | hPa |
+| Visibility | km |
+| Precipitation | mm or mm/h |
+| Humidity | 0-1 (fraction) |
+| Cloud cover | 0-1 (fraction) |
+| Wind direction | degrees (°) |
+| UV Index | integer |
+
+## Localization
+
+The library includes localized strings for 14 languages:
+English, Italian, German, Spanish, French, Japanese, Korean, Portuguese (Brazil), Chinese Simplified, Chinese Traditional, Dutch, Russian, Arabic, Polish.
+
+Localized content includes: cardinal directions, wind names, moon phases, zodiac signs, sun/moon position descriptions.
+
+## Testing
+
+```bash
+xcodebuild test -scheme MRGpsDataGetter \
+  -destination 'platform=iOS Simulator,name=iPhone 16 Pro'
+```
+
+## Dependencies
+
+Managed automatically via SPM:
+- [SwifterSwift](https://github.com/SwifterSwift/SwifterSwift) 8.0.0+
+- [ESDateHelper](https://github.com/eskaria/ESDateHelper) 1.1.0+
+- [EKAstrologyCalc](https://github.com/emvakar/EKAstrologyCalc) 1.0.6+
+
+Bundled sources:
 - [BDAstroCalc](https://github.com/braindrizzlestudio/BDAstroCalc)
-- [AstrologyCalc](https://github.com/emvakar/AstrologyCalc)
 - [SunMoonCalculator](https://github.com/kanchudeep/SunMoonCalculator)
-- [EKAstrologyCalc](https://github.com/emvakar/EKAstrologyCalc)
-
-There files are already included into the framework.
 
 ## License
 
