@@ -3,327 +3,142 @@
 //  MRGpsDataGetter
 //
 //  Created by Marco Ricca on 20/11/2019
-//
-//  Created for MRGpsDataGetter in 20/11/2019
-//  Using Swift 5.0
-//  Running on macOS 10.14
-//
 //  Copyright © 2019 Fast-Devs Project. All rights reserved.
 //
 
-
-import UIKit
 import CoreLocation
-import Alamofire
-import SwiftyJSON
-import SwifterSwift
+import UIKit
+import WeatherKit
 
 @objc public protocol MRGpsDataGetterWeatherDataDelegate: NSObjectProtocol {
+    /// Called when current weather data is ready.
     func weatherDataReady(weather: WeatherModel)
+    /// Called when weather data cannot be retrieved.
     @objc optional func weatherDataNotAvailable(error: String)
+    /// Called when weather alerts are available for the location.
+    @objc optional func weatherAlertsReady(alerts: [WeatherAlertModel])
 }
 
-open class WeatherDataGetter: NSObject {
-        
-    open weak var delegate : MRGpsDataGetterWeatherDataDelegate?
-    
-    let weather = WeatherModel()
-    
-    
-    /// Function that start to retrive current Weather (provider: OpenWeatherMap.org) data based on a specified location
-    /// - Parameters:
-    ///   - openWeatherMapKey: OpenWeatherMapKey.org key
-    ///   - currentLocation: location
-    open func getWeatherInfo(openWeatherMapKey: String, currentLocation: CLLocation) {
-        getWeatherInfoFromWeb(openWeatherMapKey, currentLocation)
-    }
-    
-    /// Private function that start to retrive current Weather (provider: OpenWeatherMap.org) data based on a specified location
-    /// - Parameters:
-    ///   - openWeatherMapKey: OpenWeatherMapKey.org key
-    ///   - currentLocation: location
-    private func getWeatherInfoFromWeb(_ openWeatherMapKey: String, _ currentLocation: CLLocation) {
-        if openWeatherMapKey == "NaN" {
-            self.delegate?.weatherDataNotAvailable?(error: "openWeatherMapKey is NaN")
-        }
-        
-        var units = ""
-        switch Preferences.shared.getPreference("weatherTemp") {
-            case "celsusTemp": units = loc("UNITSMETRIC")
-            case "fahrenheitTemp": units = loc("UNITSIMPERIAL")
-            case "kelvinTemp": units = ""
-            default: units = ""
-        }
-        
-        let urlString = "http://api.openweathermap.org/data/2.5/weather"
-        let parameters: Dictionary = [
-            "lat"           : currentLocation.coordinate.latitude.string,
-            "lon"           : currentLocation.coordinate.longitude.string,
-            "type"          : "accurate",
-            "units"         : units,
-            "lang"          : loc("LANG"),
-            "appid"         : openWeatherMapKey
-        ]
-        debugPrint("Weather openweathermap API ENDPOINT iOS " + urlString)
-        
-        guard let url = URL(string: urlString) else { return }
-        AFManager.request(url, parameters: parameters).responseDecodable(of: JSON.self) { response in
-            if let er = response.error {
-                self.delegate?.weatherDataNotAvailable?(error: er.localizedDescription)
-                return
-            }
-            guard let ilJson = response.value else {
-                self.delegate?.weatherDataNotAvailable?(error: "JSON is nil")
-                return
-            }
-            let json = JSON(ilJson)
-            if let openWeatherMapError = (json["cod"].stringValue).int {
-                if (openWeatherMapError != 200) {
-                    self.delegate?.weatherDataNotAvailable?(error: "OpenWeatherMap.org error: " + openWeatherMapError.string)
-                    return
+/// Fetches current weather data via Apple WeatherKit.
+/// All values are returned in SI units: temperature in °C, wind in m/s, pressure in hPa, visibility in km.
+open class WeatherDataGetter: NSObject, @unchecked Sendable {
+    open weak var delegate: MRGpsDataGetterWeatherDataDelegate?
+
+    private let weather = WeatherModel()
+    private let weatherService = WeatherService.shared
+
+    /// Fetches current weather + today's daily forecast for min/max temps.
+    /// Results delivered via delegate on the main thread.
+    open func getWeatherInfo(currentLocation: CLLocation) {
+        Task {
+            do {
+                let weatherData = try await weatherService.weather(for: currentLocation)
+                let current = weatherData.currentWeather
+
+                weather.timestamp = Date()
+                weather.currentWeatherLocation = currentLocation
+
+                // Condition & SF Symbol
+                weather.weatherCondition = current.condition.rawValue
+                weather.weatherDescription = current.condition.description
+                weather.weatherSymbolName = current.symbolName
+                weather.isDaylight = current.isDaylight
+
+                // Wind speed (m/s), gust (m/s), direction (degrees)
+                let windSpeedMS = current.wind.speed.converted(to: .metersPerSecond).value
+                weather.windSpeed = windSpeedMS
+                weather.windSpeedGust = current.wind.gust?.converted(to: .metersPerSecond).value
+
+                let windAngle = current.wind.direction.converted(to: .degrees).value
+                weather.windDegree = windAngle
+                weather.windName = getWindName(windAngle)
+
+                // Beaufort scale (0-12 integer + hex color)
+                let windKnot = windSpeedMS * meterSecondToKnot
+                weather.beaufortScaleWindSpeed = Int(getBeaufortForce(windKnot)) ?? 0
+                weather.beaufortScaleWindColourForWindSpeed = getBeaufortForceColor(windKnot)
+
+                if let gustMS = weather.windSpeedGust {
+                    let gustKnot = gustMS * meterSecondToKnot
+                    weather.beaufortScaleWindSpeedGust = Int(getBeaufortForce(gustKnot)) ?? 0
+                    weather.beaufortScaleWindColourForWindSpeedGust = getBeaufortForceColor(gustKnot)
                 }
-            }
-            
-            //-1
-            self.weather.timestamp = Date()
-            //0
-            self.weather.currentWeatherLocation = currentLocation
-            //1
-            if var weatherGroup = json["weather"][0]["main"].string {
-                weatherGroup.firstCharacterUppercased()
-                self.weather.weatherGroup = weatherGroup
-            }
-            //1.1
-            if var weatherDescr = json["weather"][0]["description"].string {
-                weatherDescr.firstCharacterUppercased()
-                self.weather.weatherDescription = weatherDescr
-            }
-            //2
-            if let weatherIcon = json["weather"][0]["icon"].string {
-                if let img = UIImage(named: weatherIcon, in: .module, with: nil) {
-                    self.weather.weatherOpenWeatherMapIconName = weatherIcon
-                    self.weather.weatherOpenWeatherMapIcon = img
-                } else {
-                    self.weather.weatherOpenWeatherMapIconName = "01d"
-                    self.weather.weatherOpenWeatherMapIcon = UIImage(named: "01d", in: .module, with: nil)!
+
+                // Precipitation intensity (mm/h), nil if none
+                let precipIntensity = current.precipitationIntensity.value
+                weather.precipitationIntensity = precipIntensity > 0 ? precipIntensity : nil
+
+                // Visibility (km)
+                weather.visibility = current.visibility.converted(to: .kilometers).value
+
+                // Pressure (hPa) and trend
+                weather.pressure = current.pressure.converted(to: .hectopascals).value
+                switch current.pressureTrend {
+                case .rising: weather.pressureTrend = "rising"
+                case .falling: weather.pressureTrend = "falling"
+                case .steady: weather.pressureTrend = "steady"
+                @unknown default: weather.pressureTrend = nil
                 }
-            }
-            //3-4-5
-            //Wind speed. Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour.
-            if let windSpeed = Double(json["wind"]["speed"].stringValue) {
-                if Preferences.shared.getPreference("windSpeed") == "meterSecondSpeed" {
-                    if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                        self.weather.windSpeed = (windSpeed * milesHourToMeterSecond).string
-                    } else {
-                        self.weather.windSpeed = windSpeed.string
+
+                // Humidity (0-1 fraction)
+                weather.humidity = current.humidity
+
+                // Temperature (°C)
+                weather.temp = current.temperature.converted(to: .celsius).value
+                weather.feelsLike = current.apparentTemperature.converted(to: .celsius).value
+
+                // Min/Max from today's daily forecast (°C)
+                if let today = weatherData.dailyForecast.first {
+                    weather.tempMin = today.lowTemperature.converted(to: .celsius).value
+                    weather.tempMax = today.highTemperature.converted(to: .celsius).value
+                }
+
+                // UV Index (integer) and category description
+                weather.uvIndex = current.uvIndex.value
+                weather.uvIndexCategory = current.uvIndex.category.description
+
+                // Dew point (°C)
+                weather.dewPoint = current.dewPoint.converted(to: .celsius).value
+
+                // Cloud cover (0-1 fraction), nil if clear
+                let cloudCover = current.cloudCover
+                weather.clouds = cloudCover > 0 ? cloudCover : nil
+
+                // Weather alerts
+                let alerts: [WeatherAlertModel] = weatherData.weatherAlerts?.map { alert in
+                    let model = WeatherAlertModel()
+                    model.summary = alert.summary
+                    model.source = alert.source
+                    model.detailsURL = alert.detailsURL
+                    if let region = alert.region {
+                        model.affectedRegions = [region]
+                    }
+                    switch alert.severity {
+                    case .minor: model.severity = "minor"
+                    case .moderate: model.severity = "moderate"
+                    case .severe: model.severity = "severe"
+                    case .extreme: model.severity = "extreme"
+                    default: model.severity = "unknown"
+                    }
+                    return model
+                } ?? []
+
+                DispatchQueue.main.async {
+                    self.delegate?.weatherDataReady(weather: self.weather)
+                    if !alerts.isEmpty {
+                        self.delegate?.weatherAlertsReady?(alerts: alerts)
                     }
                 }
-                if Preferences.shared.getPreference("windSpeed") == "kilometerHoursSpeed" {
-                    if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                        self.weather.windSpeed = (windSpeed * milesHourToKilometerHour).string
-                    } else {
-                        self.weather.windSpeed = (windSpeed * meterSecondToKilometerHour).string
-                    }
+            } catch {
+                DispatchQueue.main.async {
+                    self.delegate?.weatherDataNotAvailable?(error: error.localizedDescription)
                 }
-                if Preferences.shared.getPreference("windSpeed") == "knotSpeed" {
-                    if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                        self.weather.windSpeed = (windSpeed * milesHourToKnot).string
-                    } else {
-                        self.weather.windSpeed = (windSpeed * meterSecondToKnot).string
-                    }
-                }
-                if Preferences.shared.getPreference("windSpeed") == "milesHoursSpeed" {
-                    if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                        self.weather.windSpeed = windSpeed.string
-                    } else {
-                        self.weather.windSpeed = (windSpeed * meterSecondToMilesHour).string
-                    }
-                }
-                
-                if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                    self.weather.beaufortScaleWindSpeed = getBeaufortForce(windSpeed * milesHourToKnot)
-                    self.weather.beaufortScaleWindColourForWindSpeed = getBeaufortForceColor(windSpeed * milesHourToKnot)
-                } else {
-                    self.weather.beaufortScaleWindSpeed = getBeaufortForce(windSpeed * meterSecondToKnot)
-                    self.weather.beaufortScaleWindColourForWindSpeed = getBeaufortForceColor(windSpeed * meterSecondToKnot)
-                }
-            }
-            //3.1-4.1-5.1
-            //Wind gust. Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour.
-            if let windGust = Double(json["wind"]["gust"].stringValue) {
-                if Preferences.shared.getPreference("windSpeed") == "meterSecondSpeed" {
-                    if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                        self.weather.windSpeedGust = (windGust * milesHourToMeterSecond).string
-                    } else {
-                        self.weather.windSpeedGust = windGust.string
-                    }
-                }
-                if Preferences.shared.getPreference("windSpeed") == "kilometerHoursSpeed" {
-                    if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                        self.weather.windSpeedGust = (windGust * milesHourToKilometerHour).string
-                    } else {
-                        self.weather.windSpeedGust = (windGust * meterSecondToKilometerHour).string
-                    }
-                }
-                if Preferences.shared.getPreference("windSpeed") == "knotSpeed" {
-                    if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                        self.weather.windSpeedGust = (windGust * milesHourToKnot).string
-                    } else {
-                        self.weather.windSpeedGust = (windGust * meterSecondToKnot).string
-                    }
-                }
-                if Preferences.shared.getPreference("windSpeed") == "milesHoursSpeed" {
-                    if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                        self.weather.windSpeedGust = windGust.string
-                    } else {
-                        self.weather.windSpeedGust = (windGust * meterSecondToMilesHour).string
-                    }
-                }
-                
-                if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                    self.weather.beaufortScaleWindSpeedGust = getBeaufortForce(windGust * milesHourToKnot)
-                    self.weather.beaufortScaleWindColourForWindSpeedGust = getBeaufortForceColor(windGust * milesHourToKnot)
-                } else {
-                    self.weather.beaufortScaleWindSpeedGust = getBeaufortForce(windGust * meterSecondToKnot)
-                    self.weather.beaufortScaleWindColourForWindSpeedGust = getBeaufortForceColor(windGust * meterSecondToKnot)
-                }
-            }
-            //6-7-8
-            if let windAngle = Double(json["wind"]["deg"].stringValue) {
-                self.weather.windDegree = String(format: "%3.1f", windAngle)
-                self.weather.windName = getWindName(windAngle)
-            }
-            //9
-            if let rain = Double(json["rain"]["1h"].stringValue) {
-                self.weather.rain1h = String(format: "%3.1f", rain) + " " + loc("MILLIMETERS")
-            }
-            //10
-            if let rain = Double(json["rain"]["3h"].stringValue) {
-                self.weather.rain3h = String(format: "%3.1f", rain) + " " + loc("MILLIMETERS")
-            }
-            //11
-            if let vis = Double(json["visibility"].stringValue) {
-                self.weather.visibility = String(format: "%3.1f", vis/1000) + " " + loc("KILOMETERS")
-            }
-            //11.1
-            if let rainProb = Double(json["main"]["pop"].stringValue) {
-                if rainProb != 0 {
-                    self.weather.rainProbability = String(format: "%3.1f", (rainProb * 100)) + " " + loc("PERCENT")
-                }
-            }
-            //12
-            if let pres = Double(json["main"]["pressure"].stringValue) {
-                if Preferences.shared.getPreference("pressureUnit") == "atm" {
-                    self.weather.pressure = String(format: "%3.3f", pres * hpaToAtm) + " " + loc("ATM")
-                }
-                if Preferences.shared.getPreference("pressureUnit") == "bar" {
-                    self.weather.pressure = String(format: "%3.3f", pres * hpaToBar) + " " + loc("BAR")
-                }
-                if Preferences.shared.getPreference("pressureUnit") == "hPa" {
-                    self.weather.pressure = String(format: "%3.1f", pres) + " " + loc("HPA")
-                }
-            }
-            //13
-            if let pres = Double(json["main"]["sea_level"].stringValue) {
-                if Preferences.shared.getPreference("pressureUnit") == "atm" {
-                    self.weather.pressureSeaLevel = String(format: "%3.3f", pres * hpaToAtm) + " " + loc("ATM")
-                }
-                if Preferences.shared.getPreference("pressureUnit") == "bar" {
-                    self.weather.pressureSeaLevel = String(format: "%3.3f", pres * hpaToBar) + " " + loc("BAR")
-                }
-                if Preferences.shared.getPreference("pressureUnit") == "hPa" {
-                    self.weather.pressureSeaLevel = String(format: "%3.1f", pres) + " " + loc("HPA")
-                }
-            }
-            //14
-            if let pres = Double(json["main"]["grnd_level"].stringValue) {
-                if Preferences.shared.getPreference("pressureUnit") == "atm" {
-                    self.weather.pressureGroundLevel = String(format: "%3.3f", pres * hpaToAtm) + " " + loc("ATM")
-                }
-                if Preferences.shared.getPreference("pressureUnit") == "bar" {
-                    self.weather.pressureGroundLevel = String(format: "%3.3f", pres * hpaToBar) + " " + loc("BAR")
-                }
-                if Preferences.shared.getPreference("pressureUnit") == "hPa" {
-                    self.weather.pressureGroundLevel = String(format: "%3.1f", pres) + " " + loc("HPA")
-                }
-            }
-            //15
-            if let hum = Double(json["main"]["humidity"].stringValue) {
-                self.weather.umidity = hum.string + " " + loc("PERCENT")
-            }
-            //16
-            if let temp = Double(json["main"]["temp"].stringValue.replacingOccurrences(of: "-0", with: "0")) {
-                if Preferences.shared.getPreference("weatherTemp") == "celsusTemp" {
-                    self.weather.temp = String(format: "%3.1f", temp) + " " + loc("CELSUS")
-                }
-                if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                    self.weather.temp = String(format: "%3.1f", temp) + " " + loc("FAHRENHEIT")
-                }
-                if Preferences.shared.getPreference("weatherTemp") == "kelvinTemp" {
-                    self.weather.temp = String(format: "%3.1f", temp) + " " + loc("KELVIN")
-                }
-            }
-            //16.1
-            if let feelsLike = Double(json["main"]["feels_like"].stringValue.replacingOccurrences(of: "-0", with: "0")) {
-                if Preferences.shared.getPreference("weatherTemp") == "celsusTemp" {
-                    self.weather.feelsLike = String(format: "%3.1f", feelsLike) + " " + loc("CELSUS")
-                }
-                if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                    self.weather.feelsLike = String(format: "%3.1f", feelsLike) + " " + loc("FAHRENHEIT")
-                }
-                if Preferences.shared.getPreference("weatherTemp") == "kelvinTemp" {
-                    self.weather.feelsLike = String(format: "%3.1f", feelsLike) + " " + loc("KELVIN")
-                }
-            }
-            //17
-            if let tempMin = Double(json["main"]["temp_min"].stringValue.replacingOccurrences(of: "-0", with: "0")) {
-                if Preferences.shared.getPreference("weatherTemp") == "celsusTemp" {
-                    self.weather.tempMin = String(format: "%3.1f", tempMin) + " " + loc("CELSUS")
-                }
-                if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                    self.weather.tempMin = String(format: "%3.1f", tempMin) + " " + loc("FAHRENHEIT")
-                }
-                if Preferences.shared.getPreference("weatherTemp") == "kelvinTemp" {
-                    self.weather.tempMin = String(format: "%3.1f", tempMin) + " " + loc("KELVIN")
-                }
-            }
-            //18
-            if let tempMax = Double(json["main"]["temp_max"].stringValue.replacingOccurrences(of: "-0", with: "0")) {
-                if Preferences.shared.getPreference("weatherTemp") == "celsusTemp" {
-                    self.weather.tempMax = String(format: "%3.1f", tempMax) + " " + loc("CELSUS")
-                }
-                if Preferences.shared.getPreference("weatherTemp") == "fahrenheitTemp" {
-                    self.weather.tempMax = String(format: "%3.1f", tempMax) + " " + loc("FAHRENHEIT")
-                }
-                if Preferences.shared.getPreference("weatherTemp") == "kelvinTemp" {
-                    self.weather.tempMax = String(format: "%3.1f", tempMax) + " " + loc("KELVIN")
-                }
-            }
-            //19
-            if let snow = Double(json["snow"]["1h"].stringValue) {
-                self.weather.snow1h = String(format: "%3.1f", snow) + " " + loc("MILLIMETERS")
-            }
-            //20
-            if let snow = Double(json["snow"]["3h"].stringValue) {
-                self.weather.snow3h = String(format: "%3.1f", snow) + " " + loc("MILLIMETERS")
-            }
-            //21
-            if let clouds = Double(json["clouds"]["all"].stringValue) {
-                if clouds.string != "0.0" {
-                    self.weather.clouds = clouds.string + " " + loc("PERCENT")
-                }
-            }
-            
-            
-            DispatchQueue.main.async {
-                self.delegate?.weatherDataReady(weather: self.weather)
             }
         }
     }
-    
-    /// Get the weather data object
+
+    /// Returns the last fetched weather data.
     open func getOldWeatherData() -> WeatherModel {
         return weather
     }
-    
 }
