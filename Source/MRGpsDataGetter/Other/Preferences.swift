@@ -11,25 +11,33 @@
 //  Copyright © 2019 Fast-Devs Project. All rights reserved.
 //
 
+import Foundation
 
-import UIKit
+public enum SpeedUnit: String {
+    case metersPerSecond = "meterSecondSpeed"
+    case kilometersPerHour = "kilometerHoursSpeed"
+    case knots = "knotSpeed"
+    case milesPerHour = "milesHoursSpeed"
+}
 
-class Preferences: NSObject {
+public struct MRGpsPreferences {
+    public var speedUnit: SpeedUnit
+    public var showMinutesInTimes: Bool
+    public var autoRefreshSunMoon: Bool
+    public var sunMoonRefreshInterval: TimeInterval
+    public var useTrueNorth: Bool
 
-    static let shared = Preferences()
-    
-    var prefs = [String : String]()
-    
-    
-    ///Function that return the preferences map
-    func getPreference(_ key: String) -> String {
-        return prefs[key] ?? "NaN"
+    public init(
+        speedUnit: SpeedUnit = .kilometersPerHour,
+        showMinutesInTimes: Bool = true,
+        autoRefreshSunMoon: Bool = false,
+        sunMoonRefreshInterval: TimeInterval = 60,
+        useTrueNorth: Bool = true
+    ) {
+        self.speedUnit = speedUnit
+        self.showMinutesInTimes = showMinutesInTimes
+        self.autoRefreshSunMoon = autoRefreshSunMoon
+        self.sunMoonRefreshInterval = sunMoonRefreshInterval
+        self.useTrueNorth = useTrueNorth
     }
-    
-    ///Function that set the preferences map
-    func setPreferences(_ preferences : [String : String]){
-        prefs.removeAll()
-        prefs = preferences
-    }
-    
 }
