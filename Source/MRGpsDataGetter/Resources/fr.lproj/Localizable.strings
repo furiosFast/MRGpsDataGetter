@@ -1,0 +1,80 @@
+/* Localizable.strings - French (fr) */
+
+// Cardinal positions
+"NNE" = "NNE";
+"NE" = "NE";
+"ENE" = "ENE";
+"E" = "E";
+"ESE" = "ESE";
+"SE" = "SE";
+"SSE" = "SSE";
+"S" = "S";
+"SSW" = "SSO";
+"SW" = "SO";
+"WSW" = "OSO";
+"W" = "O";
+"WNW" = "ONO";
+"NW" = "NO";
+"NNW" = "NNO";
+"N" = "N";
+
+// Wind names
+"WIND_N" = "N - Tramontane";
+"WIND_NE" = "NE - Grégal";
+"WIND_E" = "E - Levant";
+"WIND_SE" = "SE - Sirocco";
+"WIND_S" = "S - Autan";
+"WIND_SW" = "SO - Libeccio";
+"WIND_W" = "O - Ponant";
+"WIND_NW" = "NO - Mistral";
+
+// Sun states
+"NIGHT" = "Nuit";
+"CREPASTROSUNRISE" = "Crépuscule astronomique";
+"CREPNAUTICSUNRISE" = "Crépuscule nautique";
+"CREPCIVSUNRISE" = "Crépuscule civil";
+"DAYLIGHT" = "Lumière du jour";
+"POSITIONSUN_NEGATIVE" = "Soleil sous l'horizon";
+"POSITIONSUN_POSITIVE" = "Soleil au-dessus de l'horizon";
+
+// Moon phases
+"NEWMOON" = "Nouvelle lune";
+"UPMOON" = "Premier croissant";
+"FIRSTMOON" = "Premier quartier";
+"GIBUPMOON" = "Gibbeuse croissante";
+"FULLMOON" = "Pleine lune";
+"GIPDOWNMOON" = "Gibbeuse décroissante";
+"LASTMOON" = "Dernier quartier";
+"DOWNMOON" = "Dernier croissant";
+"POSITIONMOON_NEGATIVE" = "Lune sous l'horizon";
+"POSITIONMOON_POSITIVE" = "Lune au-dessus de l'horizon";
+"ASCENDENT" = "Ascendant";
+"DESCENDENT" = "Descendant";
+
+// Zodiac signs
+"ARIES" = "Bélier";
+"CANCER" = "Cancer";
+"TAURUS" = "Taureau";
+"LEO" = "Lion";
+"GEMINI" = "Gémeaux";
+"VIRGO" = "Vierge";
+"LIBRA" = "Balance";
+"CAPRICORN" = "Capricorne";
+"SCORPIO" = "Scorpion";
+"AQUARIUS" = "Verseau";
+"SAGITTARIUS" = "Sagittaire";
+"PESCES" = "Poissons";
+
+// Units
+"DAY" = "Jour";
+"DAYS" = "Jours";
+"KILOMETERS" = "km";
+"METERS" = "m";
+"KNOT" = "kn";
+"KILOMETERSHOUR" = "km/h";
+"METERSSECOND" = "m/s";
+"MILESHOURS" = "mi/h";
+"DEGREE" = "°";
+"NOTAVAILABLENUMBER" = "-";
+"PERCENT" = "%";
+"AUs" = "au";

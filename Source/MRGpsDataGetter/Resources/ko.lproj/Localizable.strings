@@ -1,0 +1,80 @@
+/* Localizable.strings - Korean (ko) */
+
+// Cardinal positions
+"NNE" = "북북동";
+"NE" = "북동";
+"ENE" = "동북동";
+"E" = "동";
+"ESE" = "동남동";
+"SE" = "남동";
+"SSE" = "남남동";
+"S" = "남";
+"SSW" = "남남서";
+"SW" = "남서";
+"WSW" = "서남서";
+"W" = "서";
+"WNW" = "서북서";
+"NW" = "북서";
+"NNW" = "북북서";
+"N" = "북";
+
+// Wind names
+"WIND_N" = "북 - 북풍";
+"WIND_NE" = "북동 - 북동풍";
+"WIND_E" = "동 - 동풍";
+"WIND_SE" = "남동 - 남동풍";
+"WIND_S" = "남 - 남풍";
+"WIND_SW" = "남서 - 남서풍";
+"WIND_W" = "서 - 서풍";
+"WIND_NW" = "북서 - 북서풍";
+
+// Sun states
+"NIGHT" = "밤";
+"CREPASTROSUNRISE" = "천문 박명";
+"CREPNAUTICSUNRISE" = "항해 박명";
+"CREPCIVSUNRISE" = "시민 박명";
+"DAYLIGHT" = "낮";
+"POSITIONSUN_NEGATIVE" = "태양이 지평선 아래";
+"POSITIONSUN_POSITIVE" = "태양이 지평선 위";
+
+// Moon phases
+"NEWMOON" = "신월";
+"UPMOON" = "초승달";
+"FIRSTMOON" = "상현달";
+"GIBUPMOON" = "차오르는 볼록달";
+"FULLMOON" = "보름달";
+"GIPDOWNMOON" = "기우는 볼록달";
+"LASTMOON" = "하현달";
+"DOWNMOON" = "그믐달";
+"POSITIONMOON_NEGATIVE" = "달이 지평선 아래";
+"POSITIONMOON_POSITIVE" = "달이 지평선 위";
+"ASCENDENT" = "상승";
+"DESCENDENT" = "하강";
+
+// Zodiac signs
+"ARIES" = "양자리";
+"CANCER" = "게자리";
+"TAURUS" = "황소자리";
+"LEO" = "사자자리";
+"GEMINI" = "쌍둥이자리";
+"VIRGO" = "처녀자리";
+"LIBRA" = "천칭자리";
+"CAPRICORN" = "염소자리";
+"SCORPIO" = "전갈자리";
+"AQUARIUS" = "물병자리";
+"SAGITTARIUS" = "궁수자리";
+"PESCES" = "물고기자리";
+
+// Units
+"DAY" = "일";
+"DAYS" = "일";
+"KILOMETERS" = "km";
+"METERS" = "m";
+"KNOT" = "kn";
+"KILOMETERSHOUR" = "km/h";
+"METERSSECOND" = "m/s";
+"MILESHOURS" = "mi/h";
+"DEGREE" = "°";
+"NOTAVAILABLENUMBER" = "-";
+"PERCENT" = "%";
+"AUs" = "au";

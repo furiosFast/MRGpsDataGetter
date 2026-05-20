@@ -1,0 +1,80 @@
+/* Localizable.strings - German (de) */
+
+// Cardinal positions
+"NNE" = "NNO";
+"NE" = "NO";
+"ENE" = "ONO";
+"E" = "O";
+"ESE" = "OSO";
+"SE" = "SO";
+"SSE" = "SSO";
+"S" = "S";
+"SSW" = "SSW";
+"SW" = "SW";
+"WSW" = "WSW";
+"W" = "W";
+"WNW" = "WNW";
+"NW" = "NW";
+"NNW" = "NNW";
+"N" = "N";
+
+// Wind names
+"WIND_N" = "N - Tramontane";
+"WIND_NE" = "NO - Grecale";
+"WIND_E" = "O - Levante";
+"WIND_SE" = "SO - Scirocco";
+"WIND_S" = "S - Ostro";
+"WIND_SW" = "SW - Libeccio";
+"WIND_W" = "W - Ponente";
+"WIND_NW" = "NW - Mistral";
+
+// Sun states
+"NIGHT" = "Nacht";
+"CREPASTROSUNRISE" = "Astronomische Dämmerung";
+"CREPNAUTICSUNRISE" = "Nautische Dämmerung";
+"CREPCIVSUNRISE" = "Bürgerliche Dämmerung";
+"DAYLIGHT" = "Tageslicht";
+"POSITIONSUN_NEGATIVE" = "Sonne unter dem Horizont";
+"POSITIONSUN_POSITIVE" = "Sonne über dem Horizont";
+
+// Moon phases
+"NEWMOON" = "Neumond";
+"UPMOON" = "Zunehmende Sichel";
+"FIRSTMOON" = "Erstes Viertel";
+"GIBUPMOON" = "Zunehmender Mond";
+"FULLMOON" = "Vollmond";
+"GIPDOWNMOON" = "Abnehmender Mond";
+"LASTMOON" = "Letztes Viertel";
+"DOWNMOON" = "Abnehmende Sichel";
+"POSITIONMOON_NEGATIVE" = "Mond unter dem Horizont";
+"POSITIONMOON_POSITIVE" = "Mond über dem Horizont";
+"ASCENDENT" = "Aufsteigend";
+"DESCENDENT" = "Absteigend";
+
+// Zodiac signs
+"ARIES" = "Widder";
+"CANCER" = "Krebs";
+"TAURUS" = "Stier";
+"LEO" = "Löwe";
+"GEMINI" = "Zwillinge";
+"VIRGO" = "Jungfrau";
+"LIBRA" = "Waage";
+"CAPRICORN" = "Steinbock";
+"SCORPIO" = "Skorpion";
+"AQUARIUS" = "Wassermann";
+"SAGITTARIUS" = "Schütze";
+"PESCES" = "Fische";
+
+// Units
+"DAY" = "Tag";
+"DAYS" = "Tage";
+"KILOMETERS" = "km";
+"METERS" = "m";
+"KNOT" = "kn";
+"KILOMETERSHOUR" = "km/h";
+"METERSSECOND" = "m/s";
+"MILESHOURS" = "mi/h";
+"DEGREE" = "°";
+"NOTAVAILABLENUMBER" = "-";
+"PERCENT" = "%";
+"AUs" = "au";

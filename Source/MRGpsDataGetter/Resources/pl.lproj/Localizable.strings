@@ -1,0 +1,80 @@
+/* Localizable.strings - Polish (pl) */
+
+// Cardinal positions
+"NNE" = "NNE";
+"NE" = "NE";
+"ENE" = "ENE";
+"E" = "E";
+"ESE" = "ESE";
+"SE" = "SE";
+"SSE" = "SSE";
+"S" = "S";
+"SSW" = "SSW";
+"SW" = "SW";
+"WSW" = "WSW";
+"W" = "W";
+"WNW" = "WNW";
+"NW" = "NW";
+"NNW" = "NNW";
+"N" = "N";
+
+// Wind names
+"WIND_N" = "N - Tramontana";
+"WIND_NE" = "NE - Grecale";
+"WIND_E" = "E - Lewant";
+"WIND_SE" = "SE - Sirocco";
+"WIND_S" = "S - Ostro";
+"WIND_SW" = "SW - Libeccio";
+"WIND_W" = "W - Ponente";
+"WIND_NW" = "NW - Mistral";
+
+// Sun states
+"NIGHT" = "Noc";
+"CREPASTROSUNRISE" = "Zmierzch astronomiczny";
+"CREPNAUTICSUNRISE" = "Zmierzch nautyczny";
+"CREPCIVSUNRISE" = "Zmierzch cywilny";
+"DAYLIGHT" = "Dzień";
+"POSITIONSUN_NEGATIVE" = "Słońce pod horyzontem";
+"POSITIONSUN_POSITIVE" = "Słońce nad horyzontem";
+
+// Moon phases
+"NEWMOON" = "Nów";
+"UPMOON" = "Sierp rosnący";
+"FIRSTMOON" = "Pierwsza kwadra";
+"GIBUPMOON" = "Księżyc rosnący";
+"FULLMOON" = "Pełnia";
+"GIPDOWNMOON" = "Księżyc malejący";
+"LASTMOON" = "Ostatnia kwadra";
+"DOWNMOON" = "Sierp malejący";
+"POSITIONMOON_NEGATIVE" = "Księżyc pod horyzontem";
+"POSITIONMOON_POSITIVE" = "Księżyc nad horyzontem";
+"ASCENDENT" = "Wstępujący";
+"DESCENDENT" = "Zstępujący";
+
+// Zodiac signs
+"ARIES" = "Baran";
+"CANCER" = "Rak";
+"TAURUS" = "Byk";
+"LEO" = "Lew";
+"GEMINI" = "Bliźnięta";
+"VIRGO" = "Panna";
+"LIBRA" = "Waga";
+"CAPRICORN" = "Koziorożec";
+"SCORPIO" = "Skorpion";
+"AQUARIUS" = "Wodnik";
+"SAGITTARIUS" = "Strzelec";
+"PESCES" = "Ryby";
+
+// Units
+"DAY" = "Dzień";
+"DAYS" = "Dni";
+"KILOMETERS" = "km";
+"METERS" = "m";
+"KNOT" = "kn";
+"KILOMETERSHOUR" = "km/h";
+"METERSSECOND" = "m/s";
+"MILESHOURS" = "mi/h";
+"DEGREE" = "°";
+"NOTAVAILABLENUMBER" = "-";
+"PERCENT" = "%";
+"AUs" = "au";

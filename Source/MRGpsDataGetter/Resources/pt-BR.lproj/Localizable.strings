@@ -1,0 +1,80 @@
+/* Localizable.strings - Portuguese Brazil (pt-BR) */
+
+// Cardinal positions
+"NNE" = "NNE";
+"NE" = "NE";
+"ENE" = "ENE";
+"E" = "L";
+"ESE" = "ESE";
+"SE" = "SE";
+"SSE" = "SSE";
+"S" = "S";
+"SSW" = "SSO";
+"SW" = "SO";
+"WSW" = "OSO";
+"W" = "O";
+"WNW" = "ONO";
+"NW" = "NO";
+"NNW" = "NNO";
+"N" = "N";
+
+// Wind names
+"WIND_N" = "N - Tramontana";
+"WIND_NE" = "NE - Grecale";
+"WIND_E" = "L - Levante";
+"WIND_SE" = "SE - Siroco";
+"WIND_S" = "S - Ostro";
+"WIND_SW" = "SO - Libeccio";
+"WIND_W" = "O - Ponente";
+"WIND_NW" = "NO - Mistral";
+
+// Sun states
+"NIGHT" = "Noite";
+"CREPASTROSUNRISE" = "Crepúsculo astronômico";
+"CREPNAUTICSUNRISE" = "Crepúsculo náutico";
+"CREPCIVSUNRISE" = "Crepúsculo civil";
+"DAYLIGHT" = "Luz do dia";
+"POSITIONSUN_NEGATIVE" = "Sol abaixo do horizonte";
+"POSITIONSUN_POSITIVE" = "Sol acima do horizonte";
+
+// Moon phases
+"NEWMOON" = "Lua nova";
+"UPMOON" = "Lua crescente";
+"FIRSTMOON" = "Quarto crescente";
+"GIBUPMOON" = "Gibosa crescente";
+"FULLMOON" = "Lua cheia";
+"GIPDOWNMOON" = "Gibosa minguante";
+"LASTMOON" = "Quarto minguante";
+"DOWNMOON" = "Lua minguante";
+"POSITIONMOON_NEGATIVE" = "Lua abaixo do horizonte";
+"POSITIONMOON_POSITIVE" = "Lua acima do horizonte";
+"ASCENDENT" = "Ascendente";
+"DESCENDENT" = "Descendente";
+
+// Zodiac signs
+"ARIES" = "Áries";
+"CANCER" = "Câncer";
+"TAURUS" = "Touro";
+"LEO" = "Leão";
+"GEMINI" = "Gêmeos";
+"VIRGO" = "Virgem";
+"LIBRA" = "Libra";
+"CAPRICORN" = "Capricórnio";
+"SCORPIO" = "Escorpião";
+"AQUARIUS" = "Aquário";
+"SAGITTARIUS" = "Sagitário";
+"PESCES" = "Peixes";
+
+// Units
+"DAY" = "Dia";
+"DAYS" = "Dias";
+"KILOMETERS" = "km";
+"METERS" = "m";
+"KNOT" = "kn";
+"KILOMETERSHOUR" = "km/h";
+"METERSSECOND" = "m/s";
+"MILESHOURS" = "mi/h";
+"DEGREE" = "°";
+"NOTAVAILABLENUMBER" = "-";
+"PERCENT" = "%";
+"AUs" = "au";

@@ -1,0 +1,80 @@
+/* Localizable.strings - Dutch (nl) */
+
+// Cardinal positions
+"NNE" = "NNO";
+"NE" = "NO";
+"ENE" = "ONO";
+"E" = "O";
+"ESE" = "OZO";
+"SE" = "ZO";
+"SSE" = "ZZO";
+"S" = "Z";
+"SSW" = "ZZW";
+"SW" = "ZW";
+"WSW" = "WZW";
+"W" = "W";
+"WNW" = "WNW";
+"NW" = "NW";
+"NNW" = "NNW";
+"N" = "N";
+
+// Wind names
+"WIND_N" = "N - Tramontane";
+"WIND_NE" = "NO - Grecale";
+"WIND_E" = "O - Levante";
+"WIND_SE" = "ZO - Sirocco";
+"WIND_S" = "Z - Ostro";
+"WIND_SW" = "ZW - Libeccio";
+"WIND_W" = "W - Ponente";
+"WIND_NW" = "NW - Mistral";
+
+// Sun states
+"NIGHT" = "Nacht";
+"CREPASTROSUNRISE" = "Astronomische schemering";
+"CREPNAUTICSUNRISE" = "Nautische schemering";
+"CREPCIVSUNRISE" = "Burgerlijke schemering";
+"DAYLIGHT" = "Daglicht";
+"POSITIONSUN_NEGATIVE" = "Zon onder de horizon";
+"POSITIONSUN_POSITIVE" = "Zon boven de horizon";
+
+// Moon phases
+"NEWMOON" = "Nieuwe maan";
+"UPMOON" = "Wassende sikkel";
+"FIRSTMOON" = "Eerste kwartier";
+"GIBUPMOON" = "Wassende maan";
+"FULLMOON" = "Volle maan";
+"GIPDOWNMOON" = "Afnemende maan";
+"LASTMOON" = "Laatste kwartier";
+"DOWNMOON" = "Afnemende sikkel";
+"POSITIONMOON_NEGATIVE" = "Maan onder de horizon";
+"POSITIONMOON_POSITIVE" = "Maan boven de horizon";
+"ASCENDENT" = "Stijgend";
+"DESCENDENT" = "Dalend";
+
+// Zodiac signs
+"ARIES" = "Ram";
+"CANCER" = "Kreeft";
+"TAURUS" = "Stier";
+"LEO" = "Leeuw";
+"GEMINI" = "Tweelingen";
+"VIRGO" = "Maagd";
+"LIBRA" = "Weegschaal";
+"CAPRICORN" = "Steenbok";
+"SCORPIO" = "Schorpioen";
+"AQUARIUS" = "Waterman";
+"SAGITTARIUS" = "Boogschutter";
+"PESCES" = "Vissen";
+
+// Units
+"DAY" = "Dag";
+"DAYS" = "Dagen";
+"KILOMETERS" = "km";
+"METERS" = "m";
+"KNOT" = "kn";
+"KILOMETERSHOUR" = "km/h";
+"METERSSECOND" = "m/s";
+"MILESHOURS" = "mi/h";
+"DEGREE" = "°";
+"NOTAVAILABLENUMBER" = "-";
+"PERCENT" = "%";
+"AUs" = "au";

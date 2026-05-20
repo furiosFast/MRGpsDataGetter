@@ -1,0 +1,80 @@
+/* Localizable.strings - Chinese Simplified (zh-Hans) */
+
+// Cardinal positions
+"NNE" = "北北东";
+"NE" = "东北";
+"ENE" = "东北东";
+"E" = "东";
+"ESE" = "东南东";
+"SE" = "东南";
+"SSE" = "南南东";
+"S" = "南";
+"SSW" = "南南西";
+"SW" = "西南";
+"WSW" = "西南西";
+"W" = "西";
+"WNW" = "西北西";
+"NW" = "西北";
+"NNW" = "北北西";
+"N" = "北";
+
+// Wind names
+"WIND_N" = "北 - 北风";
+"WIND_NE" = "东北 - 东北风";
+"WIND_E" = "东 - 东风";
+"WIND_SE" = "东南 - 东南风";
+"WIND_S" = "南 - 南风";
+"WIND_SW" = "西南 - 西南风";
+"WIND_W" = "西 - 西风";
+"WIND_NW" = "西北 - 西北风";
+
+// Sun states
+"NIGHT" = "夜晚";
+"CREPASTROSUNRISE" = "天文曙暮光";
+"CREPNAUTICSUNRISE" = "航海曙暮光";
+"CREPCIVSUNRISE" = "民用曙暮光";
+"DAYLIGHT" = "日间";
+"POSITIONSUN_NEGATIVE" = "太阳在地平线以下";
+"POSITIONSUN_POSITIVE" = "太阳在地平线以上";
+
+// Moon phases
+"NEWMOON" = "新月";
+"UPMOON" = "峨眉月";
+"FIRSTMOON" = "上弦月";
+"GIBUPMOON" = "盈凸月";
+"FULLMOON" = "满月";
+"GIPDOWNMOON" = "亏凸月";
+"LASTMOON" = "下弦月";
+"DOWNMOON" = "残月";
+"POSITIONMOON_NEGATIVE" = "月亮在地平线以下";
+"POSITIONMOON_POSITIVE" = "月亮在地平线以上";
+"ASCENDENT" = "上升";
+"DESCENDENT" = "下降";
+
+// Zodiac signs
+"ARIES" = "白羊座";
+"CANCER" = "巨蟹座";
+"TAURUS" = "金牛座";
+"LEO" = "狮子座";
+"GEMINI" = "双子座";
+"VIRGO" = "处女座";
+"LIBRA" = "天秤座";
+"CAPRICORN" = "摩羯座";
+"SCORPIO" = "天蝎座";
+"AQUARIUS" = "水瓶座";
+"SAGITTARIUS" = "射手座";
+"PESCES" = "双鱼座";
+
+// Units
+"DAY" = "天";
+"DAYS" = "天";
+"KILOMETERS" = "km";
+"METERS" = "m";
+"KNOT" = "kn";
+"KILOMETERSHOUR" = "km/h";
+"METERSSECOND" = "m/s";
+"MILESHOURS" = "mi/h";
+"DEGREE" = "°";
+"NOTAVAILABLENUMBER" = "-";
+"PERCENT" = "%";
+"AUs" = "au";

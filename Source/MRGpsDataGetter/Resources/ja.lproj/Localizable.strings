@@ -1,0 +1,80 @@
+/* Localizable.strings - Japanese (ja) */
+
+// Cardinal positions
+"NNE" = "北北東";
+"NE" = "北東";
+"ENE" = "東北東";
+"E" = "東";
+"ESE" = "東南東";
+"SE" = "南東";
+"SSE" = "南南東";
+"S" = "南";
+"SSW" = "南南西";
+"SW" = "南西";
+"WSW" = "西南西";
+"W" = "西";
+"WNW" = "西北西";
+"NW" = "北西";
+"NNW" = "北北西";
+"N" = "北";
+
+// Wind names
+"WIND_N" = "北 - 北風";
+"WIND_NE" = "北東 - 北東風";
+"WIND_E" = "東 - 東風";
+"WIND_SE" = "南東 - 南東風";
+"WIND_S" = "南 - 南風";
+"WIND_SW" = "南西 - 南西風";
+"WIND_W" = "西 - 西風";
+"WIND_NW" = "北西 - 北西風";
+
+// Sun states
+"NIGHT" = "夜";
+"CREPASTROSUNRISE" = "天文薄明";
+"CREPNAUTICSUNRISE" = "航海薄明";
+"CREPCIVSUNRISE" = "市民薄明";
+"DAYLIGHT" = "日中";
+"POSITIONSUN_NEGATIVE" = "太陽は地平線の下";
+"POSITIONSUN_POSITIVE" = "太陽は地平線の上";
+
+// Moon phases
+"NEWMOON" = "新月";
+"UPMOON" = "三日月";
+"FIRSTMOON" = "上弦の月";
+"GIBUPMOON" = "十三夜月";
+"FULLMOON" = "満月";
+"GIPDOWNMOON" = "寝待月";
+"LASTMOON" = "下弦の月";
+"DOWNMOON" = "二十六夜月";
+"POSITIONMOON_NEGATIVE" = "月は地平線の下";
+"POSITIONMOON_POSITIVE" = "月は地平線の上";
+"ASCENDENT" = "上昇";
+"DESCENDENT" = "下降";
+
+// Zodiac signs
+"ARIES" = "牡羊座";
+"CANCER" = "蟹座";
+"TAURUS" = "牡牛座";
+"LEO" = "獅子座";
+"GEMINI" = "双子座";
+"VIRGO" = "乙女座";
+"LIBRA" = "天秤座";
+"CAPRICORN" = "山羊座";
+"SCORPIO" = "蠍座";
+"AQUARIUS" = "水瓶座";
+"SAGITTARIUS" = "射手座";
+"PESCES" = "魚座";
+
+// Units
+"DAY" = "日";
+"DAYS" = "日";
+"KILOMETERS" = "km";
+"METERS" = "m";
+"KNOT" = "kn";
+"KILOMETERSHOUR" = "km/h";
+"METERSSECOND" = "m/s";
+"MILESHOURS" = "mi/h";
+"DEGREE" = "°";
+"NOTAVAILABLENUMBER" = "-";
+"PERCENT" = "%";
+"AUs" = "au";

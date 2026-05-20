@@ -1,0 +1,80 @@
+/* Localizable.strings - Arabic (ar) */
+
+// Cardinal positions
+"NNE" = "شمال شمال شرق";
+"NE" = "شمال شرق";
+"ENE" = "شرق شمال شرق";
+"E" = "شرق";
+"ESE" = "شرق جنوب شرق";
+"SE" = "جنوب شرق";
+"SSE" = "جنوب جنوب شرق";
+"S" = "جنوب";
+"SSW" = "جنوب جنوب غرب";
+"SW" = "جنوب غرب";
+"WSW" = "غرب جنوب غرب";
+"W" = "غرب";
+"WNW" = "غرب شمال غرب";
+"NW" = "شمال غرب";
+"NNW" = "شمال شمال غرب";
+"N" = "شمال";
+
+// Wind names
+"WIND_N" = "شمال - ترامونتانا";
+"WIND_NE" = "شمال شرق - غريغال";
+"WIND_E" = "شرق - ليفانتي";
+"WIND_SE" = "جنوب شرق - سيروكو";
+"WIND_S" = "جنوب - أوسترو";
+"WIND_SW" = "جنوب غرب - ليبتشو";
+"WIND_W" = "غرب - بونينتي";
+"WIND_NW" = "شمال غرب - ميسترال";
+
+// Sun states
+"NIGHT" = "ليل";
+"CREPASTROSUNRISE" = "الشفق الفلكي";
+"CREPNAUTICSUNRISE" = "الشفق البحري";
+"CREPCIVSUNRISE" = "الشفق المدني";
+"DAYLIGHT" = "ضوء النهار";
+"POSITIONSUN_NEGATIVE" = "الشمس تحت الأفق";
+"POSITIONSUN_POSITIVE" = "الشمس فوق الأفق";
+
+// Moon phases
+"NEWMOON" = "محاق";
+"UPMOON" = "هلال متزايد";
+"FIRSTMOON" = "تربيع أول";
+"GIBUPMOON" = "أحدب متزايد";
+"FULLMOON" = "بدر";
+"GIPDOWNMOON" = "أحدب متناقص";
+"LASTMOON" = "تربيع أخير";
+"DOWNMOON" = "هلال متناقص";
+"POSITIONMOON_NEGATIVE" = "القمر تحت الأفق";
+"POSITIONMOON_POSITIVE" = "القمر فوق الأفق";
+"ASCENDENT" = "صاعد";
+"DESCENDENT" = "هابط";
+
+// Zodiac signs
+"ARIES" = "الحمل";
+"CANCER" = "السرطان";
+"TAURUS" = "الثور";
+"LEO" = "الأسد";
+"GEMINI" = "الجوزاء";
+"VIRGO" = "العذراء";
+"LIBRA" = "الميزان";
+"CAPRICORN" = "الجدي";
+"SCORPIO" = "العقرب";
+"AQUARIUS" = "الدلو";
+"SAGITTARIUS" = "القوس";
+"PESCES" = "الحوت";
+
+// Units
+"DAY" = "يوم";
+"DAYS" = "أيام";
+"KILOMETERS" = "km";
+"METERS" = "m";
+"KNOT" = "kn";
+"KILOMETERSHOUR" = "km/h";
+"METERSSECOND" = "m/s";
+"MILESHOURS" = "mi/h";
+"DEGREE" = "°";
+"NOTAVAILABLENUMBER" = "-";
+"PERCENT" = "%";
+"AUs" = "au";

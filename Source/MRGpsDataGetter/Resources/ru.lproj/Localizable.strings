@@ -1,0 +1,80 @@
+/* Localizable.strings - Russian (ru) */
+
+// Cardinal positions
+"NNE" = "ССВ";
+"NE" = "СВ";
+"ENE" = "ВСВ";
+"E" = "В";
+"ESE" = "ВЮВ";
+"SE" = "ЮВ";
+"SSE" = "ЮЮВ";
+"S" = "Ю";
+"SSW" = "ЮЮЗ";
+"SW" = "ЮЗ";
+"WSW" = "ЗЮЗ";
+"W" = "З";
+"WNW" = "ЗСЗ";
+"NW" = "СЗ";
+"NNW" = "ССЗ";
+"N" = "С";
+
+// Wind names
+"WIND_N" = "С - Трамонтана";
+"WIND_NE" = "СВ - Грегале";
+"WIND_E" = "В - Леванте";
+"WIND_SE" = "ЮВ - Сирокко";
+"WIND_S" = "Ю - Остро";
+"WIND_SW" = "ЮЗ - Либеччо";
+"WIND_W" = "З - Поненте";
+"WIND_NW" = "СЗ - Мистраль";
+
+// Sun states
+"NIGHT" = "Ночь";
+"CREPASTROSUNRISE" = "Астрономические сумерки";
+"CREPNAUTICSUNRISE" = "Навигационные сумерки";
+"CREPCIVSUNRISE" = "Гражданские сумерки";
+"DAYLIGHT" = "Дневной свет";
+"POSITIONSUN_NEGATIVE" = "Солнце за горизонтом";
+"POSITIONSUN_POSITIVE" = "Солнце над горизонтом";
+
+// Moon phases
+"NEWMOON" = "Новолуние";
+"UPMOON" = "Молодая луна";
+"FIRSTMOON" = "Первая четверть";
+"GIBUPMOON" = "Прибывающая луна";
+"FULLMOON" = "Полнолуние";
+"GIPDOWNMOON" = "Убывающая луна";
+"LASTMOON" = "Последняя четверть";
+"DOWNMOON" = "Старая луна";
+"POSITIONMOON_NEGATIVE" = "Луна за горизонтом";
+"POSITIONMOON_POSITIVE" = "Луна над горизонтом";
+"ASCENDENT" = "Восходящий";
+"DESCENDENT" = "Нисходящий";
+
+// Zodiac signs
+"ARIES" = "Овен";
+"CANCER" = "Рак";
+"TAURUS" = "Телец";
+"LEO" = "Лев";
+"GEMINI" = "Близнецы";
+"VIRGO" = "Дева";
+"LIBRA" = "Весы";
+"CAPRICORN" = "Козерог";
+"SCORPIO" = "Скорпион";
+"AQUARIUS" = "Водолей";
+"SAGITTARIUS" = "Стрелец";
+"PESCES" = "Рыбы";
+
+// Units
+"DAY" = "День";
+"DAYS" = "Дней";
+"KILOMETERS" = "km";
+"METERS" = "m";
+"KNOT" = "kn";
+"KILOMETERSHOUR" = "km/h";
+"METERSSECOND" = "m/s";
+"MILESHOURS" = "mi/h";
+"DEGREE" = "°";
+"NOTAVAILABLENUMBER" = "-";
+"PERCENT" = "%";
+"AUs" = "au";
