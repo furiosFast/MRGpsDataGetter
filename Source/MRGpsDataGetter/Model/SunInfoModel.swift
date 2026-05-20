@@ -1,5 +1,5 @@
 //
-//  SoleModel.swift
+//  SunInfoModel.swift
 //  MRGpsDataGetter
 //
 //  Created by Marco Ricca on 20/11/2019
@@ -14,45 +14,43 @@
 import UIKit
 
 public class SunInfoModel: NSObject {
-    
-    public final var timestamp : Date? = nil
+    public final var timestamp: Date?
 
-    public final var sunIcon : UIImage = UIImage(named: "sun", in: .module, with: nil)!
+    public final var sunIcon: UIImage = .init(named: "sun", in: .module, with: nil)!
 
-    public final var solarNoon : String = loc("NOTAVAILABLENUMBER")
-    public final var nadir : String = loc("NOTAVAILABLENUMBER")
-    
-    public final var altitude : String = loc("NOTAVAILABLENUMBER")
-    public final var azimuth : String = loc("NOTAVAILABLENUMBER")
+    public final var solarNoon: String?
+    public final var nadir: String?
 
-    public final var astronomicalDuskSunrise : String = loc("NOTAVAILABLENUMBER")
-    public final var nauticalDuskSunrise : String = loc("NOTAVAILABLENUMBER")
-    public final var civilDuskSunrise : String = loc("NOTAVAILABLENUMBER")
-    public final var sunriseStart : String = loc("NOTAVAILABLENUMBER")
-    public final var sunriseEnd : String = loc("NOTAVAILABLENUMBER")
-    public final var astronomicalDuskSunset : String = loc("NOTAVAILABLENUMBER")
-    public final var nauticalDuskSunset : String = loc("NOTAVAILABLENUMBER")
-    public final var civilDuskSunset : String = loc("NOTAVAILABLENUMBER")
-    public final var sunsetStart : String = loc("NOTAVAILABLENUMBER")
-    public final var sunsetEnd : String = loc("NOTAVAILABLENUMBER")
-    
-    public final var goldenHourSunriseStart : String = loc("NOTAVAILABLENUMBER")
-    public final var goldenHourSunriseEnd : String = loc("NOTAVAILABLENUMBER")
-    public final var goldenHourSunsetStart : String = loc("NOTAVAILABLENUMBER")
-    public final var goldenHourSunsetEnd : String = loc("NOTAVAILABLENUMBER")
-    public final var blueHourSunriseStart : String = loc("NOTAVAILABLENUMBER")
-    public final var blueHourSunriseEnd : String = loc("NOTAVAILABLENUMBER")
-    public final var blueHourSunsetStart : String = loc("NOTAVAILABLENUMBER")
-    public final var blueHourSunsetEnd : String = loc("NOTAVAILABLENUMBER")
+    public final var altitude: String?
+    public final var azimuth: String?
 
-    public final var declination : String = loc("NOTAVAILABLENUMBER")
-    public final var rightAscension : String = loc("NOTAVAILABLENUMBER")
-    public final var zodiacSign : String = loc("NOTAVAILABLENUMBER")
-    public final var phaseTitle : String = loc("NOTAVAILABLENUMBER")
-    public final var horizontalPosition : String = loc("NOTAVAILABLENUMBER")
+    public final var astronomicalDuskSunrise: String?
+    public final var nauticalDuskSunrise: String?
+    public final var civilDuskSunrise: String?
+    public final var sunriseStart: String?
+    public final var sunriseEnd: String?
+    public final var astronomicalDuskSunset: String?
+    public final var nauticalDuskSunset: String?
+    public final var civilDuskSunset: String?
+    public final var sunsetStart: String?
+    public final var sunsetEnd: String?
 
-    public final var distance : String = loc("NOTAVAILABLENUMBER")
-    
-    public final var daylightHours : String = loc("NOTAVAILABLENUMBER")
-    
+    public final var goldenHourSunriseStart: String?
+    public final var goldenHourSunriseEnd: String?
+    public final var goldenHourSunsetStart: String?
+    public final var goldenHourSunsetEnd: String?
+    public final var blueHourSunriseStart: String?
+    public final var blueHourSunriseEnd: String?
+    public final var blueHourSunsetStart: String?
+    public final var blueHourSunsetEnd: String?
+
+    public final var declination: String?
+    public final var rightAscension: String?
+    public final var zodiacSign: String?
+    public final var phaseTitle: String?
+    public final var horizontalPosition: String?
+
+    public final var distance: String?
+
+    public final var daylightHours: String?
 }

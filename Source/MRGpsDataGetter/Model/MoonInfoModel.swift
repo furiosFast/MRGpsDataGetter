@@ -1,5 +1,5 @@
 //
-//  LunaModel.swift
+//  MoonInfoModel.swift
 //  MRGpsDataGetter
 //
 //  Created by Marco Ricca on 20/11/2019
@@ -11,40 +11,38 @@
 //  Copyright © 2019 Fast-Devs Project. All rights reserved.
 //
 
+import EKAstrologyCalc
 import UIKit
-//import EKAstrologyCalc
 
-public class MoonInfoModel: NSObject { 
-    
-    public final var timestamp : Date? = nil
+public class MoonInfoModel: NSObject {
+    public final var timestamp: Date?
 
-    public final var altitude : String = loc("NOTAVAILABLENUMBER")
-    public final var fractionOfMoonIlluminated : String = loc("NOTAVAILABLENUMBER")
-    public final var azimuth : String = loc("NOTAVAILABLENUMBER")
-    public final var distance : String = loc("NOTAVAILABLENUMBER")
-    
-    public final var declination : String = loc("NOTAVAILABLENUMBER")
-    public final var rightAscension : String = loc("NOTAVAILABLENUMBER")
-    public final var zodiacSign : String = loc("NOTAVAILABLENUMBER")
-    public final var age : String = loc("NOTAVAILABLENUMBER")
+    public final var altitude: String?
+    public final var fractionOfMoonIlluminated: String?
+    public final var azimuth: String?
+    public final var distance: String?
 
-    public final var moonRise : String = loc("NOTAVAILABLENUMBER")
-    public final var moonSet : String = loc("NOTAVAILABLENUMBER")
-    
-    public final var phase : String = loc("NOTAVAILABLENUMBER")
-    public final var phaseIcon : UIImage = UIImage(named: "moon", in: .module, with: nil)!
-    public final var phaseTitle : String = loc("NOTAVAILABLENUMBER")
-    public final var phaseAngle : String = loc("NOTAVAILABLENUMBER")
+    public final var declination: String?
+    public final var rightAscension: String?
+    public final var zodiacSign: String?
+    public final var age: String?
 
-    public final var horizontalPosition : String = loc("NOTAVAILABLENUMBER")
-    
-    public final var moonTilt : String = loc("NOTAVAILABLENUMBER")
-    public final var trajectory : String = loc("NOTAVAILABLENUMBER")
-    
-    public final var moonNoon : String = loc("NOTAVAILABLENUMBER")
-    public final var nadir : String = loc("NOTAVAILABLENUMBER")
-    
+    public final var moonRise: String?
+    public final var moonSet: String?
+
+    public final var phase: String?
+    public final var phaseIcon: UIImage = .init(named: "moon", in: .module, with: nil)!
+    public final var phaseTitle: String?
+    public final var phaseAngle: String?
+
+    public final var horizontalPosition: String?
+
+    public final var moonTilt: String?
+    public final var trajectory: String?
+
+    public final var moonNoon: String?
+    public final var nadir: String?
+
     public final var previusEclipse: EKEclipse?
     public final var nextEclipse: EKEclipse?
-
 }
